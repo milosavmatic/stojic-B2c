@@ -1,0 +1,23 @@
+.footer {
+  margin-top: 2rem;
+  height: 100px;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer-copyright {
+  margin: unset;
+  color: var(--croonus-white);
+  font-weight: 550;
+  text-align: center;
+}
+.croonus-link {
+  color: #42b748;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: #3c76ba;
+    transition: all 0.1s ease-in-out;
+  }
+}

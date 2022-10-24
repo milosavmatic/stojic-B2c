@@ -1,0 +1,203 @@
+.categoriespage .title h5 {
+    text-transform: uppercase;
+    margin-left: 2rem;
+    margin-bottom: 5rem;
+}
+.container {
+    width: min(1700px, 95%);
+    margin-inline: auto;
+  }
+  .navigation-list {
+    margin: 1rem 0;
+    font-weight: 400;
+    display: flex;
+    font-size: 0.75rem;
+  }
+  .navigation-links {
+    a {
+      text-decoration: none;
+      color: var(--croonus-darkGray);
+    }
+    padding: 0.25rem 1rem;
+    &:hover a {
+      text-decoration: underline;
+      color: var(--croonus-mediumGray);
+    }
+    &:first-child {
+      padding-left: unset;
+    }
+    &:first-child a {
+      font-weight: 500;
+    }
+    &:last-child a {
+      color: var(--croonus-black);
+      text-decoration: none;
+      font-weight: 500;
+      pointer-events: none;
+    }
+    &:not(:last-child)::after {
+      content: "/";
+      position: relative;
+      right: -1rem;
+    }
+  }
+  
+  .category-name {
+    padding-left: 2rem;
+    margin: 2rem 0 3rem 0;
+  }
+  .content {
+    margin-bottom: 3rem;
+  }
+  .filters-container {
+    padding: 3rem 1.5rem;
+  }
+  .filter-reset {
+    display: block;
+    border-top: 1px solid var(--croonus-mediumGray);
+    border-bottom: 1px solid var(--croonus-mediumGray);
+    font-size: 0.875rem;
+    padding: 0.25rem 0;
+    cursor: pointer;
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+  .dropdown {
+    padding: unset !important;
+    div {
+      padding: unset;
+    }
+    button {
+      padding: unset;
+      font-size: 1rem;
+      font-weight: 450;
+    }
+  
+  .checkbox-container {
+      padding-left: 0.5rem;
+  }
+  }
+  .checkbox {
+    border: 1px solid var(--croonus-mediumGray);
+    &:checked {
+      background-color: var(--croonus-darkGray);
+      border: 1px solid var(--croonus-mediumGray);
+    }
+    &:focus {
+      border: 1px solid var(--croonus-mediumGray);
+    }
+  }
+  .checkbox-label {
+    padding-left: 1rem;
+  }
+  .number-of-products {
+      span {
+          font-weight: 500;
+      }
+  }
+  .sort-container {
+      display:flex;
+      padding: 0 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+      .sort-span {
+          width:-webkit-fill-available;
+          select {
+            width:100%;
+            border: 1px solid var(--croonus-lightMedGray);
+            padding: 0.4rem 1rem;
+            border-radius: 0.5rem;
+          }
+      }
+  }
+  .product-row {
+    margin-top: 2rem;
+  }
+  .products-per-page {
+    display:flex;
+    padding: 0 0rem;
+    width:min-content;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      padding: 0 1rem;
+      white-space: nowrap;
+    }
+    .select-span {
+      width:-webkit-fill-available;
+      select {
+          width:min-content;
+          border: 1px solid var(--croonus-lightMedGray);
+          padding: 0.4rem 1rem;
+          border-radius: 0.5rem;
+      }
+  }
+  }
+  .sort-container  select {
+    width:100%;
+    border: 1px solid var(--croonus-lightMedGray);
+    padding: 0.4rem 1rem;
+    border-radius: 0.5rem;
+  }
+
+  .product-col {
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+    &>div {
+      border: 1px solid var(--croonus-lightMedGray);
+      border-radius: 0.5rem;
+    }
+  }
+  .desktop-display {
+    display: block;
+  }
+  .mobile-display {
+    display: none;
+  }
+  @media (max-width: 992.98px) {
+    .mobile-display {
+      display: block!important;
+    }
+    .mobile-filters-heading button {
+      color: white!important;
+      margin-bottom: 0.6rem!important;
+    }
+    .desktop-display {
+      display: none!important;
+    }
+    .filters-holder {
+      margin-left: 0rem;
+    }
+    .categoriespage .title h5 {
+        margin-bottom: 3rem;
+    }
+    .sort-container {
+      padding: 0.2rem 0.2rem 0.2rem 0.8rem;
+      justify-content: unset;
+      display: flex;
+      flex-direction: column;
+    }
+ 
+    .products-per-page {
+      padding: 0.2rem 0.6rem 0.2rem 0.2rem;
+      display: flex;
+    flex-direction: column;
+    }
+    .products-per-page span {
+      padding: 0rem 0.1rem;
+    }
+    .number-of-products {
+      margin: 0rem 0rem 0.4rem 0rem;
+    }
+    .sort-container,
+    .sort-container span,
+    .select,
+    .sort-title {
+      color: black;
+    }
+    .product-row {
+     padding-right: 0rem;
+    }
+    
+  }

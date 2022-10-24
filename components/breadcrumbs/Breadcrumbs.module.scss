@@ -1,0 +1,24 @@
+.container {
+    width: min(1700px,95%);
+    padding: 0 2rem;
+}
+.breadcrumbs-holder {
+    padding: 1rem 0rem;
+    ul {
+        display: inline-flex;
+        padding-left: unset;
+    }
+    ul li:after {
+        content:"/";
+        margin: 0rem 0.6rem;
+    }
+    ul li:last-child:after {
+        content:"";
+    }
+    .breadcrumbs-link {
+        text-decoration: none;
+        color: #333;
+        font-size: 13px;
+        font-weight: 100;
+    }
+}
