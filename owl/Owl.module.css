@@ -1,0 +1,26 @@
+.title {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.img {
+  height: 160px;
+  width: 100%;
+}
+.owl-dots.disabled {
+  display: block !important;
+}
+.owl-carousel button.owl-dot span {
+  width: 16px !important;
+  height: 16px !important;
+  border: 4px solid white !important;
+  border-radius: 50%;
+  margin-top: 1rem !important;
+  opacity: 1 !important;
+}
+.owl-carousel button.owl-dot.active span {
+  background-color: red !important;
+}
+.owl-prev,
+.owl-next {
+  display: none !important;
+}

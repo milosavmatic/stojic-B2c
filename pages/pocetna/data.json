@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Laptop racunari",
+    "description": "Laptop 123",
+    "oldPrice": 123,
+    "newPrice": 555
+  },
+  {
+    "name": "Desktop racunari",
+    "description": "Desktop 123",
+    "oldPrice": 587,
+    "newPrice": 266
+  },
+  {
+    "name": "Laptop racunarikkk",
+    "description": "Laptop 123kkk",
+    "oldPrice": 1234,
+    "newPrice": 550
+  },
+  {
+    "name": "Desktop racunariaaaaa",
+    "description": "Desktop 123aaa",
+    "oldPrice": 5878,
+    "newPrice": 2666
+  },
+  {
+    "name": "Laptop racunari2222",
+    "description": "Laptop 123222",
+    "oldPrice": 1233,
+    "newPrice": 450
+  },
+  {
+    "name": "Desktop racunari0000",
+    "description": "Desktop 123000",
+    "oldPrice": 5200,
+    "newPrice": 286
+  }
+]

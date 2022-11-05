@@ -1,0 +1,34 @@
+
+.container {
+    margin: 1rem 0;
+  padding: 0rem 1rem 0 1rem;
+}
+.btn-accordion {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.4rem;
+}
+.btn-accordion {
+    font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+
+  color: var(--primary-color);
+  transition: all 0.2s ease-in-out;
+  }
+}
+.card {
+  border: none;
+  background-color: transparent;
+}
+.card-header {
+  background-color: transparent;
+  border: none;
+}
+.card-body {
+  padding: 0 3rem;
+}
+

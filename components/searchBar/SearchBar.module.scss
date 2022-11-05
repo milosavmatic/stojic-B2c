@@ -1,0 +1,17 @@
+.search-bar {
+  position: relative;
+  height: 100%;
+  margin: auto;
+  display: flex;
+}
+.search-bar-input {
+  height: 100%;
+  width: 600px;
+  padding-left: 1rem;
+  padding-right: 6rem;
+}
+.search-button {
+  width: 5rem;
+  border-bottom-left-radius: unset;
+  border-top-left-radius: unset;
+}

@@ -1,0 +1,116 @@
+.filters-holder .reset-filters {
+  padding: 0.6rem 0.9rem;
+  font-size: 15px;
+  border-radius: 0.5rem;
+  border: 1px solid #e7e7e7;
+  background-color: #e7e7e7;
+}
+.filters-holder .reset-filters p {
+  margin-bottom: 0rem;
+}
+.filters-holder .reset-filters span {
+  font-weight: 600;
+}
+.filters-holder {
+  margin: 0rem 2rem 0rem 1.5rem;
+}
+.filters .custom-accordion {
+  border: 1px solid #e7e7e7;
+  border-radius: 0.5rem;
+  margin: 1rem 0rem;
+  padding: 1rem 0.9rem;
+}
+.accordion-item {
+  border: unset;
+  text-transform: uppercase;
+}
+.accordion-button {
+  padding: unset;
+}
+.custom-accordion .accordion-button {
+  background: transparent;
+  color: black;
+  font-size: 15px;
+  text-transform: capitalize;
+}
+.custom-accordion .accordion-button:not(.collapsed) {
+  background-color: transparent !important;
+  color: black;
+}
+.accordion-button:not(.collapsed) {
+  box-shadow: unset;
+}
+.custom-accordion .accordion-button:focus,
+.custom-accordion .accordion-button:active,
+.custom-accordion .accordion-button:target,
+.custom-accordion .accordion-button:focus-within,
+.custom-accordion .accordion-button:visited {
+  border-color: transparent;
+  outline: 0;
+  box-shadow: unset;
+}
+.filters-holder .accordion-button {
+  border: none !important;
+}
+.filters-holder .accordion-button:hover {
+  color: var(--red-color);
+}
+.filters-holder .accordion-header p {
+  text-transform: uppercase;
+  margin-bottom: 0rem;
+}
+.filters-holder .checkbox-holder {
+  display: flex;
+}
+.filters-holder .checkbox-holder p {
+  font-weight: 200;
+  text-transform: capitalize;
+  margin: 0.1rem 0rem 0.1rem 0.4rem;
+  font-size: 15px;
+}
+.filters-holder .accordion-body {
+  padding: 1rem 0.85rem 0rem 0.85rem;
+}
+.filters-holder .accordion-button {
+  padding: 1rem 1.25rem 0.4rem 1.25rem;
+}
+.filters-holder .accordion-header .accordion-button {
+  background: transparent;
+  color: black;
+  padding: unset;
+  text-align: center;
+}
+.filters-holder .accordion-header .accordion-button p {
+  text-transform: capitalize;
+  font-size: 16px;
+}
+.filters-holder .form-check-input:checked {
+  accent-color: black;
+}
+.filters-holder .form-check-input:focus {
+  outline: unset;
+  box-shadow: unset;
+  select:focus-visible {
+    outline: unset;
+    box-shadow: unset;
+  }
+}
+
+@media (max-width: 992.98px) {
+  .mobile-display {
+    display: block !important;
+  }
+  .mobile-filters-heading {
+    background: black;
+  }
+  .accordion-button {
+    background: black;
+    padding: 0.6em;
+  }
+  .accordion-button:not(.collapsed) {
+    background: black;
+  }
+  .filters-holder {
+    margin: 0rem;
+  }
+}

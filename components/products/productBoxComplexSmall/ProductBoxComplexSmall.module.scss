@@ -1,0 +1,138 @@
+.container {
+  height: 100%;
+  padding: 3rem 1rem 0.2rem 1rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid #f0f0f4;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: var(--croonus-white);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 0px 22px -15px rgba(0, 0, 0, 0.2);
+  }
+}
+.add-to-cart {
+  background: #333;
+  padding: 0.4rem 1.2rem;
+  position: absolute;
+  bottom: 0rem;
+  right: 0rem;
+  border-radius: 0.8rem 0rem 0.8rem 0rem;
+  width: 4rem;
+  height: 2.4rem;
+  display: none;
+}
+.add-to-cart-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+}
+.container:hover .add-to-cart {
+  display: block;
+}
+.container .add-to-cart:hover {
+  background-color: #ed1c24;
+  cursor: pointer;
+}
+.product-img {
+  width: 100%;
+  height: 180px;
+  max-height: 180px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+}
+.category-name {
+  font-size: 0.725rem;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 0.5rem;
+}
+.product-name {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.15rem;
+  text-decoration: none;
+  color: black;
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
+  max-height: 2.3rem;
+}
+.price {
+  .no-old-price {
+    margin-bottom: unset;
+    position: relative;
+    width: fit-content;
+    height: 1.3rem;
+  }
+  .old-price {
+    margin-bottom: unset;
+    position: relative;
+    width: fit-content;
+    font-size: 0.875rem;
+    height: 1.3rem;
+    text-decoration: line-through;
+  }
+  .new-price {
+    font-weight: 550;
+    font-size: 1.25rem;
+  }
+}
+.discount {
+  position: absolute;
+  font-weight: 600;
+  padding: 0 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #333;
+  top: 1rem;
+  color: white;
+  left: 1.25rem;
+}
+.top-deal {
+  position: absolute;
+  font-weight: 600;
+  padding: 0 0.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #ed1c24;
+  top: 3.5rem;
+  color: white;
+  left: 1.25rem;
+}
+.fav-heart {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  border-radius: 50%;
+  padding: 0.25rem;
+  &:hover {
+    background-color: #ed1c24;
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+  img {
+    width: 100%;
+  }
+}
+@media (max-width: 992px) {
+  .add-to-cart {
+    display: block;
+  }
+}
+@media (max-width: 760.98px) {
+  .container {
+    min-height: unset;
+  }
+}

@@ -1,0 +1,236 @@
+.rental-nav-holder {
+  width: 100%;
+  ul.nav-tabs {
+    margin-right: auto;
+    margin-left: unset;
+  }
+
+  .service-period {
+    margin-top: 2rem;
+
+    img {
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+  .text-holder {
+    margin-top: 4rem;
+    width: 70%;
+    font-weight: 300;
+    margin-left: 2rem;
+    h5 {
+      color: var(--red-color);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    h5.rental-concept {
+      color: black;
+      margin-top: 3rem;
+      margin-bottom: 0.4rem;
+    }
+    ul {
+      padding-left: 0.6rem;
+      list-style: inside;
+    }
+    p.rental-concept-subtitle {
+      font-weight: 500;
+      margin-bottom: 1rem;
+      font-size: 16px;
+    }
+    .bold {
+      font-weight: 500;
+    }
+    .call-service {
+      color: black;
+      font-weight: 500;
+    }
+  }
+  .choose-service {
+    width: 100%;
+    background-color: var(--red-color);
+    border: 1px solid var(--red-color);
+    &:hover {
+      background-color: var(--dark-red-color);
+      border: 1px solid var(--dark-red-color);
+    }
+  }
+  .input-button {
+    padding: 0.3rem 2rem;
+    background-color: var(--red-color);
+    border: 1px solid var(--red-color);
+    &:hover {
+      background-color: var(--dark-red-color);
+      border: 1px solid var(--dark-red-color);
+    }
+  }
+  .form-holder {
+    width: 60%;
+    padding-left: 2rem;
+    margin-top: 4rem;
+    .row-form {
+      margin: 0.6rem 0rem;
+    }
+    .col-form {
+      margin: 0rem;
+      padding: 0rem 1rem 0rem 0rem;
+    }
+  }
+  .image-holder {
+    margin-left: auto;
+    width: fit-content;
+    margin-right: auto;
+    margin-top: 1rem;
+  }
+}
+.configure-div {
+  margin-left: 2rem;
+  margin-top: 2rem;
+  .go-to-configure {
+    background-color: var(--red-color);
+    border: 1px solid var(--red-color);
+    &:hover {
+      background-color: var(--dark-red-color);
+    }
+  }
+}
+.categories-nav {
+  width: 56%;
+}
+.category-custom-holder {
+  display: flex;
+
+  .product-holder {
+    padding: 2rem 2.6rem;
+    border-radius: 0.5rem;
+    margin: 0em 0.2rem;
+    width: 24%;
+    ul {
+      padding-left: 0.4rem;
+      list-style: inside;
+      font-weight: 300;
+      min-height: 15rem;
+      li {
+        font-size: 14px;
+        margin-bottom: 0.4rem;
+      }
+    }
+    h5 {
+      font-weight: 500;
+      color: var(--red-color);
+      margin: 2rem 0rem 0rem 0rem;
+      min-height: 3rem;
+      font-size: 18px;
+    }
+    p.code {
+      font-size: 18px;
+      color: #212529;
+      margin-top: 0.2rem;
+      margin-bottom: 0.6rem;
+    }
+    p.price {
+      font-size: 20px;
+      font-weight: 600;
+      background: black;
+      padding: 0.2rem 0rem;
+      color: white;
+      text-align: center;
+      span {
+        font-size: 18px;
+        font-weight: 400;
+      }
+    }
+  }
+}
+@media (max-width: 1300.98px) {
+  .category-custom-holder {
+    .product-holder {
+      padding: 2rem 1.6rem;
+    }
+  }
+}
+@media (max-width: 1200.98px) {
+  .category-custom-holder {
+    .product-holder {
+      width: 32%;
+    }
+  }
+}
+@media (max-width: 992.98px) {
+  .categories-nav {
+    width: 100%;
+  }
+  .category-custom-holder {
+    .product-holder {
+      ul {
+        min-height: unset;
+        margin-bottom: 1.8rem;
+      }
+    }
+  }
+  .rental-nav-holder {
+    .form-holder {
+      width: 100%;
+    }
+  }
+  .rental-nav-holder {
+    .text-holder {
+      width: 100%;
+    }
+  }
+  .category-custom-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 3rem 1rem 2rem 1rem;
+    .product-holder {
+      width: 46%;
+      margin-bottom: 1rem;
+    }
+  }
+}
+@media (max-width: 765.98px) {
+  .category1-holder {
+    margin: 3rem 1rem 1rem 1rem;
+  }
+  .rental-nav-holder {
+    .text-holder {
+      margin-left: 0rem;
+    }
+  }
+  .row-form {
+    flex-direction: column;
+  }
+  .rental-nav-holder {
+    .form-holder {
+      .row-form {
+        margin: 0rem 0rem;
+      }
+    }
+  }
+  .rental-nav-holder {
+    .form-holder {
+      .col-form {
+        margin: 0.4rem 0rem;
+      }
+    }
+  }
+}
+@media (max-width: 650.98px) {
+  .category-custom-holder {
+    .product-holder {
+      width: 100%;
+      margin-bottom: 2rem;
+      border: 1px solid #ddd;
+      padding: 1.4rem;
+    }
+  }
+  .category-custom-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2rem 0.2rem;
+  }
+  .category1-holder {
+    margin: 0rem;
+  }
+}

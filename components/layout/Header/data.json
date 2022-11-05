@@ -1,0 +1,108 @@
+[
+  {
+    "category": "Laptop racunari"
+  },
+  {
+    "category": "Oprema za racunare",
+    "subcategory": [
+      {
+        "sportName": "Men's Basketball",
+        "path": "mbasket",
+        "sportID": 7
+      },
+      {
+        "sportName": "Women's BasketBall",
+        "path": "wcc",
+        "sportID": 8
+      },
+      {
+        "sportName": "Men's Basketball",
+        "path": "mbasket",
+        "sportID": 7
+      },
+      {
+        "sportName": "Women's BasketBall",
+        "path": "wcc",
+        "sportID": 8
+      },
+      {
+        "sportName": "Men's Basketball",
+        "path": "mbasket",
+        "sportID": 7
+      },
+      {
+        "sportName": "Women's BasketBall",
+        "path": "wcc",
+        "sportID": 8
+      },
+      {
+        "sportName": "Men's Basketball",
+        "path": "mbasket",
+        "sportID": 7
+      },
+      {
+        "sportName": "Women's BasketBall",
+        "path": "wcc",
+        "sportID": 8
+      },
+      {
+        "sportName": "Men's Basketball",
+        "path": "mbasket",
+        "sportID": 7
+      },
+      {
+        "sportName": "Women's BasketBall",
+        "path": "wcc",
+        "sportID": 8
+      },
+      {
+        "sportName": "Men's Basketball",
+        "path": "mbasket",
+        "sportID": 7
+      },
+      {
+        "sportName": "Women's BasketBall",
+        "path": "wcc",
+        "sportID": 8
+      },
+      {
+        "sportName": "Men's Basketball",
+        "path": "mbasket",
+        "sportID": 7
+      },
+      {
+        "sportName": "Women's BasketBall",
+        "path": "wcc",
+        "sportID": 8
+      }
+    ]
+  },
+  {
+    "category": "Gaming"
+  },
+  {
+    "category": "TV, audio, video"
+  },
+  {
+    "category": "Mobilni telefoni i tableti"
+  },
+  {
+    "category": "Bela tehnika"
+  },
+  {
+    "category": "Laptop racunari"
+  },
+
+  {
+    "category": "Gaming"
+  },
+  {
+    "category": "TV, audio, video"
+  },
+  {
+    "category": "Mobilni telefoni i tableti"
+  },
+  {
+    "category": "Bela tehnika"
+  }
+]

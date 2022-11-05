@@ -1,0 +1,43 @@
+.container {
+  padding: 1rem 0rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.wishlist-heading {
+  margin: 1rem 0 3rem 1rem;
+  font-size: 1.8rem;
+}
+.content {
+  padding: 0 2rem;
+  width: 100%;
+}
+.product-col {
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+  & > div {
+    box-shadow: 0 0 5px #c1c1c1;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    padding: 1rem 2rem;
+  }
+  .content {
+    padding: 0 0.5rem;
+  }
+  .product-col {
+    padding: 0 1rem;
+  }
+}
+@media (max-width: 400px) {
+  .container {
+    padding: 1rem;
+  }
+  .content {
+    padding: 0 0.5rem;
+  }
+  .product-col {
+    padding: 0 0.5rem;
+  }
+}
