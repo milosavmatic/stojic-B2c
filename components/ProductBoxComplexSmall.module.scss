@@ -2,8 +2,6 @@
   height: 100%;
   padding: 1rem 1.5rem 1.5rem;
   width: 100%;
-  // border-radius: 0.5rem;
-  // border: 1px solid #f0f0f4;
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -215,6 +213,9 @@
       color: var(--croonus-mediumGray);
       font-size: 0.9rem;
       font-weight: 400;
+      // &:hover {
+      //   color: red !important;
+      // }
     }
     h5 {
       margin-bottom: 0.7rem;
@@ -227,6 +228,9 @@
       color: var(--red-color);
      } 
   }
+  .add-to-cart {
+    border-radius: 0.8rem 0rem 1.5rem 0rem;
+  }
 }
 
 .homeProductArticle {
@@ -238,6 +242,7 @@
       color: var(--croonus-mediumGray);
       font-size: 0.9rem;
       font-weight: 400;
+      margin-top: 1.2rem;
     }
     .category-name {
       display: none;
@@ -249,7 +254,7 @@
     margin: 1rem 0 0 0;
     order: -1;
     img {
-      padding: 10px !important;
+      padding: 1rem!important;
     }
   }
   .price {

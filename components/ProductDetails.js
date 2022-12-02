@@ -43,7 +43,7 @@ const ProductDetails = ({
       <div className="row">
         <div
           className={`${
-            classes['slider-holder'] + ' col-xl-5 col-lg-5 col-md-12'
+            classes['slider-holder'] + ' col-xl-5 col-lg-4 col-md-12'
           }`}
         >
           <ProductDetailsSlider
@@ -53,7 +53,7 @@ const ProductDetails = ({
         </div>
         <div
           className={`${
-            classes['info-holder'] + ' col-xl-6 col-lg-6 col-md-12'
+            classes['info-holder'] + ' col-xl-7 col-lg-8 col-md-12'
           }`}
         >
           <h3>{productData?.basic_data?.name}</h3>

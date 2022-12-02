@@ -14,6 +14,8 @@ const SearchPage = () => {
     pagination: {},
   })
 
+  console.log(productsData)
+
   const [limit, setLimit] = useState(24)
   const [sort, setSort] = useState(null)
   const [page, setPage] = useState(1)

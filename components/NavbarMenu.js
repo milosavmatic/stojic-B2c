@@ -268,12 +268,17 @@ const NavbarMenu = () => {
                         classes['newsletter-input'] + ' basic-input'
                       }`}
                       type="text"
+                      name="search"
+                      id="search"
+                      value={searchTerm}
+                      onChange={({ target }) => setSearchTerm(target.value)}
                     />
                     <button
                       type="submit"
                       className={`${
                         classes['newsletter-button'] + ' basic-button'
                       }`}
+                      onClick={handleSearch}
                     >
                       <BsSearch />
                     </button>
@@ -319,9 +324,7 @@ const NavbarMenu = () => {
                         Moja korpa -
                         <span>
                           &nbsp;
-                          {currencyFormat(
-                            headerTotal ?? 0
-                          )}
+                          {currencyFormat(headerTotal ?? 0)}
                         </span>
                       </li>
                     </ul>
@@ -397,11 +400,6 @@ const NavbarMenu = () => {
                         <li>
                           <Link href="/" className={classes.Link}>
                             Akcije
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/" className={classes.Link}>
-                            Novosti
                           </Link>
                         </li>
                         <li>

@@ -44,6 +44,7 @@ function CategoryItems({ buttonTabs }) {
                   setTabsCategory(item.id);
                 }}
                 buttonClass={tabCategory === item.id ? 'active' : ''}
+                changeStyle="tabCategoryButton"
               >
                 {item.name}
               </HomeTabButton>
@@ -57,7 +58,11 @@ function CategoryItems({ buttonTabs }) {
                 key={item.id}
                 className={index === 2 ? `${classes['item3']}` : ''}
               >
-                <ProductBoxComplexSmall className='homeBoxCategory' biggerImg={index === 2 ? 'biggerImg' : ""} product={item}/>
+                <ProductBoxComplexSmall
+                  className="homeBoxCategory"
+                  biggerImg={index === 2 ? 'biggerImg' : ''}
+                  product={item}
+                />
               </div>
             );
           })}

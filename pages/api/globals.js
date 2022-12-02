@@ -81,7 +81,7 @@ export const useGlobalAddToWishList = () => {
         mutateWishList();
       })
       .catch((error) =>
-        openAlertBox('Proizvod je već dodat listu želja.', 'error')
+        openAlertBox('Proizvod je već dodat u listu želja.', 'error')
       );
   };
 

@@ -1,5 +1,5 @@
 .searchPage {
-  padding: 1rem 0;
+  padding: 1.5rem 0 3rem 0;
   background-color: var(--gray-color);
   .title {
     margin-bottom: 3rem;
@@ -121,12 +121,19 @@
       border: 1px solid var(--light-gray-color);
       padding: 0.4rem 1rem;
       border-radius: 0.5rem;
+      ul {
+        color: red;
+      }
     }
+    
   }
 }
 .product-row {
-  margin-top: 2rem;
+  margin: 2rem 0;
+  padding: 0;
+  text-align: center;
 }
+
 .products-per-page {
   display: flex;
   padding: 0 1rem;
@@ -212,6 +219,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 3rem;
 }
 
 .paginationItem {
