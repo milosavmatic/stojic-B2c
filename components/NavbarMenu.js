@@ -13,7 +13,6 @@ import categories from '../assets/images/elements/menu-categories.png';
 import search from '../assets/images/elements/search.png';
 import wish from '../assets/images/elements/heart.png';
 import cartImage from '../assets/images/elements/shopping-bag.png';
-import burger from '../assets/images/elements/burger.png';
 import classes from './NavbarMenu.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -22,12 +21,11 @@ import { ApiHandler } from '../pages/api/api';
 import { generateMenu } from '../helpers/generateMenu';
 import NavSubmenu from './NavSubmenu/NavSubmenu';
 import { useCartContext } from '../pages/api/cartContext';
-import { BsHandbag, BsHeart, BsSearch, BsEnvelope } from 'react-icons/bs';
-import heart from '../assets/images/heart.png';
+import { BsHandbag, BsSearch, BsEnvelope } from 'react-icons/bs';
+import heart from '../assets/images/elements/heart.png';
 import { FaRegUser, FaPhoneAlt } from 'react-icons/fa';
 import { currencyFormat } from '../helpers/functions';
 import { TfiLocationPin } from 'react-icons/tfi';
-// import { openAlertBox } from '../helpers/tostify';
 
 const NavbarMenu = () => {
   const [isShown, setIsShown] = useState(false);
