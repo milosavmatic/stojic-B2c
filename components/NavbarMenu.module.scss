@@ -63,6 +63,10 @@ form.header-search {
   padding: 1.2rem 0rem;
   .image-holder {
     cursor: pointer;
+    width: 226px;
+    img {
+      filter: brightness(0) invert(1);
+    }
   }
 }
 .header-links-holder ul,
@@ -311,7 +315,7 @@ button.dropdown-button:after {
   }
   li a {
     color: var(--white-color);
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     &:hover {
       color: var(--red-color);
     }
@@ -363,7 +367,7 @@ ul.product-list {
 }
 .navbar-menu {
   position: inherit;
-  padding: 0 0.5rem; 
+  padding: 0 0.5rem;
 }
 .nav-submenu {
   display: flex;
@@ -441,16 +445,15 @@ ul.product-list {
   background-color: transparent;
 }
 .button-wishlist {
-  
   span {
     max-width: 27px !important;
-    
-   img {
-    filter: brightness(0) invert(1);
-    opacity: 1 !important;
-   }
+
+    img {
+      filter: brightness(0) invert(1);
+      opacity: 1 !important;
+    }
   }
-} 
+}
 .top-header-wishlist {
   border: none;
   padding: 0rem;

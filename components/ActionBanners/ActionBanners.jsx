@@ -18,13 +18,15 @@ const ActionBanners = () => {
                 lg={6}
                 xl={6}
               >
-                <div className={`${classes['actionBanner']}`}>
-                  <img src={banner.src} alt={banner.alt} />
-                  <div className={classes.wrappText}>
-                    <h5>{banner.title}</h5>
-                    <Link href="/">Saznaj više &#62;&#62;</Link>
+                <Link href="/">
+                  <div className={`${classes['actionBanner']}`}>
+                    <img src={banner.src} alt={banner.alt} />
+                    <div className={classes.wrappText}>
+                      <h5>{banner.title}</h5>
+                      <p>Saznaj više &#62;&#62;</p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </Col>
             );
           })}
