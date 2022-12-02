@@ -1,12 +1,4 @@
 import Link from 'next/link';
-import AELogo from '../assets/images/bank/AmericanExpress_logo.png';
-import BILogo from '../assets/images/bank/BancaIntesa_logo.png';
-import DCLogo from '../assets/images/bank/DinaCard_logo.png';
-import MaestroLogo from '../assets/images/bank/Maestro_logo.png';
-import MCLogo from '../assets/images/bank/Mastercard-logo.png';
-import SCLogo from '../assets/images/bank/SecureCode_logo.png';
-import VisaLogo from '../assets/images/bank/Visa_logo.png';
-import VisaSLogo from '../assets/images/bank/VisaSecure_logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Accordion from 'react-bootstrap/Accordion';
 import {
@@ -17,7 +9,6 @@ import {
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 import classes from './Footer.module.scss';
-import Image from 'next/image';
 import Newsletter from './Newsletter';
 
 const Footer = () => {

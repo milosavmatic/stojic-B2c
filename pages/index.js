@@ -1,21 +1,14 @@
 import MainSlider from '../components/MainSlider';
-import Brands from '../components/Brands';
 import ActionBanners from '../components/ActionBanners/ActionBanners.jsx';
-// import CategoryList from '../components/CategoryList';
-import ActionProducts from '../components/ActionProducts';
 import { ApiHandler } from './api/api';
 import CardsSupport from '../components/CardsSupport/CardsSupport';
 import CategoryItems from '../components/CategoryItems/CategoryItems';
 import GridProducts from '../components/GridProducts/GridProducts';
-import { useEffect } from 'react'
-
 
 const Home = ({
   banners,
   mobileBanners,
-  recommendedCategories,
   recommendedProducts,
-  actionBanners,
   buttonTabs,
   saleProducts,
   positionProducts,
