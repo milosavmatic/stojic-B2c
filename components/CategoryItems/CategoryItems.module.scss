@@ -1,0 +1,23 @@
+.categoryItems {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray-color);
+  padding-bottom: 2rem;
+  .categoryGrid {
+    display: grid;
+    grid-template-areas:
+      '. . item3 item3 . '
+      '. . item3 item3 . ';
+    grid-gap: 5px;
+    grid-template-columns: repeat(5, 20%);
+    .item3 {
+      grid-area: item3;
+    }
+  }
+  .categoryTabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #ebebeb;
+    margin-bottom: 1rem;
+  }
+}

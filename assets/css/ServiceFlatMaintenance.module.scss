@@ -1,0 +1,48 @@
+.flat-maintenance-page-holder {
+    .title-holder h5 {
+        margin: 1rem 2rem 1.6rem 2rem;
+        text-transform: uppercase;
+    }
+    .middle-holder {
+        .content-holder {
+            display: flex;
+            align-items: center;
+            .img-holder img {
+                width: 70%;
+                margin-left: 2rem;
+            }
+            .text-holder {
+                background: #f9f9f9;
+                padding: 2rem;
+                width: 50%;
+                p {
+                    margin-bottom: 0rem;
+                    padding-bottom: 0rem;
+                }
+                p:first-child {
+                    margin-bottom: 0.4rem;
+                }
+            }
+        }
+    }
+}
+.head-holder {
+    margin-bottom: 3rem;
+}
+@media (max-width:768.98px) {
+    .flat-maintenance-page-holder {
+        .middle-holder {
+            .content-holder {
+                flex-direction: column;
+                .text-holder {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .flat-maintenance-page-holder {
+        .title-holder h5 {
+            margin: 1rem 2rem 1.6rem 0.2rem;
+        }
+    }
+}
