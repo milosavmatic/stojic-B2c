@@ -1,0 +1,57 @@
+.actionBanners {
+  margin: 2rem 0 1.5rem 0;
+  .box {
+    &:nth-child(odd) {
+      .actionBanner .wrappText {
+        left: 2.5rem;
+        width: 18rem;
+        h5 {
+          color: var(--dark-gray-color);
+          
+        }
+        a {
+          color: var(--dark-gray-color);
+        }
+      }
+    }
+    &:nth-child(even) {
+      .actionBanner .wrappText {
+        right: 2.5rem;
+        text-align: right;
+        h5 {
+          text-transform: uppercase;
+
+        }
+      }
+    }
+    .actionBanner {
+      height: 16rem;
+      position: relative;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .wrappText {
+        position: absolute;
+        top: 1.5rem;
+        width: 15rem;
+        h5 {
+          font-size: 2.5rem;
+          line-height: normal;
+          color: var(--white-color);
+        }
+        a {
+          color: var(--white-color);
+          transition: all 0.3s ease-in-out;
+          display: block;
+          margin-top: 1rem;
+          font-size: 1.1rem;
+          &:hover {
+            color: var(--red-color);
+          }
+        }
+      }
+    }
+  }
+}

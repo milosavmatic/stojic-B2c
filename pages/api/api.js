@@ -1,5 +1,5 @@
-import axios from "axios";
-import Cookies from "js-cookie";
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
 /**
  * Generate customer token
@@ -7,13 +7,13 @@ import Cookies from "js-cookie";
  */
 
 const generateCustomerToken = () => {
-  return "device_" + Math.random().toString(12) + Date.now();
-};
+  return 'device_' + Math.random().toString(12) + Date.now()
+}
 
 class Api {
   constructor(customer_token, api_url) {
-    this.customer_token = customer_token;
-    this.api_url = api_url;
+    this.customer_token = customer_token
+    this.api_url = api_url
   }
 
   /**
@@ -29,13 +29,13 @@ class Api {
     return new Promise((resolve, reject) => {
       axios({
         method: method,
-        url: this.api_url + path.replace(/^\//, ""),
-        headers: { "customer-token": this.customer_token },
+        url: this.api_url + path.replace(/^\//, ''),
+        headers: { 'customer-token': this.customer_token },
         data: payload,
       })
         .then((response) => resolve(response.data))
-        .catch((error) => reject(error));
-    });
+        .catch((error) => reject(error))
+    })
   }
 
   /**
@@ -46,7 +46,7 @@ class Api {
    * @return {Promise<APIResponse>}
    */
   get(path) {
-    return this._execute("GET", path);
+    return this._execute('GET', path)
   }
 
   /**
@@ -58,7 +58,7 @@ class Api {
    * @return {Promise<APIResponse>}
    */
   put(path, payload = null) {
-    return this._execute("PUT", path, payload);
+    return this._execute('PUT', path, payload)
   }
 
   /**
@@ -70,7 +70,7 @@ class Api {
    * @return {Promise<APIResponse>}
    */
   post(path, payload) {
-    return this._execute("POST", path, payload);
+    return this._execute('POST', path, payload)
   }
 
   /**
@@ -82,7 +82,7 @@ class Api {
    * @return {Promise<APIResponse>}
    */
   list(path, payload) {
-    return this._execute("LIST", path, payload);
+    return this._execute('LIST', path, payload)
   }
 
   /**
@@ -93,20 +93,20 @@ class Api {
    * @return {Promise<APIResponse>}
    */
   delete(path) {
-    return this._execute("DELETE", path);
+    return this._execute('DELETE', path)
   }
 }
 
 export const ApiHandler = () => {
   if (!process.env.API_URL) {
-    throw new Error("process.env.REACT_API_URL is not defined");
+    throw new Error('process.env.REACT_API_URL is not defined')
   }
-  let token = Cookies.get("token");
+  let token = Cookies.get('token')
   if (!token) {
-    token = generateCustomerToken();
-    Cookies.set("token", token, { expires: 365 });
+    token = generateCustomerToken()
+    Cookies.set('token', token, { expires: 365 })
   }
 
-  const api = new Api(token, process.env.API_URL);
-  return api;
-};
+  const api = new Api(token, process.env.API_URL)
+  return api
+}

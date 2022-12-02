@@ -11,12 +11,14 @@
     }
     h3 {
       margin-bottom: 1rem;
+      font-size: 1.5rem;
     }
     ul.code-list {
       font-weight: 300;
       font-size: 14px;
       span {
         font-weight: 500;
+        margin-right: 0.3rem;
       }
     }
     ul.delivery-list {
@@ -48,7 +50,7 @@
       }
       li.price {
         font-weight: 600;
-        font-size: 26px;
+        font-size: 1.5rem;
       }
     }
   }
@@ -56,7 +58,7 @@
 .button-add-to-cart-holder {
   .button {
     background: var(--red-color);
-    padding: 0.3rem 0rem;
+    padding: 0.4rem 0.5rem;
     color: white;
     text-decoration: none;
     border-radius: 0.4rem;
@@ -66,10 +68,15 @@
     align-items: center;
     justify-content: center;
     border: none;
+    font-weight: 500;
   }
   .img-holder {
     width: 13%;
     margin-right: 0.8rem;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
   }
 }
 .plus-minus-holder,
@@ -119,7 +126,9 @@
 }
 .under-details-buttons-surrounder {
   position: relative;
-  padding: 0 2rem 0 0;
+  &:not(:last-child) {
+    margin-right: 3rem;
+  }
 }
 .under-details-buttons-button {
   align-items: center;
@@ -136,7 +145,7 @@
 }
 .under-details-buttons-button {
   margin-bottom: 0.25rem;
-  width: 3rem;
+  width: 2.5rem;
 }
 @media (max-width: 991.98px) {
   .info-holder {

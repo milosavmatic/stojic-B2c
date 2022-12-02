@@ -1,0 +1,31 @@
+.gridProducts {
+  .gridColumn {
+    display: grid;
+    grid-template-columns: 30rem 1fr;
+    gap: 5px;
+    .articles {
+      .articlesButtons {
+        display: flex;
+        justify-content: center;
+      }
+      .noProduct {
+        color: var(--red-color);
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        h3 {
+          font-size: 1.1rem;
+        }
+      }
+    }
+    .articlesGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 20px;
+      column-gap: 0;
+      margin-top: 1rem;
+    }
+  }
+}
+
+

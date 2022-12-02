@@ -1,0 +1,38 @@
+.cardsSupport {
+  margin: 2rem 0;
+  padding: 0 4rem;
+  .cardSupport {
+    background-color: var(--dark-gray-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 7px;
+    img {
+      padding-right: 1rem;
+      width: 60px;
+      filter: invert(15%) sepia(88%) saturate(3687%) hue-rotate(348deg)
+        brightness(107%) contrast(98%);
+    }
+    p {
+      display: flex;
+      flex-direction: column;
+      color: var(--white-color);
+      span {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 1400px) {
+  .cardsSupport {
+    padding: 0;
+    .cardSupport {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+

@@ -13,6 +13,7 @@ export function CartContextProvider({ children }) {
   }
 
   const [wishList, setWishlist] = useState(0)
+
   const mutateWishList = () => {
     let x = Math.random() * 10
     do {
@@ -20,9 +21,15 @@ export function CartContextProvider({ children }) {
     } while (x === cart)
     setWishlist(x)
   }
+  
+  const [headerTotal, setHeaderTotal] = useState(0)
+
+  const mutateHeaderTotal = (total) => {
+    setHeaderTotal(total)
+  }
 
   return (
-    <CartContext.Provider value={[cart, mutateCart, wishList, mutateWishList]}>
+    <CartContext.Provider value={[cart, mutateCart, wishList, mutateWishList, headerTotal, mutateHeaderTotal]}>
       {children}
     </CartContext.Provider>
   )

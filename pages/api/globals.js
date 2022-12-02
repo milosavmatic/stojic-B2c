@@ -1,27 +1,33 @@
-import { ApiHandler } from "./api";
-import { useCartContext } from "./cartContext";
-
+import { ApiHandler } from './api';
+import { useCartContext } from './cartContext';
+import { openAlertBox } from '../../helpers/tostify';
 /**
  * Hook wrapper for global add to cart so context can be used
  */
-export const useGlobalAddToCart = () => {
+export const useGlobalAddToCart = (type = false) => {
   const [, mutateCart] = useCartContext();
 
   const api = ApiHandler();
-  const addToCart = (productId, quantity) => {
+  const addToCart = (productId, quantity, fromCart = false) => {
     api
-      .post("/cart", {
+      .post('/cart', {
         id_product: productId,
         quantity,
         id_product_parent: null,
         description: null,
         status: null,
+        quantity_calc_type: type ? 'replace' : 'calc',
       })
       .then((response) => {
-        console.log(response);
+        if (!fromCart) {
+          openAlertBox('Proizvod je dodat u korpu.', 'success');
+        }
+        if (quantity === 0) {
+          openAlertBox('Proizvod je uspešno obrisan iz korpe.', 'success');
+        }
         mutateCart();
       })
-      .catch((error) => console.warn(error));
+      .catch((error) => openAlertBox(error.message, 'error'));
   };
 
   return addToCart;
@@ -36,7 +42,7 @@ export const useGlobalRemoveFromCart = () => {
   const api = ApiHandler();
   const removeFromCart = (productId) => {
     api
-      .post("/cart", {
+      .post('/cart', {
         id_product: productId,
         quantity: 0,
         id_product_parent: null,
@@ -62,7 +68,7 @@ export const useGlobalAddToWishList = () => {
   const api = ApiHandler();
   const addToWishList = (productId) => {
     api
-      .post("/wishlist", {
+      .post('/wishlist', {
         id: null,
         id_product: productId,
         quantity: 1,
@@ -71,10 +77,12 @@ export const useGlobalAddToWishList = () => {
         status: null,
       })
       .then((response) => {
-        console.log(response);
+        openAlertBox('Proizvod je dodat u listu želja.', 'success');
         mutateWishList();
       })
-      .catch((error) => console.warn(error));
+      .catch((error) =>
+        openAlertBox('Proizvod je već dodat listu želja.', 'error')
+      );
   };
 
   return addToWishList;

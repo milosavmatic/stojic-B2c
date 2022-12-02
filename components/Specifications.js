@@ -12,6 +12,11 @@ const Specifications = ({ specifications = [] }) => {
         className='mb-3'
       >
         <Tab eventKey='home' title='Dodatne informacije'>
+          {specifications.length === 0 && (
+            <p className='text-center'>
+              Za proizvod nema dodatnih informacija.
+            </p>
+          )}
           <Table striped hover>
             <tbody>
               {(specifications ?? []).map((data) => {
@@ -49,12 +54,12 @@ const Specifications = ({ specifications = [] }) => {
             </tbody>
           </Table>
         </Tab>
-        {/* <Tab eventKey='profile' title='Recenzije'>
+        <Tab eventKey='profile' title='Recenzije'>
           /
         </Tab>
         <Tab eventKey='contact' title='Pitanja i odgovori'>
           /
-            </Tab> */}
+            </Tab>
       </Tabs>
     </div>
   )

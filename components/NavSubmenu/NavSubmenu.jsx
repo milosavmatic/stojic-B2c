@@ -1,14 +1,14 @@
-import Link from "next/link";
-import classes from "./NavbarMenu.module.scss";
+import Link from 'next/link'
+import classes from '../NavbarMenu.module.scss'
 
 const NavSubmenu = ({ menu }) => {
   return (
-    <ul className={classes["nav-submenu"]}>
+    <ul className={classes['nav-submenu']}>
       {menu.map((item) => (
-        <li key={item.id} className={classes["nav-submenu-item"]}>
-          <div className={classes["submenu-item-holder"]}>
+        <li key={item.id} className={classes['nav-submenu-item']}>
+          <div className={classes['submenu-item-holder']}>
             <Link href={item.path}>
-              <a className={`${classes["category-name"]} `}>{item.name}</a>
+              <a className={`${classes['category-name']} `}>{item.name}</a>
             </Link>
             {item.children.length > 0 && (
               <div className={classes.children}>
@@ -19,7 +19,7 @@ const NavSubmenu = ({ menu }) => {
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default NavSubmenu;
+export default NavSubmenu

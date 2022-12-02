@@ -1,0 +1,31 @@
+.buttonTab button {
+  position: relative;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-size: 1rem;
+  &.active {
+    font-weight: 600;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4.5px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 4px;
+      width: 9px;
+      background-color: red;
+      border-bottom-left-radius: 0.2rem;
+      border-bottom-right-radius: 0.2rem;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: red;
+    }
+  }
+}

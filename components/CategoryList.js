@@ -22,11 +22,11 @@ const CategoryList = ({ recomendedCategories = [] }) => {
               }`}
             >
               <div className={classes['category-holder']}>
-                <Link href={`/kategorije/${item.id}`}>
+                <Link href={`/kategorije/${item.slug}`}>
                   <a>
                     <div className={classes['image-holder']}>
                       <Image
-                        src={item?.path ?? '/products/missing.png'}
+                        src={item?.images?.iamge ?? '/products/missing.png'}
                         className='d-inline-block align-top w-100 img-fluid'
                         alt='React'
                         layout='fill'
@@ -38,7 +38,7 @@ const CategoryList = ({ recomendedCategories = [] }) => {
                 <div className={classes['info-holder']}>
                   <Link href={`/kategorije/${item.id}`}>
                     <a className={classes['info-holder-title']}>
-                      <h5>{item?.name ?? ''}</h5>
+                      <h5>{item?.basic_data?.name ?? ''}</h5>
                     </a>
                   </Link>
                   <div className={`${classes.line}`}></div>
