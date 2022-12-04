@@ -2,13 +2,15 @@
   background-color: var(--dark-gray-color);
   padding: 3rem 0;
 }
+
 ul.footer-list {
   padding-left: 0rem;
 }
+
 .footer-middle-col {
   color: var(--white-color);
-  // text-align: center;
 }
+
 .footer-middle-col ul.footer-list a.basic-link-white {
   color: white;
   text-decoration: none;
@@ -17,6 +19,7 @@ ul.footer-list {
     color: var(--red-color);
   }
 }
+
 .footer-middle-headings {
   margin-bottom: 1rem;
   font-weight: 500 !important;
@@ -64,16 +67,21 @@ ul.footer-list {
   background-color: var(--navy-blue);
   padding: 1rem 0;
   color: var(--white-color);
-  ul {
-    margin-bottom: 0;
-    li:not(:last-child) {
-      padding-right: 2rem;
-    }
-    li a {
-      color: var(--white-color);
-      transition: all 0.2s ease-in-out;
-      &:hover {
-        color: var(--red-color);
+  .footer-copyright-items {
+    display: flex;
+    justify-content: space-between;
+    ul {
+      margin-bottom: 0;
+      padding-left: 0;
+      li:not(:last-child) {
+        padding-right: 2rem;
+      }
+      li a {
+        color: var(--white-color);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          color: var(--red-color);
+        }
       }
     }
   }
@@ -87,9 +95,6 @@ ul.footer-list {
   font-weight: 500 !important;
   font-size: 1rem;
 }
-// .newsletter-label {
-//   padding-left: 1rem;
-// }
 
 .newsletter {
   position: relative;
@@ -125,14 +130,7 @@ ul.footer-list {
 .marginTop {
   margin-top: 0.8rem;
 }
-// .newsletter-button:hover {
-//   background-color: #cf0007;
-// }
-// .newsletter-button-container {
-//   justify-content: flex-end;
-//   width: 100%;
-//   display: flex;
-// }
+
 .newsletter-follow {
   display: flex;
   flex-direction: column;
@@ -185,13 +183,7 @@ ul.footer-list {
     color: var(--red-color);
   }
 }
-// .newsletter-container .basic-checkbox-container input.form-custom-btn {
-//   width: 1.2em;
-//   height: 1.2em;
-//   background-color: #fff;
-//   border: 1px solid rgba(0, 0, 0, 0.25);
-//   margin-left: unset;
-// }
+
 .flex-row {
   display: flex;
 }
@@ -205,163 +197,62 @@ ul.footer-list {
 .display-desktop {
   display: block;
 }
-@media (max-width: 1399.98px) {
-  .newsletter-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0 2rem;
-    h5 {
-      width: 100%;
-      text-align: center;
-    }
-    .newsletter-follow {
-      justify-content: space-between;
-      a {
-        margin: unset;
-      }
-      .flex-row {
-        justify-content: space-between;
-        width: 100%;
+
+@media (max-width: 992px) {
+  .footer-copyright {
+    .footer-copyright-items {
+      flex-direction: column;
+      align-items: center;
+      ul {
+        order: -1;
+        margin-bottom: 0.5rem;
       }
     }
   }
-  .footer-banks {
-    flex-direction: column;
-    height: 140px;
-    justify-content: space-between;
-    .footer-banks-1 {
-      height: 50px;
-    }
-  }
-  .footer-middle-col {
-    &:last-child:after {
+  .footer-holder {
+    padding: 2rem 0;
+    .mobNone {
       display: none;
     }
-  }
-  @media (max-width: 991.98px) {
-    .footer-banks-1:last-child {
-      flex-direction: unset;
-      height: 140px;
-      justify-content: space-between;
-      .footer-banks-2 {
-        height: 50px;
+    .newsletter-col {
+      width: 60%;
+      margin: 0 auto;
+      .newsletter-heading {
+        margin-bottom: 1rem;
       }
     }
-    .footer-banks-1:first-child {
-      margin-bottom: 0.5rem;
-    }
-    .footer-banks {
-      height: 200px;
-      padding: 1.5rem 3rem 0rem 3rem;
-    }
-  }
-}
-@media (max-width: 991px) {
-  .display-mobile {
-    display: block !important;
-  }
-  .display-desktop {
-    display: none !important;
-  }
-  .acc-items {
-    color: #ababab;
-    text-transform: capitalize;
-    text-decoration: none;
-  }
-  .newsletter-container {
-    margin-top: 2rem;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .newsletter-follow {
-    height: unset;
-    width: fit-content;
-    margin-top: 0.6rem;
-    margin-left: auto;
-    margin-right: auto;
-    .flex-row {
-      .newsletter-social-link {
-        height: 40px;
-        width: 40px;
-        .newsletter-social-link-icon {
-          height: 25px;
-        }
-      }
-    }
-  }
-  .newsletter-heading {
-    color: white;
-    margin-bottom: 1rem;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  .newsletter-label {
-    color: white;
-  }
-
-  .follow-us {
-    color: white;
-    font-size: 16px;
-    margin-bottom: 0.6rem;
-  }
-  .footer-banks {
-    display: none;
-  }
-  .red-line {
-    background-color: var(--red-color);
-    height: 16px;
-    width: 4px;
-    margin-right: 0.4rem;
-  }
-  .acc-headings-holder {
-    display: flex;
-  }
-}
-
-
-
-@media (max-width: 765.98px) {
-  .footer-middle-col {
-    &::after {
-      height: 1px;
-      margin-top: 0.4rem;
-      width: 40%;
-      left: 30%;
-      top: 17%;
-    }
-  }
-  .footer-middle-col {
-    &:last-child::after {
-      height: 1px;
-      margin-top: 0.4rem;
-      width: 40%;
-      left: 30%;
-      top: 17%;
-      display: block;
+    .display-mobile {
+      display: block !important;
+      margin-top: 2rem;
     }
   }
   .footer-list {
-    padding-left: unset;
+    margin-bottom: 0;
+    li {
+      a {
+        color: var(--white-color) !important;
+        text-transform: capitalize;
+      }
+      text-transform: capitalize;
+    }
   }
-  .footer-list li {
-    margin-bottom: 0.125rem;
+  
+}
+
+@media (max-width: 765.98px) {
+  .footer-copyright {
+    p {
+      display: flex;
+      flex-direction: column;
+    }
   }
-  .footer-middle-headings {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-  .newsletter-col {
-    margin-top: 1rem;
-  }
-  .newsletter-container {
-    width: 100%;
-    padding: 0rem 1rem;
-  }
-  .footer-post-script {
-    padding: 0.4rem 1rem;
+}
+
+@media (max-width: 576px) {
+  .footer-holder {
+    .newsletter-col {
+      margin: 0;
+      width: 100%;
+    }
   }
 }

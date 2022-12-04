@@ -12,6 +12,7 @@ const Home = ({
   buttonTabs,
   saleProducts,
   positionProducts,
+  actionBanners
 }) => {
   return (
     <div>
@@ -22,7 +23,7 @@ const Home = ({
         positionProducts={positionProducts}
       />
       <GridProducts recommendedProducts={recommendedProducts} />
-      <ActionBanners />
+      <ActionBanners actionBanners={actionBanners} />
       <CategoryItems buttonTabs={buttonTabs} />
     </div>
   );

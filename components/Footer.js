@@ -19,7 +19,9 @@ const Footer = () => {
           <div className={`${classes['footer-middle']} row`}>
             <div className={`${classes['display-desktop']}`}>
               <div className="row">
-                <div className={`${classes['footer-middle-col']} col-3`}>
+                <div
+                  className={`${classes['footer-middle-col']} ${classes['mobNone']} col-3`}
+                >
                   <h5 className={`${classes['footer-middle-headings']}`}>
                     Podrška
                   </h5>
@@ -61,7 +63,7 @@ const Footer = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="col-3">
+                <div className={`${classes['mobNone']} col-3`}>
                   <div className="row">
                     <div className={`${classes['footer-middle-col']} col-12`}>
                       <h5 className={`${classes['footer-middle-headings']}`}>
@@ -91,7 +93,9 @@ const Footer = () => {
                         </li>
                       </ul>
                     </div>
-                    <div className={`${classes['footer-middle-col']}  ${classes['marginTop']} col-12 `}>
+                    <div
+                      className={`${classes['footer-middle-col']}  ${classes['marginTop']} col-12 `}
+                    >
                       <h5 className={`${classes['footer-middle-headings']}`}>
                         Kontakt centar
                       </h5>
@@ -110,7 +114,9 @@ const Footer = () => {
                   </div>
                 </div>
 
-                <div className={`${classes['footer-middle-col']} col-3`}>
+                <div
+                  className={`${classes['footer-middle-col']} ${classes['mobNone']} col-3`}
+                >
                   <h5 className={`${classes['footer-middle-headings']}`}>
                     Stojić Elektrik
                   </h5>
@@ -158,7 +164,44 @@ const Footer = () => {
                     <Accordion.Header className={`${classes['acc-headings']}`}>
                       <div className={`${classes['acc-headings-holder']}`}>
                         <div className={`${classes['red-line']}`}></div>
-                        <p>Kupovina</p>
+                        <p>Podrška</p>
+                      </div>
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <ul className={`${classes['footer-list']}`}>
+                        <li>
+                          <Link href="/" className={`${classes['acc-items']}`}>
+                            Način plaćanja
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/" className={`${classes['acc-items']}`}>
+                            Kako naručiti
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/" className={`${classes['acc-items']}`}>
+                            Najčešća pitanja
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/" className={`${classes['acc-items']}`}>
+                            Korisnička podrška
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/" className={`${classes['acc-items']}`}>
+                            Zamena artikala
+                          </Link>
+                        </li>
+                      </ul>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="1">
+                    <Accordion.Header className={`${classes['acc-headings']}`}>
+                      <div className={`${classes['acc-headings-holder']}`}>
+                        <div className={`${classes['red-line']}`}></div>
+                        <p>Uslovi korišćenja</p>
                       </div>
                     </Accordion.Header>
                     <Accordion.Body>
@@ -175,59 +218,7 @@ const Footer = () => {
                         </li>
                         <li>
                           <Link href="/" className={`${classes['acc-items']}`}>
-                            Reklamacije
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Pravo na odsutanje
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Zamena artikala
-                          </Link>
-                        </li>
-                      </ul>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                  <Accordion.Item eventKey="1">
-                    <Accordion.Header className={`${classes['acc-headings']}`}>
-                      <div className={`${classes['acc-headings-holder']}`}>
-                        <div className={`${classes['red-line']}`}></div>
-                        <p>Informacije</p>
-                      </div>
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      <ul className={`${classes['footer-list']}`}>
-                        <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Kako kupiti
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Aktuelnost
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Karijera
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Odaberite veličinu
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Autorska prava
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Poklon Vaučeri
+                            Prava potrošača
                           </Link>
                         </li>
                       </ul>
@@ -237,7 +228,7 @@ const Footer = () => {
                     <Accordion.Header className={`${classes['acc-headings']}`}>
                       <div className={`${classes['acc-headings-holder']}`}>
                         <div className={`${classes['red-line']}`}></div>
-                        <p>Kompanija</p>
+                        <p>Stojić Elektrik</p>
                       </div>
                     </Accordion.Header>
                     <Accordion.Body>
@@ -252,144 +243,71 @@ const Footer = () => {
                         </li>
                         <li>
                           <Link href="/" className={`${classes['acc-items']}`}>
+                            Postani partner
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/" className={`${classes['acc-items']}`}>
                             Kontakt
                           </Link>
                         </li>
                         <li>
                           <Link href="/" className={`${classes['acc-items']}`}>
-                            Prodajna mesta
+                            Blog
                           </Link>
                         </li>
-                        <li className={`${classes['acc-items']}`}>
-                          Mobs Technology d.o.o
+                      </ul>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="3">
+                    <Accordion.Header className={`${classes['acc-headings']}`}>
+                      <div className={`${classes['acc-headings-holder']}`}>
+                        <div className={`${classes['red-line']}`}></div>
+                        <p>Kontakt centar</p>
+                      </div>
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <ul className={`${classes['footer-list']}`}>
+                        <li>
+                          <Link
+                            href="tel:0038132368007"
+                            className={`${classes['acc-items']}`}
+                          >
+                            +381 32 368 007
+                          </Link>
                         </li>
-                        <li className={`${classes['acc-items']}`}>
-                          Braće Jerković 223
+                        <li>
+                          Ponedeljak - petak: 8 - 20h
                         </li>
-                        <li className={`${classes['acc-items']}`}>
-                          Beograd 11000, Srbija.
-                        </li>
-                        <li className={`${classes['acc-items']}`}>
-                          MB: 17531875
-                        </li>
-                        <li className={`${classes['acc-items']}`}>
-                          PIB: 103173767
+                        <li>
+                          Subota - nedelja:8 - 17h
                         </li>
                       </ul>
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
               </div>
-              <div className={`${classes['nl-holder']}`}>
-                <div className={`${classes['newsletter-container']}`}>
-                  <h5 className={`${classes['newsletter-heading']}`}>
-                    NEWSLETTER
-                  </h5>
-                  <div className={`${classes['basic-checkbox-container']}`}>
-                    <input
-                      id="acceptance"
-                      type="checkbox"
-                      className={`${
-                        classes['form-custom-btn'] + ' form-check-button'
-                      }`}
-                    />
-                    <label
-                      className={`${classes['newsletter-label']}`}
-                      htmlFor="acceptance"
-                    >
-                      Saglasan sam sa svim uslovima
-                    </label>
-                  </div>
-                  <input
-                    className={`${
-                      classes['newsletter-input'] + ' basic-input'
-                    }`}
-                    type="text"
-                    placeholder="e-mail"
-                  />
-                  <div className={`${classes['newsletter-button-container']}`}>
-                    <button
-                      type="button"
-                      className={`${
-                        classes['newsletter-button'] + ' basic-button'
-                      }`}
-                    >
-                      Prijavi se
-                    </button>
-                  </div>
-                </div>
-                <div className={`${classes['newsletter-follow']}`}>
-                  <h5 className={`${classes['follow-us']}`}>PRATITE NAS</h5>
-                  <div className={`${'flex-row ' + classes['flex-row']}`}>
-                    <a
-                      className={`${`${classes['newsletter-social-link']}`}`}
-                      href="https://facebook.com"
-                    >
-                      <FontAwesomeIcon
-                        icon={faFacebookF}
-                        className={classes['newsletter-social-link-icon']}
-                      />
-                    </a>
-                    <a
-                      className={`${classes['newsletter-social-link']}`}
-                      href="https://instagram.com"
-                    >
-                      <FontAwesomeIcon
-                        icon={faInstagram}
-                        className={classes['newsletter-social-link-icon']}
-                      />
-                    </a>
-                    <a
-                      className={`${classes['newsletter-social-link']}`}
-                      href="https://linkedin.com"
-                    >
-                      <FontAwesomeIcon
-                        icon={faLinkedinIn}
-                        className={classes['newsletter-social-link-icon']}
-                      />
-                    </a>
-                    <a
-                      className={`${classes['newsletter-social-link']}`}
-                      href="https://twitter.com"
-                    >
-                      {
-                        <FontAwesomeIcon
-                          icon={faTwitter}
-                          className={classes['newsletter-social-link-icon']}
-                        />
-                      }
-                    </a>
-                    <a
-                      className={`${classes['newsletter-social-link']}`}
-                      href="https://twitter.com"
-                    >
-                      {
-                        <FontAwesomeIcon
-                          icon={faYoutube}
-                          className={classes['newsletter-social-link-icon']}
-                        />
-                      }
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
       <div className={`${classes['footer-copyright']} `}>
-        <div className="container d-flex justify-content-between">
+        <div className={`${classes['footer-copyright-items']} container`}>
           <p>
-            Stojić Elektrik | Sva prava zadržana. Powered by{' '}
-            <a
-              className={classes['croonus-link']}
-              rel="noreferrer"
-              href="https://www.croonus.com/"
-              target="_blank"
-            >
-              Croonus Technologies
-            </a>
-            .
+            Stojić Elektrik | Sva prava zadržana.
+            <span>
+              {' '}
+              Powered by{' '}
+              <a
+                className={classes['croonus-link']}
+                rel="noreferrer"
+                href="https://www.croonus.com/"
+                target="_blank"
+              >
+                Croonus Technologies
+              </a>
+              .
+            </span>
           </p>
           <ul className="d-flex">
             <li>

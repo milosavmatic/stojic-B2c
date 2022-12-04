@@ -18,9 +18,7 @@
 .filters-holder .reset-filters span {
   font-weight: 600;
 }
-.filters-holder {
-  // margin: 0rem 2rem 0rem 1.5rem;
-}
+
 .filters .custom-accordion {
   border: 1px solid var(--light-gray-color);
   border-radius: 0.5rem;
@@ -31,11 +29,13 @@
   }
 }
 .accordion-item {
-  border: unset;
+  border: 1px solid var(--dark-gray-color);
   text-transform: uppercase;
+  background-color: transparent !important;
 }
 .accordion-button {
   padding: unset;
+  background-color: var(--navy-blue) !important;
 }
 .custom-accordion .accordion-button {
   background: transparent;
@@ -43,6 +43,7 @@
   font-size: 15px;
   text-transform: capitalize;
 }
+
 .custom-accordion .accordion-button:not(.collapsed) {
   background-color: transparent;
   color: black;
@@ -68,6 +69,7 @@
 .filters-holder .accordion-header p {
   text-transform: uppercase;
   margin-bottom: 0rem;
+  
 }
 .filters-holder .checkbox-holder {
   display: flex;
@@ -92,7 +94,7 @@
 }
 .filters-holder .accordion-header .accordion-button p {
   text-transform: capitalize;
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--navy-blue);
   font-weight: normal;
 }

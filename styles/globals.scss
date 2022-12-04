@@ -22,6 +22,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .mandatory {
   color: red;
   margin-right: 5px;
@@ -421,7 +422,7 @@ ul {
 }
 footer .accordion-header .accordion-button {
   color: white;
-  background-color: var(--black-color);
+  font-weight: normal;
 }
 footer .accordion-collapse.collapse.show,
 footer .accordion-collapse.collapsing {
@@ -443,6 +444,8 @@ footer .accordion-button:hover {
 }
 footer .accordion-button::after {
   background-image: url(../assets/images/elements/arrow-down.png);
+  background-size: 10px;
+  background-position: center;
 }
 
 .top-margin-1 {

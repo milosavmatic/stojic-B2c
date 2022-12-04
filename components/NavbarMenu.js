@@ -54,7 +54,7 @@ const NavbarMenu = () => {
       .get('/categories/product/tree')
       .then((response) => setCategoryData(response.payload))
       .catch((error) => console.warn(error));
-  }, []);
+  }, [api]);
 
   const [cart] = useCartContext();
   const [, , , wishList] = useCartContext();
@@ -68,7 +68,7 @@ const NavbarMenu = () => {
       .catch((error) => {
         console.warn(error);
       });
-  }, []);
+  }, [api]);
 
   const getWishCount = useCallback(() => {
     console.log('wishcount render');
@@ -80,7 +80,7 @@ const NavbarMenu = () => {
       .catch((error) => {
         console.warn(error);
       });
-  }, []);
+  }, [api]);
 
   useEffect(() => {
     getMenuCategories();
@@ -102,7 +102,7 @@ const NavbarMenu = () => {
         console.log(response?.payload.summary.totals.total);
       })
       .catch((error) => console.warn(error));
-  }, [cart]);
+  }, [cart, api]);
 
   const menu = generateMenu(categoryData, '/kategorije');
 
@@ -238,30 +238,6 @@ const NavbarMenu = () => {
                   className={classes['header-search']}
                   onSubmit={handleSearch}
                 >
-                  {/* <div className={classes['search-holder']}>
-                    <input
-                      placeholder="Traži..."
-                      className={classes['search-input']}
-                      type="text"
-                      id="docs-search-input"
-                      mplete="off"
-                      spellCheck="false"
-                      aria-autocomplete="list"
-                      aria-label="search input"
-                      aria-owns="algolia-autoComplete-listbox-16"
-                      value={searchTerm}
-                      onChange={({ target }) => setSearchTerm(target.value)}
-                    />
-                    <button
-                      type="button"
-                      onClick={handleSearch}
-                      className={`${
-                        classes['newsletter-button'] + ' basic-button'
-                      }`}
-                    >
-                      Prijavi se
-                    </button>
-                  </div> */}
                   <div className={classes['newsletter']}>
                     <input
                       className={`${
@@ -272,6 +248,7 @@ const NavbarMenu = () => {
                       id="search"
                       value={searchTerm}
                       onChange={({ target }) => setSearchTerm(target.value)}
+                      placeholder="Pretraži proizvode.."
                     />
                     <button
                       type="submit"
@@ -290,7 +267,7 @@ const NavbarMenu = () => {
                 md={4}
                 sm={3}
                 xl={4}
-                lg={1}
+                lg={4}
                 className={classes['col-holder']}
               >
                 <div className={classes['icons-holder']}>
@@ -339,10 +316,6 @@ const NavbarMenu = () => {
             <div
               className={`${classes['bottom-header-content']} d-flex align-items-center`}
             >
-              {/* <p>
-                <span>Besplatna dostava</span> - Za porudžbenice čija je vrenost
-                veća od 5.000 RSD
-              </p> */}
               <Col xl={3} lg={3}>
                 <ul>
                   <li className={classes['dropdown-hover']}>
@@ -381,7 +354,7 @@ const NavbarMenu = () => {
                   </li>
                 </ul>
               </Col>
-              <Col xl={6} lg={6} className={classes['nav-holder']}>
+              <Col xl={5} lg={6} className={classes['nav-holder']}>
                 <Navbar
                   expand="lg"
                   className={classes['navbar-menu']}
@@ -398,7 +371,7 @@ const NavbarMenu = () => {
                     >
                       <ul className={classes['nav-list']}>
                         <li>
-                          <Link href="/" className={classes.Link}>
+                          <Link href="/akcija" className={classes.Link}>
                             Akcije
                           </Link>
                         </li>
@@ -422,44 +395,30 @@ const NavbarMenu = () => {
                             Kontakt
                           </Link>
                         </li>
-                        {/* <li>
-                          <Link href="/" className={classes.Link}>
-                            Početna
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/servis" className={classes.Link}>
-                            Servis
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/rentiranje" className={classes.Link}>
-                            Renta opreme
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/kontakt" className={classes.Link}>
-                            Kontakt
-                          </Link>
-                        </li> */}
                       </ul>
                     </Nav>
                   </Navbar.Collapse>
                 </Navbar>
               </Col>
-              <Col md={3} xl={3} lg={3}>
+              <Col md={3} xl={4} lg={3}>
                 <ul
                   className={`${classes['envelope-phone']} d-flex justify-content-end`}
                 >
                   <li>
-                    <BsEnvelope />
                     <Link href="mailto:prodaja@stojic.rs">
-                      prodaja@stojic.rs
+                      <span>
+                        <BsEnvelope />
+                        <span>prodaja@stojic.rs</span>
+                      </span>
                     </Link>
                   </li>
                   <li>
-                    <FaPhoneAlt />
-                    <Link href="tel:0038132368007">+381 32 368 007</Link>
+                    <Link href="tel:0038132368007">
+                      <span>
+                        <FaPhoneAlt />
+                        <span>+381 32 368 007</span>
+                      </span>
+                    </Link>
                   </li>
                 </ul>
               </Col>
@@ -473,9 +432,9 @@ const NavbarMenu = () => {
           <div className="container">
             <Row className={`${classes['top-header-mobile']}`}>
               <Col
-                xs={4}
-                sm={3}
-                md={3}
+                xs={6}
+                sm={6}
+                md={4}
                 className={`${classes['col-holder']} ${classes['logo-holder']}`}
               >
                 <Link href="/">
@@ -488,7 +447,7 @@ const NavbarMenu = () => {
                   </div>
                 </Link>
               </Col>
-              <Col md={9} sm={9} xs={8} className={classes['col-holder']}>
+              <Col md={8} sm={6} xs={6} className={classes['col-holder']}>
                 <div className={classes['icons-holder']}>
                   <div>
                     <ul className={classes['icons-list']}>
@@ -498,11 +457,10 @@ const NavbarMenu = () => {
                           className={`${classes['button-wishlist']}`}
                           onClick={() => navigate('/lista-zelja')}
                         >
-                          <Image
-                            src={heart}
-                            className="d-inline-block align-top w-100"
-                            alt="React"
-                          />
+                          <Image src={wish} alt="Lista zelja" />
+                          <span className={`${classes['marker']}`}>
+                            {wishCount}
+                          </span>
                         </button>
                       </li>
                       <li>
@@ -511,11 +469,7 @@ const NavbarMenu = () => {
                           className={`${classes['button-checkout']}`}
                           onClick={() => navigate('/korpa')}
                         >
-                          <Image
-                            src={cartImage}
-                            className="d-inline-block align-top w-100"
-                            alt="React"
-                          />
+                          <BsHandbag />
                           <span className={`${classes['marker']}`}>
                             {cartCount}
                           </span>
@@ -526,11 +480,11 @@ const NavbarMenu = () => {
                 </div>
               </Col>
             </Row>
-            <Row className="mt-2">
+            <Row className="d-flex align-items-center">
               <Col
-                xs={1}
-                sm={1}
-                md={1}
+                xs={2}
+                md={6}
+                sm={4}
                 className={classes['mobile-nav-holder']}
               >
                 <div className={`${classes['mobile-nav']}`}>
@@ -595,21 +549,39 @@ const NavbarMenu = () => {
 
                       <li
                         onClick={() => {
-                          navigate('/rentiranje');
+                          navigate('/akcije');
                           onMobileDivShow();
                         }}
                         className={classes['mobile-nav-link']}
                       >
-                        Renta opreme
+                        Akcije
                       </li>
                       <li
                         onClick={() => {
-                          navigate('/servis');
+                          navigate('/');
                           onMobileDivShow();
                         }}
                         className={classes['mobile-nav-link']}
                       >
-                        Servis
+                        Način plaćanja
+                      </li>
+                      <li
+                        onClick={() => {
+                          navigate('/');
+                          onMobileDivShow();
+                        }}
+                        className={classes['mobile-nav-link']}
+                      >
+                        Blog
+                      </li>
+                      <li
+                        onClick={() => {
+                          navigate('/');
+                          onMobileDivShow();
+                        }}
+                        className={classes['mobile-nav-link']}
+                      >
+                        B2B
                       </li>
                       <li
                         onClick={() => {
@@ -621,46 +593,42 @@ const NavbarMenu = () => {
                         Kontakt
                       </li>
                     </ul>
-                    <div className={`${classes['bottom-navbar']}`}>
-                      <p>Call center</p>
-                      <p>+381 62 22 12 15</p>
-                    </div>
                   </div>
                 </div>
               </Col>
               <Col
-                md={11}
-                sm={11}
-                xs={11}
+                md={6}
+                sm={8}
+                xs={10}
                 className={`${classes['col-holder']}`}
               >
-                <from onSubmit={handleSearch}>
-                  <div className={classes['search-holder']}>
-                    <div
-                      className={`${classes['search-image-holder']}`}
-                      onClick={handleSearch}
-                    >
-                      <Image
-                        src={search}
-                        className={`${classes['search']}`}
-                        alt=""
-                      />
-                    </div>
+                <form
+                  className={classes['header-search']}
+                  onSubmit={handleSearch}
+                >
+                  <div className={classes['newsletter']}>
                     <input
-                      placeholder="Pretraži proizvode"
-                      className={classes['search-input']}
+                      className={`${
+                        classes['newsletter-input'] + ' basic-input'
+                      }`}
                       type="text"
-                      id="docs-search-input"
-                      mplete="off"
-                      spellCheck="false"
-                      aria-autocomplete="list"
-                      aria-label="search input"
-                      aria-owns="algolia-autoComplete-listbox-16"
+                      name="search"
+                      id="search"
                       value={searchTerm}
                       onChange={({ target }) => setSearchTerm(target.value)}
+                      placeholder="Pretraži proizvode.."
                     />
+                    <button
+                      type="submit"
+                      className={`${
+                        classes['newsletter-button'] + ' basic-button'
+                      }`}
+                      onClick={handleSearch}
+                    >
+                      <BsSearch />
+                    </button>
                   </div>
-                </from>
+                </form>
               </Col>
             </Row>
           </div>

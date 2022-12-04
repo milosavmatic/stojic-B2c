@@ -1,14 +1,13 @@
-import banners from '../../data/bannersAction.json';
 import classes from './ActionBanners.module.scss';
 import { Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 
-const ActionBanners = () => {
+const ActionBanners = ({ actionBanners }) => {
   return (
     <div className={`${classes['actionBanners']}`}>
       <div className="container">
         <Row>
-          {banners.map((banner) => {
+          {(actionBanners ?? []).map((banner) => {
             return (
               <Col
                 className={`${classes['box']}`}
@@ -20,11 +19,11 @@ const ActionBanners = () => {
               >
                 <Link href="/">
                   <div className={`${classes['actionBanner']}`}>
-                    <img src={banner.src} alt={banner.alt} />
-                    <div className={classes.wrappText}>
+                    <img src={banner.image} alt='Stojic Elektik' />
+                    {/* <div className={classes.wrappText}>
                       <h5>{banner.title}</h5>
                       <p>Saznaj više &#62;&#62;</p>
-                    </div>
+                    </div> */}
                   </div>
                 </Link>
               </Col>
