@@ -517,6 +517,7 @@ ul.header-links li:hover {
             padding: 0.5rem 1rem;
             width: max-content;
             top: calc(100% + 10px);
+            z-index: 9;
             &::after {
               position: absolute;
               content: '';
