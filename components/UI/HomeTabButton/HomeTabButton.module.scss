@@ -43,3 +43,11 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .buttonTab {
+    button {
+      margin-bottom: 1rem;
+    }
+  }
+}

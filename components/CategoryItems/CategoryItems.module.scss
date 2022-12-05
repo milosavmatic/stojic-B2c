@@ -18,7 +18,7 @@
       '. . item3 item3 . '
       '. . item3 item3 . ';
     grid-gap: 5px;
-    grid-template-columns: repeat(5, 20%);
+    grid-template-columns: repeat(5, calc((100% - 20px) / 5));
     .item3 {
       grid-area: item3;
     }
@@ -26,7 +26,50 @@
   .categoryTabs {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     border-bottom: 2px solid #ebebeb;
     margin-bottom: 1rem;
   }
 }
+
+// RESPONSIVE
+
+@media (max-width: 950px) {
+  .categoryItems {
+    .categoryGrid {
+      grid-template-areas:
+        '. . .'
+        'item3 item3 item3'
+        '. . . ';
+      grid-template-columns: repeat(3, calc((100% - 10px) / 3));
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .categoryItems {
+    .categoryGrid {
+      grid-template-areas:
+        '. .'
+        'item3 item3'
+        '. .'
+        '. .';
+      grid-template-columns: repeat(2, calc((100% - 5px) / 2));
+    }
+  }
+}
+
+// @media (max-width: 576px) {
+//   .categoryItems {
+//     .categoryGrid {
+//       // grid-template-areas:
+//       // '.'
+//       // 'item3 item3'
+//       // '. .'
+//       // '. .';
+//       // grid-template-columns: repeat(2, calc((100% - 5px) / 2));
+//       display: fle;
+//       flex-direction: column;
+//     }
+//   }
+// }

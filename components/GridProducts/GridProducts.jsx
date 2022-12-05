@@ -11,11 +11,11 @@ function GridProducts({
   const [products, setProducts] = useState(recommendedProducts);
   const [tabList, setTabList] = useState(0);
 
-  console.log(recommendedProducts)
+  console.log(recommendedProducts);
 
   return (
     <div className={`${classes['gridProducts']}`}>
-      <div className="container">
+      <div className={`${classes['pResetMob']} container`}>
         <div className={`${classes['gridColumn']}`}>
           <div className={`${classes['singleProduct']}`}>
             {recommendedProducts.slice(1, 2).map((item) => {

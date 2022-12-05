@@ -7,17 +7,16 @@ const CardsSupport = () => {
     <div className={`${classes['cardsSupport']}`}>
       <div className="container">
         <Row>
-          {cards.map((card) => {
+          {cards.map((card, i) => {
             return (
-              <Col key={card.id} sm={12} md={6} lg={6} xl={3}>
-                <div className={`${classes['cardSupport']}`}>
+              <Col key={card.id} xs={3} sm={3} md={3} lg={3} xl={3} >
+                <div className={i === 2 || i === 3 ? `${classes['cardSupport']} ${classes['cardSupportMob']}` : `${classes['cardSupport']}`} >
                   <img src={card.src} alt={card.alt} />
 
                   <p>
                     <span>{card.span}</span>
                     {card.desc}
                   </p>
-                  {/* <div className={`${classes['mobile']}`}>{card.desc}</div> */}
                 </div>
               </Col>
             );

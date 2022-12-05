@@ -28,4 +28,57 @@
   }
 }
 
+// RESPONSIVE
+
+@media (max-width: 1400px) {
+  .gridProducts {
+    .gridColumn {
+      display: flex;
+      flex-direction: column;
+      .articles {
+        order: -1;
+        margin-bottom: 3rem;
+        padding: 0 1rem;
+        .articlesButtons {
+          flex-wrap: wrap;
+        }
+      }
+      .singleProduct {
+        background-color: var(--gray-color);
+        padding: 1.5rem;
+      }
+      
+    }
+  }
+  .pResetMob {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridProducts {
+    .gridColumn {
+      .articles {
+        .articlesGrid {
+          grid-template-columns: repeat(2, 1fr)
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .gridProducts {
+    .gridColumn {
+      .articles {
+        background-color: var(--gray-color);
+        padding: 1.5rem 1rem;
+        .articlesGrid {
+          grid-template-columns: 1fr
+        }
+      }
+    }
+  }
+}
+
 

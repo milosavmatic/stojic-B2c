@@ -51,3 +51,19 @@
     }
   }
 }
+
+// RESPONSIVE 
+
+@media (max-width: 768px) {
+  .actionBanners {
+    .box {
+      &:nth-child(odd) {
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+      }
+      &:nth-child(even) {
+        padding: 0 1rem;
+      }
+    }
+  }
+}

@@ -586,7 +586,11 @@ ul.header-links li:hover {
   }
 
   .header-holder {
-    padding: 0.8rem 0;
+    padding: 1rem 0;
+  }
+
+  .top-header-mobile {
+    margin-bottom: 1rem;
   }
 
   .search-image-holder {
@@ -658,7 +662,7 @@ ul.header-links li:hover {
     z-index: 3;
     width: 100vw;
     position: fixed;
-    top: 6.7rem;
+    top: 8.8rem;
     left: 0;
     background-color: var(--white-color);
     transition: transform 0.4s ease-in-out;
@@ -731,6 +735,6 @@ ul.header-links li:hover {
 }
 @media (max-width: 400.98px) {
   .mobile-header-div {
-    top: 7.6rem;
+    top: 7.9rem;
   }
 }
