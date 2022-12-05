@@ -23,8 +23,10 @@
       padding-left: 1.3;
     }
     .actionBanner {
-      height: 16rem;
+      height: 11rem;
       position: relative;
+      border-radius: 7px;
+      overflow: hidden;
       cursor: pointer;
       img {
         width: 100%;
@@ -52,7 +54,7 @@
   }
 }
 
-// RESPONSIVE 
+// RESPONSIVE
 
 @media (max-width: 768px) {
   .actionBanners {

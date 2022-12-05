@@ -56,7 +56,7 @@ const ProductBoxComplexSmall = ({
 
       <div className={classes['price']}>
         {!product?.price?.discount?.active && (
-          <p className={classes['no-old-price']}>&nbsp;</p>
+          <p className={classes['no-old-price']}></p>
         )}
         {product?.price?.discount?.active && (
           <p className={classes['old-price']}>
@@ -93,7 +93,9 @@ const ProductBoxComplexSmall = ({
           <Image alt="fav-heart" src={heartImg} />
         </div>
       ) : (
-        <div className={classes['percentSale']}>{product?.price?.discount?.amount || '30%'}</div>
+        <div className={classes['percentSale']}>
+          {product?.price?.discount?.amount || '30%'}
+        </div>
       )}
 
       {Number(product?.inventory?.amount) > 0 && (

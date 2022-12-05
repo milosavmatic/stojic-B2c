@@ -7,7 +7,7 @@
     margin: 0 1.3rem;
     &.active {
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
       &::after {
         content: '';
         position: absolute;
@@ -15,10 +15,10 @@
         left: 50%;
         transform: translateX(-50%);
         height: 4px;
-        width: 9px;
+        width: 13px;
         background-color: red;
-        border-bottom-left-radius: 0.2rem;
-        border-bottom-right-radius: 0.2rem;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
       }
       &::before {
         content: '';
@@ -30,16 +30,12 @@
         background-color: red;
       }
     }
-    
   }
   &.tabCategoryButton {
     button {
       margin: 0 0.5rem;
-      font-size: 1rem; 
-      padding:0.8rem 0.3rem ;
-      &.active {
-        font-weight: normal;
-      }
+      font-size: 1rem;
+      padding: 0.8rem 0.3rem;
     }
   }
 }

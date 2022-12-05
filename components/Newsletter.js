@@ -77,9 +77,9 @@ function Newsletter() {
         
       </div> */}
       <div className={`${classes['newsletter-follow']}`}>
-        <h5 className={`${classes['follow-us']}`}>
+        {/* <h5 className={`${classes['follow-us']}`}>
           Pratite nas na društvenim mrežama:
-        </h5>
+        </h5> */}
         <div className={`${'flex-row ' + classes['flex-row']}`}>
           <a
             className={`${`${classes['newsletter-social-link']}`}`}

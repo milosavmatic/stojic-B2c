@@ -1,6 +1,6 @@
 .cardsSupport {
   margin: 3.5rem 0;
-  padding: 0 4rem;
+  padding: 0 12rem;
   .cardSupport {
     background-color: var(--dark-gray-color);
     display: flex;
@@ -26,6 +26,11 @@
 }
 
 // RESPONSIVE
+@media (max-width: 1625px) {
+  .cardsSupport {
+    padding: 0 4rem;
+  }
+}
 
 @media (max-width: 1400px) {
   .cardsSupport {
