@@ -8,7 +8,7 @@ import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import { queryKeys, sortKeys } from '../../helpers/const'
-
+  
 const CategoriesPage = ({ categoryData, filters }) => {
   const router = useRouter()
   const { asPath } = router
