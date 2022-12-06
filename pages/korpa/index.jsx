@@ -1,18 +1,18 @@
-import classes from '../../assets/css/CheckoutPage.module.scss';
-import { useCallback, useEffect, useState } from 'react';
-import CartProductBox from '../../components/CartProductBox';
-import { ApiHandler } from '../api/api';
-import { currencyFormat } from '../../helpers/functions';
-import { useCartContext } from '../api/cartContext';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import classes from '../../assets/css/CheckoutPage.module.scss'
+import { useCallback, useEffect, useState } from 'react'
+import CartProductBox from '../../components/CartProductBox'
+import { ApiHandler } from '../api/api'
+import { currencyFormat } from '../../helpers/functions'
+import { useCartContext } from '../api/cartContext'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [cart, mutateCart] = useCartContext();
-  const [cartData, setCartData] = useState([]);
-  const [secondAddress, setSecondAddress] = useState(false);
+  const [cart, mutateCart] = useCartContext()
+  const [cartData, setCartData] = useState([])
+  const [secondAddress, setSecondAddress] = useState(false)
   const [formData, setFormData] = useState({
     type: 'personal',
     first_name: '',
@@ -41,7 +41,7 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 
     delivery: null,
     payment: null,
-  });
+  })
 
   const required = [
     'first_name',
@@ -63,50 +63,50 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
     'shipping_town',
     'delivery',
     'payment',
-  ];
+  ]
 
   const companyrequired = [
     'company_name',
     'pib',
     'maticni_broj',
     'shipping_company_name',
-  ];
-  const errorMsg = 'polje je obavezno';
-  const errorSelect = 'morate izabrati jednu opciju';
+  ]
+  const errorMsg = 'polje je obavezno'
+  const errorSelect = 'morate izabrati jednu opciju'
 
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([])
 
   const getCart = useCallback(() => {
-    const api = ApiHandler();
+    const api = ApiHandler()
     api
       .list('cart')
       .then((response) => {
-        setCartData(response?.payload);
+        setCartData(response?.payload)
       })
-      .catch((error) => console.warn(error));
-  }, []);
+      .catch((error) => console.warn(error))
+  }, [])
 
   useEffect(() => {
-    getCart();
-  }, [getCart, cart]);
+    getCart()
+  }, [getCart, cart])
 
-  const cartItems = cartData.items ?? [];
-  const cartCost = cartData.summary;
+  const cartItems = cartData.items ?? []
+  const cartCost = cartData.summary
 
   const formChangeHandler = ({ target }) => {
-    setErrors(errors.filter((item) => item != target.name));
+    setErrors(errors.filter((item) => item != target.name))
 
     if (target.type === 'radio' && target.checked) {
-      setFormData({ ...formData, [target.name]: target.value });
+      setFormData({ ...formData, [target.name]: target.value })
     } else {
-      setFormData({ ...formData, [target.name]: target.value });
+      setFormData({ ...formData, [target.name]: target.value })
     }
-  };
+  }
 
   const formSubmitHandler = () => {
-    const err = [];
+    const err = []
     for (const key in formData) {
-      const item = formData[key];
+      const item = formData[key]
       if (
         (formData.type === 'company' &&
           companyrequired.includes(key) &&
@@ -115,18 +115,18 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
       ) {
         if (key.includes('shipping')) {
           if (secondAddress) {
-            err.push(key);
+            err.push(key)
           }
         } else {
-          err.push(key);
+          err.push(key)
         }
       }
     }
 
     if (err.length > 0) {
-      setErrors(err);
+      setErrors(err)
     } else {
-      const api = ApiHandler();
+      const api = ApiHandler()
       const ret = {
         customer_type_billing: formData.type,
         id_company_shipping: null,
@@ -208,19 +208,20 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
         note: formData.note,
 
         accept_rules: 1,
-      };
+      }
 
       api
         .post('/checkout/one-page', ret)
         .then((response) => {
-          const token = response?.payload?.order[0].order_token;
-          mutateCart();
+          console.log(response)
+          const token = response?.payload?.order?.order_token
+          mutateCart()
 
-          router.push(`/korpa/${token}`);
+          router.push(`/korpa/${token}`)
         })
-        .catch((error) => console.warn(error));
+        .catch((error) => console.warn(error))
     }
-  };
+  }
 
   return (
     <div className={`${classes['checkout']} container`}>
@@ -232,21 +233,21 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
             <div className={classes['user-info']}>
               <div className={classes['radio-face']}>
                 <input
-                  type="radio"
+                  type='radio'
                   className={classes['basic-radio']}
-                  name="type"
-                  value="personal"
-                  id="personal"
+                  name='type'
+                  value='personal'
+                  id='personal'
                   onChange={formChangeHandler}
                   checked={formData.type === 'personal'}
                 />
                 <label htmlFor={'personal'}>Poručujem kao fizičko lice</label>
                 <input
-                  type="radio"
+                  type='radio'
                   className={classes['basic-radio']}
-                  name="type"
-                  value="company"
-                  id="company"
+                  name='type'
+                  value='company'
+                  id='company'
                   onChange={formChangeHandler}
                 />
                 <label htmlFor={'company'}>Poručujem kao pravno lice</label>
@@ -260,9 +261,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                     >
                       <label
                         className={classes['input-label']}
-                        htmlFor="company_name"
+                        htmlFor='company_name'
                       >
-                        Naziv kompanije: <span className="mandatory">*</span>
+                        Naziv kompanije: <span className='mandatory'>*</span>
                         {errors.includes('company_name') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -270,9 +271,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="company_name"
-                          type="text"
-                          name="company_name"
+                          id='company_name'
+                          type='text'
+                          name='company_name'
                           value={formData.company_name}
                           onChange={formChangeHandler}
                         />
@@ -285,8 +286,8 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                         classes['input-info-left'] + ' col-lg-6 col-12'
                       }
                     >
-                      <label className={classes['input-label']} htmlFor="pib">
-                        PIB: <span className="mandatory">*</span>
+                      <label className={classes['input-label']} htmlFor='pib'>
+                        PIB: <span className='mandatory'>*</span>
                         {errors.includes('pib') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -294,9 +295,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="pib"
-                          type="text"
-                          name="pib"
+                          id='pib'
+                          type='text'
+                          name='pib'
                           value={formData.pib}
                           onChange={formChangeHandler}
                         />
@@ -309,9 +310,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                     >
                       <label
                         className={classes['input-label']}
-                        htmlFor="maticni_broj"
+                        htmlFor='maticni_broj'
                       >
-                        Matični broj: <span className="mandatory">*</span>
+                        Matični broj: <span className='mandatory'>*</span>
                         {errors.includes('maticni_broj') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -319,9 +320,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="maticni_broj"
-                          type="text"
-                          name="maticni_broj"
+                          id='maticni_broj'
+                          type='text'
+                          name='maticni_broj'
                           value={formData.maticni_broj}
                           onChange={formChangeHandler}
                         />
@@ -335,8 +336,8 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                 <div
                   className={classes['input-info-left'] + ' col-lg-6 col-12'}
                 >
-                  <label className={classes['input-label']} htmlFor="name">
-                    Ime: <span className="mandatory">*</span>
+                  <label className={classes['input-label']} htmlFor='name'>
+                    Ime: <span className='mandatory'>*</span>
                     {errors.includes('first_name') && (
                       <span className={classes.errorMsg}>{errorMsg}</span>
                     )}
@@ -344,15 +345,15 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                   <div className={classes['input-info-padding']}>
                     <input
                       className={classes['input']}
-                      id="name"
-                      type="text"
-                      name="first_name"
+                      id='name'
+                      type='text'
+                      name='first_name'
                       value={formData.first_name}
                       onChange={formChangeHandler}
                     />
                   </div>
-                  <label className={classes['input-label']} htmlFor="surname">
-                    Prezime: <span className="mandatory">*</span>
+                  <label className={classes['input-label']} htmlFor='surname'>
+                    Prezime: <span className='mandatory'>*</span>
                     {errors.includes('last_name') && (
                       <span className={classes.errorMsg}>{errorMsg}</span>
                     )}
@@ -360,15 +361,15 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                   <div className={classes['input-info-padding']}>
                     <input
                       className={classes['input']}
-                      id="surname"
-                      type="text"
-                      name="last_name"
+                      id='surname'
+                      type='text'
+                      name='last_name'
                       value={formData.last_name}
                       onChange={formChangeHandler}
                     />
                   </div>
-                  <label className={classes['input-label']} htmlFor="email">
-                    E-mail: <span className="mandatory">*</span>
+                  <label className={classes['input-label']} htmlFor='email'>
+                    E-mail: <span className='mandatory'>*</span>
                     {errors.includes('email') && (
                       <span className={classes.errorMsg}>{errorMsg}</span>
                     )}
@@ -376,9 +377,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                   <div className={classes['input-info-padding']}>
                     <input
                       className={classes['input']}
-                      id="email"
-                      type="text"
-                      name="email"
+                      id='email'
+                      type='text'
+                      name='email'
                       value={formData.email}
                       onChange={formChangeHandler}
                     />
@@ -387,8 +388,8 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                 <div
                   className={classes['input-info-right'] + ' col-lg-6 col-12'}
                 >
-                  <label className={classes['input-label']} htmlFor="phone">
-                    Telefon: <span className="mandatory">*</span>
+                  <label className={classes['input-label']} htmlFor='phone'>
+                    Telefon: <span className='mandatory'>*</span>
                     {errors.includes('phone') && (
                       <span className={classes.errorMsg}>{errorMsg}</span>
                     )}
@@ -396,20 +397,20 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                   <div className={classes['input-info-padding']}>
                     <input
                       className={classes['input']}
-                      id="phone"
-                      type="text"
-                      name="phone"
+                      id='phone'
+                      type='text'
+                      name='phone'
                       value={formData.phone}
                       onChange={formChangeHandler}
                     />
                   </div>
-                  <div className="row">
-                    <div className="col-6">
+                  <div className='row'>
+                    <div className='col-6'>
                       <label
                         className={classes['input-label']}
-                        htmlFor="address"
+                        htmlFor='address'
                       >
-                        Ulica: <span className="mandatory">*</span>
+                        Ulica: <span className='mandatory'>*</span>
                         {errors.includes('address') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -417,20 +418,20 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="address"
-                          type="text"
-                          name="address"
+                          id='address'
+                          type='text'
+                          name='address'
                           value={formData.address}
                           onChange={formChangeHandler}
                         />
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className='col-6'>
                       <label
                         className={classes['input-label']}
-                        htmlFor="object_number"
+                        htmlFor='object_number'
                       >
-                        Broj: <span className="mandatory">*</span>
+                        Broj: <span className='mandatory'>*</span>
                         {errors.includes('object_number') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -438,22 +439,22 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="object_number"
-                          type="text"
-                          name="object_number"
+                          id='object_number'
+                          type='text'
+                          name='object_number'
                           value={formData.object_number}
                           onChange={formChangeHandler}
                         />
                       </div>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-6">
+                  <div className='row'>
+                    <div className='col-6'>
                       <label
                         className={classes['input-label']}
-                        htmlFor="zip_code"
+                        htmlFor='zip_code'
                       >
-                        Poštanski broj: <span className="mandatory">*</span>
+                        Poštanski broj: <span className='mandatory'>*</span>
                         {errors.includes('zip_code') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -461,17 +462,17 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="zip_code"
-                          type="text"
-                          name="zip_code"
+                          id='zip_code'
+                          type='text'
+                          name='zip_code'
                           value={formData.zip_code}
                           onChange={formChangeHandler}
                         />
                       </div>
                     </div>
-                    <div className="col-6">
-                      <label className={classes['input-label']} htmlFor="town">
-                        Grad: <span className="mandatory">*</span>
+                    <div className='col-6'>
+                      <label className={classes['input-label']} htmlFor='town'>
+                        Grad: <span className='mandatory'>*</span>
                         {errors.includes('town') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -479,9 +480,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="town"
-                          type="text"
-                          name="town"
+                          id='town'
+                          type='text'
+                          name='town'
                           value={formData.town}
                           onChange={formChangeHandler}
                         />
@@ -509,15 +510,15 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                   </div>
                 </div>
                 <div className={classes['user-note'] + ' col-lg-6 col-12'}>
-                  <label className={classes['input-label']} htmlFor="note">
+                  <label className={classes['input-label']} htmlFor='note'>
                     Napomena:
                   </label>
                   <div className={classes['input-info-padding']}>
                     <textarea
-                      id="note"
-                      type="text"
-                      rows="4"
-                      name="note"
+                      id='note'
+                      type='text'
+                      rows='4'
+                      name='note'
                       value={formData.note}
                       onChange={formChangeHandler}
                     />
@@ -532,9 +533,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                     >
                       <label
                         className={classes['input-label']}
-                        htmlFor="shipping_company_name"
+                        htmlFor='shipping_company_name'
                       >
-                        Naziv kompanije: <span className="mandatory">*</span>
+                        Naziv kompanije: <span className='mandatory'>*</span>
                         {errors.includes('shipping_company_name') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -542,9 +543,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="shipping_company_name"
-                          type="text"
-                          name="shipping_company_name"
+                          id='shipping_company_name'
+                          type='text'
+                          name='shipping_company_name'
                           value={formData.shipping_company_name}
                           onChange={formChangeHandler}
                         />
@@ -563,9 +564,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                     >
                       <label
                         className={classes['input-label']}
-                        htmlFor="shipping_name"
+                        htmlFor='shipping_name'
                       >
-                        Ime: <span className="mandatory">*</span>
+                        Ime: <span className='mandatory'>*</span>
                         {errors.includes('shipping_first_name') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -573,18 +574,18 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="shipping_name"
-                          type="text"
-                          name="shipping_first_name"
+                          id='shipping_name'
+                          type='text'
+                          name='shipping_first_name'
                           value={formData.shipping_first_name}
                           onChange={formChangeHandler}
                         />
                       </div>
                       <label
                         className={classes['input-label']}
-                        htmlFor="shipping_surname"
+                        htmlFor='shipping_surname'
                       >
-                        Prezime: <span className="mandatory">*</span>
+                        Prezime: <span className='mandatory'>*</span>
                         {errors.includes('shipping_last_name') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -592,18 +593,18 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="shipping_surname"
-                          type="text"
-                          name="shipping_last_name"
+                          id='shipping_surname'
+                          type='text'
+                          name='shipping_last_name'
                           value={formData.shipping_last_name}
                           onChange={formChangeHandler}
                         />
                       </div>
                       <label
                         className={classes['input-label']}
-                        htmlFor="shipping_email"
+                        htmlFor='shipping_email'
                       >
-                        E-mail: <span className="mandatory">*</span>
+                        E-mail: <span className='mandatory'>*</span>
                         {errors.includes('shipping_email') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -611,9 +612,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="shipping_email"
-                          type="text"
-                          name="shipping_email"
+                          id='shipping_email'
+                          type='text'
+                          name='shipping_email'
                           value={formData.shipping_email}
                           onChange={formChangeHandler}
                         />
@@ -626,9 +627,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                     >
                       <label
                         className={classes['input-label']}
-                        htmlFor="shipping_phone"
+                        htmlFor='shipping_phone'
                       >
-                        Telefon: <span className="mandatory">*</span>
+                        Telefon: <span className='mandatory'>*</span>
                         {errors.includes('shipping_phone') && (
                           <span className={classes.errorMsg}>{errorMsg}</span>
                         )}
@@ -636,20 +637,20 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                       <div className={classes['input-info-padding']}>
                         <input
                           className={classes['input']}
-                          id="shipping_phone"
-                          type="text"
-                          name="shipping_phone"
+                          id='shipping_phone'
+                          type='text'
+                          name='shipping_phone'
                           value={formData.shipping_phone}
                           onChange={formChangeHandler}
                         />
                       </div>
-                      <div className="row">
-                        <div className="col-6">
+                      <div className='row'>
+                        <div className='col-6'>
                           <label
                             className={classes['input-label']}
-                            htmlFor="shipping_address"
+                            htmlFor='shipping_address'
                           >
-                            Adresa dostave: <span className="mandatory">*</span>
+                            Adresa dostave: <span className='mandatory'>*</span>
                             {errors.includes('shipping_address') && (
                               <span className={classes.errorMsg}>
                                 {errorMsg}
@@ -659,20 +660,20 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                           <div className={classes['input-info-padding']}>
                             <input
                               className={classes['input']}
-                              id="shipping_address"
-                              type="text"
-                              name="shipping_address"
+                              id='shipping_address'
+                              type='text'
+                              name='shipping_address'
                               value={formData.shipping_address}
                               onChange={formChangeHandler}
                             />
                           </div>
                         </div>
-                        <div className="col-6">
+                        <div className='col-6'>
                           <label
                             className={classes['input-label']}
-                            htmlFor="shipping_object_number"
+                            htmlFor='shipping_object_number'
                           >
-                            Broj: <span className="mandatory">*</span>
+                            Broj: <span className='mandatory'>*</span>
                             {errors.includes('shipping_object_number') && (
                               <span className={classes.errorMsg}>
                                 {errorMsg}
@@ -682,9 +683,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                           <div className={classes['input-info-padding']}>
                             <input
                               className={classes['input']}
-                              id="shipping_object_number"
-                              type="text"
-                              name="shipping_object_number"
+                              id='shipping_object_number'
+                              type='text'
+                              name='shipping_object_number'
                               value={formData.shipping_object_number}
                               onChange={formChangeHandler}
                             />
@@ -692,13 +693,13 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                         </div>
                       </div>
 
-                      <div className="row">
-                        <div className="col-6">
+                      <div className='row'>
+                        <div className='col-6'>
                           <label
                             className={classes['input-label']}
-                            htmlFor="shipping_zip_code"
+                            htmlFor='shipping_zip_code'
                           >
-                            Poštanski broj: <span className="mandatory">*</span>
+                            Poštanski broj: <span className='mandatory'>*</span>
                             {errors.includes('shipping_zip_code') && (
                               <span className={classes.errorMsg}>
                                 {errorMsg}
@@ -708,20 +709,20 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                           <div className={classes['input-info-padding']}>
                             <input
                               className={classes['input']}
-                              id="shipping_zip_code"
-                              type="text"
-                              name="shipping_zip_code"
+                              id='shipping_zip_code'
+                              type='text'
+                              name='shipping_zip_code'
                               value={formData.shipping_zip_code}
                               onChange={formChangeHandler}
                             />
                           </div>
                         </div>
-                        <div className="col-6">
+                        <div className='col-6'>
                           <label
                             className={classes['input-label']}
-                            htmlFor="shipping_town"
+                            htmlFor='shipping_town'
                           >
-                            Grad: <span className="mandatory">*</span>
+                            Grad: <span className='mandatory'>*</span>
                             {errors.includes('shipping_town') && (
                               <span className={classes.errorMsg}>
                                 {errorMsg}
@@ -731,9 +732,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                           <div className={classes['input-info-padding']}>
                             <input
                               className={classes['input']}
-                              id="shipping_town"
-                              type="text"
-                              name="shipping_town"
+                              id='shipping_town'
+                              type='text'
+                              name='shipping_town'
                               value={formData.shipping_town}
                               onChange={formChangeHandler}
                             />
@@ -748,16 +749,16 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                     >
                       <label
                         className={classes['input-label']}
-                        htmlFor="shipping_note"
+                        htmlFor='shipping_note'
                       >
                         Napomena:
                       </label>
                       <div className={classes['input-info-padding']}>
                         <textarea
-                          id="shipping_note"
-                          type="text"
-                          rows="4"
-                          name="shipping_note"
+                          id='shipping_note'
+                          type='text'
+                          rows='4'
+                          name='shipping_note'
                           value={formData.shipping_note}
                           onChange={formChangeHandler}
                         />
@@ -783,9 +784,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                     <div key={item.type}>
                       <div className={classes['radio-face']}>
                         <input
-                          type="radio"
+                          type='radio'
                           className={classes['basic-radio']}
-                          name="delivery"
+                          name='delivery'
                           value={item.id}
                           id={'delivery' + item.id}
                           onChange={formChangeHandler}
@@ -808,9 +809,9 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                   {(paymentoptions ?? []).map((item) => (
                     <div className={classes['radio-face']} key={item.id}>
                       <input
-                        type="radio"
+                        type='radio'
                         className={classes['basic-radio']}
-                        name="payment"
+                        name='payment'
                         value={item.id}
                         id={'payment' + item.id}
                         onChange={formChangeHandler}
@@ -901,7 +902,7 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
             <div className={classes['end-button-container']}>
               <div>
                 <button
-                  type="button"
+                  type='button'
                   className={classes['end-button'] + ' basic-button-sec'}
                   onClick={formSubmitHandler}
                 >
@@ -920,18 +921,18 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
         <div className={'row'}>
           <div className={classes['left-side'] + ' col-xxl-7 col-12'}>
             <p>Vaša korpa je prazna!</p>
-            <Link href="/">Nastavite kupovinu</Link>
+            <Link href='/'>Nastavite kupovinu</Link>
           </div>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CheckoutPage;
+export default CheckoutPage
 
 export const getServerSideProps = async () => {
-  const api = ApiHandler();
+  const api = ApiHandler()
 
   return {
     props: {
@@ -942,5 +943,5 @@ export const getServerSideProps = async () => {
         .get('checkout/delivery-options')
         .then((response) => response?.payload),
     },
-  };
-};
+  }
+}
