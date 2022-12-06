@@ -1,6 +1,5 @@
 import classes from './CartProductItem.module.scss'
 import PlusMinusInputCart from './PlusMinusInputCart'
-import cartimage from '../assets/images/rproduct14.png'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { currencyFormat } from '../helpers/functions'
@@ -16,7 +15,7 @@ const CartProductItem = ({ item }) => {
     if (productAmount != item.cart.quantity) {
       addToCart(item?.product?.id, productAmount, true)
     }
-  }, [productAmount])
+  }, [productAmount, addToCart, item.cart.quantity, item?.product?.id])
 
   const per_item = item?.product?.price?.per_item
   const total = item?.product?.price?.cost

@@ -1,8 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { ApiHandler } from '../../pages/api/api';
 import classes from './CategoryItems.module.scss';
-// import Link from 'next/link';
-// import Image from 'next/image';
 import HomeTabButton from '../UI/HomeTabButton/HomeTabButton';
 import ProductBoxComplexSmall from '../ProductBoxComplexSmall';
 

@@ -54,12 +54,12 @@ const Specifications = ({ specifications = [] }) => {
             </tbody>
           </Table>
         </Tab>
-        <Tab eventKey='profile' title='Recenzije'>
+        {/* <Tab eventKey='profile' title='Recenzije'>
           /
         </Tab>
         <Tab eventKey='contact' title='Pitanja i odgovori'>
           /
-            </Tab>
+            </Tab> */}
       </Tabs>
     </div>
   )

@@ -1,6 +1,4 @@
-import heartImg from '../assets/images/elements/heart.png';
 import classes from './ProductBoxComplexSmall.module.scss';
-import cart from '../assets/images/elements/cart-white.png';
 import Link from 'next/link';
 import Image from 'next/image';
 import { currencyFormat } from '../helpers/functions';
@@ -86,12 +84,13 @@ const ProductBoxComplexSmall = ({
         </div>
       ))}
       {!isSpecialOffer ? (
-        <div
-          className={classes['fav-heart']}
-          onClick={() => addToWishList(product?.id)}
-        >
-          <Image alt="fav-heart" src={heartImg} />
-        </div>
+        // <div
+        //   className={classes['fav-heart']}
+        //   onClick={() => addToWishList(product?.id)}
+        // >
+        //   <Image alt="fav-heart" src={heartImg} />
+        // </div>
+        null
       ) : (
         <div className={classes['percentSale']}>
           {product?.price?.discount?.amount || '30%'}

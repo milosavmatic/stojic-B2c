@@ -69,6 +69,7 @@
   }
 }
 .button-add-to-cart-holder {
+  margin-left: 30px;
   .button {
     background: var(--red-color);
     padding: 0.4rem 0.5rem;
@@ -97,7 +98,7 @@
   display: flex;
 }
 .button-quantity {
-  border: 1px solid #e7e7e7;
+  border: 1px solid var(--croonus-lightMedGray);
   border-radius: 0.4rem;
   width: fit-content;
   padding: 0rem;
@@ -140,11 +141,9 @@
 .under-details-buttons-surrounder {
   position: relative;
   .under-details-buttons-button {
-    button {
-      span img{
-        width: 20px;
-        height: 20px;
-      }
+    span {
+      width: 20px !important;
+      opacity: 0.55 !important;
     }
   }
 
@@ -164,6 +163,9 @@
 .under-details-buttons-button:hover {
   cursor: pointer;
   text-decoration: underline;
+  span {
+    opacity: 1 !important;
+  }
 }
 .under-details-buttons-button {
   margin-bottom: 0.25rem;

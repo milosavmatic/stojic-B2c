@@ -1,6 +1,5 @@
 import heartImg from '../assets/images/elements/heart.png';
 import classes from './ProductBoxComplexSmall.module.scss';
-import cart from '../assets/images/elements/cart-white.png';
 import Link from 'next/link';
 import Image from 'next/image';
 import { currencyFormat } from '../helpers/functions';

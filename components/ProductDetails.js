@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import Specifications from './Specifications';
 import RecomendedProducts from './RecomendedProducts';
-import cart from '../assets/images/elements/cart-white.png';
 import ProductDetailsSlider from '../components/ProductDetailsSlider';
 import PlusMinusInput from '../components/PlusMinusInput';
 import classes from './ProductDetails.module.scss';
-import Image from 'next/image';
 import { currencyFormat } from '../helpers/functions';
 import {
   useGlobalAddToCart,
   useGlobalAddToWishList,
 } from '../pages/api/globals';
 import { BsHandbag } from 'react-icons/bs';
-import CardsSupport from './CardsSupport/CardsSupport';
-import cards from '../data/cardsSupport.json';
 
 const ProductDetails = ({
   productData,
@@ -114,13 +109,8 @@ const ProductDetails = ({
               <li>Akcija traje od 23.5.2022. do 28.5.2022. </li> */}
           </ul>
           {Number(productData?.inventory?.amount) > 0 && (
-            <div className="row d-flex align-items-center">
-              <div
-                className={`${
-                  classes['button-quantity-holder'] +
-                  ' col-xl-2 col-lg-2 col-md-2 col-sm-3 col-xs-4 col-4'
-                }`}
-              >
+            <div className=" d-flex align-items-center">
+              <div className={`${classes['button-quantity-holder']}`}>
                 <div className={`${classes['button-quantity']}`}>
                   <PlusMinusInput
                     className={classes['amount-input']}
@@ -130,7 +120,7 @@ const ProductDetails = ({
                 </div>
               </div>
               <div
-                className={`${classes['button-add-to-cart-holder'] + ' col-6'}`}
+                className={`${classes['button-add-to-cart-holder']}`}
               >
                 <button onClick={addToCart} className={classes['button']}>
                   <div className={`${classes['img-holder']}`}>

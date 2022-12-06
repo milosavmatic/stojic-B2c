@@ -1,13 +1,5 @@
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Accordion from 'react-bootstrap/Accordion';
-import {
-  faInstagram,
-  faFacebookF,
-  faLinkedinIn,
-  faTwitter,
-  faYoutube,
-} from '@fortawesome/free-brands-svg-icons';
 import classes from './Footer.module.scss';
 import Newsletter from './Newsletter';
 

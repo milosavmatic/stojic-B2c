@@ -28,7 +28,12 @@ const PlusMinusInput = ({ className, amount, setCount }) => {
 
   return (
     <div className={`${classes['container']} ${className}`}>
-      <div className={`${classes['number']}`}>
+      
+      <div className={`${classes['plus-minus-holder']}`}>
+        <button className={classes['min-holder']} onClick={onMinusHandler}>
+          -
+        </button>
+        <div className={`${classes['number']}`}>
         <input
           maxLength="2"
           className={classes['input']}
@@ -36,10 +41,6 @@ const PlusMinusInput = ({ className, amount, setCount }) => {
           onChange={onInputChange}
         ></input>
       </div>
-      <div className={`${classes['plus-minus-holder']}`}>
-        <button className={classes['min-holder']} onClick={onMinusHandler}>
-          -
-        </button>
         <button className={classes['plus-holder']} onClick={onPlusHandler}>
           +
         </button>

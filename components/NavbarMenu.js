@@ -2,17 +2,14 @@ import React, { useState, useCallback, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-import { menuCategories } from '../helpers/const';
+// import { menuCategories } from '../helpers/const';
 import { NavDropdown } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Nav from 'react-bootstrap/Nav';
 import logo from '../assets/images/logo/logo.png';
 import categories from '../assets/images/elements/menu-categories.png';
-import search from '../assets/images/elements/search.png';
 import wish from '../assets/images/elements/heart.png';
-import cartImage from '../assets/images/elements/shopping-bag.png';
 import classes from './NavbarMenu.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -22,7 +19,6 @@ import { generateMenu } from '../helpers/generateMenu';
 import NavSubmenu from './NavSubmenu/NavSubmenu';
 import { useCartContext } from '../pages/api/cartContext';
 import { BsHandbag, BsSearch, BsEnvelope } from 'react-icons/bs';
-import heart from '../assets/images/elements/heart.png';
 import { FaRegUser, FaPhoneAlt } from 'react-icons/fa';
 import { currencyFormat } from '../helpers/functions';
 import { TfiLocationPin } from 'react-icons/tfi';
@@ -386,7 +382,10 @@ const NavbarMenu = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={classes.Link}>
+                          <Link
+                            href="https://b2b.stojic.rs/b2b-zahtev"
+                            className={classes.Link}
+                          >
                             B2B
                           </Link>
                         </li>
@@ -576,7 +575,7 @@ const NavbarMenu = () => {
                       </li>
                       <li
                         onClick={() => {
-                          navigate('/');
+                          navigate('https://b2b.stojic.rs/b2b-zahtev');
                           onMobileDivShow();
                         }}
                         className={classes['mobile-nav-link']}
@@ -596,12 +595,7 @@ const NavbarMenu = () => {
                   </div>
                 </div>
               </Col>
-              <Col
-                md={6}
-                sm={8}
-                xs={10}
-                className={`${classes['col-holder']}`}
-              >
+              <Col md={6} sm={8} xs={10} className={`${classes['col-holder']}`}>
                 <form
                   className={classes['header-search']}
                   onSubmit={handleSearch}
