@@ -63,21 +63,21 @@ const Footer = () => {
                       </h5>
                       <ul className={`${classes['footer-list']}`}>
                         <li>
-                          <Link href="/">
+                          <Link href="uslovi-koriscenja">
                             <a className={`${classes['basic-link-white']}`}>
                               Uslovi korišćenja
                             </a>
                           </Link>
                         </li>
                         <li>
-                          <Link href="/">
+                          <Link href="/politika-privatnosti">
                             <a className={`${classes['basic-link-white']}`}>
                               Politika privatnosti
                             </a>
                           </Link>
                         </li>
                         <li>
-                          <Link href="/">
+                          <Link href="prava-potrosaca">
                             <a className={`${classes['basic-link-white']}`}>
                               Prava potrošača
                             </a>
@@ -309,7 +309,7 @@ const Footer = () => {
             </li>
             <li>
               <Link href="/" className={`${classes['acc-items']}`}>
-                Politika privatnosti.
+                Politika privatnosti
               </Link>
             </li>
           </ul>

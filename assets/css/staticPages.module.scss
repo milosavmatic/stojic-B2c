@@ -1,0 +1,24 @@
+.staticPages {
+  padding: 2rem 0;
+  h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 500 !important;
+  }
+  .staticPagesContent {
+    p {
+      margin-bottom: 1.2rem;
+    }
+    ol {
+      padding-left: 1rem;
+      counter-reset: item;
+      li {
+        display: block;
+        &::before {
+          content: counters(item, '.') ' ';
+          counter-increment: item;
+        }
+      }
+    }
+  }
+}

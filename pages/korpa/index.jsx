@@ -769,7 +769,7 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
               )}
             </div>
             <div className={classes['products-container']}>
-              <CartProductBox cartItems={cartItems} />
+              <CartProductBox cartItems={cartItems}/>
             </div>
           </div>
           <div className={classes['right-side'] + ' col-xxl-5 col-12'}>

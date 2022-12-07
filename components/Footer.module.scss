@@ -5,6 +5,9 @@
 
 ul.footer-list {
   padding-left: 0rem;
+  li {
+    font-weight: 300;
+  }
 }
 
 .footer-middle-col {
@@ -89,6 +92,7 @@ ul.footer-list {
 
 .newsletter-col {
   color: var(--white-color);
+
 }
 .newsletter-heading {
   margin-bottom: 1.3rem;
@@ -191,6 +195,13 @@ ul.footer-list {
   display: flex;
   align-items: center;
 }
+
+.newsletter-container {
+  p {
+    font-weight: 300;
+  }
+}
+
 .display-mobile {
   display: none !important;
 }

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import classes from '../../assets/css/ContactPage.module.scss';
-import cacakMap from '../../assets/images/banners/cacak_map_gray.png';
-import dlIcon from '../../assets/images/elements/download-sticker.png';
+import cacakMap from '../../assets/images/banners/contact_pic.jpg';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Image from 'next/image';
 import { CgSoftwareDownload } from 'react-icons/cg';
@@ -123,7 +122,11 @@ const ContactPage = () => {
           <div className={classes['contact-info'] + ' col-md-4'}>
             <h4 className={classes['contact-info-heading']}>Kontakt</h4>
             <div className={classes['call-center']}>
-              <h5 className={`${classes['call-center-heading']} ${classes['line']}`}>Call centar</h5>
+              <h5
+                className={`${classes['call-center-heading']} ${classes['line']}`}
+              >
+                Call centar
+              </h5>
               <span className={classes['bolded-faces']}>Fizička lica</span>
               <span className={classes['phone-numbers']}>032 222 222</span>
               <span className={classes['bolded-faces']}>Pravna lica</span>
@@ -136,12 +139,11 @@ const ContactPage = () => {
               <span className={classes['phone-numbers']}>
                 prodaja@stojic.rs
               </span>
-              {/* <span className={classes['phone-numbers']}>
-                pravnalica@mobsshop.com
-              </span> */}
             </div>
             <div className={classes['working-hours']}>
-              <h5 className={`${classes['working-hours-heading']} ${classes['line']}`}>
+              <h5
+                className={`${classes['working-hours-heading']} ${classes['line']}`}
+              >
                 Radno vreme Call Centra
               </h5>
               <Link href="#" className={classes['working-hours-shops']}>
@@ -167,23 +169,12 @@ const ContactPage = () => {
               </span>
             </div>
             <div className={classes['contact-downloads']}>
-              {/* <Image
-                src={dlIcon}
-                className={classes['downloads-icon']}
-                alt=""
-              /> */}
-              
-              {/* <h5 className={classes['downloads-heading']}>
-                Stojić elektrik - rasveta i elektro oprema{' '}
-                <span>PIB: 1000000</span>
-              </h5> */}
               <Link href="/">
-                <Image
-                  src={logo}
-                  alt="Stojic-elektrik-logo"
-                />
+                <Image src={logo} alt="Stojic-elektrik-logo" />
               </Link>
-              <h6 className={`${classes['downloads-subheading']} ${classes['line']}`}>
+              <h6
+                className={`${classes['downloads-subheading']} ${classes['line']}`}
+              >
                 Preuzmite obrasce:
               </h6>
               <CgSoftwareDownload />
@@ -333,6 +324,53 @@ const ContactPage = () => {
               </p>
             )}
           </form>
+        </div>
+      </div>
+      <div className={classes['stores']}>
+        <div className="container">
+          <h5>Prodavnice</h5>
+          <div className={classes['storesGrid']}>
+            <div className={classes['storeCard']}>
+              <h6>Čačak</h6>
+              <span>Braće Spasić 5</span>
+              <span>0646430189</span>
+            </div>
+            <div className={classes['storeCard']}>
+              <h6>Beograd</h6>
+              <span>Braće Spasić 5</span>
+              <span>0646430189</span>
+            </div>
+            <div className={classes['storeCard']}>
+              <h6>Niš</h6>
+              <span>Braće Spasić 5</span>
+              <span>0646430189</span>
+            </div>
+            <div className={classes['storeCard']}>
+              <h6>Čačak</h6>
+              <span>Braće Spasić 5</span>
+              <span>0646430189</span>
+            </div>
+            <div className={classes['storeCard']}>
+              <h6>Čačak</h6>
+              <span>Braće Spasić 5</span>
+              <span>0646430189</span>
+            </div>
+            <div className={classes['storeCard']}>
+              <h6>Čačak</h6>
+              <span>Braće Spasić 5</span>
+              <span>0646430189</span>
+            </div>
+            <div className={classes['storeCard']}>
+              <h6>Čačak</h6>
+              <span>Braće Spasić 5</span>
+              <span>0646430189</span>
+            </div>
+            <div className={classes['storeCard']}>
+              <h6>Čačak</h6>
+              <span>Braće Spasić 5</span>
+              <span>0646430189</span>
+            </div>
+          </div>
         </div>
       </div>
     </>

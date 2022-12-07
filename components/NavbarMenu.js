@@ -30,13 +30,10 @@ const NavbarMenu = () => {
   const [wishCount, setWishCount] = useState(0)
   const [headerTotal, setHeaderTotal] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
-  const api = ApiHandler()
+ 
   const { push: navigate } = useRouter()
-  // Go to homepage onClick
-  const onLogoClick = useCallback(
-    () => navigate('/', { replace: true }),
-    [navigate]
-  )
+
+
   // Shows mobile hamburger div
   const [showMobileDiv, setShowMobileDiv] = useState(false)
   const onMobileDivShow = () => {
@@ -46,11 +43,12 @@ const NavbarMenu = () => {
   }
 
   const getMenuCategories = useCallback(() => {
+    const api = ApiHandler()
     api
       .get('/categories/product/tree')
       .then((response) => setCategoryData(response.payload))
       .catch((error) => console.warn(error))
-  }, [api])
+  }, [])
 
   const [cart] = useCartContext()
   const [, , , wishList] = useCartContext()
@@ -119,7 +117,7 @@ const NavbarMenu = () => {
               <ul className={`${classes['header-links']}`}>
                 <li>
                   <TfiLocationPin />
-                  <Link href='/'>Prodavnice</Link>
+                  <Link href='/kontakt'>Prodavnice</Link>
                 </li>
                 <li>
                   <FaRegUser />

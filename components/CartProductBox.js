@@ -1,5 +1,5 @@
-import classes from './CartProductBox.module.scss'
-import CartProductItem from './CartProductItem'
+import classes from './CartProductBox.module.scss';
+import CartProductItem from './CartProductItem';
 
 const CartProductBox = ({ cartItems = [] }) => {
   return (
@@ -23,7 +23,7 @@ const CartProductBox = ({ cartItems = [] }) => {
         <CartProductItem item={item} key={item.cart.cart_item_id} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default CartProductBox
+export default CartProductBox;

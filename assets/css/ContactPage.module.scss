@@ -16,9 +16,9 @@
   }
 }
 .content-container {
-  padding: 22rem 0rem 4rem 0rem;
-  width:1200px;
-  margin:0 auto;
+  padding: 22rem 0rem 3rem 0rem;
+  width: 1200px;
+  margin: 0 auto;
 }
 .contact {
   box-shadow: 0 0 10px var(--croonus-lightMedGray);
@@ -51,7 +51,6 @@
 }
 .phone-numbers {
   margin-bottom: 0.5rem;
-
 }
 
 .working-hours {
@@ -122,10 +121,10 @@
 .line {
   position: relative;
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 50px;
-    height:1px;
+    height: 1px;
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--white-color);
@@ -133,13 +132,13 @@
   }
 }
 .contact-form {
-  padding:3rem 2rem;
-  display:flex;
+  padding: 3rem 2rem;
+  display: flex;
   flex-direction: column;
   background-color: var(--white-color);
 }
 .contact-form-input {
-  border:none;
+  border: none;
   border-bottom: 1px solid var(--croonus-lightMedGray);
   background-color: var(--white-color);
   // margin-bottom:2rem;
@@ -161,7 +160,7 @@
   color: red;
 }
 .contact-select {
-  border:none;
+  border: none;
   border-bottom: 1px solid var(--croonus-lightMedGray);
   margin-bottom: 2rem;
   padding: 0.5rem 0;
@@ -172,7 +171,7 @@
   }
 }
 .contact-form-text-1 {
-  display:block;
+  display: block;
   margin-bottom: 1rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -182,26 +181,26 @@
   font-weight: 500;
 }
 .contact-form-textarea {
-  resize:none;
+  resize: none;
   border: 1px solid var(--croonus-lightMedGray);
   font-size: 0.875rem;
   border-radius: 5px;
   width: 75%;
   &:focus {
-    outline:none;
+    outline: none;
   }
 }
 .contact-button {
   margin: 2rem 0 1rem 0;
   padding: 0.5rem 2rem;
-  width:fit-content;
+  width: fit-content;
   border-radius: 5px;
-  border:none;
+  border: none;
   color: var(--black-color);
   font-weight: 550;
   background-color: var(--croonus-lightMedGray);
   &:active {
-    color:var(--croonus-white);
+    color: var(--croonus-white);
     background-color: var(--croonus-mediumGray);
   }
 }
@@ -209,9 +208,9 @@
   margin: 2rem 0 0.1rem 0;
   padding: 0.5rem 6rem;
   color: var(--white-color);
-  width:fit-content;
+  width: fit-content;
   border-radius: 5px;
-  border:none;
+  border: none;
   font-weight: 550;
   background-color: var(--red-color);
   &:active {
@@ -219,16 +218,17 @@
   }
 }
 .checkbox-label {
-  padding-left:1rem;
+  padding-left: 1rem;
   line-height: normal;
   font-size: 0.875rem;
   a {
     color: var(--red-color);
   }
 }
+
 .checkbox-container {
   align-items: flex-start;
-  margin-top:1rem;
+  margin-top: 1rem;
   .checkbox {
     accent-color: var(--red-color);
   }
@@ -243,28 +243,97 @@
     border: 1px solid var(--croonus-mediumGray);
   }
 }
+
 .captcha {
   margin: 1rem 0 0 0;
 }
+
+.rc-anchor-container {
+  width: 100%;
+}
+
 .malfunction-options {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
-@media (max-width:1199.98px){
-  .content-container {
-    width:100%;
+.stores {
+  margin-bottom: 3rem;
+  h5 {
+    margin-bottom: 1rem;
+    font-weight: 500 !important;
+    font-size: 1.3rem;
   }
+  .storesGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    .storeCard {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: var(--gray-color);
+      padding: 1rem;
+      border-radius: 7px;
+      h6 {
+        position: relative;
+        width: fit-content;
+        margin-bottom: 0.7rem;
+        &::after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          transform: translate(-50%);
+          width: 1rem;
+          background-color: var(--croonus-mediumGray);
+          height: 1px;
+          bottom: -2px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+  .content-container {
+    width: 100%;
+    padding: 10rem 3rem 3rem 3rem;
+  }
+}
+
+@media (max-width: 1199.98px) {
   .contact-form {
     padding: 2rem 1rem;
   }
   .contact-info {
-    padding:1rem;
+    padding: 1rem;
+  }
+  .stores .storesGrid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
+
+@media (max-width: 768px) {
+  .stores .storesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contact-form-textarea {
+    width: 100%;
+  }
+  .checkbox-container {
+    margin-top: 0;
+  }
+}
+
 @media (max-width: 760px) {
   .content-container .contact {
     width: 100%;
     margin: 0rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .stores .storesGrid {
+    grid-template-columns: 1fr;
   }
 }
