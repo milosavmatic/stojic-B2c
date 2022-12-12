@@ -172,8 +172,11 @@
   width: 2.5rem;
 }
 @media (max-width: 991.98px) {
-  .info-holder {
-    padding: 2rem 4rem;
+  .product-details-holder {
+    .info-holder {
+      padding: 2rem 1rem 1rem 1rem;
+      order: -1;
+    }
   }
   .spec-holder {
     margin-top: 1rem;
@@ -185,6 +188,12 @@
   }
   .info-holder {
     padding: 2rem;
+  }
+  .product-details-holder .info-holder .delivery-list {
+    flex-direction: column;
+    li:not(:last-child) {
+      margin-bottom: 1rem;
+    }
   }
 }
 @media (max-width: 420px) {

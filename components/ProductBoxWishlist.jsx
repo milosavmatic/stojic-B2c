@@ -17,7 +17,7 @@ const ProductBoxWishlist = ({ product, wishlistId }) => {
     <div className={classes['container']}>
       <Link href={`/proizvod/${product?.basic_data?.id_product}`}>
         <a className={classes['product-img']}>
-          <Image
+          {/* <Image
             alt={product?.basic_data?.slug}
             src={
               (product?.image ? product?.image[0] : product?.path) ??
@@ -25,7 +25,7 @@ const ProductBoxWishlist = ({ product, wishlistId }) => {
             }
             layout="fill"
             objectFit="contain"
-          />
+          /> */}
         </a>
       </Link>
       {product?.categories && (

@@ -2,6 +2,8 @@ import ProductBoxComplexSmall from '../ProductBoxComplexSmall';
 import classes from './GridProducts.module.scss';
 import HomeTabButton from '../UI/HomeTabButton/HomeTabButton';
 import { useState } from 'react';
+import pic from '../../assets/images/loading-buffering.gif';
+import Image from 'next/image';
 
 function GridProducts({
   recommendedProducts = [],
@@ -10,15 +12,14 @@ function GridProducts({
 }) {
   const [products, setProducts] = useState(recommendedProducts);
   const [tabList, setTabList] = useState(0);
-
-  console.log(recommendedProducts);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className={`${classes['gridProducts']}`}>
       <div className={`${classes['pResetMob']} container`}>
         <div className={`${classes['gridColumn']}`}>
           <div className={`${classes['singleProduct']}`}>
-            {recommendedProducts.slice(1, 2).map((item) => {
+            {saleProducts.slice(1, 2).map((item) => {
               return (
                 <ProductBoxComplexSmall
                   isSpecialOffer={true}
@@ -64,18 +65,24 @@ function GridProducts({
                 <h3>Trenutno nema podataka za prikaz.</h3>
               </div>
             )}
-            <div className={`${classes['articlesGrid']}`}>
-              {products.slice(0, 6).map((item, i) => {
-                return (
-                  <ProductBoxComplexSmall
-                    key={item.id}
-                    product={item}
-                    noBorder="noBorder"
-                    className="homeProductArticle"
-                  />
-                );
-              })}
-            </div>
+            {!isLoading ? (
+              <div className={`${classes['articlesGrid']}`}>
+                {products.slice(0, 6).map((item, i) => {
+                  return (
+                    <ProductBoxComplexSmall
+                      key={item.id}
+                      product={item}
+                      noBorder="noBorder"
+                      className="homeProductArticle"
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="gif">
+                <Image src={pic} alt="Loading" objectFit={'contain'} />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -84,3 +91,7 @@ function GridProducts({
 }
 
 export default GridProducts;
+
+{/* <div className="gif">
+  <Image src={pic} alt="Loading" objectFit={'contain'} />
+</div>; */}

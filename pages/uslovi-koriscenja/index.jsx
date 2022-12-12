@@ -43,14 +43,14 @@ function TermsOfUse() {
             možemo biti odgovorni za zaštitu Vaše privatnosti kada posećujete
             druge sajtove.
           </p>
-          <ol>
+          <ul>
             <li>
               Na koji način prikupljamo Vaše lične podatke i po kom pravnom
               osnovu?
             </li>
             <li>
               Koje podatke prikupljamo od Vas?
-              <ol>
+              <ul>
                 <li>
                   Kupovina/porudžbina u Tehnomanija prodavnici/web
                   sajtu/aplikaciji
@@ -63,9 +63,9 @@ function TermsOfUse() {
                 </li>
                 <li>Plaćanje preko administrativne zabrane</li>
                 <li>Reklamacije</li>
-              </ol>
+              </ul>
             </li>
-          </ol>
+          </ul>
         </div>
       </div>
     </div>

@@ -9,15 +9,15 @@
     p {
       margin-bottom: 1.2rem;
     }
-    ol {
+    ul {
       padding-left: 1rem;
-      counter-reset: item;
-      li {
-        display: block;
-        &::before {
-          content: counters(item, '.') ' ';
-          counter-increment: item;
-        }
+      list-style-type: disc;
+      li::marker {
+        color: var(--dark-gray-color);
+        
+      }
+      ul {
+        list-style-type: circle;
       }
     }
   }

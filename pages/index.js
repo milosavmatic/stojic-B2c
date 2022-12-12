@@ -12,17 +12,17 @@ const Home = ({
   buttonTabs,
   saleProducts,
   positionProducts,
-  actionBanners
+  actionBanners,
 }) => {
   return (
     <div>
       <MainSlider banners={banners} mobileBanners={mobileBanners} />
-      <CardsSupport
+      <CardsSupport />
+      <GridProducts
         recommendedProducts={recommendedProducts}
         saleProducts={saleProducts}
         positionProducts={positionProducts}
       />
-      <GridProducts recommendedProducts={recommendedProducts} />
       <ActionBanners actionBanners={actionBanners} />
       <CategoryItems buttonTabs={buttonTabs} />
     </div>
@@ -41,21 +41,21 @@ export const getServerSideProps = async () => {
       mobileBanners: await api
         .get('banners/index_slider_mobile')
         .then((response) => response?.payload),
-      recommendedCategories:
-        (await api
-          .list('categories/section/recomended', { limit: 6 })
-          .then((response) => response?.payload)) ?? null,
+      // recommendedCategories:
+      //   (await api
+      //     .list('categories/section/recomended', { limit: 6 })
+      //     .then((response) => response?.payload)) ?? null,
       actionBanners: await api
         .get('banners/action_banners')
         .then((response) => response?.payload),
       buttonTabs: await api
-        .get('categories/product/tree')
+        .list('categories/section/recommended')
         .then((response) => response?.payload),
       recommendedProducts: await api
         .list('products/section/list/action')
         .then((response) => response?.payload?.items),
-      saleProducts: await api
-        .list('products/section/list/sale')
+    saleProducts: await api
+        .list('products/section/list/top_sellers')
         .then((response) => response?.payload?.items),
       positionProducts: await api
         .list('products/section/list/position')

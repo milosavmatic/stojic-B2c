@@ -1,11 +1,11 @@
 import React from 'react';
-import classes from "../../assets/css/StaticPages.module.scss"
+import classes from '../../assets/css/StaticPages.module.scss';
 
-function PrivacyPolicy() {
+function HowToOrder() {
   return (
     <div className={`${classes.staticPages}`}>
       <div className="container">
-        <h3>Politika privatnosti</h3>
+        <h3>Kako naručiti?</h3>
         <div className={`${classes.staticPagesContent}`}>
           <p>
             Ukoliko se interesujete za obradu i zaštitu Vaših podataka o
@@ -72,4 +72,4 @@ function PrivacyPolicy() {
   );
 }
 
-export default PrivacyPolicy;
+export default HowToOrder;

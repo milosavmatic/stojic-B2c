@@ -19,35 +19,35 @@ const Footer = () => {
                   </h5>
                   <ul className={`${classes['footer-list']}`}>
                     <li>
-                      <Link href="/">
+                      <Link href="/nacin-placanja-i-isporuka">
                         <a className={`${classes['basic-link-white']}`}>
                           Način plaćanja i isporuka
                         </a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
+                      <Link href="/kako-naruciti">
                         <a className={`${classes['basic-link-white']}`}>
                           Kako naručiti
                         </a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
+                      <Link href="/najcesca-pitanja">
                         <a className={`${classes['basic-link-white']}`}>
                           Najčešća pitanja
                         </a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
+                      <Link href="/korisnicka-podrska">
                         <a className={`${classes['basic-link-white']}`}>
                           Korisnička podrška
                         </a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
+                      <Link href="/zamena-artikala">
                         <a className={`${classes['basic-link-white']}`}>
                           Zamena artikala
                         </a>
@@ -63,7 +63,7 @@ const Footer = () => {
                       </h5>
                       <ul className={`${classes['footer-list']}`}>
                         <li>
-                          <Link href="uslovi-koriscenja">
+                          <Link href="/uslovi-koriscenja">
                             <a className={`${classes['basic-link-white']}`}>
                               Uslovi korišćenja
                             </a>
@@ -77,7 +77,7 @@ const Footer = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link href="prava-potrosaca">
+                          <Link href="/prava-potrosaca">
                             <a className={`${classes['basic-link-white']}`}>
                               Prava potrošača
                             </a>
@@ -121,14 +121,14 @@ const Footer = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
+                      <Link href="/postani-partner">
                         <a className={`${classes['basic-link-white']}`}>
                           Postani partner
                         </a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
+                      <Link href="/kontakt">
                         <a className={`${classes['basic-link-white']}`}>
                           Kontakt
                         </a>
@@ -162,27 +162,27 @@ const Footer = () => {
                     <Accordion.Body>
                       <ul className={`${classes['footer-list']}`}>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
-                            Način plaćanja
+                          <Link href="/nacin-placanja-i-isporuka" className={`${classes['acc-items']}`}>
+                            Način plaćanja i isporuka
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/kako-naruciti" className={`${classes['acc-items']}`}>
                             Kako naručiti
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/najcesca-pitanja" className={`${classes['acc-items']}`}>
                             Najčešća pitanja
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/korisnicka-podrska" className={`${classes['acc-items']}`}>
                             Korisnička podrška
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/zamena-artikala" className={`${classes['acc-items']}`}>
                             Zamena artikala
                           </Link>
                         </li>
@@ -199,17 +199,17 @@ const Footer = () => {
                     <Accordion.Body>
                       <ul className={`${classes['footer-list']}`}>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/uslovi-koriscenja" className={`${classes['acc-items']}`}>
                             Uslovi korišćenja
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/politika-privatnosti" className={`${classes['acc-items']}`}>
                             Politika privatnosti
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/prava-potrosaca" className={`${classes['acc-items']}`}>
                             Prava potrošača
                           </Link>
                         </li>
@@ -234,12 +234,12 @@ const Footer = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/postani-partner" className={`${classes['acc-items']}`}>
                             Postani partner
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/kontakt" className={`${classes['acc-items']}`}>
                             Kontakt
                           </Link>
                         </li>

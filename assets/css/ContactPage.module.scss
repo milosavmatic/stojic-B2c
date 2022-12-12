@@ -60,14 +60,16 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
-  a {
-    color: var(--red-color);
-    margin: 0.5rem 0;
+  img {
+    width: 200px !important;
+    filter: brightness(0) invert(1) !important;
+    padding-bottom: 1rem !important;
   }
 }
 .working-hours-heading {
   font-weight: 500;
   font-size: 1.125rem;
+  margin-bottom: 1rem;
 }
 .working-hours-shops {
   color: var(--white-color);
@@ -85,39 +87,6 @@
   font-weight: 400;
 }
 
-.contact-downloads {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  img {
-    width: 200px !important;
-    filter: brightness(0) invert(1) !important;
-  }
-  svg {
-    width: 50px;
-    height: 50px;
-    color: var(--red-color);
-  }
-}
-.downloads-icon {
-  height: 50px;
-  margin-bottom: 1rem;
-}
-.downloads-heading {
-  font-weight: 600;
-  font-size: 1.125rem;
-  margin-bottom: 1rem;
-}
-.downloads-subheading {
-  font-weight: 400 !important;
-  margin: 2rem 0 0.2rem 0;
-  font-size: 1.125rem;
-}
-.download-link {
-  display: block;
-  margin-bottom: 0.25rem;
-}
 .line {
   position: relative;
   &::after {
@@ -257,43 +226,6 @@
   flex-direction: column;
 }
 
-.stores {
-  margin-bottom: 3rem;
-  h5 {
-    margin-bottom: 1rem;
-    font-weight: 500 !important;
-    font-size: 1.3rem;
-  }
-  .storesGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.4rem;
-    .storeCard {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: var(--gray-color);
-      padding: 1rem;
-      border-radius: 7px;
-      h6 {
-        position: relative;
-        width: fit-content;
-        margin-bottom: 0.7rem;
-        &::after {
-          content: '';
-          position: absolute;
-          left: 50%;
-          transform: translate(-50%);
-          width: 1rem;
-          background-color: var(--croonus-mediumGray);
-          height: 1px;
-          bottom: -2px;
-        }
-      }
-    }
-  }
-}
-
 @media (max-width: 1300px) {
   .content-container {
     width: 100%;
@@ -308,15 +240,9 @@
   .contact-info {
     padding: 1rem;
   }
-  .stores .storesGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
-  .stores .storesGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
   .contact-form-textarea {
     width: 100%;
   }
@@ -333,7 +259,15 @@
 }
 
 @media (max-width: 500px) {
-  .stores .storesGrid {
-    grid-template-columns: 1fr;
+  .g-recaptcha {
+    transform: scale(0.77);
+    transform-origin: 0 0;
+  }
+}
+
+@media (max-width: 370px) {
+  .g-recaptcha {
+    transform: scale(0.67);
+    transform-origin: 0 0;
   }
 }

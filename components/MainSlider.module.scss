@@ -13,23 +13,33 @@
   padding: 0.125rem 1.2rem;
   text-transform: uppercase;
 }
+
 .button-caption:hover {
   background-color: #cf0007;
 }
+
 .carousel-indicators [data-bs-target] {
   width: 10px !important;
   height: 10px !important;
   border: 1px solid transparent !important;
   border-radius: 10px;
 }
+
 .desktop-display {
   display: block;
   width: 100%;
   height: 400px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
+
 .mobile-display {
   display: none !important;
 }
+
 @media (max-width: 768px) {
   .mobile-display {
     display: block !important;

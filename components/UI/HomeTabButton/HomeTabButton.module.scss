@@ -36,6 +36,10 @@
       margin: 0 0.5rem;
       font-size: 1rem;
       padding: 0.8rem 0.3rem;
+      text-transform: lowercase;
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 }
