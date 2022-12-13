@@ -1,15 +1,14 @@
-import React from 'react'
-import classes from "../../assets/css/StaticPages.module.scss"
+import React from 'react';
 
 function BecomeaPartner() {
   return (
-    <div className={`${classes.staticPages}`}>
+    <div className="staticPages">
       <div className="container">
         <h3>Postani naš partner</h3>
-        <div className={`${classes.staticPagesContent}`}></div>
+        <div className="staticPagesContent"></div>
       </div>
     </div>
-  )
+  );
 }
 
-export default BecomeaPartner
+export default BecomeaPartner;

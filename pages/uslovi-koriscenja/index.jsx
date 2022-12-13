@@ -1,12 +1,11 @@
 import React from 'react';
-import classes from '../../assets/css/staticPages.module.scss';
 
 function TermsOfUse() {
   return (
-    <div className={`${classes.staticPages}`}>
+    <div className="staticPages">
       <div className="container">
         <h3>Uslovi korišćenja</h3>
-        <div className={`${classes.staticPagesContent}`}>
+        <div className="staticPagesContent">
           <p>
             Ukoliko se interesujete za obradu i zaštitu Vaših podataka o
             ličnosti u okviru privrednog društva Tehomanija d.o.o., DOBRO DOŠLI,

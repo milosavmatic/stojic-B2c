@@ -1,12 +1,11 @@
 import React from 'react'
-import classes from "../../assets/css/StaticPages.module.scss"
 
 function MethodOfPayment() {
   return (
-    <div className={`${classes.staticPages}`}>
+    <div className="staticPages">
       <div className="container">
         <h3>Način plaćanja i isporuka</h3>
-        <div className={`${classes.staticPagesContent}`}>
+        <div className="staticPagesContent">
           <p>
             Ukoliko se interesujete za obradu i zaštitu Vaših podataka o
             ličnosti u okviru privrednog društva Tehomanija d.o.o., DOBRO DOŠLI,
