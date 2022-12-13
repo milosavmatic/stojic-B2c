@@ -1,15 +1,7 @@
-import Link from 'next/link';
-import classes from '../NavbarMenu.module.scss';
-// import classes from "../Categories/Categories.module.scss"
-import { useState } from 'react';
-import Image from 'next/image';
-import categoryImg from '../../assets/images/banners/logo_stojic.png';
-import logo from '../../public/static/images/logo.png';
-import { IoMdArrowDropdown } from 'react-icons/io';
-import { RiArrowRightSLine } from 'react-icons/ri';
-import { BsSearch } from 'react-icons/bs';
-import banner from '../../assets/images/banners/promo.png';
-import { icon } from '@fortawesome/fontawesome-svg-core';
+import Link from 'next/link'
+import classes from '../NavbarMenu.module.scss'
+import Image from 'next/image'
+import { RiArrowRightSLine } from 'react-icons/ri'
 
 const Categories = ({
   menu,
@@ -22,53 +14,52 @@ const Categories = ({
   searchCategory,
   isMobile = false,
 }) => {
-  console.log(menu);
+  console.log(menu)
   const clearModalData = () => {
-    closeLeftSidebarModal();
-    setCategoryItemHandler(null);
-  };
+    closeLeftSidebarModal()
+    setCategoryItemHandler(null)
+  }
 
   const convertChirilicLetter = (word) => {
     if (word.includes('č')) {
-      return word.replace('č', 'c');
+      return word.replace('č', 'c')
     }
     if (word.includes('ć')) {
-      return word.replace('ć', 'c');
+      return word.replace('ć', 'c')
     }
     if (word.includes('ž')) {
-      return word.replace('ž', 'z');
+      return word.replace('ž', 'z')
     }
     if (word.includes('đ')) {
-      return word.replace('đ', 'dj');
+      return word.replace('đ', 'dj')
     }
     if (word.includes('š')) {
-      return word.replace('š', 's');
+      return word.replace('š', 's')
     }
-    return word;
-  };
+    return word
+  }
 
   const filterByLabel = (array, searchTerm) => {
-    if (array && array.length > 0 && !isMobile) {
+    if ((array ?? []).length > 0 && !isMobile) {
       return array.reduce((prev, curr) => {
-        console.log(convertChirilicLetter(curr?.name.toLowerCase()));
+        console.log(convertChirilicLetter(curr?.name.toLowerCase()))
         const children = curr.children
           ? filterByLabel(curr.children, searchTerm)
-          : undefined;
-
+          : undefined
         return convertChirilicLetter(curr.name.toLowerCase()).includes(
-          convertChirilicLetter(searchTerm)
+          convertChirilicLetter(searchTerm.toLowerCase())
         ) || children?.length > 0
           ? [...prev, { ...curr, children }]
-          : prev;
-      }, []);
+          : prev
+      }, [])
     } else {
-      return [];
+      return []
     }
-  };
+  }
 
-  const categoryData = filterByLabel(categoryItem?.children, searchCategory);
+  const categoryData = filterByLabel(categoryItem?.children, searchCategory)
 
-  console.log(menu);
+  console.log(categoryData)
 
   return (
     <div className={classes['categoriesTree']}>
@@ -81,15 +72,15 @@ const Categories = ({
                 key={item.id}
                 className={classes['nav-submenu-item']}
                 onClick={() => {
-                  setCategoryItemHandler(item);
-                  setSelectedCatIdHandler(item);
-                  setSearchCategoryhandler('');
+                  setCategoryItemHandler(item)
+                  setSelectedCatIdHandler(item)
+                  setSearchCategoryhandler('')
                 }}
               >
                 <div className={classes['submenu-item-holder']}>
                   <div className={classes['iconNameCat']}>
                     {item.icon ? (
-                      <img src={item.icon} alt="Stojic Elektrik doo" />
+                      <img src={item.icon} alt='Stojic Elektrik doo' />
                     ) : null}
 
                     <p
@@ -121,7 +112,7 @@ const Categories = ({
                 <a className={classes['submenu-item-holder']}>
                   <li onClick={clearModalData}>
                     {item.icon ? (
-                      <img src={item.icon} alt="Stojic Elektrik doo" />
+                      <img src={item.icon} alt='Stojic Elektrik doo' />
                     ) : null}
                     <p>{item.name}</p>
                   </li>
@@ -138,36 +129,31 @@ const Categories = ({
                       <p onClick={clearModalData}>{item.name}</p>
                     </a>
                   </Link>
-                  {categoryItem?.children && categoryItem.children.length > 0
-                    ? categoryItem.children.map((subCategory) => {
-                        return (
-                          <ul key={subCategory.id}>
-                            <Link href={subCategory.path}>
-                              <a>
-                                <p onClick={clearModalData}>
-                                  {subCategory.name}
-                                </p>
-                              </a>
-                            </Link>
-                            {subCategory.children &&
-                            subCategory.children.length > 0
-                              ? subCategory.children.map((subSubCategory) => (
-                                  <Link
-                                    key={subSubCategory.id}
-                                    href={subSubCategory.path}
-                                  >
-                                    <a>
-                                      <li onClick={clearModalData}>
-                                        {subSubCategory.name}
-                                      </li>
-                                    </a>
-                                  </Link>
-                                ))
-                              : null}
-                          </ul>
-                        );
-                      })
-                    : null}
+                  {(categoryItem?.children ?? []).map((subCategory) => {
+                    return (
+                      <ul key={subCategory.id}>
+                        <Link href={subCategory.path}>
+                          <a>
+                            <p onClick={clearModalData}>{subCategory.name}</p>
+                          </a>
+                        </Link>
+                        {subCategory.children && subCategory.children.length > 0
+                          ? subCategory.children.map((subSubCategory) => (
+                              <Link
+                                key={subSubCategory.id}
+                                href={subSubCategory.path}
+                              >
+                                <a>
+                                  <li onClick={clearModalData}>
+                                    {subSubCategory.name}
+                                  </li>
+                                </a>
+                              </Link>
+                            ))
+                          : null}
+                      </ul>
+                    )
+                  })}
                 </div>
               </div>
             ) : null}
@@ -201,31 +187,30 @@ const Categories = ({
             </a>
           </Link>
           <div className={classes['gridRightSideSubCat']}>
-            {categoryData && categoryData.length > 0 ? (
-              <>
-                {/* <form
-                  className={`${classes['header-search']} ${classes['headerSearchCat']}`}
-                  // onSubmit={handleSearch}
-                >
-                  <div className={classes['newsletter']}>
-                    <input
-                      className={`${
-                        classes['newsletter-input'] + ' basic-input'
-                      }`}
-                      type="text"
-                      name="search"
-                      id="search"
-                      value={searchCategory}
-                      onChange={({ target }) =>
-                        setSearchCategoryhandler(target.value)
-                      }
-                      placeholder="Pretraga.."
-                    />
-                  </div>
-                </form> */}
-
-                <div className={classes['subCategoryChildren']}>
-                  {categoryData.map((subCategory) => {
+            <>
+              <form
+                className={`${classes['header-search']} ${classes['headerSearchCat']}`}
+                // onSubmit={handleSearch}
+              >
+                <div className={classes['newsletter']}>
+                  <input
+                    className={`${
+                      classes['newsletter-input'] + ' basic-input'
+                    }`}
+                    type='text'
+                    name='search'
+                    id='search'
+                    value={searchCategory}
+                    onChange={({ target }) =>
+                      setSearchCategoryhandler(target.value)
+                    }
+                    placeholder='Pretraga..'
+                  />
+                </div>
+              </form>
+              <div className={classes['subCategoryChildren']}>
+                {categoryData.length > 0 ? (
+                  categoryData.map((subCategory) => {
                     return (
                       <ul key={subCategory.id}>
                         <Link href={subCategory.path}>
@@ -233,42 +218,42 @@ const Categories = ({
                             <p onClick={clearModalData}>{subCategory.name}</p>
                           </a>
                         </Link>
-                        {subCategory?.children &&
-                        subCategory?.children.length > 0
-                          ? subCategory.children.map((subSubCategory) => (
-                              <Link
-                                key={subSubCategory.id}
-                                href={subSubCategory.path}
-                              >
-                                <a>
-                                  <li onClick={clearModalData}>
-                                    {subSubCategory.name}
-                                  </li>
-                                </a>
-                              </Link>
-                            ))
-                          : null}
+                        {(subCategory?.children ?? []).map((subSubCategory) => (
+                          <Link
+                            key={subSubCategory.id}
+                            href={subSubCategory.path}
+                          >
+                            <a>
+                              <li onClick={clearModalData}>
+                                {subSubCategory.name}
+                              </li>
+                            </a>
+                          </Link>
+                        ))}
                       </ul>
-                    );
-                  })}
-                </div>
-              </>
-            ) : null}
-            {categoryItem.image ? (
+                    )
+                  })
+                ) : (
+                  <p className={classes.noData}>Nema podataka za prikaz!</p>
+                )}
+              </div>
+            </>
+
+            {categoryItem.image != null && (
               <div className={classes['banner']}>
                 <Image
                   src={categoryItem.image}
-                  alt="Stojic Elektrik doo"
+                  alt='Stojic Elektrik doo'
                   width={300}
                   height={500}
                 />
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       ) : null}
     </div>
-  );
-};
+  )
+}
 
-export default Categories;
+export default Categories

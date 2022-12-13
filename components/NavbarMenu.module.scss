@@ -136,7 +136,6 @@ a.submenu-item-holder {
     }
     p {
       padding-left: 0 !important;
-     
     }
   }
 }
@@ -1001,4 +1000,8 @@ ul.header-links li:hover {
     left: 1rem;
     top: 0.8rem;
   }
+}
+
+.noData {
+  color: black;
 }
