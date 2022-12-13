@@ -127,6 +127,8 @@ const NavbarMenu = () => {
 
   const menu = generateMenu(categoryData, '/kategorije');
 
+  console.log(menu.icon)
+
   const handleSearch = (event) => {
     event.preventDefault();
     navigate(`/search?search=${searchTerm}`);

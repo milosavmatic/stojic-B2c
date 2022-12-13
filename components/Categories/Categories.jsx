@@ -9,6 +9,7 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { BsSearch } from 'react-icons/bs';
 import banner from '../../assets/images/banners/promo.png';
+import { icon } from '@fortawesome/fontawesome-svg-core';
 
 const Categories = ({
   menu,
@@ -67,7 +68,7 @@ const Categories = ({
 
   const categoryData = filterByLabel(categoryItem?.children, searchCategory);
 
-  console.log(categoryData);
+  console.log(menu);
 
   return (
     <div className={classes['categoriesTree']}>
@@ -75,38 +76,58 @@ const Categories = ({
         <h5 className={`${classes['all-categories-title']}`}>Sve kategorije</h5>
         {menu.map((item) => (
           <>
-            <li
-              key={item.id}
-              className={classes['nav-submenu-item']}
-              onClick={() => {
-                setCategoryItemHandler(item);
-                setSelectedCatIdHandler(item);
-                setSearchCategoryhandler('');
-              }}
-            >
-              <div className={classes['submenu-item-holder']}>
-                <p
-                  className={
-                    categoryItem?.id === item.id
-                      ? ` ${classes['active']} ${classes['category-name']}`
-                      : ''
-                  }
-                >
-                  {item.name}
-                </p>
-                {/* {item.children && item.children.length > 0 ? ( */}
-                <RiArrowRightSLine
-                  className={
-                    selectedCategoryId === item.id
-                      ? `${classes['rotate']}`
-                      : '' || categoryItem?.id === item.id
-                      ? ` ${classes['active']}`
-                      : ''
-                  }
-                />
-                {/* ) : null} */}
-              </div>
-            </li>
+            {item.children && item.children.length > 0 ? (
+              <li
+                key={item.id}
+                className={classes['nav-submenu-item']}
+                onClick={() => {
+                  setCategoryItemHandler(item);
+                  setSelectedCatIdHandler(item);
+                  setSearchCategoryhandler('');
+                }}
+              >
+                <div className={classes['submenu-item-holder']}>
+                  <div className={classes['iconNameCat']}>
+                    {item.icon ? (
+                      <img src={item.icon} alt="Stojic Elektrik doo" />
+                    ) : null}
+
+                    <p
+                      className={
+                        categoryItem?.id === item.id
+                          ? ` ${classes['active']} ${classes['category-name']}`
+                          : ''
+                      }
+                    >
+                      {item.name}
+                    </p>
+                  </div>
+
+                  {item.children && item.children.length > 0 ? (
+                    <RiArrowRightSLine
+                      className={
+                        selectedCategoryId === item.id
+                          ? `${classes['rotate']}`
+                          : '' || categoryItem?.id === item.id
+                          ? ` ${classes['active']}`
+                          : ''
+                      }
+                    />
+                  ) : null}
+                </div>
+              </li>
+            ) : (
+              <Link href={item.path}>
+                <a className={classes['submenu-item-holder']}>
+                  <li onClick={clearModalData}>
+                    {item.icon ? (
+                      <img src={item.icon} alt="Stojic Elektrik doo" />
+                    ) : null}
+                    <p>{item.name}</p>
+                  </li>
+                </a>
+              </Link>
+            )}
             {/* ***** */}
 
             {selectedCategoryId === item.id && item ? (
@@ -182,7 +203,7 @@ const Categories = ({
           <div className={classes['gridRightSideSubCat']}>
             {categoryData && categoryData.length > 0 ? (
               <>
-                <form
+                {/* <form
                   className={`${classes['header-search']} ${classes['headerSearchCat']}`}
                   // onSubmit={handleSearch}
                 >
@@ -201,7 +222,7 @@ const Categories = ({
                       placeholder="Pretraga.."
                     />
                   </div>
-                </form>
+                </form> */}
 
                 <div className={classes['subCategoryChildren']}>
                   {categoryData.map((subCategory) => {
@@ -233,22 +254,16 @@ const Categories = ({
                 </div>
               </>
             ) : null}
-            <div className={classes['banner']}>
-              {categoryItem.image ? (
+            {categoryItem.image ? (
+              <div className={classes['banner']}>
                 <Image
                   src={categoryItem.image}
                   alt="Stojic Elektrik doo"
                   width={300}
                   height={500}
                 />
-              ) : (
-                <Image
-                  src={categoryImg}
-                  alt="Stojic Elektrik doo"
-                  objectFit="cover"
-                />
-              )}
-            </div>
+              </div>
+            ) : null}
           </div>
         </div>
       ) : null}

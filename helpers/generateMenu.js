@@ -7,7 +7,7 @@ export const generateMenu = (menu, startPath) => {
       (item?.children ?? []).length > 0
         ? generateMenu(item.children, path)
         : [];
-    ret.push({ name, path, children, id: item.id });
+    ret.push({ name, path, children, id: item.id, icon: item.icon });
   }
 
   return ret;

@@ -68,7 +68,7 @@ form.header-search {
   padding: 1.2rem 0rem;
   .image-holder {
     cursor: pointer;
-    width: 226px;
+    width: 290px;
     // img {
     //   filter: brightness(0) invert(1);
     // }
@@ -86,11 +86,13 @@ form.header-search {
 
 .submenu-item-holder {
   text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   p {
     color: var(--dark-gray-color);
     font-size: 1rem;
     font-weight: normal;
-    // border-bottom: 1px solid transparent;
     padding-left: 0;
     transition: all 0.3s ease-in-out;
     &::first-letter {
@@ -98,25 +100,43 @@ form.header-search {
     }
     cursor: pointer;
     &:hover {
-      border-color: var(--croonus-mediumGray);
       color: var(--red-color);
     }
     &.active {
-      // border-color: var(--croonus-mediumGray);
       padding-left: 0.5rem;
       color: var(--red-color);
       font-weight: 600;
     }
   }
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   svg {
-    // display: none;
     color: var(--dark-gray-color);
 
     &.active {
       color: red;
+    }
+  }
+  .iconNameCat {
+    display: flex;
+    align-items: center;
+    img {
+      width: 22px;
+      margin-right: 10px;
+    }
+  }
+}
+
+a.submenu-item-holder {
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.7rem;
+    img {
+      width: 22px;
+      margin-right: 10px;
+    }
+    p {
+      padding-left: 0 !important;
+     
     }
   }
 }
@@ -247,7 +267,8 @@ li.dropdown-hover .navlink.category:hover {
 // }
 .categoriesTree {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 355px 1fr;
+  height: 100%;
   h1 {
     color: red;
   }
@@ -263,7 +284,7 @@ li.dropdown-hover .navlink.category:hover {
 
   .subCategoryChildren {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 240px);
     grid-template-rows: max-content;
     gap: 1rem;
     text-align: left;
@@ -293,7 +314,7 @@ li.dropdown-hover .navlink.category:hover {
 
 .gridRightSideSubCat {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: 1fr;
   .header-search {
     grid-column: 1/-1;
     &.headerSearchCat {
@@ -305,7 +326,6 @@ li.dropdown-hover .navlink.category:hover {
       }
     }
   }
-
 }
 
 .icons-list li {
@@ -499,10 +519,12 @@ button.dropdown-button:after {
   display: flex;
   width: fit-content;
   h5 {
-    color: red;
-    margin-bottom: 1rem;
+    color: var(--dark-gray-color);
+    font-weight: 600 !important;
+    margin-bottom: 2rem;
     text-transform: uppercase;
-    padding-right: 1rem;
+    margin-right: 1rem;
+    border-bottom: 2px solid var(--red-color);
   }
 }
 
@@ -526,7 +548,7 @@ ul.product-list {
   padding: 0rem 3rem 0rem 0rem;
   align-items: flex-start;
   li:not(:last-child) {
-    padding-bottom: 0.5rem;
+    margin-bottom: 0.7rem;
   }
   li {
     width: 100%;
@@ -912,9 +934,9 @@ ul.header-links li:hover {
       display: block;
       transition: all 0.3s ease-in-out;
       transform: rotate(90deg);
-     &.rotate {
-      color: red;
-     }
+      &.rotate {
+        color: red;
+      }
     }
     .rotate {
       transform: rotate(180deg);
