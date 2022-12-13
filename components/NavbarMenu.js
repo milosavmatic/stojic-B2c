@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import { menuCategories } from '../helpers/const';
 import { NavDropdown } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import CloseButton from 'react-bootstrap/CloseButton';
@@ -21,7 +20,7 @@ import { useCartContext } from '../pages/api/cartContext';
 import { BsHandbag, BsSearch, BsEnvelope } from 'react-icons/bs';
 import { FaRegUser, FaPhoneAlt } from 'react-icons/fa';
 import { currencyFormat } from '../helpers/functions';
-import { TfiLocationPin } from 'react-icons/tfi';
+// import { TfiLocationPin } from 'react-icons/tfi';
 
 const NavbarMenu = () => {
   const [isShown, setIsShown] = useState(false);
@@ -32,6 +31,7 @@ const NavbarMenu = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryItem, setCategoryItem] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [searchCategory, setSearchCategory] = useState('');
 
   const setCategoryItemHandler = (item) => {
     setCategoryItem(item);
@@ -42,12 +42,20 @@ const NavbarMenu = () => {
   };
 
   const closeLeftSidebarModal = () => {
-    onMobileDivShow();
     setIsShown(false);
     setSelectedCategoryId(null);
   };
 
-  console.log(categoryData);
+  const closeLeftSideMobileModal = () => {
+    onMobileDivShow();
+    setSelectedCategoryId(null);
+  };
+
+  const setSearchCategoryhandler = (searchTermCat) => {
+    setSearchCategory(searchTermCat);
+  };
+
+  // console.log(categoryData);
 
   const { push: navigate } = useRouter();
 
@@ -268,19 +276,14 @@ const NavbarMenu = () => {
                       fluid
                       className={isShown ? classes.animation : classes.word}
                     >
-                      <div className="d-flex">
-                        <h5 className={`${classes['all-categories-title']}`}>
-                          Sve kategorije
-                        </h5>
-                        <CloseButton
-                          className={classes['close-button']}
-                          aria-label="Hide"
-                          onClick={() => {
-                            setIsShown(false);
-                            setCategoryItem(null);
-                          }}
-                        />
-                      </div>
+                      <CloseButton
+                        className={classes['close-button']}
+                        aria-label="Hide"
+                        onClick={() => {
+                          setIsShown(false);
+                          setCategoryItem(null);
+                        }}
+                      />
 
                       <Categories
                         menu={menu}
@@ -288,6 +291,9 @@ const NavbarMenu = () => {
                         setCategoryItemHandler={setCategoryItemHandler}
                         closeLeftSidebarModal={closeLeftSidebarModal}
                         setSelectedCatIdHandler={setSelectedCatIdHandler}
+                        setSearchCategory={setSearchCategory}
+                        setSearchCategoryhandler={setSearchCategoryhandler}
+                        searchCategory={searchCategory}
                       />
                     </Container>
                     <div
@@ -439,22 +445,25 @@ const NavbarMenu = () => {
                 className={classes['mobile-nav-holder']}
               >
                 <div className={`${classes['mobile-nav']}`}>
-                  <div
-                    id="nav-icon"
-                    className={
-                      showMobileDiv
-                        ? ` ${classes['nav-icon']} open ${classes['nav-icon-active']}`
-                        : classes['nav-icon']
-                    }
-                    onClick={closeLeftSidebarModal}
-                  >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
+                  {!showMobileDiv ? (
+                    <div
+                      id="nav-icon"
+                      className={
+                        showMobileDiv
+                          ? ` ${classes['nav-icon']} open ${classes['nav-icon-active']}`
+                          : classes['nav-icon']
+                      }
+                      onClick={closeLeftSideMobileModal}
+                    >
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  ) : null}
+
                   <div
                     className={
                       showMobileDiv
@@ -463,6 +472,9 @@ const NavbarMenu = () => {
                     }
                   >
                     <ul className={classes['mobile-header-list']}>
+                      <li className={`${classes['close']}`}>
+                        <CloseButton onClick={closeLeftSideMobileModal} />
+                      </li>
                       <li
                         onClick={() => {
                           navigate('/');
@@ -491,9 +503,13 @@ const NavbarMenu = () => {
                                 menu={menu}
                                 categoryItem={categoryItem}
                                 setCategoryItemHandler={setCategoryItemHandler}
-                                closeLeftSidebarModal={closeLeftSidebarModal}
+                                closeLeftSidebarModal={closeLeftSideMobileModal}
                                 selectedCategoryId={selectedCategoryId}
-                                setSelectedCatIdHandler={setSelectedCatIdHandler}
+                                setSelectedCatIdHandler={
+                                  setSelectedCatIdHandler
+                                }
+                                setSearchCategoryhandler={() => {}}
+                                isMobile={true}
                               />
                             </div>
                           </div>

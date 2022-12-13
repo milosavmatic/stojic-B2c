@@ -31,6 +31,10 @@ form.header-search {
       border: 0;
       padding: 0 0.5rem;
       color: var(--navy-blue);
+      // box-shadow: rgb(0 0 0 / 10%) 0px 0px 5px 0px, rgb(0 0 0 / 10%) 0px 0px 1px 0px;
+      &::placeholder {
+        color: var(--navy-blue);
+      }
     }
   }
 }
@@ -57,16 +61,17 @@ form.header-search {
   padding: 0.5rem 0rem;
   font-size: 14px;
   border-bottom: 1px solid var(--dark-gray-color);
+  display: none;
 }
 .header-holder {
-  background-color: var(--navy-blue);
+  background-color: var(--gray-color);
   padding: 1.2rem 0rem;
   .image-holder {
     cursor: pointer;
     width: 226px;
-    img {
-      filter: brightness(0) invert(1);
-    }
+    // img {
+    //   filter: brightness(0) invert(1);
+    // }
   }
 }
 .header-links-holder ul,
@@ -85,7 +90,8 @@ form.header-search {
     color: var(--dark-gray-color);
     font-size: 1rem;
     font-weight: normal;
-    border-bottom: 1px solid transparent;
+    // border-bottom: 1px solid transparent;
+    padding-left: 0;
     transition: all 0.3s ease-in-out;
     &::first-letter {
       text-transform: uppercase;
@@ -96,15 +102,22 @@ form.header-search {
       color: var(--red-color);
     }
     &.active {
-      border-color: var(--croonus-mediumGray);
+      // border-color: var(--croonus-mediumGray);
+      padding-left: 0.5rem;
       color: var(--red-color);
+      font-weight: 600;
     }
   }
   display: flex;
   align-items: center;
   justify-content: space-between;
   svg {
-    display: none;
+    // display: none;
+    color: var(--dark-gray-color);
+
+    &.active {
+      color: red;
+    }
   }
 }
 
@@ -234,20 +247,27 @@ li.dropdown-hover .navlink.category:hover {
 // }
 .categoriesTree {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 340px 1fr;
   h1 {
     color: red;
+  }
+  .nav-submenu {
+    padding: 1.5rem;
   }
 }
 
 .subCategoryTree {
-  border-left: 1px solid var(--croonus-mediumGray);
+  // border-left: 1px solid var(--croonus-mediumGray);
+  padding: 1.5rem;
+  background-color: var(--gray-color);
+
   .subCategoryChildren {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-rows: max-content;
+    gap: 1rem;
     text-align: left;
-    padding: 2rem;
+    padding-right: 1rem;
   }
   ul {
     p {
@@ -269,6 +289,23 @@ li.dropdown-hover .navlink.category:hover {
       }
     }
   }
+}
+
+.gridRightSideSubCat {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  .header-search {
+    grid-column: 1/-1;
+    &.headerSearchCat {
+      margin-bottom: 1rem;
+      input {
+        border: 1px solid var(--);
+        box-shadow: rgb(0 0 0 / 10%) 0px 0px 5px 0px,
+          rgb(0 0 0 / 10%) 0px 0px 1px 0px;
+      }
+    }
+  }
+
 }
 
 .icons-list li {
@@ -349,11 +386,11 @@ button.dropdown-button:after {
 .icons-list li {
   // margin: 0rem 0.3rem;
   display: flex;
-  color: var(--white-color);
+  color: var(--navy-blue);
   button svg {
     width: 28px;
     height: 28px;
-    color: var(--white-color);
+    color: #333;
   }
   span {
     color: var(--red-color);
@@ -423,7 +460,7 @@ button.dropdown-button:after {
 }
 .animation {
   opacity: 1;
-  padding: 2rem;
+  padding: 0;
   background: white;
   z-index: 20000;
   position: fixed;
@@ -458,21 +495,14 @@ button.dropdown-button:after {
 }
 
 .categoryName {
-  position: relative;
+  text-align: left;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: fit-content;
   h5 {
-    position: absolute;
-    z-index: 9;
-    font-size: 1.5rem;
-    color: var(--white-color);
-    font-weight: 500 !important;
+    color: red;
+    margin-bottom: 1rem;
     text-transform: uppercase;
-  }
-  img {
-    width: 100% !important;
-    object-fit: cover !important;
+    padding-right: 1rem;
   }
 }
 
@@ -562,10 +592,10 @@ ul.product-list {
   span {
     max-width: 27px !important;
 
-    img {
-      filter: brightness(0) invert(1);
-      opacity: 1 !important;
-    }
+    // img {
+    //   filter: brightness(0) invert(1);
+    //   opacity: 1 !important;
+    // }
   }
 }
 .top-header-wishlist {
@@ -577,10 +607,11 @@ ul.product-list {
 .top-header-wishlist:hover img {
   opacity: 0.3 !important;
 }
-.all-categories-title {
+h5.all-categories-title {
   font-weight: 600 !important;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: var(--red-color);
+  border-bottom: 0;
 }
 
 // a.category-name {
@@ -593,9 +624,21 @@ ul.product-list {
 //     color: red;
 //   }
 // }
+.banner {
+  img {
+    background-color: var(--white-color);
+    object-fit: cover;
+    border-radius: 7px;
+    overflow: hidden;
+  }
+}
+
 .close-button {
-  display: flex;
-  margin-left: auto;
+  // display: flex;
+  // margin-left: auto;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
 }
 ul.header-links li:hover {
   color: rgb(170, 170, 170);
@@ -783,13 +826,17 @@ ul.header-links li:hover {
         color: var(--red-color);
       }
     }
+    .close {
+      margin: 1rem 0 0 0;
+      text-align: right;
+    }
   }
   .mobile-header-div {
     display: block;
     z-index: 3;
-    width: 100vw;
+    width: 90%;
     position: fixed;
-    top: 8.8rem;
+    top: 0;
     left: 0;
     background-color: var(--white-color);
     transition: transform 0.4s ease-in-out;
@@ -811,7 +858,7 @@ ul.header-links li:hover {
     top: 0;
     cursor: pointer;
     span {
-      background-color: var(--white-color);
+      background-color: #333;
       display: block;
       position: absolute;
       height: 2px;
@@ -824,7 +871,7 @@ ul.header-links li:hover {
 
   .nav-icon-active {
     span {
-      background-color: var(--white-color);
+      background-color: #333;
     }
   }
 
@@ -864,6 +911,10 @@ ul.header-links li:hover {
     svg {
       display: block;
       transition: all 0.3s ease-in-out;
+      transform: rotate(90deg);
+     &.rotate {
+      color: red;
+     }
     }
     .rotate {
       transform: rotate(180deg);
@@ -872,6 +923,7 @@ ul.header-links li:hover {
     p {
       &.active {
         color: inherit;
+        padding-left: 0;
       }
       font-size: 14px;
     }
