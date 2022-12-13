@@ -7,10 +7,10 @@ const nextConfig = {
       'static.tehnomanija.rs',
       'www.tehnomanija.rs',
       'online.bancaintesa.rs',
-      'api.mobs.croonus.com',
+      'api.stojic.rs',
       '25.19.215.162',
       'api.staging.croonus.com',
-    ],
+    ]
   },
   env: {
     API_URL: process.env.API_URL,

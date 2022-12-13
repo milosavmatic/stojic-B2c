@@ -107,7 +107,8 @@ const CategoriesPage = ({ categoryData, filters }) => {
     newQuery = { ...newQuery, ...arr }
 
     replaceQuery(newQuery)
-  }, [selectedFilters, categoryData.id, availableFilters, changeFilters, query, replaceQuery])
+  }, [])
+  // }, [selectedFilters, categoryData.id, availableFilters, changeFilters, query, replaceQuery])
 
   const getProductList = useCallback(
     (limit, sort, page, selectedFilters) => {

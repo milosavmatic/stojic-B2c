@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import classes from '../../assets/css/ContactPage.module.scss';
-import cacakMap from '../../assets/images/banners/cacak_map_gray.png';
-import dlIcon from '../../assets/images/elements/download-sticker.png';
+import cacakMap from '../../assets/images/banners/contact_pic.jpg';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Image from 'next/image';
-import { CgSoftwareDownload } from 'react-icons/cg';
 import { ApiHandler } from '../api/api';
 import { openAlertBox } from '../../helpers/tostify';
 import { useRouter } from 'next/router';
 import logo from '../../assets/images/logo/logo.png';
+import Stores from '../../components/Stores/Stores';
 
 const ContactPage = () => {
   const [selectContact, setSelectContact] = useState('');
@@ -19,6 +18,10 @@ const ContactPage = () => {
   };
 
   const { push: navigate } = useRouter();
+
+  const router = useRouter();
+
+  const { id, name } = router.query;
 
   const [formData, setFormData] = useState({
     customer_name: '',
@@ -89,25 +92,52 @@ const ContactPage = () => {
         ...feldsForRet,
       };
       console.log(ret);
-
-      api
-        .post('/contact/contact_page', ret)
-        .then((response) => {
-          openAlertBox('Uspešno ste poslali poruku', 'success');
-          setFormData({
-            customer_name: '',
-            email: '',
-            phone: '',
-            message: '',
-            city: '',
-            recaptcha: null,
-            agreed: null,
-          });
-          setTimeout(() => {
-            navigate('/');
-          }, 2000);
-        })
-        .catch((error) => openAlertBox(error.message, 'error'));
+      if (!id && !name) {
+        api
+          .post('/contact/contact_page', ret)
+          .then((response) => {
+            openAlertBox('Uspešno ste poslali poruku', 'success');
+            setFormData({
+              customer_name: '',
+              email: '',
+              phone: '',
+              message: '',
+              city: '',
+              recaptcha: null,
+              agreed: null,
+            });
+            setTimeout(() => {
+              navigate('/');
+            }, 2000);
+          })
+          .catch((error) => openAlertBox(error.message, 'error'));
+      } else {
+        api
+          .post('contact/product_request', {
+            ...ret,
+            id_product: +id,
+            product_name: name,
+          })
+          .then((response) => {
+            openAlertBox(
+              'Uspešno ste poslali zahtev za proveru proizvoda na stanju.',
+              'success'
+            );
+            setFormData({
+              customer_name: '',
+              email: '',
+              phone: '',
+              message: '',
+              city: '',
+              recaptcha: null,
+              agreed: null,
+            });
+            setTimeout(() => {
+              navigate('/');
+            }, 2000);
+          })
+          .catch((error) => openAlertBox(error.message, 'error'));
+      }
     }
   };
 
@@ -123,77 +153,35 @@ const ContactPage = () => {
           <div className={classes['contact-info'] + ' col-md-4'}>
             <h4 className={classes['contact-info-heading']}>Kontakt</h4>
             <div className={classes['call-center']}>
-              <h5 className={`${classes['call-center-heading']} ${classes['line']}`}>Call centar</h5>
+              <h5
+                className={`${classes['call-center-heading']} ${classes['line']}`}
+              >
+                Call centar
+              </h5>
               <span className={classes['bolded-faces']}>Fizička lica</span>
-              <span className={classes['phone-numbers']}>032 222 222</span>
+              <span className={classes['phone-numbers']}>0800</span>
               <span className={classes['bolded-faces']}>Pravna lica</span>
-              <span className={classes['phone-numbers']}>032 222 222</span>
-              <span className={classes['bolded-faces']}>
-                Pozivi sa mobilne mreže
+              <span className={classes['phone-numbers']}>
+                +381 32 515 52 99
               </span>
-              <span className={classes['phone-numbers']}>064 222 22 22</span>
               <span className={classes['bolded-faces']}>ili e-mailom na:</span>
               <span className={classes['phone-numbers']}>
                 prodaja@stojic.rs
               </span>
-              {/* <span className={classes['phone-numbers']}>
-                pravnalica@mobsshop.com
-              </span> */}
             </div>
             <div className={classes['working-hours']}>
-              <h5 className={`${classes['working-hours-heading']} ${classes['line']}`}>
-                Radno vreme Call Centra
-              </h5>
-              <Link href="#" className={classes['working-hours-shops']}>
-                Stojic prodavnice - gradovi, adrese, brojevi telefona
+              <Link href="/">
+                <Image src={logo} alt="Stojic-elektrik-logo" />
               </Link>
+              <h5
+                className={`${classes['working-hours-heading']} ${classes['line']}`}
+              >
+                Radno vreme prodajnog centra
+              </h5>
               <span className={classes['working-hours-day']}>
-                Ponedeljak - Petak:{' '}
                 <span className={classes['working-hours-hour']}>
                   od 08h do 20h
                 </span>
-              </span>
-              <span className={classes['working-hours-day']}>
-                Subota:{' '}
-                <span className={classes['working-hours-hour']}>
-                  od 09h do 16:30h
-                </span>
-              </span>
-              <span className={classes['working-hours-day']}>
-                Nedelja:{' '}
-                <span className={classes['working-hours-hour']}>
-                  neradni dan
-                </span>
-              </span>
-            </div>
-            <div className={classes['contact-downloads']}>
-              {/* <Image
-                src={dlIcon}
-                className={classes['downloads-icon']}
-                alt=""
-              /> */}
-              
-              {/* <h5 className={classes['downloads-heading']}>
-                Stojić elektrik - rasveta i elektro oprema{' '}
-                <span>PIB: 1000000</span>
-              </h5> */}
-              <Link href="/">
-                <Image
-                  src={logo}
-                  alt="Stojic-elektrik-logo"
-                />
-              </Link>
-              <h6 className={`${classes['downloads-subheading']} ${classes['line']}`}>
-                Preuzmite obrasce:
-              </h6>
-              <CgSoftwareDownload />
-              <span className={classes['download-link']}>PEPDV obrazac</span>
-              <span className={classes['download-link']}>PIB</span>
-              <span className={classes['download-link']}>
-                Obrazac za identifikaciju
-              </span>
-              <span className={classes['download-link']}>
-                Obrazac za odustanak od ugovora
               </span>
             </div>
           </div>
@@ -279,12 +267,14 @@ const ContactPage = () => {
               *Dokument može biti .jpg i .pdf.
             </span> */}
             <div className={classes['inputError']}>
-              <ReCAPTCHA
-                className={classes['captcha']}
-                sitekey="6Ld9cj4gAAAAANDQjVmIJUDcOU79VnU9u_Qr1jDL"
-                onChange={onCaptchaChange}
-                name="recaptcha"
-              />
+              <div className={classes['g-recaptcha']}>
+                <ReCAPTCHA
+                  className={classes['captcha']}
+                  sitekey="6Ld9cj4gAAAAANDQjVmIJUDcOU79VnU9u_Qr1jDL"
+                  onChange={onCaptchaChange}
+                  name="recaptcha"
+                />
+              </div>
               {errors.includes('recaptcha') && (
                 <span className={classes.errorMsg}>{errorMsg}</span>
               )}
@@ -335,6 +325,7 @@ const ContactPage = () => {
           </form>
         </div>
       </div>
+      <Stores />
     </>
   );
 };

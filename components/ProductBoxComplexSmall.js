@@ -17,6 +17,12 @@ const ProductBoxComplexSmall = ({
 }) => {
   const addToCart = useGlobalAddToCart();
   const addToWishList = useGlobalAddToWishList();
+  console.log(product);
+  const imageUrl =
+    product?.image.length > 0 && product?.image
+      ? product?.image[0]
+      : product?.path ?? '/static/images/logo.png';
+  
   return (
     <div className={`${classes['container']} ${classes[className]}`}>
       <div className={`${classes['wrapp']}`}>
@@ -42,10 +48,7 @@ const ProductBoxComplexSmall = ({
         >
           <Image
             alt={product?.basic_data?.slug}
-            src={
-              (product?.image ? product?.image[0] : product?.path) ??
-              '/products/missing.png'
-            }
+            src={imageUrl}
             layout="fill"
             objectFit="contain"
           />
@@ -83,29 +86,32 @@ const ProductBoxComplexSmall = ({
           <span>{sticker.name}</span>
         </div>
       ))}
-      {!isSpecialOffer ? (
-        // <div
-        //   className={classes['fav-heart']}
-        //   onClick={() => addToWishList(product?.id)}
-        // >
-        //   <Image alt="fav-heart" src={heartImg} />
-        // </div>
-        null
-      ) : (
+      {!isSpecialOffer ? // > //   onClick={() => addToWishList(product?.id)} //   className={classes['fav-heart']} // <div
+      //   <Image alt="fav-heart" src={heartImg} />
+      // </div>
+      null : product?.price?.discount?.amount ? (
         <div className={classes['percentSale']}>
-          {product?.price?.discount?.amount || '30%'}
+          {product?.price?.discount?.amount}
         </div>
-      )}
+      ) : null}
 
-      {Number(product?.inventory?.amount) > 0 && (
+      {Number(product?.inventory?.amount) > 0 &&
+      product.price.price.original ? (
         <div className={classes['add-to-cart']}>
           <div
             className={classes['add-to-cart-image']}
             onClick={() => addToCart(product?.id, 1)}
           >
-            {/* <Image src={cart} alt="React" /> */}
             <BsHandbag />
           </div>
+        </div>
+      ) : (
+        <div className={classes['checkAvailability']}>
+          <Link
+            href={`/kontakt?id=${product?.id}&&name=${product?.basic_data?.name}`}
+          >
+            Proverite dostupnost
+          </Link>
         </div>
       )}
     </div>

@@ -3,6 +3,12 @@
     ul {
         display: inline-flex;
         padding-left: unset;
+        li {
+          text-transform: lowercase;
+          &::first-letter {
+            text-transform: uppercase;
+          }
+        }
     }
     ul li:after {
         content:"/";
@@ -15,6 +21,13 @@
         text-decoration: none;
         color: #333;
         font-size: 13px;
-        // font-weight: 100;
     }
+}
+
+// RESPONSIVE
+
+@media (max-width: 992px) {
+  .breadcrumbs-holder {
+    display: none;
+  }
 }

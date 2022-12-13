@@ -15,13 +15,13 @@
 }
 
 body {
+
   margin: 0;
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 .mandatory {
   color: red;
@@ -75,9 +75,29 @@ a:hover {
   text-decoration: none !important;
 }
 
+.gif {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  img {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+}
+
+.overlay {
+  position: absolute;
+  background-color: rgba(19, 25, 33, 0.6);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 /* Track */
@@ -103,11 +123,18 @@ a:hover {
   background-color: #f7f7f7;
 }
 
+a.carousel-control-prev,
+a.carousel-control-next {
+  display: none !important;
+}
+
 @media (max-width: 1200px) {
   .container {
     padding: 0 1rem;
   }
 }
+
+
 
 @media screen and (max-width: 768px) {
   .mobile-hidden {
@@ -189,6 +216,15 @@ ul {
     padding: 0.2rem 0rem;
     box-shadow: unset;
     outline: unset;
+  }
+  .dropdown-toggle.nav-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    &::after {
+      margin-right: 4px !important;
+      color: red;
+    }
   }
   .gray {
     background: var(--gray-color);
@@ -739,4 +775,10 @@ tbody td {
 
 .text-center {
   text-align: center;
+}
+
+@media (max-width: 400.98px) {
+  .gray {
+    padding-left:2.3rem !important;
+  }
 }

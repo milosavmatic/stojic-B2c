@@ -5,6 +5,9 @@
 
 ul.footer-list {
   padding-left: 0rem;
+  li {
+    font-weight: 300;
+  }
 }
 
 .footer-middle-col {
@@ -64,9 +67,9 @@ ul.footer-list {
 .footer-copyright {
   text-align: center;
   // font-weight: 500;
-  background-color: var(--navy-blue);
+  background-color: var(--gray-color);
   padding: 1rem 0;
-  color: var(--white-color);
+  color: var(--navy-blue);
   .footer-copyright-items {
     display: flex;
     justify-content: space-between;
@@ -77,7 +80,7 @@ ul.footer-list {
         padding-right: 2rem;
       }
       li a {
-        color: var(--white-color);
+        color: var(--navy-blue);
         transition: all 0.2s ease-in-out;
         &:hover {
           color: var(--red-color);
@@ -89,6 +92,7 @@ ul.footer-list {
 
 .newsletter-col {
   color: var(--white-color);
+
 }
 .newsletter-heading {
   margin-bottom: 1.3rem;
@@ -124,6 +128,9 @@ ul.footer-list {
     border: 0;
     padding: 0 0.5rem;
     color: var(--navy-blue);
+    &::placeholder {
+      color: var(--navy-blue);
+    }
   }
 }
 
@@ -191,6 +198,13 @@ ul.footer-list {
   display: flex;
   align-items: center;
 }
+
+.newsletter-container {
+  p {
+    font-weight: 300;
+  }
+}
+
 .display-mobile {
   display: none !important;
 }

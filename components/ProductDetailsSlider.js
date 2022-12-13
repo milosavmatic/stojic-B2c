@@ -16,6 +16,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useWindowDimensions } from '../helpers/functions';
 import Image from 'next/image';
+import {convertHttpToHttps} from "../helpers/convertHttpToHttps"
 
 /**
  * Slider for product images on Single product page of B2B
@@ -83,7 +84,7 @@ const ProductDetailsSlider = ({ images = [], addToWishList, ...props }) => {
                     <Image
                       className="slick-small-img"
                       alt=""
-                      src={item.image}
+                      src={convertHttpToHttps(item.image)}
                       width={70}
                       height={50}
                     />
@@ -123,7 +124,7 @@ const ProductDetailsSlider = ({ images = [], addToWishList, ...props }) => {
                   <Image
                     className="slick-small-img"
                     alt=""
-                    src={item.image}
+                    src={convertHttpToHttps(item.image)}
                     width={600}
                     height={450}
                   />

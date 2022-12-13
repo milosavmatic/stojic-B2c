@@ -190,6 +190,19 @@
   }
 }
 
+.checkAvailability {
+  display: flex;
+  justify-content: center;
+
+  a {
+    background-color: var(--red-color);
+    color: var(--white-color);
+    padding: 0.3rem 0.7rem;
+    border-radius: 7px;
+    margin-top: 0.5rem;
+  }
+}
+
 .homeActionItem {
   border: 1px solid var(--red-color);
   border-radius: 15px;

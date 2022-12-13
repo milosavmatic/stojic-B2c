@@ -1,25 +1,33 @@
-import classes from './CartProductItem.module.scss'
-import PlusMinusInputCart from './PlusMinusInputCart'
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { currencyFormat } from '../helpers/functions'
-import { useGlobalAddToCart } from '../pages/api/globals'
+import classes from './CartProductItem.module.scss';
+import PlusMinusInputCart from './PlusMinusInputCart';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { currencyFormat } from '../helpers/functions';
+import { useGlobalAddToCart } from '../pages/api/globals';
+import { useGlobalRemoveFromCart } from '../pages/api/globals';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { openAlertBox } from '../helpers/tostify';
 
 const CartProductItem = ({ item }) => {
   // State that holds amount of products
-  const [productAmount, setProductAmount] = useState(Number(item.cart.quantity))
+  const [productAmount, setProductAmount] = useState(
+    Number(item.cart.quantity)
+  );
 
-  const addToCart = useGlobalAddToCart(true)
+  const removeFromCart = useGlobalRemoveFromCart();
+
+  const addToCart = useGlobalAddToCart(true);
 
   useEffect(() => {
     if (productAmount != item.cart.quantity) {
-      addToCart(item?.product?.id, productAmount, true)
+      addToCart(item?.product?.id, productAmount, true);
     }
-  }, [productAmount, addToCart, item.cart.quantity, item?.product?.id])
+  }, [productAmount, addToCart, item.cart.quantity, item?.product?.id]);
 
-  const per_item = item?.product?.price?.per_item
-  const total = item?.product?.price?.cost
-  const currency = item?.product?.price?.currency
+  const per_item = item?.product?.price?.per_item;
+  const total = item?.product?.price?.cost;
+  const currency = item?.product?.price?.currency;
   return (
     <>
       <div className={classes['container'] + ' row'}>
@@ -30,10 +38,10 @@ const CartProductItem = ({ item }) => {
         >
           <div className={classes['product-image']}>
             <Image
-              alt='product'
+              alt="product"
               src={item.product.image[0] ?? '/products/missing.png'}
-              layout='fill'
-              objectFit='contain'
+              layout="fill"
+              objectFit="contain"
             />
           </div>
         </div>
@@ -61,6 +69,15 @@ const CartProductItem = ({ item }) => {
         <div className={classes['cols'] + ' col-2'}>
           <span>{currencyFormat(total?.with_vat, currency)}</span>
         </div>
+        <div className={classes['delete']}>
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={() => {
+              removeFromCart(item?.product?.id);
+              openAlertBox('Uspešno obrisan proizvod.', 'success');
+            }}
+          ></FontAwesomeIcon>
+        </div>
       </div>
       <div className={classes['mobile-container'] + ' row'}>
         <div
@@ -68,7 +85,7 @@ const CartProductItem = ({ item }) => {
         >
           <div className={classes['product-image-mobile']}>
             <Image
-              alt='product'
+              alt="product"
               src={item.product.image[0] ?? '/products/missing.png'}
               width={180}
               height={220}
@@ -103,7 +120,7 @@ const CartProductItem = ({ item }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CartProductItem
+export default CartProductItem;
