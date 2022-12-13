@@ -1,22 +1,22 @@
 import React from 'react';
-import classes from '../../assets/css/StaticPages.module.scss';
 import Accordion from 'react-bootstrap/Accordion';
 import Link from 'next/link';
+// import classes  from "../../components/"
 
 function index() {
   return (
-    <div className={`${classes.staticPages}`}>
+    <div className="staticPages">
       <div className="container">
         <h3>Česta pitanja</h3>
-        <div className={`${classes.staticPagesContent}`}>
-          <Accordion className={`${classes['acc-holder']}`}>
+        <div className="staticPagesContent">
+          <Accordion >
             <Accordion.Item
               eventKey="0"
-              className={`${classes['acc-item-holder']}`}
+              
             >
-              <Accordion.Header className={`${classes['acc-headings']}`}>
-                <div className={`${classes['acc-headings-holder']}`}>
-                  <div className={`${classes['red-line']}`}></div>
+              <Accordion.Header >
+                <div >
+                  <div ></div>
                   <p>Da li je moguća kupovina na rate u prodavnici I online?</p>
                 </div>
               </Accordion.Header>
@@ -31,9 +31,9 @@ function index() {
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="1">
-              <Accordion.Header className={`${classes['acc-headings']}`}>
-                <div className={`${classes['acc-headings-holder']}`}>
-                  <div className={`${classes['red-line']}`}></div>
+              <Accordion.Header>
+                <div>
+                  <div ></div>
                   <p>Kako da poručim uređaj online?</p>
                 </div>
               </Accordion.Header>
@@ -54,9 +54,9 @@ function index() {
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
-              <Accordion.Header className={`${classes['acc-headings']}`}>
-                <div className={`${classes['acc-headings-holder']}`}>
-                  <div className={`${classes['red-line']}`}></div>
+              <Accordion.Header >
+                <div >
+                  <div></div>
                   <p>
                     Kupio sam online aparat, ali nisam dobila garanciju, šta da
                     radim?
