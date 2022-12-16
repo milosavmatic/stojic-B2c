@@ -1,6 +1,7 @@
 import Accordion from 'react-bootstrap/Accordion'
 import Filter from './Filter/Filter'
-import { TfiClose } from 'react-icons/tfi';
+import reset from "../assets/images/icons/reset.png"
+import Image from 'next/image'
 
 const Filters = ({
   filters,
@@ -15,8 +16,16 @@ const Filters = ({
   return (
     <div className={`${'filters-holder'}`}>
       <div className={`${'reset-filters'}`}>
-        <p>
-          Resetuj filtere <span><TfiClose /></span>
+        <p onClick={() => setSelectedFilters([])}>
+          Resetuj filtere <span className='reset-image'>
+            <Image
+              src={reset}
+              alt=''
+              className='image'
+              width={15}
+              height={15}
+            />
+          </span>
         </p>
       </div>
       <div className={`${'filters'}`}>
@@ -41,7 +50,7 @@ const Filters = ({
             </Accordion>
           )
         })}
-        {showSearch && <button onClick={searchProducts}>Pretraži</button>}
+        {/* {showSearch && <button onClick={searchProducts}>Pretraži</button>}
         <div className='styleCheckBox'>
           <input
             type='checkbox'
@@ -61,7 +70,7 @@ const Filters = ({
             onChange={() => setShowSearch(!showSearch)}
           />
           <label htmlFor='search-button'>Prikazi dugme za pretragu</label>
-        </div>
+        </div> */}
       </div>
     </div>
   )

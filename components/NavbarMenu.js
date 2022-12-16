@@ -18,6 +18,7 @@ import { generateMenu } from '../helpers/generateMenu';
 import Categories from './Categories/Categories';
 import { useCartContext } from '../pages/api/cartContext';
 import { BsHandbag, BsSearch, BsEnvelope } from 'react-icons/bs';
+import { SlUser } from 'react-icons/sl';
 import { FaRegUser, FaPhoneAlt } from 'react-icons/fa';
 import { currencyFormat } from '../helpers/functions';
 // import { TfiLocationPin } from 'react-icons/tfi';
@@ -127,7 +128,7 @@ const NavbarMenu = () => {
 
   const menu = generateMenu(categoryData, '/kategorije');
 
-  console.log(menu.icon)
+  console.log(menu.icon);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -217,6 +218,11 @@ const NavbarMenu = () => {
                 <div className={classes['icons-holder']}>
                   <div>
                     <ul className={classes['icons-list']}>
+                      {/* <li className={`${classes['button-registration']}`}>
+                        <button onClick={() => navigate('/login')}>
+                          <SlUser />
+                        </button>
+                      </li> */}
                       <li>
                         <button
                           type="button"
@@ -410,6 +416,9 @@ const NavbarMenu = () => {
                 <div className={classes['icons-holder']}>
                   <div>
                     <ul className={classes['icons-list']}>
+                      {/* <li>
+                        <SlUser />
+                      </li> */}
                       <li>
                         <button
                           type="button"

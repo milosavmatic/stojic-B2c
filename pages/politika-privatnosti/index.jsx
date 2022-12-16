@@ -4,21 +4,28 @@ function PrivacyPolicy() {
   return (
     <div className="staticPages">
       <div className="container">
-        <h3>Politika privatnosti</h3>
+        <h3>Politika upotrebe kolačića</h3>
         <div className="staticPagesContent">
           <p>
-            Ukoliko se interesujete za obradu i zaštitu Vaših podataka o
-            ličnosti u okviru privrednog društva Tehomanija d.o.o., DOBRO DOŠLI,
-            ovaj odeljak je pravo mesto za Vas!
+            Zaštita podataka o ličnosti u republici Srbiji je uređena pozitivno
+            pravnim propisima sadržanim u Zakonu o zaštiti podataka o ličnosti
+            ‚(“ Službeni glasnik RS”br. 87/2018) u daljem tekstu Zakon.U ovoj
+            politici upotrebe kolačića opisuju se različite vrste kolačića koje
+            se upotrebljavaju na internet stranici www.stojic.rs ,koja je u
+            svojini i pod kontrolom S.Z.T.K.R. Stojić Čačak, sa sedištem u Čačku
+            u ulici Svetozara Babovića 13 , PIB 101109365 i matični broj
+            54906382,šifra delatnosti 4790.
           </p>
           <p>
-            Mi cenimo Vašu privatnost i posebno vodimo računa o bezbednosti
-            Vaših podataka o ličnosti. Upravo iz tih razloga ovom Politikom
-            privatnosti na transparentan i lako razumljiv način želimo da Vas
-            informišemo o prikupljanju, upotrebi, prirodi i obimu obrade Vaših
-            ličnih podataka od strane Tehnomanija d.o.o. Beograd, ul. Tošin
-            bunar 179G, MB: 17233041, koja se nalazi u položaju rukovaoca Vaših
-            podatka o ličnosti.
+            Želeći da svim korisnicima koji posećuju naš sajt omogućimo
+            neometano I personlizovano kretanje kroz stranice na sajtu,
+            www.stojic.rs ,koristi kolačiće (eng. Cookies),malu količinu
+            informacija koju sajt šalje Vašem računaru. U skladu sa Zakonom kao
+            I Opštom uredbom o zaštiti podataka o ličnosti Evropske unije – GDPR
+            (eng. Generaln Data Protection Regulation)Stojić Elektrik d.o.o je
+            dužan da dobije vašu saglasnost za upotrebu kolačića, te Vas u ovom
+            dokumentu obaveštavamo o značaju kolačića za Vaše korisničko
+            iskustvo.
           </p>
           <p>
             Ovde se nalaze informacije o svim podacima koje prikupljamo o Vama,

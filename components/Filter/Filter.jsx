@@ -1,27 +1,30 @@
-import { useState } from 'react'
-import { RangeSlider } from 'rsuite'
+import { useState, useEffect } from 'react';
+import { RangeSlider } from 'rsuite';
+import styles from "./Filter.module.scss"
 
 const Filter = ({ filter, selectedFilters, setSelectedFilters }) => {
   const changeHanler = (data) => {
-    const tmp = [...selectedFilters]
-    const filtered = tmp.filter((item) => item.column === data.column)
+    const tmp = [...selectedFilters];
+    const filtered = tmp.filter((item) => item.column === data.column);
     if (data.value.selected.length === 0) {
       if (filtered.length > 0) {
-        const index = tmp.indexOf(filtered[0])
-        tmp.splice(index, 1)
+        const index = tmp.indexOf(filtered[0]);
+        tmp.splice(index, 1);
       }
     } else {
       if (filtered.length > 0) {
-        tmp = tmp.map((item) => (item.column === data.column ? data : item))
+        tmp = tmp.map((item) => (item.column === data.column ? data : item));
       } else {
-        tmp.push(data)
+        tmp.push(data);
       }
     }
-    setSelectedFilters([...tmp])
-  }
+    setSelectedFilters([...tmp]);
+  };
 
-  let selected = selectedFilters.filter((item) => item.column === filter.key)[0]
-  selected = selected ? selected.value.selected : []
+  let selected = selectedFilters.filter(
+    (item) => item.column === filter.key
+  )[0];
+  selected = selected ? selected.value.selected : [];
 
   switch (filter.type) {
     case 'range':
@@ -31,80 +34,108 @@ const Filter = ({ filter, selectedFilters, setSelectedFilters }) => {
           onChange={changeHanler}
           selected={selected}
         />
-      )
+      );
     case 'in':
     default:
       return (
         <FilterIn filter={filter} onChange={changeHanler} selected={selected} />
-      )
+      );
   }
-}
+};
 
-export default Filter
+export default Filter;
 
 const FilterIn = ({ filter, onChange = () => {}, selected }) => {
-  const [checked, setChecked] = useState(selected)
-
   const checkedChanged = ({ target }) => {
     if (target.checked) {
-      if (!checked.includes(target.value)) {
-        const tmp = [...checked, target.value]
-        setChecked(tmp)
+      if (!selected.includes(target.value)) {
+        const tmp = [...selected, target.value];
 
         onChange({
-          column: filter.key,
+          column: filter?.params?.use_field
+            ? filter[filter?.params?.use_field]
+            : filter.key,
           value: { selected: tmp },
-        })
+        });
       }
     } else {
-      const tmp = [...checked]
-      var index = tmp.indexOf(target.value)
+      const tmp = [...selected];
+      var index = tmp.indexOf(target.value);
       if (index !== -1) {
-        tmp.splice(index, 1)
+        tmp.splice(index, 1);
       }
 
-      setChecked(tmp)
-      onChange({ column: filter.key, value: { selected: tmp } })
+      onChange({
+        column: filter.key,
+        value: { selected: tmp },
+      });
     }
-  }
-
+  };
   return (
     <>
       {(filter?.params?.items ?? []).map((item) => (
-        <div key={item.id} className='styleCheckBox'>
+        <div key={item.id}>
           <input
-            type='checkbox'
+            type="checkbox"
             name={item.label}
-            checked={checked.includes(item.label)}
+            checked={selected.includes(
+              filter?.params?.use_field
+                ? item[filter?.params?.use_field]
+                : item.key
+            )}
             onChange={checkedChanged}
-            value={item.label}
+            value={
+              filter?.params?.use_field
+                ? item[filter?.params?.use_field]
+                : item.key
+            }
+            id={'chbx-' + item.id}
           />
-          <label>{item.label}</label>
+          <label className={styles.checkboxLabel} htmlFor={'chbx-' + item.id}>
+            {item.label}
+          </label>
         </div>
       ))}
     </>
-  )
-}
+  );
+};
 
 const FilterRange = ({ filter, onChange, selected }) => {
   const [selectedValue, setSelectedValue] = useState(
     selected.length === 2
       ? selected
       : [Number(filter.params.min), Number(filter.params.max)]
-  )
+  );
   const onRangeChange = (data) => {
-    onChange({ column: filter.key, value: { selected: data } })
-  }
+    onChange({
+      column: filter?.params?.use_field
+        ? filter[filter?.params?.use_field]
+        : filter.key,
+      value: { selected: data },
+    });
+  };
+
+  useEffect(() => {
+    if (selected.length !== 2)
+      setSelectedValue([Number(filter.params.min), Number(filter.params.max)]);
+  }, [selected, filter.params]);
+
   return (
-    <RangeSlider
-      min={Number(filter.params.min)}
-      max={Number(filter.params.max)}
-      value={selectedValue}
-      defaultValue={[Number(filter.params.min), Number(filter.params.max)]}
-      onChange={(value) => {
-        setSelectedValue(value)
-      }}
-      onChangeCommitted={onRangeChange}
-    />
-  )
-}
+    <div>
+      <RangeSlider
+        min={Number(filter.params.min)}
+        max={Number(filter.params.max)}
+        value={selectedValue}
+        defaultValue={[Number(filter.params.min), Number(filter.params.max)]}
+        onChange={(value) => {
+          setSelectedValue(value);
+        }}
+        onChangeCommitted={onRangeChange}
+      />
+      <div>
+        <span>od: {selectedValue[0]}</span>
+        <span> do: {selectedValue[1]}</span>
+      </div>
+    </div>
+  );
+};

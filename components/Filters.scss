@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   color: var(--navy-blue);
+  font-size: 0.8rem;
   span svg {
     width: 17px;
     height: 17px;
@@ -23,9 +24,13 @@
   border: 1px solid var(--light-gray-color);
   border-radius: 0.5rem;
   margin: 1rem 0rem;
-  padding: 1rem 0.9rem;
+  padding: 1rem 0.8rem;
   h2 {
     line-height: normal;
+  }
+  .accordion-button::after {
+    background-size: 11px !important;
+    background-position: center;
   }
 }
 .accordion-item {
@@ -69,7 +74,10 @@
 .filters-holder .accordion-header p {
   text-transform: uppercase;
   margin-bottom: 0rem;
-  
+  text-transform: lowercase;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 .filters-holder .checkbox-holder {
   display: flex;
@@ -82,6 +90,10 @@
 }
 .filters-holder .accordion-body {
   padding: 1rem 0.85rem 0rem 0.85rem;
+  font-size: 0.8rem;
+  .rs-slider {
+    margin-bottom: 0.5rem !important;
+  }
 }
 .filters-holder .accordion-button {
   padding: 1rem 1.25rem 0.4rem 1.25rem;
@@ -90,11 +102,11 @@
   background: transparent !important;
   color: var(--navy-blue);
   padding: unset;
-  text-align: center;
+  text-align: left;
 }
 .filters-holder .accordion-header .accordion-button p {
-  text-transform: capitalize;
-  font-size: 1rem;
+  // text-transform: capitalize;
+  font-size: 0.8rem;
   color: var(--navy-blue);
   font-weight: normal;
 }
@@ -115,7 +127,7 @@ select:focus-visible {
     margin-left: 0.3rem;
     color: var(--navy-blue);
   }
-  input[type=checkbox] {
+  input[type='checkbox'] {
     accent-color: var(--red-color);
   }
 }
