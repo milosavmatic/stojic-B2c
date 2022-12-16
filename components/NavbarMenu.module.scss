@@ -30,7 +30,7 @@ form.header-search {
       border-radius: 7px;
       border: 0;
       padding: 0 0.5rem;
-      color: var(--navy-blue);
+      color: #333;
       // box-shadow: rgb(0 0 0 / 10%) 0px 0px 5px 0px, rgb(0 0 0 / 10%) 0px 0px 1px 0px;
       &::placeholder {
         color: var(--navy-blue);
@@ -90,7 +90,7 @@ form.header-search {
   align-items: center;
   justify-content: space-between;
   p {
-    color: var(--dark-gray-color);
+    color: #333;
     font-size: 1rem;
     font-weight: normal;
     padding-left: 0;
@@ -109,7 +109,7 @@ form.header-search {
     }
   }
   svg {
-    color: var(--dark-gray-color);
+    color: #333;
 
     &.active {
       color: red;
@@ -119,7 +119,7 @@ form.header-search {
     display: flex;
     align-items: center;
     img {
-      width: 22px;
+      width: 30px;
       margin-right: 10px;
     }
   }
@@ -131,7 +131,7 @@ a.submenu-item-holder {
     align-items: center;
     margin-bottom: 0.7rem;
     img {
-      width: 22px;
+      width: 30px;
       margin-right: 10px;
     }
     p {
@@ -205,7 +205,8 @@ ul.nav-list {
 .category {
   // background: var(--red-color);
   border-radius: 0.5rem;
-  color: var(--white-color) !important;
+  // color: var(--white-color) !important;
+  color: #333 !important;
   // padding: 0.2rem 2.2rem 0.2rem 1.2rem !important;
   display: flex;
   align-items: center;
@@ -292,7 +293,7 @@ li.dropdown-hover .navlink.category:hover {
   ul {
     p {
       font-weight: 600;
-      color: var(--dark-gray-color);
+      color: #333;
       padding-left: 0 !important;
       margin-bottom: 0.5rem !important;
     }
@@ -400,16 +401,19 @@ button.dropdown-button:after {
   width: fit-content;
   margin-left: 0.2rem;
   padding-left: 0rem;
-  // width: 76%;
 }
 .icons-list li {
   // margin: 0rem 0.3rem;
   display: flex;
-  color: var(--navy-blue);
-  button svg {
-    width: 28px;
-    height: 28px;
-    color: #333;
+  color: #333;
+  button {
+    background: none;
+    padding: 0;
+    svg {
+      width: 28px;
+      height: 28px;
+      color: #333;
+    }
   }
   span {
     color: var(--red-color);
@@ -419,6 +423,10 @@ button.dropdown-button:after {
     width: 25px;
     height: 25px;
   }
+  // &:nth-child(2) button svg {
+  //   width: 25px;
+  //   height: 25px;
+  // }
   &:not(:last-child) {
     margin-right: 1rem;
   }
@@ -454,7 +462,7 @@ button.dropdown-button:after {
     margin-right: 2.5rem;
   }
   li a {
-    color: var(--white-color);
+    color: #333;
     transition: all 0.2s ease-in-out;
     &:hover {
       color: var(--red-color);
@@ -518,7 +526,7 @@ button.dropdown-button:after {
   display: flex;
   width: fit-content;
   h5 {
-    color: var(--dark-gray-color);
+    color: #333;
     font-weight: 600 !important;
     margin-bottom: 2rem;
     text-transform: uppercase;
@@ -584,7 +592,7 @@ ul.product-list {
       span {
         display: flex;
         align-items: center;
-        color: var(--white-color);
+        color: #333;
         svg {
           color: var(--red-color);
           margin-right: 0.5rem;

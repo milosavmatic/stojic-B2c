@@ -14,7 +14,7 @@ const Categories = ({
   searchCategory,
   isMobile = false,
 }) => {
-  console.log(menu)
+  // console.log(menu)
   const clearModalData = () => {
     closeLeftSidebarModal()
     setCategoryItemHandler(null)
@@ -59,7 +59,6 @@ const Categories = ({
 
   const categoryData = filterByLabel(categoryItem?.children, searchCategory)
 
-  console.log(categoryData)
 
   return (
     <div className={classes['categoriesTree']}>
@@ -167,23 +166,6 @@ const Categories = ({
           <Link href={categoryItem.path}>
             <a className={classes['categoryName']}>
               <h5 onClick={clearModalData}>{categoryItem.name}</h5>
-
-              {/* <div className={classes['overlayImg']}>
-                {categoryItem.image ? (
-                  <Image
-                    src={categoryItem.image}
-                    alt="Stojic Elektrik doo"
-                    objectFit="cover"
-                  />
-                ) : (
-                  <Image
-                    src={logo}
-                    alt="Stojic Elektrik doo"
-                    objectFit="cover"
-                  />
-                )}
-                <div className="overlay"></div>
-              </div> */}
             </a>
           </Link>
           <div className={classes['gridRightSideSubCat']}>

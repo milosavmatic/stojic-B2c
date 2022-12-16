@@ -1,73 +1,91 @@
-import Breadcrumbs from '../../components/Breadcrumbs'
-import Filters from '../../components/Filters'
-import classes from '../../assets/css/CategoriesPage.module.scss'
-import Accordion from 'react-bootstrap/Accordion'
-import ProductBoxComplexSmall from '../../components/ProductBoxComplexSmall'
-import { ApiHandler } from '../api/api'
-import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs'
-import { useRouter } from 'next/router'
-import { useCallback, useEffect, useState } from 'react'
-import { queryKeys, sortKeys } from '../../helpers/const'
-  
-const CategoriesPage = ({ categoryData, filters }) => {
-  const router = useRouter()
-  const { asPath } = router
-  const { query } = router
+import Breadcrumbs from '../../components/Breadcrumbs';
+import Filters from '../../components/Filters';
+import classes from '../../assets/css/CategoriesPage.module.scss';
+import Accordion from 'react-bootstrap/Accordion';
+import ProductBoxComplexSmall from '../../components/ProductBoxComplexSmall';
+import { ApiHandler } from '../api/api';
+import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
+import { queryKeys, sortKeys } from '../../helpers/const';
+import Image from 'next/image';
+import catBanner from '../../assets/images/banners/catBanner.jpg';
 
-  const replaceQuery = (newQuery) => {
-    delete newQuery.path
-    router.replace({
-      pathname: asPath.split('?')[0],
-      query: newQuery,
-    })
-  }
+const CategoriesPage = ({ categoryData, filters}) => {
+  const router = useRouter();
+  const { asPath } = router;
+  const { query } = router;
+  const replaceQuery = useCallback(
+    (newQuery) => {
+      delete newQuery.path;
+      router.replace({
+        pathname: router.asPath.split('?')[0],
+        query: newQuery,
+      });
+    },
+    [router]
+  );
 
   const [productsData, setProductsData] = useState({
     items: [],
     pagination: {},
-  })
+  });
 
   const [limit, setLimit] = useState(
     query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24
-  )
+  );
 
   const newSort = Object.keys(sortKeys).find(
     (key) => sortKeys[key].query === query[queryKeys.sort]
-  )
+  );
 
   const [sort, setSort] = useState(
     newSort
       ? { field: newSort.split('_')[0], direction: newSort.split('_')[1] }
       : null
-  )
+  );
 
   const [page, setPage] = useState(
     query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1
-  )
+  );
 
-  const newSelected = []
+  const newSelected = [];
   for (const item in query) {
     if (item !== 'path' && !Object.values(queryKeys).includes(item))
       newSelected.push({
         column: item,
         value: { selected: query[item].split(',') },
-      })
+      });
   }
-  const [selectedFilters, setSelectedFilters] = useState(newSelected)
-  const [availableFilters, setAvailableFilters] = useState(filters)
-  const [changeFilters, setChangeFilters] = useState(false)
-  const [showSearch, setShowSearch] = useState(false)
+  const [selectedFilters, setSelectedFilters] = useState(newSelected);
+  const [availableFilters, setAvailableFilters] = useState(filters);
+  // ***
+  const [changeFilters, setChangeFilters] = useState(true);
+  const [showSearch, setShowSearch] = useState(true);
+
+  useEffect(() => {
+    const api = ApiHandler();
+    console.log(categoryData.id);
+    api
+      .post(`/products/category/filters/${categoryData.id}`)
+      .then((response) => {
+        replaceQuery({});
+        setSelectedFilters([]);
+        setPage(1);
+        setAvailableFilters(response.payload);
+      });
+  }, [categoryData.id]);
 
   useEffect(() => {
     if (changeFilters) {
-      const api = ApiHandler()
+      const api = ApiHandler();
       api
         .post(`/products/category/filters/${categoryData.id}`, {
           filters: selectedFilters,
         })
         .then((response) => {
-          const newFilters = response.payload
-          let ret = availableFilters
+          const newFilters = response.payload;
+          let ret = availableFilters;
           for (const filter of newFilters) {
             if (
               selectedFilters.filter((item) => item.column === filter.key)
@@ -75,44 +93,45 @@ const CategoriesPage = ({ categoryData, filters }) => {
             ) {
               ret = ret.map((item) => {
                 if (item.key === filter.key) {
-                  return filter
+                  return filter;
                 }
-                return item
-              })
+                return item;
+              });
             }
           }
-          setAvailableFilters(ret)
-        })
+          setAvailableFilters(ret);
+        });
     }
 
     const arr = selectedFilters.reduce((obj, item) => {
       return {
         ...obj,
         [item.column]: String([item.value.selected]),
-      }
-    }, {})
-    const newQuery = {}
+      };
+    }, {});
+    setPage(1);
+
+    const newQuery = {};
     if (queryKeys.page in query) {
-      newQuery[queryKeys.page] = query[queryKeys.page]
+      newQuery[queryKeys.page] = 1;
     }
 
     if (queryKeys.limit in query) {
-      newQuery[queryKeys.limit] = query[queryKeys.limit]
+      newQuery[queryKeys.limit] = query[queryKeys.limit];
     }
 
     if (queryKeys.sort in query) {
-      newQuery[queryKeys.sort] = query[queryKeys.sort]
+      newQuery[queryKeys.sort] = query[queryKeys.sort];
     }
 
-    newQuery = { ...newQuery, ...arr }
+    newQuery = { ...newQuery, ...arr };
 
-    replaceQuery(newQuery)
-  }, [])
-  // }, [selectedFilters, categoryData.id, availableFilters, changeFilters, query, replaceQuery])
+    replaceQuery(newQuery);
+  }, [selectedFilters, categoryData.id]);
 
   const getProductList = useCallback(
     (limit, sort, page, selectedFilters) => {
-      const api = ApiHandler()
+      const api = ApiHandler();
       api
         .list(`products/category/list/${categoryData.id}`, {
           limit,
@@ -121,68 +140,91 @@ const CategoriesPage = ({ categoryData, filters }) => {
           filters: selectedFilters,
         })
         .then((response) => setProductsData(response?.payload))
-        .catch((error) => console.warn(error))
+        .catch((error) => console.warn(error));
     },
     [categoryData.id]
-  )
+  );
 
   useEffect(() => {
     if (!showSearch) {
-      getProductList(limit, sort, page, selectedFilters)
+      getProductList(limit, sort, page, selectedFilters);
     }
-  }, [getProductList, limit, sort, page, selectedFilters, showSearch])
+  }, [getProductList, limit, sort, page, selectedFilters, showSearch]);
 
   const searchProducts = () => {
-    getProductList(limit, sort, page, selectedFilters)
-  }
+    getProductList(limit, sort, page, selectedFilters);
+  };
 
   useEffect(() => {
-    setPage(query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1)
-  }, [asPath, query])
+    setPage(query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1);
+  }, [asPath, query]);
 
   const onSortChange = ({ target }) => {
     if (target.value != 'none') {
-      const newQuery = query
-      newQuery[queryKeys.sort] = sortKeys[target.value].query
-      newQuery[queryKeys.page] = 1
-      replaceQuery(newQuery)
-      const [field, direction] = target.value.split('_')
-      setSort({ field, direction })
+      const newQuery = query;
+      newQuery[queryKeys.sort] = sortKeys[target.value].query;
+      newQuery[queryKeys.page] = 1;
+      replaceQuery(newQuery);
+      const [field, direction] = target.value.split('_');
+      setSort({ field, direction });
     } else {
-      const newQuery = query
-      delete newQuery[queryKeys.sort]
-      newQuery[queryKeys.page] = 1
-      replaceQuery(newQuery)
-      setSort(null)
+      const newQuery = query;
+      delete newQuery[queryKeys.sort];
+      newQuery[queryKeys.page] = 1;
+      replaceQuery(newQuery);
+      setSort(null);
     }
-    setPage(1)
-  }
+    setPage(1);
+  };
 
   const onLimitChange = ({ target }) => {
-    const newQuery = query
-    newQuery[queryKeys.limit] = target.value
-    newQuery[queryKeys.page] = 1
-    replaceQuery(newQuery)
+    const newQuery = query;
+    newQuery[queryKeys.limit] = target.value;
+    newQuery[queryKeys.page] = 1;
+    replaceQuery(newQuery);
 
-    setLimit(target.value)
-    setPage(1)
-  }
+    setLimit(target.value);
+    setPage(1);
+  };
 
   const onPageChange = (num) => {
-    const newQuery = query
-    newQuery[queryKeys.page] = num
-    replaceQuery(newQuery)
+    const newQuery = query;
+    newQuery[queryKeys.page] = num;
+    replaceQuery(newQuery);
 
-    setPage(num)
-  }
+    setPage(num);
+  };
 
-  const products = productsData.items
-  const pagination = productsData.pagination
-  console.log(availableFilters)
+  const products = productsData.items;
+  const pagination = productsData.pagination;
+
+  console.log(categoryData);
 
   return (
     <div className={`${classes.categoriespage}`}>
-      <div className='container'>
+      <div className={`${classes.catBanner}`}>
+        <div className="container-fluid">
+          {categoryData.images.image ? (
+            <Image
+              src={categoryData.images.image}
+              alt={categoryData.name}
+              layout="fill"
+              objectFit="cover"
+            />
+          ) : (
+            <Image
+              src={catBanner}
+              alt="Stojic Elektrik doo"
+              layout="fill"
+              objectFit="cover"
+            />
+          )}
+          <div className={`${classes.title}`}>
+            <h5>{categoryData?.basic_data?.name}</h5>
+          </div>
+        </div>
+      </div>
+      <div className="container">
         <Breadcrumbs
           crumbs={generateBreadcrumbs(
             { label: 'Početna', path: '/' },
@@ -191,12 +233,10 @@ const CategoriesPage = ({ categoryData, filters }) => {
             { label: categoryData?.basic_data?.name, path: asPath }
           )}
         />
-        <div className={`${classes.title}`}>
-          <h5>{categoryData?.basic_data?.name}</h5>
-        </div>
+
         <div className={`${classes['mobile-display']}`}>
           <Accordion className={`${classes['filters-mobile-holder']}`}>
-            <Accordion.Item eventKey='0'>
+            <Accordion.Item eventKey="0">
               <Accordion.Header
                 className={`${classes['mobile-filters-heading']}`}
               >
@@ -218,8 +258,8 @@ const CategoriesPage = ({ categoryData, filters }) => {
           </Accordion>
         </div>
 
-        <div className='row'>
-          <div className='col-xl-3 col-md-3 col-12'>
+        <div className="row">
+          <div className="col-xl-3 col-md-3 col-12">
             <div className={`${classes['desktop-display']}`}>
               <Filters
                 filters={availableFilters}
@@ -260,13 +300,13 @@ const CategoriesPage = ({ categoryData, filters }) => {
                 <span>Sortiraj:</span>
                 <span>
                   <select
-                    name='sort'
-                    id='sort'
+                    name="sort"
+                    id="sort"
                     className={classes['select']}
                     onChange={onSortChange}
                     value={sort ? sort.field + '_' + sort.direction : 'none'}
                   >
-                    <option value='none' className={`${classes['sort-title']}`}>
+                    <option value="none" className={`${classes['sort-title']}`}>
                       Sortirajte
                     </option>
                     {Object.entries(sortKeys).map((item) => (
@@ -286,25 +326,25 @@ const CategoriesPage = ({ categoryData, filters }) => {
                 <span>Prikaži:</span>
                 <span className={classes['select-span']}>
                   <select
-                    name='limit'
-                    id='limit'
+                    name="limit"
+                    id="limit"
                     className={classes['select']}
                     onChange={onLimitChange}
                     value={limit}
                   >
-                    <option value={4} key='4'>
+                    <option value={4} key="4">
                       4
                     </option>
-                    <option value={8} key='8'>
+                    <option value={8} key="8">
                       8
                     </option>
-                    <option value={12} key='12'>
+                    <option value={12} key="12">
                       12
                     </option>
-                    <option value={24} key='24'>
+                    <option value={24} key="24">
                       24
                     </option>
-                    <option value={36} key='36'>
+                    <option value={36} key="36">
                       36
                     </option>
                   </select>
@@ -365,15 +405,15 @@ const CategoriesPage = ({ categoryData, filters }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoriesPage
+export default CategoriesPage;
 
 export const getServerSideProps = async (context) => {
-  const { path } = context.query
-  const id = path[path.length - 1]
-  const api = ApiHandler()
+  const { path } = context.query;
+  const id = path[path.length - 1];
+  const api = ApiHandler();
   return {
     props: {
       categoryData: await api
@@ -383,5 +423,5 @@ export const getServerSideProps = async (context) => {
         .post(`/products/category/filters/${id}`)
         .then((response) => response.payload),
     },
-  }
-}
+  };
+};

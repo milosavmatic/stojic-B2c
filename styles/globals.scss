@@ -7,7 +7,8 @@
   --red-color: #ed1c24;
   --dark-red-color: #d51627;
   --gray-color: #f6f8f9;
-  --dark-gray-color: #333e48;
+  // --dark-gray-color: #333e48;
+  --dark-gray-color: #ccd9e5;
   --light-gray-color: #e7e7e7;
   --croonus-lightMedGray: #d4d4d4;
   --croonus-mediumGray: #8a8b90;
@@ -15,7 +16,6 @@
 }
 
 body {
-
   margin: 0;
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 400;
@@ -34,13 +34,13 @@ body {
   height: 24px;
   justify-content: space-around;
   .line {
-    background-color: #fff;
+    background-color: #333;
     height: 3px;
     position: relative;
     width: 3px;
     z-index: 99;
     &::after {
-      background-color: #fff;
+      background-color: #333;
       content: '';
       height: 3px;
       left: 5px;
@@ -54,6 +54,11 @@ body {
   margin: 0;
   max-width: 100%;
   padding: 0 7rem;
+}
+
+.container-fluid {
+  max-width: 100%;
+  padding: 0;
 }
 
 .Toastify__toast--error {
@@ -111,7 +116,6 @@ a:hover {
       list-style-type: disc;
       li::marker {
         color: var(--dark-gray-color);
-        
       }
       ul {
         list-style-type: circle;
@@ -158,8 +162,6 @@ a.carousel-control-next {
     padding: 0 1rem;
   }
 }
-
-
 
 @media screen and (max-width: 768px) {
   .mobile-hidden {
@@ -804,6 +806,6 @@ tbody td {
 
 @media (max-width: 400.98px) {
   .gray {
-    padding-left:2.3rem !important;
+    padding-left: 2.3rem !important;
   }
 }
