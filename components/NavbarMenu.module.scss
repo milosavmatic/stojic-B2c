@@ -28,7 +28,7 @@ form.header-search {
       outline: none;
       height: 40px;
       border-radius: 7px;
-      border: 0;
+      border: 1px solid var(--light-gray-color);
       padding: 0 0.5rem;
       color: #333;
       // box-shadow: rgb(0 0 0 / 10%) 0px 0px 5px 0px, rgb(0 0 0 / 10%) 0px 0px 1px 0px;
@@ -64,7 +64,7 @@ form.header-search {
   display: none;
 }
 .header-holder {
-  background-color: var(--gray-color);
+  background-color: var(--white-color);
   padding: 1.2rem 0rem;
   .image-holder {
     cursor: pointer;
@@ -206,7 +206,7 @@ ul.nav-list {
   // background: var(--red-color);
   border-radius: 0.5rem;
   // color: var(--white-color) !important;
-  color: #333 !important;
+  color: var(--white-color) !important;
   // padding: 0.2rem 2.2rem 0.2rem 1.2rem !important;
   display: flex;
   align-items: center;
@@ -462,7 +462,7 @@ button.dropdown-button:after {
     margin-right: 2.5rem;
   }
   li a {
-    color: #333;
+    color: var(--white-color);
     transition: all 0.2s ease-in-out;
     &:hover {
       color: var(--red-color);
@@ -592,7 +592,7 @@ ul.product-list {
       span {
         display: flex;
         align-items: center;
-        color: #333;
+        color: var(--white-color);
         svg {
           color: var(--red-color);
           margin-right: 0.5rem;
@@ -752,6 +752,12 @@ ul.header-links li:hover {
   }
 }
 @media (max-width: 992.98px) {
+  // .bckMobile {
+  //   background-color: var(--gray-color);
+  //   padding: 0.5rem 0;
+  //   // margin-left: -20px;
+  //   // margin-right: -20px;
+  // }
   .mobile-navbar {
     display: block;
   }
@@ -784,6 +790,7 @@ ul.header-links li:hover {
 
   .header-holder {
     padding: 1rem 0;
+    background-color: var(--gray-color);
   }
 
   .top-header-mobile {
@@ -998,9 +1005,9 @@ ul.header-links li:hover {
   }
 }
 @media (max-width: 400.98px) {
-  .mobile-header-div {
-    top: 7.9rem;
-  }
+  // .mobile-header-div {
+  //   top: 7.9rem;
+  // }
   .mobile-nav-link {
     padding: 0.4rem 1rem;
   }

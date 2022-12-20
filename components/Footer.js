@@ -62,13 +62,13 @@ const Footer = () => {
                         Uslovi korišćenja
                       </h5>
                       <ul className={`${classes['footer-list']}`}>
-                        <li>
+                        {/* <li>
                           <Link href="/uslovi-koriscenja">
                             <a className={`${classes['basic-link-white']}`}>
                               Uslovi korišćenja
                             </a>
                           </Link>
-                        </li>
+                        </li> */}
                         <li>
                           <Link href="/politika-privatnosti">
                             <a className={`${classes['basic-link-white']}`}>

@@ -43,14 +43,14 @@ function GridProducts({
               </HomeTabButton>
               <HomeTabButton
                 onButtonClick={() => {
-                  setProducts(saleProducts);
+                  setProducts(positionProducts);
                   setTabList(1);
                 }}
                 buttonClass={tabList === 1 ? 'active' : ''}
               >
                 Rasprodaja
               </HomeTabButton>
-              <HomeTabButton
+              {/* <HomeTabButton
                 onButtonClick={() => {
                   setProducts(positionProducts);
                   setTabList(2);
@@ -58,7 +58,7 @@ function GridProducts({
                 buttonClass={tabList === 2 ? 'active' : ''}
               >
                 Najbolje ocenjeni proizvodi
-              </HomeTabButton>
+              </HomeTabButton> */}
             </div>
             {products <= 0 && (
               <div className={`${classes['noProduct']}`}>
@@ -92,6 +92,8 @@ function GridProducts({
 
 export default GridProducts;
 
-{/* <div className="gif">
+{
+  /* <div className="gif">
   <Image src={pic} alt="Loading" objectFit={'contain'} />
-</div>; */}
+</div>; */
+}

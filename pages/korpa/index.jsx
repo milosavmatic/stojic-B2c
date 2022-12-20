@@ -923,7 +923,11 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
         <div className={'row'}>
           <div className="col-12">
             <Link href="/">
-              <Image className={`${classes.cartImg}`} src={cartImg} alt="Korpa" />
+              <Image
+                className={`${classes.cartImg}`}
+                src={cartImg}
+                alt="Korpa"
+              />
             </Link>
           </div>
         </div>

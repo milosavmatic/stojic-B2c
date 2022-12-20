@@ -17,12 +17,11 @@ const ProductBoxComplexSmall = ({
 }) => {
   const addToCart = useGlobalAddToCart();
   const addToWishList = useGlobalAddToWishList();
-  console.log(product);
   const imageUrl =
     product?.image.length > 0 && product?.image
       ? product?.image[0]
       : product?.path ?? '/static/images/logo.png';
-  
+
   return (
     <div className={`${classes['container']} ${classes[className]}`}>
       <div className={`${classes['wrapp']}`}>
@@ -44,7 +43,11 @@ const ProductBoxComplexSmall = ({
 
       <Link href={`/proizvod/${product?.id}`}>
         <a
-          className={`${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`}
+          className={
+            product?.image.length <= 0
+              ? `${classes['noImg']} ${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
+              : `${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
+          }
         >
           <Image
             alt={product?.basic_data?.slug}
@@ -86,14 +89,17 @@ const ProductBoxComplexSmall = ({
           <span>{sticker.name}</span>
         </div>
       ))}
-      {!isSpecialOffer ? // > //   onClick={() => addToWishList(product?.id)} //   className={classes['fav-heart']} // <div
-      //   <Image alt="fav-heart" src={heartImg} />
-      // </div>
-      null : product?.price?.discount?.amount ? (
+      {!isSpecialOffer ? null : product?.price?.discount?.amount ? ( // </div> //   <Image alt="fav-heart" src={heartImg} /> // > //   onClick={() => addToWishList(product?.id)} //   className={classes['fav-heart']} // <div
         <div className={classes['percentSale']}>
           {product?.price?.discount?.amount}
         </div>
       ) : null}
+
+      {(product?.stickers ?? []).map((sticker) => (
+        <div className={classes['top-deal']} key={sticker.slug}>
+          <span>{sticker.name}</span>
+        </div>
+      ))}
 
       {Number(product?.inventory?.amount) > 0 &&
       product.price.price.original ? (

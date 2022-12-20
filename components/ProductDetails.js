@@ -61,10 +61,10 @@ const ProductDetails = ({
               <span>Barcode:</span>
               {productData?.basic_data?.barcode}
             </li>
-            <li>
+            {/* <li>
               <span>EAN Code:</span>
               {productData?.basic_data?.barcode}
-            </li>
+            </li> */}
           </ul>
           <ul className={`${classes['delivery-list']}`}>
             <li>
@@ -88,6 +88,15 @@ const ProductDetails = ({
               Dostava: <span>Besplatna</span>
             </li>
           </ul>
+
+          <ul className={`${classes['shortDesc']}`}>
+            <li>
+              <span>Kratak opis:</span>
+              
+              {productData?.basic_data?.short_description ? productData?.basic_data?.short_description : "/"}
+            </li>
+          </ul>
+
           <ul className={`${classes['price-list']}`}>
             <li className={`${classes['old-price']}`}>
               {currencyFormat(
@@ -105,6 +114,7 @@ const ProductDetails = ({
                 productData?.price?.currency
               )}
             </li>
+
             {/* <li>Ušteda: 26.221 RSD</li>
               <li>Akcija traje od 23.5.2022. do 28.5.2022. </li> */}
           </ul>
@@ -119,9 +129,7 @@ const ProductDetails = ({
                   />
                 </div>
               </div>
-              <div
-                className={`${classes['button-add-to-cart-holder']}`}
-              >
+              <div className={`${classes['button-add-to-cart-holder']}`}>
                 <button onClick={addToCart} className={classes['button']}>
                   <div className={`${classes['img-holder']}`}>
                     <BsHandbag />

@@ -11,7 +11,7 @@ import { queryKeys, sortKeys } from '../../helpers/const';
 import Image from 'next/image';
 import catBanner from '../../assets/images/banners/catBanner.jpg';
 
-const CategoriesPage = ({ categoryData, filters}) => {
+const CategoriesPage = ({ categoryData, filters }) => {
   const router = useRouter();
   const { asPath } = router;
   const { query } = router;
@@ -60,8 +60,8 @@ const CategoriesPage = ({ categoryData, filters}) => {
   const [selectedFilters, setSelectedFilters] = useState(newSelected);
   const [availableFilters, setAvailableFilters] = useState(filters);
   // ***
-  const [changeFilters, setChangeFilters] = useState(true);
-  const [showSearch, setShowSearch] = useState(true);
+  const [changeFilters, setChangeFilters] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     const api = ApiHandler();
