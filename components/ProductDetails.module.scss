@@ -26,13 +26,19 @@
       font-size: 1.5rem;
       line-height: 35px;
     }
-    ul.code-list {
-      font-weight: 300;
+    ul.code-list,
+    ul.shortDesc {
+      font-weight: normal;
       font-size: 14px;
+
       span {
         font-weight: 600;
         margin-right: 0.3rem;
       }
+    }
+    ul.shortDesc {
+      margin-bottom: 1.4rem;
+      padding-left: 0;
     }
     ul.delivery-list {
       border-top: 1px solid #e7e7e7;
@@ -42,7 +48,7 @@
       font-weight: 300;
       padding: 1rem 0rem;
       margin-top: 1.4rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.4rem;
       span {
         font-weight: 600;
       }

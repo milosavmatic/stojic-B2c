@@ -11,11 +11,11 @@ ul.footer-list {
 }
 
 .footer-middle-col {
-  color: #333;
+  color: var(--white-color);
 }
 
 .footer-middle-col ul.footer-list a.basic-link-white {
-  color: #333;
+  color: var(--white-color);
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   &:hover {
@@ -67,9 +67,9 @@ ul.footer-list {
 .footer-copyright {
   text-align: center;
   // font-weight: 500;
-  background-color: var(--gray-color);
+  background-color: var(--blue-color-darker);
   padding: 1rem 0;
-  color: #333;
+  color: var(--white-color);
   .footer-copyright-items {
     display: flex;
     justify-content: space-between;
@@ -80,7 +80,7 @@ ul.footer-list {
         padding-right: 2rem;
       }
       li a {
-        color: #333;
+        color: var(--white-color);
         transition: all 0.2s ease-in-out;
         &:hover {
           color: var(--red-color);
@@ -91,7 +91,7 @@ ul.footer-list {
 }
 
 .newsletter-col {
-  color: #333;
+  color: var(--white-color);
 
 }
 .newsletter-heading {
@@ -160,7 +160,7 @@ ul.footer-list {
 
 .newsletter-social-link {
   display: flex;
-  color: #333;
+  color: var(--white-color);
   align-items: center;
   justify-content: center;
   margin: 0 1rem 0 0;
@@ -202,7 +202,7 @@ ul.footer-list {
 .newsletter-container {
   p {
     font-weight: 300;
-    color: #333;
+    color: var(--white-color);
   }
 }
 

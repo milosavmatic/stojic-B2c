@@ -139,13 +139,14 @@
 }
 .top-deal {
   position: absolute;
-  padding: 0 0.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 5px;
+  font-size: 14px;
   background-color: var(--red-color);
   top: 5.5rem;
+  right: 1rem;
   color: white;
-  left: 1.25rem;
+  font-weight: 600;
 }
 .fav-heart {
   position: absolute;
@@ -179,8 +180,8 @@
     display: none;
   }
   .biggerImg {
-    height: 250px;
-    max-height: 250px;
+    height: 400px;
+    max-height: 400px;
   }
   .wrapp {
     .product-name {
@@ -205,10 +206,11 @@
 
 .homeActionItem {
   border: 1px solid var(--red-color);
-  border-radius: 15px;
+  border-radius: 35px;
   .product-img {
-    height: 250px;
-    max-height: 250px;
+    height: 500px;
+    max-height: 500px;
+    margin: 2rem 0;
   }
   .percentSale {
     position: absolute;
@@ -231,6 +233,10 @@
       color: var(--navy-blue);
       font-size: 0.9rem;
       font-weight: 400;
+      text-transform: lowercase;
+      &::first-letter {
+        text-transform: uppercase;
+      }
       // &:hover {
       //   color: red !important;
       // }
@@ -238,7 +244,7 @@
     h5 {
       margin-bottom: 0.7rem;
       font-weight: 600 !important;
-      font-size: 1.1rem !important;
+      font-size: 1.2rem !important;
     }
   }
   .price {
@@ -263,6 +269,7 @@
       font-weight: 500;
       margin-top: 2rem;
       text-align: center;
+      text-transform: uppercase;
     }
     .category-name {
       display: none;
@@ -271,6 +278,10 @@
   .product-img {
     margin: 1rem 0 0 0;
     order: -1;
+    &.noImg {
+      width: 200px;
+      margin: 0 auto;
+    }
   }
   .price {
     flex-direction: column;

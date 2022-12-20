@@ -30,6 +30,14 @@
     border-bottom: 2px solid #ebebeb;
     margin-bottom: 1rem;
   }
+  .noProduct {
+    color: var(--red-color);
+    display: flex;
+    justify-content: center;
+    h3 {
+      font-size: 1.1rem;
+    }
+  }
 }
 
 // RESPONSIVE

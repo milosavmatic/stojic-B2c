@@ -2,7 +2,7 @@ export const queryKeys = {
   page: 'strana',
   sort: 'redosled',
   limit: 'prikaz',
-}
+};
 
 export const sortKeys = {
   price_asc: { label: 'Cena rastuće', query: 'cena_rastuce' },
@@ -16,4 +16,4 @@ export const sortKeys = {
     label: 'Na stanju opadajuće',
     query: 'na_stanju_opadajuce',
   },
-}
+};

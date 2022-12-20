@@ -4,7 +4,7 @@ import classes from './CategoryItems.module.scss';
 import HomeTabButton from '../UI/HomeTabButton/HomeTabButton';
 import ProductBoxComplexSmall from '../ProductBoxComplexSmall';
 import Image from 'next/image';
-import pic from "../../assets/images/loading-buffering.gif"
+import pic from '../../assets/images/loading-buffering.gif';
 
 function CategoryItems({ buttonTabs }) {
   const [tabCategory, setTabsCategory] = useState('');
@@ -60,6 +60,7 @@ function CategoryItems({ buttonTabs }) {
             );
           })}
         </div>
+
         {!isLoading ? (
           <div className={`${classes['categoryGrid']}`}>
             {items.map((item, index) => {
@@ -78,8 +79,14 @@ function CategoryItems({ buttonTabs }) {
             })}
           </div>
         ) : (
-          <div className='gif'>
-            <Image src={pic} alt="Loading"  objectFit={'contain'} />
+          <div className="gif">
+            <Image src={pic} alt="Loading" objectFit={'contain'} />
+          </div>
+        )}
+
+        {items <= 0 && !isLoading && (
+          <div className={`${classes['noProduct']}`}>
+            <h3>Trenutno nema podataka za prikaz.</h3>
           </div>
         )}
       </div>

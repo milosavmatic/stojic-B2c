@@ -9,7 +9,7 @@ function index() {
       <div className="container">
         <h3>Česta pitanja</h3>
         <div className="staticPagesContent">
-          <Accordion >
+          {/* <Accordion >
             <Accordion.Item
               eventKey="0"
               
@@ -71,7 +71,7 @@ function index() {
                 </p>
               </Accordion.Body>
             </Accordion.Item>
-          </Accordion>
+          </Accordion> */}
         </div>
       </div>
     </div>

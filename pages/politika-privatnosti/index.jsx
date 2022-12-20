@@ -9,69 +9,192 @@ function PrivacyPolicy() {
           <p>
             Zaštita podataka o ličnosti u republici Srbiji je uređena pozitivno
             pravnim propisima sadržanim u Zakonu o zaštiti podataka o ličnosti
-            ‚(“ Službeni glasnik RS”br. 87/2018) u daljem tekstu Zakon.U ovoj
+            ‚(“ Službeni glasnik RS”br. 87/2018) u daljem tekstu Zakon. U ovoj
             politici upotrebe kolačića opisuju se različite vrste kolačića koje
             se upotrebljavaju na internet stranici www.stojic.rs ,koja je u
             svojini i pod kontrolom S.Z.T.K.R. Stojić Čačak, sa sedištem u Čačku
-            u ulici Svetozara Babovića 13 , PIB 101109365 i matični broj
-            54906382,šifra delatnosti 4790.
+            u ulici Svetozara Babovića 13, PIB 101109365 i matični broj
+            54906382, šifra delatnosti 4790.
           </p>
           <p>
             Želeći da svim korisnicima koji posećuju naš sajt omogućimo
-            neometano I personlizovano kretanje kroz stranice na sajtu,
-            www.stojic.rs ,koristi kolačiće (eng. Cookies),malu količinu
+            neometano i personlizovano kretanje kroz stranice na sajtu,
+            www.stojic.rs, koristi kolačiće (eng. Cookies), alu količinu
             informacija koju sajt šalje Vašem računaru. U skladu sa Zakonom kao
-            I Opštom uredbom o zaštiti podataka o ličnosti Evropske unije – GDPR
+            i Opštom uredbom o zaštiti podataka o ličnosti Evropske unije – GDPR
             (eng. Generaln Data Protection Regulation)Stojić Elektrik d.o.o je
             dužan da dobije vašu saglasnost za upotrebu kolačića, te Vas u ovom
             dokumentu obaveštavamo o značaju kolačića za Vaše korisničko
             iskustvo.
           </p>
+        </div>
+        <h5>Šta su kolačići?</h5>
+        <div className="staticPagesContent">
           <p>
-            Ovde se nalaze informacije o svim podacima koje prikupljamo o Vama,
-            prilikom različitih vidova saradnje, posebno podaci koje prikupljamo
-            kada pristupite našoj internet stranici www.tehnomanija.rs, kada se
-            registrujete i napravite profil ili kada samo odlučite da kupujete
-            online naše proizvode kao gost.
+            Internet kolačić je mala datoteka koja se sastoji od slova i
+            brojeva, koja će biti sačuvana na računaru, mobilnom uređaju ili
+            drugoj opremi korisnika, a pomoću koje se može pristupiti internetu.
           </p>
           <p>
-            Podaci o ličnosti su svi podaci koji se neposredno ili posredno
-            odnose ili mogu da se odnose na Vas kao fizičko lice. Kao zakonski
-            osnov koji uređuje zaštitu podataka i uslove za obradu Vaših ličnih
-            podataka primenjujemo Zakon o zaštiti podataka o ličnosti
+            Kolačići se instaliraju putem zahteva koji web server izdaje čitaču
+            (kao što je Internet Explorer, Firefox, Chrome itd). Kada su
+            instalirani, kolačići imaju ograničen životni vek i ostaju
+            “pasivni”, što znači da ne sadrže softvere, viruse ili špijunske
+            softvere i da neće imati pristupa informacijama sa korisnikovog
+            čvrstog diska na čiju su opremu instalirani. Kolačići predstavljaju
+            neznatne količine informacija koje se beleže prilikom posete nekom
+            web - sajtu. Ove informacije računar koji koristite prepoznaje i
+            šalje ih prilikom Vaše ponovne posete na web stranicu, server može
+            pročitati vrednosti koje su zabeležene u kolačićima i na taj način
+            vam prikazati informacije na datom web sajtu koje su prilagođene
+            Vašim potrebama.
+          </p>
+        </div>
+        <h5>Kako i zašto koristimo kolačiće?</h5>
+        <div className="staticPagesContent">
+          <p>
+            S.Z.T.K.R. Stojić upotrebljava kolačiće da unapredi korišćenje i
+            funkcionalnost svoje internet stranice i da što bolje shvati način
+            na koji je posetioci koriste, kao i da unapredi prodaju i usluge
+            koje pruža.
           </p>
           <p>
-            U slučaju da naš sajt sadrži likove ka drugim internet stranicama,
-            molimo Vas da se adekvatno upoznate sa politikama privatnosti koje
-            se nalaze na tim internet stranicama i načinom na koji ta lica
-            obrađuju podatke o Vama. Imajte u vidu da Tehnomanija nema nikakvu
-            kontrolu nad sadržajem drugih internet stranica, te zbog toga ne
-            možemo biti odgovorni za zaštitu Vaše privatnosti kada posećujete
-            druge sajtove.
+            Čuvanje kolačića na vašem računaru predstavlja lak i praktičan način
+            da prilagodimo vaše iskustvo na našoj internet stranici vašim
+            potrebama, odnosno da ga poboljšamo, da bi vaša naredna poseta bila
+            što prijatnija.
           </p>
+          <p>
+            S.Z.T.K.R. Stojić Čačak ne koristi kolačiće u cilju prikupljanja
+            podataka o ličnosti, kao što je Vaše ime. Ali u mogućnosti smo da
+            napravimo vezu između podataka koje sadrže kolačići I Vaših podataka
+            o ličnosti prikupljenih drugim putem (npr. Preko obrazca za
+            registraciju ili popunjavanjem narudžbenice)
+          </p>
+        </div>
+        <h5>Kako se upravlja kolačićima?</h5>
+        <div className="staticPagesContent">
+          <p>
+            Imate opciju da prihvatite kolačiće, koja će vam omogućiti da
+            prilikom posete koristite sve funkcije naše internet stanice bez
+            ograničenja. Ako odbijete upotrebu striktno neophodnih kolačića, to
+            može uticati na vaše korisničko iskustvo i funkcionalnost tokom
+            korišćenja internet stranice. Ako odbijete sve kolačće, biće
+            isključeni i kolačići primarnog kanala i kolačići trećih lica. Pored
+            toga kolačići primarnog kanala biće izbrisani. Ali u tom slučaju
+            nećemo biti u mogućnosti da izbrišemo kolačiće trećih lica, već ćete
+            to vi morati da izbrišete ručno, a to možete učiniti preko
+            podešavanja vašeg čitača.
+          </p>
+        </div>
+        <h5>
+          Isključivanje i/ili brisanje kolačića preko vašeg internet čitača
+        </h5>
+        <div className="staticPagesContent">
+          <p>
+            Kao alternativa i/ili dodatno, možete promeniti podešavanje za
+            kolačiće sa vašeg internet čitača, Vaš internet čitač će vam
+            omogućiti da promenite svoja podešavanja za kolačiće. Ta podešavanja
+            na čitaču obično se nalaze na kartici “opcije” ili “parametri” vašeg
+            internet čitača. Pored toga, možete konsultovati i meni “Pomoć” na
+            vašem čitaču. Različiti čitači koriste različite mehanizme za
+            isključivanje kolačića.
+          </p>
+          <p>
+            Kada je reč o podešavanjima čitača za brisanje prethodno sačuvanih
+            kolačića, primenjuje se isti princip kao i za deaktivaciju novih
+            kolačića u podešavanjima čitača. Molimo vas da pratite odgovarajuća
+            uputstva vašeg čitača, koja su opisana ispod.
+          </p>
+          <p>
+            Na mreži postoje alatke za brisanje svih kolačića sačuvanih nakon
+            poseta različitim internet stranicama, kao što je
+            <a href="https://www.allaboutcookies.org">
+              https://www.allaboutcookies.org
+            </a>
+            .(https//www.allaboutcookies.org).
+          </p>
+          <p>
+            Prilikom posete ovoj internet stranici sa drugih računara, morate
+            ponovo izvršiti izmene podešavanja.
+          </p>
+        </div>
+        <h5 className="headingCookie">Koje vrste kolačića koristmo?</h5>
+        <h5>Striktno neophodni kolačići</h5>
+        <div className="staticPagesContent">
+          <p>
+            Ovi kolačići Vam garantuju funkcije bez kojih nećete moći da
+            koristite našu internet stranicu i obezbeđuju, između ostalog da vam
+            bude prikazana verzija stranice sa širokopojasnom vezom čija
+            količina podataka odgovara količini podataka koju omogućava vaša
+            veza sa internetom koju koristite prilikom pristupa nekoj od
+            funkcionalnosti internet stranice. Pored toga, ako promenite stranu,
+            takav kolačić vrši prebacivanje sa protokola http na https. Osim
+            toga, ova vrsta kolačića čuva vašu odluku u vezi sa upotrebom
+            kolačića na našoj internet stranici.
+          </p>
+
           <ul>
-            <li>
-              Na koji način prikupljamo Vaše lične podatke i po kom pravnom
-              osnovu?
-            </li>
-            <li>
-              Koje podatke prikupljamo od Vas?
-              <ul>
-                <li>
-                  Kupovina/porudžbina u Tehnomanija prodavnici/web
-                  sajtu/aplikaciji
-                </li>
-                <li>Plaćanje preko administrativne zabrane</li>
-                <li>Reklamacije</li>
-                <li>
-                  Kupovina/porudžbina u Tehnomanija prodavnici/web
-                  sajtu/aplikaciji
-                </li>
-                <li>Plaćanje preko administrativne zabrane</li>
-                <li>Reklamacije</li>
-              </ul>
-            </li>
+            <li>Striktno neophodni kolačići koje koristimo su:</li>
+            <ul>
+              <li>
+                kolačići koji se koriste isključivo u svrhu prenosa komunikacija
+                preko interneta
+              </li>
+              <li>
+                striktno neophodni kolačići da bi smo Vam pružili usluge koje
+                ste izričito tražili (ako ih isključite, nećemo biti u stanju da
+                vam pružimo tačno onu uslugu koju ste zahtevali)
+              </li>
+            </ul>
           </ul>
+          <p>
+            Upotreba striktno neophodnih kolačića u gore navedene svrhe
+            zasnovana je na vašem legitimnom interesu da obezbedite rad, pristup
+            i propisno korišćenje tehničkih mogućnosti naše internet stranice,
+            kao i da vam budu pružene usluge koje ste izričito zahtevali.{' '}
+          </p>
+        </div>
+        <h5>Kolačići za potrebe statistike</h5>
+        <div className="staticPagesContent">
+          <p>
+            Ovi kolačići se upotrebljavaju kako bi nam obezbedili statističke
+            podatke o radu naše internet stranice (kao što su broj poseta ili
+            izvor saobraćaja).
+          </p>
+        </div>
+        <h5>Kolačići za potrebe marketinga</h5>
+        <div className="staticPagesContent">
+          <p>
+            Ovi kolačići omogućavaju internet stranici da sačuva izbore koje ste
+            napravili i da vam ponudi unapređenje i prilagođene funkcije. Ova
+            kategorija može obuhvatiti i kolačiće trećih lica.
+          </p>
+        </div>
+        <h5>Pristanak na upotrebu kolačića</h5>
+        <div className="staticPagesContent">
+          <p>
+            S.Z.T.K.R. Stojić iz Čačka, planira da koristi određene vrste
+            kolačića iz različitih razloga, za šta nam je potrebna vaša
+            saglasnost. Kliknite na “PRIHVATAM” da prihvatite, ili “PODEŠAVANJA”
+            za više informacija o vrstama kolačića koje upotrebljavamo i da
+            ograničite određenu vrstu kolačića. Moći ćete i sami da izaberete
+            određene vrste kolačića koji se upotrebljavaju na našoj internet
+            stranici.
+          </p>
+          <p>
+            Obaveštenje o kolačićima ostaće prikazano sve dok ne podesite svoje
+            parametre. Nećemo koristiti druge vrste kolačića osim striktno
+            neophodne za ispravan rad internet stranice, u slučaju da nam
+            naznačite da ne želite da koristimo te druge vrste kolačića.
+          </p>
+        </div>
+        <h5>Izmene ovog obaveštenja</h5>
+        <div className="staticPagesContent">
+          <p>
+            O svim izmenama ove Politike upotrebe kolačića, bićete blagovremeno
+            obavešteni pre njihovog stupanja na snagu.
+          </p>
         </div>
       </div>
     </div>

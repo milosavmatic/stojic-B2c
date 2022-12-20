@@ -11,8 +11,7 @@
     img {
       padding-right: 1rem;
       width: 60px;
-      filter: invert(15%) sepia(88%) saturate(3687%) hue-rotate(348deg)
-        brightness(107%) contrast(98%);
+      filter: brightness(0) invert(1) !important;
     }
     p {
       display: flex;
