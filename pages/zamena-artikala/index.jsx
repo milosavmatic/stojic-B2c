@@ -69,9 +69,9 @@ function ExchangeOfItems() {
                 deo Razlog reklamacije: kupac zaokružuje samo jedan razlog
                 reklamacije; ako je istekao period od 14 dana po primanju robe u
                 kome je kupac imao pravo da se predomisli a naručena roba nije
-                ispravna, kupac zaokružuje "roba nesaobrazna u garantnom roku";
-                ako postoji bilo koji drugi razlog, kupac zaokružuje "drugi
-                razlozi reklamacije"
+                ispravna, kupac zaokružuje &rdquo;roba nesaobrazna u garantnom roku&rdquo;;
+                ako postoji bilo koji drugi razlog, kupac zaokružuje &rdquo;drugi
+                razlozi reklamacije&rdquo;
               </li>
               <li>
                 deo Komentar kupca uz reklamaciju: kratak opis problema,
@@ -84,8 +84,8 @@ function ExchangeOfItems() {
                 neispravnu), vraćanje novca (kupac traži vraćanje novca); u
                 slučaju da se kupac odlučio da se reklamacija reši popravkom,
                 potrebna je njegova izričita saglasnost za to, koju će kupac
-                označiti stavljanjem slova "X" u krug pored rečenice "Kupac daje
-                saglasnost da se reklamacija reši popravkom
+                označiti stavljanjem slova &rdquo;X&rdquo; u krug pored rečenice &rdquo;Kupac daje
+                saglasnost da se reklamacija reši popravkom&rdquo;
               </li>
               <li>
                 deo Primedba prodavca: ovaj deo popunjava prodavac ili osoba
