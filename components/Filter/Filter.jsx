@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RangeSlider } from 'rsuite';
-import styles from "./Filter.module.scss"
+import styles from './Filter.module.scss';
 
 const Filter = ({ filter, selectedFilters, setSelectedFilters }) => {
   const changeHanler = (data) => {

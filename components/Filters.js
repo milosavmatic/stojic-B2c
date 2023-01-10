@@ -1,7 +1,7 @@
-import Accordion from 'react-bootstrap/Accordion'
-import Filter from './Filter/Filter'
-import reset from "../assets/images/icons/reset.png"
-import Image from 'next/image'
+import Accordion from 'react-bootstrap/Accordion';
+import Filter from './Filter/Filter';
+import reset from '../assets/images/icons/reset.png';
+import Image from 'next/image';
 
 const Filters = ({
   filters,
@@ -17,11 +17,12 @@ const Filters = ({
     <div className={`${'filters-holder'}`}>
       <div className={`${'reset-filters'}`}>
         <p onClick={() => setSelectedFilters([])}>
-          Resetuj filtere <span className='reset-image'>
+          Resetuj filtere{' '}
+          <span className="reset-image">
             <Image
               src={reset}
-              alt=''
-              className='image'
+              alt=""
+              className="image"
               width={15}
               height={15}
             />
@@ -31,7 +32,7 @@ const Filters = ({
       <div className={`${'filters'}`}>
         {(filters ?? []).map((filter) => {
           return (
-            <Accordion defaultActiveKey='0' key={filter.key}>
+            <Accordion defaultActiveKey="0" key={filter.key}>
               <Accordion.Item
                 eventKey={filter.key}
                 className={`${'custom-accordion'}`}
@@ -48,7 +49,7 @@ const Filters = ({
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
-          )
+          );
         })}
         {/* {showSearch && <button onClick={searchProducts}>Pretraži</button>}
         <div className='styleCheckBox'>
@@ -73,7 +74,7 @@ const Filters = ({
         </div> */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Filters
+export default Filters;
