@@ -26,7 +26,7 @@ const ProductBoxComplexSmall = ({
     <div className={`${classes['container']} ${classes[className]}`}>
       <div className={`${classes['wrapp']}`}>
         {!isSpecialOffer && product?.categories ? (
-          <Link href={`/kategorije/${product?.categories[0].id}`}>
+          <Link href={`/kategorije/${product?.categories[0]?.id}`}>
             <a className={classes['category-name']}>
               {product?.categories[0]?.name ?? ''}
             </a>
@@ -84,11 +84,14 @@ const ProductBoxComplexSmall = ({
           <span>{product?.price?.discount?.amount}</span>
         </div>
       )}
+      
       {(product?.stickers ?? []).map((sticker) => (
         <div className={classes['top-deal']} key={sticker.slug}>
           <span>{sticker.name}</span>
+          
         </div>
       ))}
+     
       {!isSpecialOffer ? null : product?.price?.discount?.amount ? ( // </div> //   <Image alt="fav-heart" src={heartImg} /> // > //   onClick={() => addToWishList(product?.id)} //   className={classes['fav-heart']} // <div
         <div className={classes['percentSale']}>
           {product?.price?.discount?.amount}

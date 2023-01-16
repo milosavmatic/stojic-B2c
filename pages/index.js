@@ -55,10 +55,10 @@ export const getServerSideProps = async () => {
         .list('products/section/list/action')
         .then((response) => response?.payload?.items),
     saleProducts: await api
-        .list('products/section/list/best_sell')
+        .list('products/section/list/best_sell', { limit: 1 })
         .then((response) => response?.payload?.items),
       positionProducts: await api
-        .list('products/section/list/sale')
+        .list('products/section/list/sale', { limit: 6 })
         .then((response) => response?.payload?.items),
     },
   };

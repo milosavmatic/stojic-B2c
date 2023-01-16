@@ -14,12 +14,13 @@ function GridProducts({
   const [tabList, setTabList] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+
   return (
     <div className={`${classes['gridProducts']}`}>
       <div className={`${classes['pResetMob']} container`}>
         <div className={`${classes['gridColumn']}`}>
           <div className={`${classes['singleProduct']}`}>
-            {saleProducts.slice(1, 2).map((item) => {
+            {saleProducts.map((item) => {
               return (
                 <ProductBoxComplexSmall
                   isSpecialOffer={true}
@@ -67,7 +68,7 @@ function GridProducts({
             )}
             {!isLoading ? (
               <div className={`${classes['articlesGrid']}`}>
-                {products.slice(0, 6).map((item, i) => {
+                {products.map((item, i) => {
                   return (
                     <ProductBoxComplexSmall
                       key={item.id}

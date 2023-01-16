@@ -448,7 +448,9 @@ const NavbarMenu = () => {
                 </div>
               </Col>
             </Row>
-            <Row className={`${classes['bckMobile']} d-flex align-items-center`}>
+            <Row
+              className={`${classes['bckMobile']} d-flex align-items-center`}
+            >
               <Col
                 xs={2}
                 md={6}
