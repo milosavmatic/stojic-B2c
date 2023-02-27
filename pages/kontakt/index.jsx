@@ -159,7 +159,7 @@ const ContactPage = () => {
                 Call centar
               </h5>
               <span className={classes['bolded-faces']}>Fizička lica</span>
-              <span className={classes['phone-numbers']}>0800</span>
+              <span className={classes['phone-numbers']}>+381 65 377 330 0</span>
               <span className={classes['bolded-faces']}>Pravna lica</span>
               <span className={classes['phone-numbers']}>
                 +381 32 515 52 99
