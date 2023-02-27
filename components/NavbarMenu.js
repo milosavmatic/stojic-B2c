@@ -378,10 +378,10 @@ const NavbarMenu = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="tel:0038132368007">
+                    <Link href="tel:00381653773300">
                       <span>
                         <FaPhoneAlt />
-                        <span>+381 32 368 007</span>
+                        <span>+381 65 377 330 0 </span>
                       </span>
                     </Link>
                   </li>

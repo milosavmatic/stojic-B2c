@@ -93,9 +93,9 @@ const Footer = () => {
                       </h5>
                       <ul className={`${classes['footer-list']}`}>
                         <li>
-                          <Link href="tel:0038132368007">
+                          <Link href="tel:00381653773300">
                             <a className={`${classes['basic-link-white']}`}>
-                              +381 32 368 007
+                              +381 65 377 330 0 
                             </a>
                           </Link>
                         </li>
@@ -262,10 +262,10 @@ const Footer = () => {
                       <ul className={`${classes['footer-list']}`}>
                         <li>
                           <Link
-                            href="tel:0038132368007"
+                            href="tel:00381653773300"
                             className={`${classes['acc-items']}`}
                           >
-                            +381 32 368 007
+                            +381 65 377 330 0 
                           </Link>
                         </li>
                         <li>
