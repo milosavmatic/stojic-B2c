@@ -16,7 +16,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useWindowDimensions } from '../helpers/functions';
 import Image from 'next/image';
-import {convertHttpToHttps} from "../helpers/convertHttpToHttps"
+import { convertHttpToHttps } from '../helpers/convertHttpToHttps';
 
 /**
  * Slider for product images on Single product page of B2B
@@ -63,8 +63,10 @@ const ProductDetailsSlider = ({ images = [], addToWishList, ...props }) => {
   return (
     <>
       <div className=" col-12 product-details-slider-container">
-        <div className="row flex-start">
-          <div className="col-md-2 slick-flex-down">
+        <div className={`row flex-start ${classes['row-print']}`}>
+          <div
+            className={`col-md-2 slick-flex-down ${classes['slick-img-print-l']}`}
+          >
             <div className="col-10">
               <Slider
                 asNavFor={nav2}
@@ -94,7 +96,7 @@ const ProductDetailsSlider = ({ images = [], addToWishList, ...props }) => {
             </div>
           </div>
 
-          <div className="col-md-10">
+          <div className={`col-md-10 ${classes['slick-img-print-r']}`}>
             <Slider
               asNavFor={nav1}
               ref={(slider2) => setNav2(slider2)}
@@ -141,17 +143,10 @@ const ProductDetailsSlider = ({ images = [], addToWishList, ...props }) => {
               className={`${classes['under-details-buttons']} ${classes['mobile-show']}`}
             >
               <div className={classes['under-details-buttons-surrounder']}>
-                <button className={classes['under-details-buttons-button']}>
-                  <Image
-                    alt="compare"
-                    src={compareImg}
-                    className={classes['under-details-image']}
-                  />
-                  Uporedi
-                </button>
-              </div>
-              <div className={classes['under-details-buttons-surrounder']}>
-                <button className={classes['under-details-buttons-button']}>
+                <button
+                  className={classes['under-details-buttons-button']}
+                  onClick={props.onClick}
+                >
                   <Image
                     alt="compare"
                     src={printerImg}

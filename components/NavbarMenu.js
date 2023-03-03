@@ -348,7 +348,7 @@ const NavbarMenu = () => {
                         </li>
                         <li className={`${classes.activeB2B}`}>
                           <Link
-                            href="https://b2b.stojic.rs/b2b-zahtev"
+                            href="https://b2b.stojic.rs/prijava"
                             className={`${classes.Link} `}
                           >
                             B2B
@@ -370,10 +370,10 @@ const NavbarMenu = () => {
                   className={`${classes['envelope-phone']} d-flex justify-content-end`}
                 >
                   <li>
-                    <Link href="mailto:prodaja@stojic.rs">
+                    <Link href="mailto:web@stojic.rs">
                       <span>
                         <BsEnvelope />
-                        <span>prodaja@stojic.rs</span>
+                        <span>web@stojic.rs</span>
                       </span>
                     </Link>
                   </li>
