@@ -271,3 +271,9 @@ ul.footer-list {
     }
   }
 }
+
+@media print {
+  .footer-holder *, .footer-copyright {
+    display: none;
+  }
+}

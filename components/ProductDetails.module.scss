@@ -210,3 +210,40 @@
     flex-direction: column;
   }
 }
+
+@media print {
+  .button-quantity-holder,
+  .button-add-to-cart-holder,
+  .header-holder,
+  .price-list,
+  .under-details-buttons,
+  .slick-img-print-l {
+    display: none;
+  }
+
+  .slider-holder {
+    width: 100% !important;
+  }
+
+  .slick-img-print-r {
+    flex: 0 1 auto !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .slick-img-print-r img {
+    border: none !important;
+  }
+
+  .slick-img-print-r .row-print {
+    flex-shrink: 1 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .product-details-holder .grid-print {
+    display: grid !important;
+    grid-template-columns: 60% 40% !important;
+    grid-gap: 1rem !important;
+  }
+}

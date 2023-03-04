@@ -1022,3 +1022,10 @@ ul.header-links li:hover {
 .noData {
   color: black;
 }
+
+@media print {
+  form .newsletter,
+  .col-holder .icons-holder {
+    display: none;
+  }
+}

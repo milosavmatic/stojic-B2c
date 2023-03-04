@@ -1,8 +1,9 @@
-import Breadcrumbs from '../../components/Breadcrumbs'
-import ProductDetails from '../../components/ProductDetails'
-import { ApiHandler } from '../api/api'
-import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs'
-import { useRouter } from 'next/router'
+import dynamic from "next/dynamic";
+const Breadcrumbs = dynamic(() => import("../../components/Breadcrumbs"));
+const ProductDetails = dynamic(() => import("../../components/ProductDetails"));
+import { ApiHandler } from "../api/api";
+import { generateBreadcrumbs } from "../../helpers/generateBreadCrumbs";
+import { useRouter } from "next/router";
 
 const ProductPage = ({
   basic_data,
@@ -11,13 +12,13 @@ const ProductPage = ({
   specifications,
   recommendedProducts,
 }) => {
-  const { asPath } = useRouter()
+  const { asPath } = useRouter();
   return (
-    <div className='container'>
+    <div className="container">
       <Breadcrumbs
         crumbs={generateBreadcrumbs(
-          { label: 'Početna', path: '/' },
-          '/kategorije',
+          { label: "Početna", path: "/" },
+          "/kategorije",
           breadcrumbs.steps,
           { label: breadcrumbs.end.name, path: asPath }
         )}
@@ -29,14 +30,14 @@ const ProductPage = ({
         recommendedProducts={recommendedProducts}
       />
     </div>
-  )
-}
+  );
+};
 
-export default ProductPage
+export default ProductPage;
 
 export const getServerSideProps = async (context) => {
-  const api = ApiHandler()
-  const { productSlug } = context.query
+  const api = ApiHandler();
+  const { productSlug } = context.query;
   return {
     props: {
       basic_data: await api
@@ -55,5 +56,5 @@ export const getServerSideProps = async (context) => {
         .list(`/product-details/recommended/${productSlug}`)
         .then((response) => response?.payload?.items),
     },
-  }
-}
+  };
+};

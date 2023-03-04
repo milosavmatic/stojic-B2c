@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
-import Specifications from './Specifications';
-import RecomendedProducts from './RecomendedProducts';
-import ProductDetailsSlider from '../components/ProductDetailsSlider';
-import PlusMinusInput from '../components/PlusMinusInput';
-import classes from './ProductDetails.module.scss';
-import { currencyFormat } from '../helpers/functions';
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
+const Specifications = dynamic(() => import("./Specifications"), {
+  ssr: false,
+  loading: () => null,
+});
+const RecomendedProducts = dynamic(() => import("./RecomendedProducts"), {
+  ssr: false,
+  loading: () => null,
+});
+const ProductDetailsSlider = dynamic(
+  () => import("../components/ProductDetailsSlider"),
+  { ssr: false, loading: () => null }
+);
+const PlusMinusInput = dynamic(() => import("../components/PlusMinusInput"), {
+  ssr: false,
+  loading: () => null,
+});
+import classes from "./ProductDetails.module.scss";
+import { currencyFormat } from "../helpers/functions";
 import {
   useGlobalAddToCart,
   useGlobalAddToWishList,
-} from '../pages/api/globals';
-import { BsHandbag } from 'react-icons/bs';
+} from "../pages/api/globals";
+import { BsHandbag } from "react-icons/bs";
 
 const ProductDetails = ({
   productData,
@@ -18,12 +31,14 @@ const ProductDetails = ({
   recommendedProducts,
 }) => {
   // Holds the selected additional option
-  const [additional, setAdditional] = useState('info');
+  const [additional, setAdditional] = useState("info");
   // State that holds amount of products
   const [productAmount, setProductAmount] = useState(1);
 
   const globalAddToCart = useGlobalAddToCart();
   const addToWishList = useGlobalAddToWishList();
+
+  const [printClicked, setPrintClicked] = useState(false);
 
   const addToCart = () => {
     if (Number(productData?.inventory?.amount) > 0) {
@@ -32,27 +47,39 @@ const ProductDetails = ({
     }
   };
 
+  const pagePrintClicked = () => {
+    setPrintClicked(true);
+  };
+
+  useEffect(() => {
+    if (printClicked) {
+      window.print();
+      setPrintClicked(false);
+    }
+  }, [printClicked]);
+
   return (
-    <div className={`${classes['product-details-holder']}`}>
+    <div className={`${classes["product-details-holder"]}`}>
       {/* <div className='container'> */}
-      <div className="row">
+      <div className={`row ${classes["grid-print"]}`}>
         <div
           className={`${
-            classes['slider-holder'] + ' col-xl-5 col-lg-4 col-md-12'
+            classes["slider-holder"] + " col-xl-5 col-lg-4 col-md-12"
           }`}
         >
           <ProductDetailsSlider
             images={gallery.gallery}
             addToWishList={() => addToWishList(productData?.id)}
+            onClick={pagePrintClicked}
           />
         </div>
         <div
           className={`${
-            classes['info-holder'] + ' col-xl-7 col-lg-8 col-md-12'
+            classes["info-holder"] + " col-xl-7 col-lg-8 col-md-12"
           }`}
         >
           <h3>{productData?.basic_data?.name}</h3>
-          <ul className={`${classes['code-list']}`}>
+          <ul className={`${classes["code-list"]}`}>
             <li>
               <span>Šifra artikla:</span>
               {productData?.basic_data?.sku}
@@ -66,15 +93,15 @@ const ProductDetails = ({
               {productData?.basic_data?.barcode}
             </li> */}
           </ul>
-          <ul className={`${classes['delivery-list']}`}>
+          <ul className={`${classes["delivery-list"]}`}>
             <li>
-              Dostupnost:{' '}
+              Dostupnost:{" "}
               <span
                 className={`${
                   classes[
                     Number(productData?.inventory?.amount) > 0
-                      ? 'stock'
-                      : 'no-stock'
+                      ? "stock"
+                      : "no-stock"
                   ]
                 }`}
               >
@@ -89,16 +116,18 @@ const ProductDetails = ({
             </li>
           </ul>
 
-          <ul className={`${classes['shortDesc']}`}>
+          <ul className={`${classes["shortDesc"]}`}>
             <li>
               <span>Kratak opis:</span>
-              
-              {productData?.basic_data?.short_description ? productData?.basic_data?.short_description : "/"}
+
+              {productData?.basic_data?.short_description
+                ? productData?.basic_data?.short_description
+                : "/"}
             </li>
           </ul>
 
-          <ul className={`${classes['price-list']}`}>
-            <li className={`${classes['old-price']}`}>
+          <ul className={`${classes["price-list"]}`}>
+            <li className={`${classes["old-price"]}`}>
               {currencyFormat(
                 productData?.price?.discount?.active
                   ? productData?.price?.price?.original
@@ -106,7 +135,7 @@ const ProductDetails = ({
                 productData?.price?.currency
               )}
             </li>
-            <li className={`${classes['price']}`}>
+            <li className={`${classes["price"]}`}>
               {currencyFormat(
                 productData?.price?.discount?.active
                   ? productData?.price?.price?.discount
@@ -120,18 +149,18 @@ const ProductDetails = ({
           </ul>
           {Number(productData?.inventory?.amount) > 0 && (
             <div className=" d-flex align-items-center">
-              <div className={`${classes['button-quantity-holder']}`}>
-                <div className={`${classes['button-quantity']}`}>
+              <div className={`${classes["button-quantity-holder"]}`}>
+                <div className={`${classes["button-quantity"]}`}>
                   <PlusMinusInput
-                    className={classes['amount-input']}
+                    className={classes["amount-input"]}
                     amount={productAmount}
                     setCount={setProductAmount}
                   />
                 </div>
               </div>
-              <div className={`${classes['button-add-to-cart-holder']}`}>
-                <button onClick={addToCart} className={classes['button']}>
-                  <div className={`${classes['img-holder']}`}>
+              <div className={`${classes["button-add-to-cart-holder"]}`}>
+                <button onClick={addToCart} className={classes["button"]}>
+                  <div className={`${classes["img-holder"]}`}>
                     <BsHandbag />
                   </div>
                   Dodaj u korpu
