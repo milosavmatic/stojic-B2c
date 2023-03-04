@@ -1,9 +1,25 @@
-import MainSlider from '../components/MainSlider';
-import ActionBanners from '../components/ActionBanners/ActionBanners.jsx';
-import { ApiHandler } from './api/api';
-import CardsSupport from '../components/CardsSupport/CardsSupport';
-import CategoryItems from '../components/CategoryItems/CategoryItems';
-import GridProducts from '../components/GridProducts/GridProducts';
+import dynamic from "next/dynamic";
+const MainSlider = dynamic(() => import("../components/MainSlider"), {
+  ssr: false,
+  loading: () => null,
+});
+const ActionBanners = dynamic(
+  () => import("../components/ActionBanners/ActionBanners.jsx"),
+  { ssr: false, loading: () => null }
+);
+import { ApiHandler } from "./api/api";
+const CardsSupport = dynamic(
+  () => import("../components/CardsSupport/CardsSupport"),
+  { ssr: false, loading: () => null }
+);
+const CategoryItems = dynamic(
+  () => import("../components/CategoryItems/CategoryItems"),
+  { ssr: false, loading: () => null }
+);
+const GridProducts = dynamic(
+  () => import("../components/GridProducts/GridProducts"),
+  { ssr: false, loading: () => null }
+);
 
 const Home = ({
   banners,
@@ -36,29 +52,29 @@ export const getServerSideProps = async () => {
   return {
     props: {
       banners: await api
-        .get('banners/index_slider')
+        .get("banners/index_slider")
         .then((response) => response?.payload),
       mobileBanners: await api
-        .get('banners/index_slider_mobile')
+        .get("banners/index_slider_mobile")
         .then((response) => response?.payload),
       // recommendedCategories:
       //   (await api
       //     .list('categories/section/recomended', { limit: 6 })
       //     .then((response) => response?.payload)) ?? null,
       actionBanners: await api
-        .get('banners/action_banners')
+        .get("banners/action_banners")
         .then((response) => response?.payload),
       buttonTabs: await api
-        .list('categories/section/recommended')
+        .list("categories/section/recommended")
         .then((response) => response?.payload),
       recommendedProducts: await api
-        .list('products/section/list/action')
+        .list("products/section/list/action")
         .then((response) => response?.payload?.items),
-    saleProducts: await api
-        .list('products/section/list/best_sell', { limit: 1 })
+      saleProducts: await api
+        .list("products/section/list/best_sell", { limit: 1 })
         .then((response) => response?.payload?.items),
       positionProducts: await api
-        .list('products/section/list/sale', { limit: 6 })
+        .list("products/section/list/sale", { limit: 6 })
         .then((response) => response?.payload?.items),
     },
   };

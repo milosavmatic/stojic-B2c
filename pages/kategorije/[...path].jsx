@@ -1,15 +1,25 @@
-import Breadcrumbs from '../../components/Breadcrumbs';
-import Filters from '../../components/Filters';
-import classes from '../../assets/css/CategoriesPage.module.scss';
-import Accordion from 'react-bootstrap/Accordion';
-import ProductBoxComplexSmall from '../../components/ProductBoxComplexSmall';
-import { ApiHandler } from '../api/api';
-import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
-import { queryKeys, sortKeys } from '../../helpers/const';
-import Image from 'next/image';
-import catBanner from '../../assets/images/banners/catBanner.jpg';
+import dynamic from "next/dynamic";
+const Breadcrumbs = dynamic(() => import("../../components/Breadcrumbs"), {
+  ssr: false,
+  loading: () => null,
+});
+const Filters = dynamic(() => import("../../components/Filters"), {
+  ssr: false,
+  loading: () => null,
+});
+import classes from "../../assets/css/CategoriesPage.module.scss";
+import Accordion from "react-bootstrap/Accordion";
+const ProductBoxComplexSmall = dynamic(
+  () => import("../../components/ProductBoxComplexSmall"),
+  { ssr: false, loading: () => null }
+);
+import { ApiHandler } from "../api/api";
+import { generateBreadcrumbs } from "../../helpers/generateBreadCrumbs";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
+import { queryKeys, sortKeys } from "../../helpers/const";
+import Image from "next/image";
+import catBanner from "../../assets/images/banners/catBanner.jpg";
 
 const CategoriesPage = ({ categoryData, filters }) => {
   const router = useRouter();
@@ -19,7 +29,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
     (newQuery) => {
       delete newQuery.path;
       router.replace({
-        pathname: router.asPath.split('?')[0],
+        pathname: router.asPath.split("?")[0],
         query: newQuery,
       });
     },
@@ -41,7 +51,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
 
   const [sort, setSort] = useState(
     newSort
-      ? { field: newSort.split('_')[0], direction: newSort.split('_')[1] }
+      ? { field: newSort.split("_")[0], direction: newSort.split("_")[1] }
       : null
   );
 
@@ -51,10 +61,10 @@ const CategoriesPage = ({ categoryData, filters }) => {
 
   const newSelected = [];
   for (const item in query) {
-    if (item !== 'path' && !Object.values(queryKeys).includes(item))
+    if (item !== "path" && !Object.values(queryKeys).includes(item))
       newSelected.push({
         column: item,
-        value: { selected: query[item].split(',') },
+        value: { selected: query[item].split(",") },
       });
   }
   const [selectedFilters, setSelectedFilters] = useState(newSelected);
@@ -160,12 +170,12 @@ const CategoriesPage = ({ categoryData, filters }) => {
   }, [asPath, query]);
 
   const onSortChange = ({ target }) => {
-    if (target.value != 'none') {
+    if (target.value != "none") {
       const newQuery = query;
       newQuery[queryKeys.sort] = sortKeys[target.value].query;
       newQuery[queryKeys.page] = 1;
       replaceQuery(newQuery);
-      const [field, direction] = target.value.split('_');
+      const [field, direction] = target.value.split("_");
       setSort({ field, direction });
     } else {
       const newQuery = query;
@@ -227,18 +237,18 @@ const CategoriesPage = ({ categoryData, filters }) => {
       <div className="container">
         <Breadcrumbs
           crumbs={generateBreadcrumbs(
-            { label: 'Početna', path: '/' },
-            '/kategorije',
+            { label: "Početna", path: "/" },
+            "/kategorije",
             categoryData.parents,
             { label: categoryData?.basic_data?.name, path: asPath }
           )}
         />
 
-        <div className={`${classes['mobile-display']}`}>
-          <Accordion className={`${classes['filters-mobile-holder']}`}>
+        <div className={`${classes["mobile-display"]}`}>
+          <Accordion className={`${classes["filters-mobile-holder"]}`}>
             <Accordion.Item eventKey="0">
               <Accordion.Header
-                className={`${classes['mobile-filters-heading']}`}
+                className={`${classes["mobile-filters-heading"]}`}
               >
                 Filteri
               </Accordion.Header>
@@ -260,7 +270,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
 
         <div className="row">
           <div className="col-xl-3 col-md-3 col-12">
-            <div className={`${classes['desktop-display']}`}>
+            <div className={`${classes["desktop-display"]}`}>
               <Filters
                 filters={availableFilters}
                 selectedFilters={selectedFilters}
@@ -275,26 +285,26 @@ const CategoriesPage = ({ categoryData, filters }) => {
           </div>
           <div
             className={
-              classes['right-side-container'] +
-              ' col-xl-9 col-lg-9 col-12 col-sm-12 col-xs-12'
+              classes["right-side-container"] +
+              " col-xl-9 col-lg-9 col-12 col-sm-12 col-xs-12"
             }
           >
-            <div className={classes['controls'] + ' row'}>
+            <div className={classes["controls"] + " row"}>
               <div
                 className={
-                  classes['number-of-products'] +
-                  ' col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12'
+                  classes["number-of-products"] +
+                  " col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12"
                 }
               >
                 <span>
-                  {pagination.total_items}{' '}
-                  {pagination.total_items !== 1 ? 'proizvoda' : 'proizvod'}
+                  {pagination.total_items}{" "}
+                  {pagination.total_items !== 1 ? "proizvoda" : "proizvod"}
                 </span>
               </div>
               <div
                 className={
-                  classes['sort-container'] +
-                  ' col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6'
+                  classes["sort-container"] +
+                  " col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6"
                 }
               >
                 <span>Sortiraj:</span>
@@ -302,11 +312,11 @@ const CategoriesPage = ({ categoryData, filters }) => {
                   <select
                     name="sort"
                     id="sort"
-                    className={classes['select']}
+                    className={classes["select"]}
                     onChange={onSortChange}
-                    value={sort ? sort.field + '_' + sort.direction : 'none'}
+                    value={sort ? sort.field + "_" + sort.direction : "none"}
                   >
-                    <option value="none" className={`${classes['sort-title']}`}>
+                    <option value="none" className={`${classes["sort-title"]}`}>
                       Sortirajte
                     </option>
                     {Object.entries(sortKeys).map((item) => (
@@ -319,16 +329,16 @@ const CategoriesPage = ({ categoryData, filters }) => {
               </div>
               <div
                 className={
-                  classes['products-per-page'] +
-                  ' col-xl-5 col-lg-4 col-md-3 col-sm-6 col-6'
+                  classes["products-per-page"] +
+                  " col-xl-5 col-lg-4 col-md-3 col-sm-6 col-6"
                 }
               >
                 <span>Prikaži:</span>
-                <span className={classes['select-span']}>
+                <span className={classes["select-span"]}>
                   <select
                     name="limit"
                     id="limit"
-                    className={classes['select']}
+                    className={classes["select"]}
                     onChange={onLimitChange}
                     value={limit}
                   >
@@ -351,12 +361,12 @@ const CategoriesPage = ({ categoryData, filters }) => {
                 </span>
                 <span>po strani</span>
               </div>
-              <div className={classes['product-row'] + ' row'}>
+              <div className={classes["product-row"] + " row"}>
                 {(products ?? []).map((product) => (
                   <div
                     className={
-                      classes['product-col'] +
-                      ' col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12'
+                      classes["product-col"] +
+                      " col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12"
                     }
                     key={product.id}
                   >
@@ -369,7 +379,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
               </div>
               <div className={classes.paginationHolder}>
                 <div>
-                  Strana {pagination?.selected_page} od{' '}
+                  Strana {pagination?.selected_page} od{" "}
                   {pagination?.total_pages}
                 </div>
                 {pagination?.selected_page && (

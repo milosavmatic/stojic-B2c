@@ -1,18 +1,18 @@
-import classes from './ProductBoxComplexSmall.module.scss';
-import Link from 'next/link';
-import Image from 'next/image';
-import { currencyFormat } from '../helpers/functions';
+import classes from "./ProductBoxComplexSmall.module.scss";
+import Link from "next/link";
+import Image from "next/image";
+import { currencyFormat } from "../helpers/functions";
 import {
   useGlobalAddToCart,
   useGlobalAddToWishList,
-} from '../pages/api/globals';
-import { BsHandbag } from 'react-icons/bs';
+} from "../pages/api/globals";
+import { BsHandbag } from "react-icons/bs";
 
 const ProductBoxComplexSmall = ({
   product,
-  noBorder = '',
-  className = '',
-  biggerImg = '',
+  noBorder = "",
+  className = "",
+  biggerImg = "",
   isSpecialOffer = false,
 }) => {
   const addToCart = useGlobalAddToCart();
@@ -20,23 +20,23 @@ const ProductBoxComplexSmall = ({
   const imageUrl =
     product?.image.length > 0 && product?.image
       ? product?.image[0]
-      : product?.path ?? '/static/images/logo.png';
+      : product?.path ?? "/static/images/logo.png";
 
   return (
-    <div className={`${classes['container']} ${classes[className]}`}>
-      <div className={`${classes['wrapp']}`}>
+    <div className={`${classes["container"]} ${classes[className]}`}>
+      <div className={`${classes["wrapp"]}`}>
         {!isSpecialOffer && product?.categories ? (
           <Link href={`/kategorije/${product?.categories[0]?.id}`}>
-            <a className={classes['category-name']}>
-              {product?.categories[0]?.name ?? ''}
+            <a className={classes["category-name"]}>
+              {product?.categories[0]?.name ?? ""}
             </a>
           </Link>
         ) : (
           <h5>Specijalna ponuda</h5>
         )}
         <Link href={`/proizvod/${product?.id}`}>
-          <a className={classes['product-name']}>
-            {product?.basic_data?.name ?? ''}
+          <a className={classes["product-name"]}>
+            {product?.basic_data?.name ?? ""}
           </a>
         </Link>
       </div>
@@ -45,8 +45,8 @@ const ProductBoxComplexSmall = ({
         <a
           className={
             product?.image.length <= 0
-              ? `${classes['noImg']} ${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
-              : `${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
+              ? `${classes["noImg"]} ${classes["product-img"]} ${classes[noBorder]} ${classes[biggerImg]}`
+              : `${classes["product-img"]} ${classes[noBorder]} ${classes[biggerImg]}`
           }
         >
           <Image
@@ -58,19 +58,19 @@ const ProductBoxComplexSmall = ({
         </a>
       </Link>
 
-      <div className={classes['price']}>
+      <div className={classes["price"]}>
         {!product?.price?.discount?.active && (
-          <p className={classes['no-old-price']}></p>
+          <p className={classes["no-old-price"]}></p>
         )}
         {product?.price?.discount?.active && (
-          <p className={classes['old-price']}>
+          <p className={classes["old-price"]}>
             {currencyFormat(
               product?.price?.price?.original,
               product?.price?.currency
             )}
           </p>
         )}
-        <p className={classes['new-price']}>
+        <p className={classes["new-price"]}>
           {currencyFormat(
             product?.price?.discount?.active
               ? product?.price?.price?.discount
@@ -80,42 +80,41 @@ const ProductBoxComplexSmall = ({
         </p>
       </div>
       {product?.price?.discount?.active && (
-        <div className={classes['discount']}>
+        <div className={classes["discount"]}>
           <span>{product?.price?.discount?.amount}</span>
         </div>
       )}
-      
+
       {(product?.stickers ?? []).map((sticker) => (
-        <div className={classes['top-deal']} key={sticker.slug}>
+        <div className={classes["top-deal"]} key={sticker.slug}>
           <span>{sticker.name}</span>
-          
         </div>
       ))}
-     
+
       {!isSpecialOffer ? null : product?.price?.discount?.amount ? ( // </div> //   <Image alt="fav-heart" src={heartImg} /> // > //   onClick={() => addToWishList(product?.id)} //   className={classes['fav-heart']} // <div
-        <div className={classes['percentSale']}>
+        <div className={classes["percentSale"]}>
           {product?.price?.discount?.amount}
         </div>
       ) : null}
 
       {(product?.stickers ?? []).map((sticker) => (
-        <div className={classes['top-deal']} key={sticker.slug}>
+        <div className={classes["top-deal"]} key={sticker.slug}>
           <span>{sticker.name}</span>
         </div>
       ))}
 
       {Number(product?.inventory?.amount) > 0 &&
       product.price.price.original ? (
-        <div className={classes['add-to-cart']}>
+        <div className={classes["add-to-cart"]}>
           <div
-            className={classes['add-to-cart-image']}
+            className={classes["add-to-cart-image"]}
             onClick={() => addToCart(product?.id, 1)}
           >
             <BsHandbag />
           </div>
         </div>
       ) : (
-        <div className={classes['checkAvailability']}>
+        <div className={classes["checkAvailability"]}>
           <Link
             href={`/kontakt?id=${product?.id}&&name=${product?.basic_data?.name}`}
           >
