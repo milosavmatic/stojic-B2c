@@ -52,6 +52,7 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 
     delivery: null,
     payment: null,
+    agreed: null,
   });
 
   const required = [
@@ -74,6 +75,7 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
     "shipping_town",
     "delivery",
     "payment",
+    "agreed",
   ];
 
   const companyrequired = [
@@ -83,7 +85,8 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
     "shipping_company_name",
   ];
   const errorMsg = "polje je obavezno";
-  const errorSelect = "morate izabrati jednu opciju";
+  const errorSelect = "odaberite opciju";
+  const errorChecked = "polje je obavezno čekirati";
 
   const [errors, setErrors] = useState([]);
 
@@ -235,6 +238,8 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
         .catch((error) => console.warn(error));
     }
   };
+
+  console.log("cartItems", cartItems);
 
   return (
     <GoogleReCaptchaProvider reCaptchaKey={process.env.CAPTCHAKEY}>
@@ -844,31 +849,29 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                     ))}
                   </div>
                 </div>
+                {/* <div className={classes["way-of-payement"]}>
+                  <h5>Odaberite način plaćanja:</h5>
+                  {errors.includes("payment") && (
+                    <span className={classes.errorMsg}>{errorSelect}</span>
+                  )}
+                  <div className={classes["padding"]}>
+                    {(paymentoptions ?? []).map((item) => (
+                      <div className={classes["radio-face"]} key={item.id}>
+                        <input
+                          type="radio"
+                          className={classes["basic-radio"]}
+                          name="payment"
+                          value={item.id}
+                          id={"payment" + item.id}
+                          onChange={formChangeHandler}
+                        />
+                        <label htmlFor={"payment" + item.id}>{item.name}</label>
+                      </div>
+                    ))}
+                  </div>
+                </div> */}
               </div>
               <div className={classes["same-height-2"]}>
-                {/* <div className={classes['coupon-container']}>
-                <h5>Kupon:</h5>
-                <div className={classes['input-info-padding']}>
-                  <input
-                    className={classes['input']}
-                    id='coupon'
-                    type='text'
-                    placeholder='-- Ovde unesite kupon'
-                  />
-                  <span className={classes['coupon-span']}>
-                    * Pogledajte uputstvo za upotrebu kupona
-                  </span>
-                </div>
-
-                <div className={classes['coupon-button-container']}>
-                  <button
-                    type='button'
-                    className={classes['coupon-button'] + ' basic-button-sec'}
-                  >
-                    Aktiviraj kupon
-                  </button>
-                </div>
-              </div> */}
                 <div className={classes["value-container"]}>
                   <h5>Vrednost Vaše korpe:</h5>
                   <span className={classes["value-span"]}>
@@ -922,26 +925,44 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
                   </span>
                 </div>
               </div>
-              <div className={classes["end-button-container"]}>
-                <div>
-                  <button
-                    type="button"
-                    className={classes["end-button"] + " basic-button-sec"}
-                    onClick={formSubmitHandler}
-                  >
-                    Završi kupovinu
-                  </button>
-                  {errors.length > 0 && (
-                    <p className={classes.errorMsg}>
-                      Nisu popunjena sva obavezna polja
-                    </p>
-                  )}
-                </div>
+            </div>
+            <div className={classes["agree"]}>
+              <div className="d-flex">
+                <input
+                  type="checkbox"
+                  id="agreed"
+                  name="agreed"
+                  onChange={formChangeHandler}
+                  value={formData.agreed === "1" ? "" : "1"}
+                />
+                <label htmlFor="agreed">
+                  Saglasan sam sa opštim uslovima korišćenja Stojić shop-a
+                </label>
+              </div>
+
+              {errors.includes("agreed") && (
+                <span className={classes.errorMsg}>{errorChecked}</span>
+              )}
+            </div>
+            <div className={classes["end-button-container"]}>
+              <div>
+                <button
+                  type="button"
+                  className={classes["end-button"] + " basic-button-sec"}
+                  onClick={formSubmitHandler}
+                >
+                  Završi kupovinu
+                </button>
+                {errors.length > 0 && (
+                  <p className={classes.errorMsg}>
+                    Nisu popunjena sva obavezna polja
+                  </p>
+                )}
               </div>
             </div>
           </div>
         ) : (
-          <div className={"row"}>
+          <div className="row">
             <div className="col-12">
               <Link href="/">
                 <Image

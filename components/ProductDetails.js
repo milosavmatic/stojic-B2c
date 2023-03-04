@@ -38,6 +38,8 @@ const ProductDetails = ({
   const globalAddToCart = useGlobalAddToCart();
   const addToWishList = useGlobalAddToWishList();
 
+  const [printClicked, setPrintClicked] = useState(false);
+
   const addToCart = () => {
     if (Number(productData?.inventory?.amount) > 0) {
       globalAddToCart(productData.id, productAmount);
@@ -45,10 +47,21 @@ const ProductDetails = ({
     }
   };
 
+  const pagePrintClicked = () => {
+    setPrintClicked(true);
+  };
+
+  useEffect(() => {
+    if (printClicked) {
+      window.print();
+      setPrintClicked(false);
+    }
+  }, [printClicked]);
+
   return (
     <div className={`${classes["product-details-holder"]}`}>
       {/* <div className='container'> */}
-      <div className="row">
+      <div className={`row ${classes["grid-print"]}`}>
         <div
           className={`${
             classes["slider-holder"] + " col-xl-5 col-lg-4 col-md-12"
@@ -57,6 +70,7 @@ const ProductDetails = ({
           <ProductDetailsSlider
             images={gallery.gallery}
             addToWishList={() => addToWishList(productData?.id)}
+            onClick={pagePrintClicked}
           />
         </div>
         <div
