@@ -1,4 +1,5 @@
 import React from 'react';
+import { PagePreparation } from '../../components/PagePreparation/PagePreparation';
 
 function HowToOrder() {
   return (
@@ -6,7 +7,7 @@ function HowToOrder() {
       <div className="container">
         <h3>Kako naručiti?</h3>
         <div className="staticPagesContent">
-          <p>...</p>
+          <PagePreparation />
         </div>
       </div>
     </div>

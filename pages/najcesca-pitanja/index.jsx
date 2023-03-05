@@ -1,6 +1,7 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Link from 'next/link';
+import { PagePreparation } from '../../components/PagePreparation/PagePreparation';
 // import classes  from "../../components/"
 
 function index() {
@@ -9,6 +10,7 @@ function index() {
       <div className="container">
         <h3>Česta pitanja</h3>
         <div className="staticPagesContent">
+          <PagePreparation />
           {/* <Accordion >
             <Accordion.Item
               eventKey="0"
