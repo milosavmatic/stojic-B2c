@@ -17,6 +17,7 @@ const Blog = ({ blog }) => {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
       </div>
       <div className={classes.contentHolder}>
+      {blog?.length ? 
         <Row>
           {(blog?.slice(0, thumbCount) ?? []).map((row) => {
             return (
@@ -50,7 +51,7 @@ const Blog = ({ blog }) => {
             </button>
           )}
 
-        </Row>
+        </Row> : <p className='text-center'>Trenutno je lista vesti prazna.</p>}
       </div>
     </div>
   )
