@@ -46,7 +46,7 @@ const Blog = ({ blog }) => {
               className={classes.loadMore}
               onClick={() => setThumbCount(thumbCount + 4)}
             >
-              Učitaj više...
+              Učitajte više...
             </button>
           )}
 
