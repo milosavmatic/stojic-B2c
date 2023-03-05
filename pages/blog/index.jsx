@@ -5,33 +5,10 @@ import { ApiHandler } from '../api/api';
 import classes from './Blog.module.scss';
 import { BsArrowRight } from 'react-icons/bs';
 
-
-const perPage = 5
-
 const Blog = ({ blog }) => {
-  console.log(blog)
-  const [data, setData] = useState([])
-  const [page, setPage] = useState(1)
-  const [pagination, setPagination] = useState({})
 
-  const handleData = useCallback(async (page, perPage) => {
-    try {
-      const response = await getShortAktuelnosti(page, perPage)
-      if (!response.data.success) {
-        throw new Error('Stranica nije pronadjena!')
-      }
-      setPagination(response.data.payload.pagination)
-
-      setData(response.data.payload.items)
-    } catch (error) {
-      console.log(error.message)
-    }
-  }, [])
-
-  useEffect(() => {
-    handleData(page, perPage)
-  }, [page, handleData])
-
+  const [data, setData] = useState([]);
+  const [thumbCount, setThumbCount] = useState(4);
 
   return (
     <div className={classes.blogHolder}>
@@ -41,7 +18,7 @@ const Blog = ({ blog }) => {
       </div>
       <div className={classes.contentHolder}>
         <Row>
-          {blog?.map((row) => {
+          {(blog?.slice(0, thumbCount) ?? []).map((row) => {
             return (
               <Col xl={3} md={6} sm={6} xs={12} key={row?.id}>
                 <Link href={`/blog/${row?.id}`}>
@@ -62,6 +39,16 @@ const Blog = ({ blog }) => {
               </Col>
             )
           })}
+
+          {blog?.length > thumbCount && (
+            <button
+              type="button"
+              className={classes.loadMore}
+              onClick={() => setThumbCount(thumbCount + 4)}
+            >
+              Učitaj više...
+            </button>
+          )}
 
         </Row>
       </div>
