@@ -181,7 +181,7 @@ const ContactPage = () => {
               </span>
               <span className={classes["bolded-faces"]}>ili e-mailom na:</span>
               <span className={classes["phone-numbers"]}>
-                prodaja@stojic.rs
+                web@stojic.rs
               </span>
             </div>
             <div className={classes["working-hours"]}>
