@@ -197,10 +197,17 @@
   border: none;
   font-weight: 550;
   background-color: var(--red-color);
+  display: flex;
+  align-items: center;
   &:active {
     background-color: var(--blue-color-darker);
   }
+  img {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
 }
+
 .checkbox-label {
   padding-left: 1rem;
   line-height: normal;

@@ -14,15 +14,15 @@ import {
   GoogleReCaptcha,
 } from "react-google-recaptcha-v3";
 import { BsCheck } from 'react-icons/bs';
+import pic from '../../assets/images/loading-buffering.gif';
 
 
 const ContactPage = () => {
   const [selectContact, setSelectContact] = useState("");
   const [token, setToken] = useState();
   const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
-
   const [showMessage, setShowMessage] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const verifyCaptcha = useCallback((token) => {
     setToken(token);
@@ -52,6 +52,7 @@ const ContactPage = () => {
   ];
 
   const errorMsg = "Polje je obavezno.";
+  const errorMsgCheck = "Polje je obavezno čekirati.";
   const [errors, setErrors] = useState([]);
   const formChangeHandler = ({ target }) => {
     setErrors(errors.filter((item) => item != target.name));
@@ -73,10 +74,11 @@ const ContactPage = () => {
       setErrors([...errors, target.name]);
     }
   };
-  console.log("error", errors);
+
   const formSubmitHandler = () => {
+
     setRefreshReCaptcha(true);
-setLoading(true)
+
     const err = [];
     for (const key in formData) {
       const item = formData[key];
@@ -94,18 +96,19 @@ setLoading(true)
     if (err.length > 0) {
       setErrors(err);
     } else {
+      setIsLoading(true);
       const api = ApiHandler();
       const { agreed, ...feldsForRet } = formData;
       const ret = {
         page_section: "contact_page",
         ...feldsForRet,
       };
-      console.log(ret);
+
       if (!id && !name) {
         api
           .post("/contact/contact_page", ret)
           .then((response) => {
-            openAlertBox("Uspešno ste poslali poruku", "success");
+            openAlertBox("Uspešno ste poslali poruku!", "success");
             setShowMessage(true);
             setFormData({
               customer_name: "",
@@ -116,10 +119,17 @@ setLoading(true)
               gcaptcha: token,
               agreed: null,
             });
-            setTimeout(() => setShowMessage(false), 3000);
-            setLoading(false)
+            setTimeout(() => setShowMessage(false), 5000);
+            setIsLoading(false);
           })
-          .catch((error) => openAlertBox(error.message, "error"));
+          .catch((error) => {
+            openAlertBox(error.message, "error")
+            setIsLoading(false);
+          })
+          .finally(() => {
+            setRefreshReCaptcha(false);
+          });
+
       } else {
         api
           .post("contact/product_request", {
@@ -142,9 +152,16 @@ setLoading(true)
               gcaptcha: token,
               agreed: null,
             });
-            setTimeout(() => setShowMessage(false), 3000);
+            setTimeout(() => setShowMessage(false), 5000);
+            setIsLoading(false)
           })
-          .catch((error) => openAlertBox(error.message, "error"));
+          .catch((error) => {
+            openAlertBox(error.message, "error");
+            setIsLoading(false);
+          })
+          .finally(() => {
+            setRefreshReCaptcha(false);
+          });
       }
     }
   };
@@ -206,11 +223,13 @@ setLoading(true)
             </div>
           </div>
           {/* ******* */}
+
           {showMessage ? (
-            <div className={classes["contact-form"] + " col-md-8"}>Uspešno ste poslali poruku.</div>
+            <div className={`${classes["contact-form"]} ${classes["successMessage"]} col-md-8`}><BsCheck className={classes.iconSuccess} />Uspešno ste poslali poruku! Uskoro ćemo Vas kontaktirati.</div>
           ) : (
             <form className={classes["contact-form"] + " col-md-8"}>
               <div className={classes["inputError"]}>
+
                 <input
                   type="text"
                   placeholder="Ime i prezime *"
@@ -280,21 +299,6 @@ setLoading(true)
                 )}
               </div>
 
-
-              {/* <div className={classes["inputError"]}>
-              <div className={classes["g-recaptcha"]}>
-                <ReCAPTCHA
-                  className={classes["captcha"]}
-                  sitekey="6Ld9cj4gAAAAANDQjVmIJUDcOU79VnU9u_Qr1jDL"
-                  onChange={onCaptchaChange}
-                  name="recaptcha"
-                />
-              </div>
-              {errors.includes("recaptcha") && (
-                <span className={classes.errorMsg}>{errorMsg}</span>
-              )}
-            </div> */}
-
               <div
                 className={
                   classes["checkbox-container"] + " basic-checkbox-container"
@@ -321,17 +325,20 @@ setLoading(true)
                 </div>
 
                 {errors.includes("agreed") && (
-                  <span className={classes.errorMsg}>{errorMsg}</span>
+                  <span className={classes.errorMsg}>{errorMsgCheck}</span>
                 )}
               </div>
-{loading? <p>Ucitavam</p> : (
-              <button
-                type="button"
-                className={classes["contact-submit"]}
-                onClick={formSubmitHandler}
-              >
-                Pošalji
-              </button>)}
+
+              {isLoading ? (
+                <button type="button" className={classes["contact-submit"]}>
+                  <Image src={pic} alt="Loading" objectFit={'contain'} />
+                </button>
+              ) : (
+                <button type="button" className={classes["contact-submit"]} onClick={formSubmitHandler}>
+                  Pošalji
+                </button>)}
+
+
 
               {errors.length > 0 && (
                 <p className={classes.errorMsg}>
