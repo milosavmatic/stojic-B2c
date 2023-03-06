@@ -13,16 +13,20 @@ import {
   GoogleReCaptchaProvider,
   GoogleReCaptcha,
 } from "react-google-recaptcha-v3";
+import { BsCheck } from 'react-icons/bs';
+
+
 const ContactPage = () => {
   const [selectContact, setSelectContact] = useState("");
   const [token, setToken] = useState();
   const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
 
+  const [showMessage, setShowMessage] = useState(false);
+  const [loading, setLoading] = useState(false)
+
   const verifyCaptcha = useCallback((token) => {
     setToken(token);
   }, []);
-
-  const { push: navigate } = useRouter();
 
   const router = useRouter();
 
@@ -49,7 +53,6 @@ const ContactPage = () => {
 
   const errorMsg = "Polje je obavezno.";
   const [errors, setErrors] = useState([]);
-
   const formChangeHandler = ({ target }) => {
     setErrors(errors.filter((item) => item != target.name));
     if (
@@ -70,10 +73,10 @@ const ContactPage = () => {
       setErrors([...errors, target.name]);
     }
   };
-  console.log(errors);
+  console.log("error", errors);
   const formSubmitHandler = () => {
     setRefreshReCaptcha(true);
-
+setLoading(true)
     const err = [];
     for (const key in formData) {
       const item = formData[key];
@@ -92,7 +95,7 @@ const ContactPage = () => {
       setErrors(err);
     } else {
       const api = ApiHandler();
-      const { gcaptcha, agreed, ...feldsForRet } = formData;
+      const { agreed, ...feldsForRet } = formData;
       const ret = {
         page_section: "contact_page",
         ...feldsForRet,
@@ -103,6 +106,7 @@ const ContactPage = () => {
           .post("/contact/contact_page", ret)
           .then((response) => {
             openAlertBox("Uspešno ste poslali poruku", "success");
+            setShowMessage(true);
             setFormData({
               customer_name: "",
               email: "",
@@ -112,9 +116,8 @@ const ContactPage = () => {
               gcaptcha: token,
               agreed: null,
             });
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
+            setTimeout(() => setShowMessage(false), 3000);
+            setLoading(false)
           })
           .catch((error) => openAlertBox(error.message, "error"));
       } else {
@@ -129,6 +132,7 @@ const ContactPage = () => {
               "Uspešno ste poslali zahtev za proveru proizvoda na stanju.",
               "success"
             );
+            setShowMessage(true);
             setFormData({
               customer_name: "",
               email: "",
@@ -138,14 +142,13 @@ const ContactPage = () => {
               gcaptcha: token,
               agreed: null,
             });
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
+            setTimeout(() => setShowMessage(false), 3000);
           })
           .catch((error) => openAlertBox(error.message, "error"));
       }
     }
   };
+
   useEffect(() => {
     setFormData({ ...formData, gcaptcha: token });
   }, [token]);
@@ -181,7 +184,9 @@ const ContactPage = () => {
               </span>
               <span className={classes["bolded-faces"]}>ili e-mailom na:</span>
               <span className={classes["phone-numbers"]}>
-                prodaja@stojic.rs
+                <Link href="mailto:web@stojic.rs">
+                  <span>web@stojic.rs</span>
+                </Link>
               </span>
             </div>
             <div className={classes["working-hours"]}>
@@ -201,87 +206,82 @@ const ContactPage = () => {
             </div>
           </div>
           {/* ******* */}
-          <form className={classes["contact-form"] + " col-md-8"}>
-            <div className={classes["inputError"]}>
-              <input
-                type="text"
-                placeholder="Ime i prezime *"
-                className={classes["contact-form-input"]}
-                name="customer_name"
-                value={formData.customer_name}
-                onChange={formChangeHandler}
-              />
-              {errors.includes("customer_name") && (
-                <span className={classes.errorMsg}>{errorMsg}</span>
-              )}
-            </div>
+          {showMessage ? (
+            <div className={classes["contact-form"] + " col-md-8"}>Uspešno ste poslali poruku.</div>
+          ) : (
+            <form className={classes["contact-form"] + " col-md-8"}>
+              <div className={classes["inputError"]}>
+                <input
+                  type="text"
+                  placeholder="Ime i prezime *"
+                  className={classes["contact-form-input"]}
+                  name="customer_name"
+                  value={formData.customer_name}
+                  onChange={formChangeHandler}
+                />
+                {errors.includes("customer_name") && (
+                  <span className={classes.errorMsg}>{errorMsg}</span>
+                )}
+              </div>
 
-            <div className={classes["inputError"]}>
-              <input
-                type="text"
-                placeholder="Email *"
-                name="email"
-                className={classes["contact-form-input"]}
-                value={formData.email}
-                onChange={formChangeHandler}
-              />
-              {errors.includes("email") && (
-                <span className={classes.errorMsg}>{errorMsg}</span>
-              )}
-            </div>
+              <div className={classes["inputError"]}>
+                <input
+                  type="text"
+                  placeholder="Email *"
+                  name="email"
+                  className={classes["contact-form-input"]}
+                  value={formData.email}
+                  onChange={formChangeHandler}
+                />
+                {errors.includes("email") && (
+                  <span className={classes.errorMsg}>{errorMsg}</span>
+                )}
+              </div>
 
-            <div className={classes["inputError"]}>
-              <input
-                type="text"
-                placeholder="Telefon *"
-                name="phone"
-                className={classes["contact-form-input"]}
-                value={formData.phone}
-                onChange={formChangeHandler}
-              />
-              {errors.includes("phone") && (
-                <span className={classes.errorMsg}>{errorMsg}</span>
-              )}
-            </div>
+              <div className={classes["inputError"]}>
+                <input
+                  type="text"
+                  placeholder="Telefon *"
+                  name="phone"
+                  className={classes["contact-form-input"]}
+                  value={formData.phone}
+                  onChange={formChangeHandler}
+                />
+                {errors.includes("phone") && (
+                  <span className={classes.errorMsg}>{errorMsg}</span>
+                )}
+              </div>
 
-            <div className={classes["inputError"]}>
-              <input
-                type="text"
-                placeholder="Grad *"
-                name="city"
-                className={classes["contact-form-input"]}
-                value={formData.city}
-                onChange={formChangeHandler}
-              />
-              {errors.includes("city") && (
-                <span className={classes.errorMsg}>{errorMsg}</span>
-              )}
-            </div>
+              <div className={classes["inputError"]}>
+                <input
+                  type="text"
+                  placeholder="Grad *"
+                  name="city"
+                  className={classes["contact-form-input"]}
+                  value={formData.city}
+                  onChange={formChangeHandler}
+                />
+                {errors.includes("city") && (
+                  <span className={classes.errorMsg}>{errorMsg}</span>
+                )}
+              </div>
 
-            <div className={classes["inputError"]}>
-              <textarea
-                placeholder="Poruka *"
-                className={classes["contact-form-textarea"]}
-                rows="7"
-                name="message"
-                value={formData.message}
-                onChange={formChangeHandler}
-              />
-              {errors.includes("message") && (
-                <span className={classes.errorMsg}>{errorMsg}</span>
-              )}
-            </div>
+              <div className={classes["inputError"]}>
+                <textarea
+                  placeholder="Poruka *"
+                  className={classes["contact-form-textarea"]}
+                  rows="7"
+                  name="message"
+                  value={formData.message}
+                  onChange={formChangeHandler}
+                />
+                {errors.includes("message") && (
+                  <span className={classes.errorMsg}>{errorMsg}</span>
+                )}
+              </div>
 
-            {/* <button type="button" className={classes['contact-button']}>
-              Dodajte fajlove
-            </button>
-            <span className={classes['contact-form-text']}>
-              *Maksimalna veličina dokumenta je 10MB.
-            </span>
-            <span className={classes['contact-form-text']}>
-              *Dokument može biti .jpg i .pdf.
-            </span> */}
-            {/* <div className={classes["inputError"]}>
+
+              {/* <div className={classes["inputError"]}>
               <div className={classes["g-recaptcha"]}>
                 <ReCAPTCHA
                   className={classes["captcha"]}
@@ -295,49 +295,51 @@ const ContactPage = () => {
               )}
             </div> */}
 
-            <div
-              className={
-                classes["checkbox-container"] + " basic-checkbox-container"
-              }
-            >
-              <div className="d-flex">
-                <input
-                  id="acceptance"
-                  type="checkbox"
-                  className={classes["checkbox"]}
-                  name="agreed"
-                  onChange={formChangeHandler}
-                  value={formData.agreed === "1" ? "" : "1"}
-                />
-                <label
-                  className={classes["checkbox-label"]}
-                  htmlFor="acceptance"
-                >
-                  Upoznat sam i slažem se sa sadržajem disklejmera.
-                  <br />
-                  Sadržaj disklejmera možete pogledati na{" "}
-                  <Link href="/uslovi">Pročitaj uslove</Link>
-                </label>
+              <div
+                className={
+                  classes["checkbox-container"] + " basic-checkbox-container"
+                }
+              >
+                <div className="d-flex">
+                  <input
+                    id="acceptance"
+                    type="checkbox"
+                    className={classes["checkbox"]}
+                    name="agreed"
+                    onChange={formChangeHandler}
+                    value={formData.agreed === "1" ? "" : "1"}
+                  />
+                  <label
+                    className={classes["checkbox-label"]}
+                    htmlFor="acceptance"
+                  >
+                    Upoznat sam i slažem se sa sadržajem disklejmera.
+                    <br />
+                    Sadržaj disklejmera možete pogledati na{" "}
+                    <Link href="/uslovi">Pročitaj uslove</Link>
+                  </label>
+                </div>
+
+                {errors.includes("agreed") && (
+                  <span className={classes.errorMsg}>{errorMsg}</span>
+                )}
               </div>
+{loading? <p>Ucitavam</p> : (
+              <button
+                type="button"
+                className={classes["contact-submit"]}
+                onClick={formSubmitHandler}
+              >
+                Pošalji
+              </button>)}
 
-              {errors.includes("agreed") && (
-                <span className={classes.errorMsg}>{errorMsg}</span>
+              {errors.length > 0 && (
+                <p className={classes.errorMsg}>
+                  Nisu popunjena sva obavezna polja.
+                </p>
               )}
-            </div>
-
-            <button
-              type="button"
-              className={classes["contact-submit"]}
-              onClick={formSubmitHandler}
-            >
-              Pošalji
-            </button>
-            {errors.length > 0 && (
-              <p className={classes.errorMsg}>
-                Nisu popunjena sva obavezna polja.
-              </p>
-            )}
-          </form>
+            </form>
+          )}
         </div>
       </div>
       <Stores />
