@@ -320,7 +320,9 @@ const ContactPage = () => {
                     Upoznat sam i slažem se sa sadržajem disklejmera.
                     <br />
                     Sadržaj disklejmera možete pogledati na{" "}
-                    <Link href="/uslovi">Pročitaj uslove</Link>
+                    <Link href="/politika-privatnosti">
+                      <a target="_blank">Pročitaj uslove</a>
+                    </Link>
                   </label>
                 </div>
 
