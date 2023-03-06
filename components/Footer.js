@@ -162,27 +162,42 @@ const Footer = () => {
                     <Accordion.Body>
                       <ul className={`${classes['footer-list']}`}>
                         <li>
-                          <Link href="/nacin-placanja-i-isporuka" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/nacin-placanja-i-isporuka"
+                            className={`${classes['acc-items']}`}
+                          >
                             Način plaćanja i isporuka
                           </Link>
                         </li>
                         <li>
-                          <Link href="/kako-naruciti" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/kako-naruciti"
+                            className={`${classes['acc-items']}`}
+                          >
                             Kako naručiti
                           </Link>
                         </li>
                         <li>
-                          <Link href="/najcesca-pitanja" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/najcesca-pitanja"
+                            className={`${classes['acc-items']}`}
+                          >
                             Najčešća pitanja
                           </Link>
                         </li>
                         <li>
-                          <Link href="/korisnicka-podrska" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/korisnicka-podrska"
+                            className={`${classes['acc-items']}`}
+                          >
                             Korisnička podrška
                           </Link>
                         </li>
                         <li>
-                          <Link href="/zamena-artikala" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/zamena-artikala"
+                            className={`${classes['acc-items']}`}
+                          >
                             Zamena artikala
                           </Link>
                         </li>
@@ -199,17 +214,26 @@ const Footer = () => {
                     <Accordion.Body>
                       <ul className={`${classes['footer-list']}`}>
                         <li>
-                          <Link href="/uslovi-koriscenja" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/uslovi-koriscenja"
+                            className={`${classes['acc-items']}`}
+                          >
                             Uslovi korišćenja
                           </Link>
                         </li>
                         <li>
-                          <Link href="/politika-privatnosti" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/politika-privatnosti"
+                            className={`${classes['acc-items']}`}
+                          >
                             Politika privatnosti
                           </Link>
                         </li>
                         <li>
-                          <Link href="/prava-potrosaca" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/prava-potrosaca"
+                            className={`${classes['acc-items']}`}
+                          >
                             Prava potrošača
                           </Link>
                         </li>
@@ -234,12 +258,18 @@ const Footer = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link href="/postani-partner" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/postani-partner"
+                            className={`${classes['acc-items']}`}
+                          >
                             Postani partner
                           </Link>
                         </li>
                         <li>
-                          <Link href="/kontakt" className={`${classes['acc-items']}`}>
+                          <Link
+                            href="/kontakt"
+                            className={`${classes['acc-items']}`}
+                          >
                             Kontakt
                           </Link>
                         </li>
@@ -268,12 +298,8 @@ const Footer = () => {
                             +381 65 377 330 0 
                           </Link>
                         </li>
-                        <li>
-                          Ponedeljak - petak: 8 - 20h
-                        </li>
-                        <li>
-                          Subota - nedelja:8 - 17h
-                        </li>
+                        <li>Ponedeljak - petak: 8 - 20h</li>
+                        <li>Subota - nedelja:8 - 17h</li>
                       </ul>
                     </Accordion.Body>
                   </Accordion.Item>
@@ -303,12 +329,18 @@ const Footer = () => {
           </p>
           <ul className="d-flex">
             <li>
-              <Link href="/" className={`${classes['acc-items']}`}>
+              <Link
+                href="/opsti-uslovi-prodaje"
+                className={`${classes['acc-items']}`}
+              >
                 Opšti uslovi prodaje
               </Link>
             </li>
             <li>
-              <Link href="/" className={`${classes['acc-items']}`}>
+              <Link
+                href="/politika-privatnosti"
+                className={`${classes['acc-items']}`}
+              >
                 Politika privatnosti
               </Link>
             </li>
