@@ -337,12 +337,12 @@ const NavbarMenu = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={classes.Link}>
+                          <Link href="/nacin-placanja-i-isporuka" className={classes.Link}>
                             Način plaćanja
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={classes.Link}>
+                          <Link href="/blog" className={classes.Link}>
                             Blog
                           </Link>
                         </li>

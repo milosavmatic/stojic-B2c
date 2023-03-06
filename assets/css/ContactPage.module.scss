@@ -51,6 +51,7 @@
 }
 .phone-numbers {
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 .working-hours {
@@ -119,6 +120,20 @@
   }
 }
 
+.successMessage {
+  align-items: center;
+  justify-content: center;
+  .iconSuccess {
+    background: #43b749;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    color: white;
+    margin-bottom: 5px;
+  }
+}
+
 .inputError {
   margin-bottom: 2rem;
   display: flex;
@@ -182,10 +197,17 @@
   border: none;
   font-weight: 550;
   background-color: var(--red-color);
+  display: flex;
+  align-items: center;
   &:active {
     background-color: var(--blue-color-darker);
   }
+  img {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
 }
+
 .checkbox-label {
   padding-left: 1rem;
   line-height: normal;

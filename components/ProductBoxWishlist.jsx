@@ -29,7 +29,7 @@ const ProductBoxWishlist = ({ product, wishlistId }) => {
         </a>
       </Link>
       {product?.categories && (
-        <Link href={`/kategorije/${product?.categories[0].id}`}>
+        <Link href={`/kategorije/${product?.categories[0]?.id}`}>
           <a className={classes['category-name']}>
             {product?.categories[0]?.name ?? ''}
           </a>
