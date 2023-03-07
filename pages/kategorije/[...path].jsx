@@ -20,11 +20,15 @@ import { useCallback, useEffect, useState } from "react";
 import { queryKeys, sortKeys } from "../../helpers/const";
 import Image from "next/image";
 import catBanner from "../../assets/images/banners/catBanner.jpg";
+import pic from '../../assets/images/loading-buffering.gif';
 
 const CategoriesPage = ({ categoryData, filters }) => {
   const router = useRouter();
   const { asPath } = router;
   const { query } = router;
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const replaceQuery = useCallback(
     (newQuery) => {
       delete newQuery.path;
@@ -74,6 +78,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
   const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
+    // setIsLoading(true);
     const api = ApiHandler();
     console.log(categoryData.id);
     api
@@ -83,11 +88,13 @@ const CategoriesPage = ({ categoryData, filters }) => {
         setSelectedFilters([]);
         setPage(1);
         setAvailableFilters(response.payload);
+        // setIsLoading(false);
       });
   }, [categoryData.id]);
 
   useEffect(() => {
     if (changeFilters) {
+      // setIsLoading(true);
       const api = ApiHandler();
       api
         .post(`/products/category/filters/${categoryData.id}`, {
@@ -110,6 +117,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
             }
           }
           setAvailableFilters(ret);
+          // setIsLoading(false);
         });
     }
 
@@ -141,6 +149,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
 
   const getProductList = useCallback(
     (limit, sort, page, selectedFilters) => {
+      setIsLoading(true);
       const api = ApiHandler();
       api
         .list(`products/category/list/${categoryData.id}`, {
@@ -149,8 +158,14 @@ const CategoriesPage = ({ categoryData, filters }) => {
           sort,
           filters: selectedFilters,
         })
-        .then((response) => setProductsData(response?.payload))
-        .catch((error) => console.warn(error));
+        .then((response) => {
+          setProductsData(response?.payload)
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.warn(error);
+          setIsLoading(false);
+        });
     },
     [categoryData.id]
   );
@@ -361,7 +376,12 @@ const CategoriesPage = ({ categoryData, filters }) => {
                 </span>
                 <span>po strani</span>
               </div>
-              <div className={classes["product-row"] + " row"}>
+              {isLoading ? (
+                <div className="gif">
+                  <Image src={pic} alt="Loading" objectFit={'contain'} />
+                </div>
+              ) : (
+                <div className={classes["product-row"] + " row"}>
                 {(products ?? []).map((product) => (
                   <div
                     className={
@@ -377,6 +397,8 @@ const CategoriesPage = ({ categoryData, filters }) => {
                   <p>Trenutno nema podataka za prikaz!</p>
                 )}
               </div>
+                )}
+              
               <div className={classes.paginationHolder}>
                 <div>
                   Strana {pagination?.selected_page} od{" "}
@@ -389,8 +411,8 @@ const CategoriesPage = ({ categoryData, filters }) => {
                         length: Math.min(
                           5,
                           pagination?.total_pages -
-                            pagination?.selected_page +
-                            3,
+                          pagination?.selected_page +
+                          3,
                           pagination?.total_pages
                         ),
                       },
@@ -398,10 +420,9 @@ const CategoriesPage = ({ categoryData, filters }) => {
                     ).map((num) => (
                       <span
                         key={num}
-                        className={`${classes.paginationItem} ${
-                          num === pagination?.selected_page &&
+                        className={`${classes.paginationItem} ${num === pagination?.selected_page &&
                           classes.paginationItemSelected
-                        }`}
+                          }`}
                         onClick={() => onPageChange(num)}
                       >
                         {num}
