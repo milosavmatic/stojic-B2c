@@ -11,6 +11,7 @@
 
 .checkout {
   background-color: #f6f8f9;
+  padding-bottom: 2rem;
 
   .input {
     border-radius: 7px;
@@ -264,11 +265,13 @@
   min-height: 500px;
   border-radius: 5px;
   background-color: var(--white-color);
-  margin-bottom: 4rem;
+  // margin-bottom: 4rem;
   padding: 2rem;
 }
 
 .agree {
+  width: fit-content;
+  margin-left: auto;
   input[type='checkbox'] {
     accent-color: var(--red-color);
   }
@@ -292,11 +295,21 @@
     color: #fff;
     outline: none;
     background-color: var(--red-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:active {
       background-color: var(--dark-red-color);
     }
     &:hover {
       background-color: var(--dark-red-color);
+    }
+  }
+  .loading-button {
+    min-width: 11rem;
+    img {
+      width: 1.5rem !important;
+      height: 1.5rem !important;
     }
   }
 }
