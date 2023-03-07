@@ -4,6 +4,7 @@ import classes from '../../assets/css/WishListPage.module.scss'
 import { ApiHandler } from '../api/api'
 import { useCartContext } from '../api/cartContext'
 import ProductBoxWishlist from '../../components/ProductBoxWishlist'
+import Link from 'next/link'
 
 const WishListPage = () => {
   const [wishListData, setWishListData] = useState()
@@ -33,7 +34,14 @@ const WishListPage = () => {
             />
           </div>
         ))}
-        {wishListProducts.length === 0 && <p>Vaša lista želja je prazna!</p>}
+        {wishListProducts.length === 0 && <div>
+              <p className="mb-3">Vaša lista želja je prazna!</p>
+              <Link href="/" >
+                <a className="button-back-to-home">
+                  Vratite se na početnu stranicu
+                </a>
+              </Link>
+            </div>}
       </div>
     </div>
   )
