@@ -785,15 +785,6 @@ footer .accordion-button::after {
     align-items: center;
   }
   position: relative;
-  // &::after {
-  //   content: '';
-  //   position: absolute;
-  //   height: 100%;
-  //   width:100%;
-  //   left:0;
-  //   top:0;
-  //   border:1px solid var(--croonus-lightMedGray);
-  // }
 }
 
 @media (min-width: 768px) {
