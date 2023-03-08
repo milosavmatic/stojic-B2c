@@ -8,6 +8,7 @@ import {
 } from '../pages/api/globals';
 import { BsHandbag } from 'react-icons/bs';
 import pic from '../assets/images/loading-buffering.gif';
+import { useState } from 'react';
 
 const ProductBoxComplexSmall = ({
   product,
@@ -22,6 +23,12 @@ const ProductBoxComplexSmall = ({
     product?.image.length > 0 && product?.image
       ? product?.image[0]
       : product?.path ?? '/static/images/logo.png';
+
+  const [isLoadingDetails, setIsLoadingDetails] = useState(false);
+
+  const handleClick = () => {
+    setIsLoadingDetails(true);
+  };
 
   return (
     <div className={`${classes['container']} ${classes[className]}`}>
@@ -42,6 +49,7 @@ const ProductBoxComplexSmall = ({
         </Link>
       </div>
 
+      {/* <div className={`${classes['ruza']}`} onClick={handleClick}> */}
       <Link href={`/proizvod/${product?.id}`}>
         <a
           className={
@@ -49,7 +57,13 @@ const ProductBoxComplexSmall = ({
               ? `${classes['noImg']} ${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
               : `${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
           }
+          onClick={handleClick}
         >
+          {isLoadingDetails && (
+            <div className={`${classes['box-small-gif']} gif`}>
+              <Image src={pic} alt="Loading" objectFit={'contain'} />
+            </div>
+          )}
           <Image
             alt={product?.basic_data?.slug}
             src={imageUrl}
@@ -58,6 +72,7 @@ const ProductBoxComplexSmall = ({
           />
         </a>
       </Link>
+
 
       <div className={classes['price']}>
         {!product?.price?.discount?.active && (
