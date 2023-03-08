@@ -11,7 +11,7 @@ import { openAlertBox } from '../helpers/tostify';
 import { BsHandbag } from 'react-icons/bs';
 
 const ProductBoxWishlist = ({ product, wishlistId }) => {
-  const addToCart = useGlobalAddToCart();
+  const [addToCart] = useGlobalAddToCart();
   const removeFromWishList = useGlobalRemoveFromWishlist();
   return (
     <div className={classes['container']}>

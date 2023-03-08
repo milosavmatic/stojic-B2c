@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -17,7 +17,7 @@ import { ApiHandler } from '../pages/api/api';
 import { generateMenu } from '../helpers/generateMenu';
 import Categories from './Categories/Categories';
 import { useCartContext } from '../pages/api/cartContext';
-import { BsHandbag, BsSearch, BsEnvelope } from 'react-icons/bs';
+import { BsHandbag, BsSearch, BsEnvelope, BsX } from 'react-icons/bs';
 import { SlUser } from 'react-icons/sl';
 import { FaRegUser, FaPhoneAlt } from 'react-icons/fa';
 import { currencyFormat } from '../helpers/functions';
@@ -33,6 +33,11 @@ const NavbarMenu = () => {
   const [categoryItem, setCategoryItem] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchCategory, setSearchCategory] = useState('');
+
+  const [showDivCartCount, setShowDivCartCount] = useState(false);
+  const [showDivWishListCount, setShowDivWishListCount] = useState(false);
+
+  const myRef = useRef(null);
 
   const setCategoryItemHandler = (item) => {
     setCategoryItem(item);
@@ -136,6 +141,46 @@ const NavbarMenu = () => {
     setSearchTerm('');
   };
 
+  const handleButtonClickCart = () => {
+    if (cartCount === 0) {
+      setShowDivCartCount(!showDivCartCount);
+      setShowDivWishListCount(false);
+    } else {
+      navigate('/korpa');
+    }
+  };
+
+  const handleCloseClickCart = () => {
+    setShowDivCartCount(false);
+  };
+
+  const handleButtonClickWishList = () => {
+    if (wishCount === 0) {
+      setShowDivWishListCount(!showDivWishListCount);
+      setShowDivCartCount(false);
+    } else {
+      navigate('/lista-zelja');
+    }
+  };
+
+  const handleCloseClickWishlist = () => {
+    setShowDivWishListCount(false);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (myRef.current && !myRef.current.contains(e.target)) {
+      setShowDivCartCount(false);
+      setShowDivWishListCount(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
   return (
     <div>
       <div className={`${classes['navbar']}`}>
@@ -218,35 +263,53 @@ const NavbarMenu = () => {
                 <div className={classes['icons-holder']}>
                   <div>
                     <ul className={classes['icons-list']}>
-                      {/* <li className={`${classes['button-registration']}`}>
-                        <button onClick={() => navigate('/login')}>
-                          <SlUser />
-                        </button>
-                      </li> */}
                       <li>
                         <button
                           type="button"
                           className={`${classes['button-wishlist']}`}
-                          onClick={() => navigate('/lista-zelja')}
+                          onClick={handleButtonClickWishList}
                         >
                           <Image src={wish} alt="Lista zelja" />
                           <span className={`${classes['marker']}`}>
                             {wishCount}
                           </span>
                         </button>
+                        {showDivWishListCount && (
+                          <div ref={myRef} className="on-click-show-div-zero">
+                            <BsX
+                              className="close-div-zero"
+                              onClick={handleCloseClickWishlist}
+                            />
+                            <b>Vaša lista želja je prazna.</b>
+                            Da biste videli sadržaj ove stranice, prvo morate
+                            dodati artikle u Vašu listu želja.
+                          </div>
+                        )}
                       </li>
                       <li>
                         <button
                           type="button"
                           className={`${classes['button-checkout']}`}
-                          onClick={() => navigate('/korpa')}
+                          onClick={handleButtonClickCart}
                         >
                           <BsHandbag />
                           <span className={`${classes['marker']}`}>
                             {cartCount}
                           </span>
                         </button>
+                        {showDivCartCount && (
+                          <div ref={myRef} className="on-click-show-div-zero">
+                            <BsX
+                              className="close-div-zero"
+                              onClick={handleCloseClickCart}
+                            />
+                            <b>Vaša korpa je prazna.</b>
+                            Da biste videli sadržaj ove stranice, prvo morate
+                            dodati artikle u Vašu korpu.
+                          </div>
+                        )}
                       </li>
+
                       <li>
                         Moja korpa -
                         <span>
@@ -337,7 +400,10 @@ const NavbarMenu = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link href="/nacin-placanja-i-isporuka" className={classes.Link}>
+                          <Link
+                            href="/nacin-placanja-i-isporuka"
+                            className={classes.Link}
+                          >
                             Način plaćanja
                           </Link>
                         </li>

@@ -3,11 +3,15 @@ import ProductBoxComplexSmall from '../../components/ProductBoxComplexSmall';
 import { ApiHandler } from '../api/api';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
+import pic from '../../assets/images/loading-buffering.gif';
 
 const SearchPage = () => {
   const router = useRouter();
   const { search } = router.query;
   const { asPath } = router;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [productsData, setProductsData] = useState({
     items: [],
@@ -22,15 +26,23 @@ const SearchPage = () => {
 
   const getProductList = useCallback(
     (limit, sort, page) => {
+      setIsLoading(true);
       const api = ApiHandler();
+
       api
         .list(`/products/search/list?search=${search}`, {
           limit,
           page,
           sort,
         })
-        .then((response) => setProductsData(response?.payload))
-        .catch((error) => console.warn(error));
+        .then((response) => {
+          setProductsData(response?.payload);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.warn(error);
+          setIsLoading(false);
+        });
     },
     [search]
   );
@@ -144,23 +156,30 @@ const SearchPage = () => {
                 </span>
                 <span>po strani</span>
               </div>
+              {/* className={`${classes["end-button"]} ${classes["loading-button"]}`} */}
+              {isLoading ? (
+                <div className="gif">
+                  <Image src={pic} alt="Loading" objectFit={'contain'} />
+                </div>
+              ) : (
+                <div className={classes['product-row'] + ' row'}>
+                  {products.map((product) => (
+                    <div
+                      className={
+                        classes['product-col'] +
+                        ' col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-6 col-12'
+                      }
+                      key={product.id}
+                    >
+                      <ProductBoxComplexSmall product={product} />
+                    </div>
+                  ))}
+                  {products.length === 0 && (
+                    <p>Nema podataka za unesenu pretragu!</p>
+                  )}
+                </div>)}
 
-              <div className={classes['product-row'] + ' row'}>
-                {products.map((product) => (
-                  <div
-                    className={
-                      classes['product-col'] +
-                      ' col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-6 col-12'
-                    }
-                    key={product.id}
-                  >
-                    <ProductBoxComplexSmall product={product} />
-                  </div>
-                ))}
-                {products.length === 0 && (
-                  <p>Nema podataka za unesenu pretragu!</p>
-                )}
-              </div>
+
               <div className={classes.paginationHolder}>
                 <div>
                   Strana {pagination?.selected_page} od{' '}
@@ -173,8 +192,8 @@ const SearchPage = () => {
                         length: Math.min(
                           5,
                           pagination?.total_pages -
-                            pagination?.selected_page +
-                            3,
+                          pagination?.selected_page +
+                          3,
                           pagination?.total_pages
                         ),
                       },
@@ -182,10 +201,9 @@ const SearchPage = () => {
                     ).map((num) => (
                       <span
                         key={num}
-                        className={`${classes.paginationItem} ${
-                          num === pagination?.selected_page &&
+                        className={`${classes.paginationItem} ${num === pagination?.selected_page &&
                           classes.paginationItemSelected
-                        }`}
+                          }`}
                         onClick={() => setPage(num)}
                       >
                         {num}

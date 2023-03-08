@@ -1,6 +1,7 @@
 import classes from '../../assets/css/CheckoutPage.module.scss'
 import { ApiHandler } from '../api/api'
 import { currencyFormat } from '../../helpers/functions'
+import Link from 'next/link'
 
 const OrderSuccess = ({ checkoutData }) => {
   checkoutData = checkoutData.order
@@ -22,10 +23,15 @@ const OrderSuccess = ({ checkoutData }) => {
       <p className={classes.orderDataField}>
         <b>Tip dostave:</b> {checkoutData.delivery_method}
       </p>
-      <p className={classes.orderDataField}>
+      <p className={`${classes.orderDataField} mb-4`}>
         <b>Ukupno za uplatu:</b>
         {` ${currencyFormat(checkoutData.total, checkoutData.currency)}`}
       </p>
+      <Link href="/">
+        <a className="button-back-to-home">
+          Vratite se na početnu stranicu
+        </a>
+      </Link>
     </div>
   )
 }

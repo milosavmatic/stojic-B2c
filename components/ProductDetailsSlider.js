@@ -5,7 +5,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import heartImg from '../assets/images/elements/heart.png';
 import printerImg from '../assets/images/elements/print.png';
-import compareImg from '../assets/images/elements/compare.png';
 import classes from './ProductDetails.module.scss';
 import {
   faChevronDown,
@@ -17,6 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useWindowDimensions } from '../helpers/functions';
 import Image from 'next/image';
 import { convertHttpToHttps } from '../helpers/convertHttpToHttps';
+import pic from '../assets/images/loading-buffering.gif';
 
 /**
  * Slider for product images on Single product page of B2B
@@ -54,7 +54,12 @@ function Arrow2(props) {
   );
 }
 
-const ProductDetailsSlider = ({ images = [], addToWishList, ...props }) => {
+const ProductDetailsSlider = ({
+  images = [],
+  addToWishList,
+  isLoadingWish,
+  ...props
+}) => {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
   const [numberOfImages, setNumberOfImages] = useState(images?.length ?? 5);
@@ -156,17 +161,25 @@ const ProductDetailsSlider = ({ images = [], addToWishList, ...props }) => {
                 </button>
               </div>
               <div className={classes['under-details-buttons-surrounder']}>
-                <button
-                  className={classes['under-details-buttons-button']}
-                  onClick={addToWishList}
-                >
-                  <Image
-                    alt="compare"
-                    src={heartImg}
-                    className={classes['under-details-image']}
-                  />
-                  Sačuvaj
-                </button>
+                {isLoadingWish ? (
+                  <button
+                    className={`${classes['under-details-buttons-button']}`}
+                  >
+                    <Image src={pic} alt="Loading" objectFit={'contain'} />
+                  </button>
+                ) : (
+                  <button
+                    className={classes['under-details-buttons-button']}
+                    onClick={addToWishList}
+                  >
+                    <Image
+                      alt="compare"
+                      src={heartImg}
+                      className={classes['under-details-image']}
+                    />
+                    Sačuvaj
+                  </button>
+                )}
               </div>
             </div>
           </div>
