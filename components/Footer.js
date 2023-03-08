@@ -135,7 +135,7 @@ const Footer = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
+                      <Link href="/blog">
                         <a className={`${classes['basic-link-white']}`}>Blog</a>
                       </Link>
                     </li>
@@ -274,7 +274,7 @@ const Footer = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link href="/" className={`${classes['acc-items']}`}>
+                          <Link href="/blog" className={`${classes['acc-items']}`}>
                             Blog
                           </Link>
                         </li>

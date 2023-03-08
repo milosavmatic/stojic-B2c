@@ -204,6 +204,19 @@
   }
 }
 
+.box-small-gif {
+  background-color: rgb(255, 255, 255, 0.9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  padding: 0;
+  z-index: 5;
+}
+
 .homeActionItem {
   border: 1px solid var(--red-color);
   border-radius: 35px;

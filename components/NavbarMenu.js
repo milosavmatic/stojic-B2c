@@ -597,7 +597,7 @@ const NavbarMenu = () => {
 
                       <li
                         onClick={() => {
-                          navigate('/akcije');
+                          navigate('/akcija');
                           onMobileDivShow();
                         }}
                         className={classes['mobile-nav-link']}
@@ -606,7 +606,7 @@ const NavbarMenu = () => {
                       </li>
                       <li
                         onClick={() => {
-                          navigate('/');
+                          navigate('/nacin-placanja-i-isporuka');
                           onMobileDivShow();
                         }}
                         className={classes['mobile-nav-link']}
@@ -615,7 +615,7 @@ const NavbarMenu = () => {
                       </li>
                       <li
                         onClick={() => {
-                          navigate('/');
+                          navigate('/blog');
                           onMobileDivShow();
                         }}
                         className={classes['mobile-nav-link']}
@@ -624,7 +624,7 @@ const NavbarMenu = () => {
                       </li>
                       <li
                         onClick={() => {
-                          navigate('https://b2b.stojic.rs/b2b-zahtev');
+                          navigate('https://b2b.stojic.rs/prijava');
                           onMobileDivShow();
                         }}
                         className={`${classes['mobile-nav-link']} ${classes['activeB2B']}`}
