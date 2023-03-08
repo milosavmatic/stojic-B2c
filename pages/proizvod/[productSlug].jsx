@@ -4,6 +4,7 @@ const ProductDetails = dynamic(() => import("../../components/ProductDetails"));
 import { ApiHandler } from "../api/api";
 import { generateBreadcrumbs } from "../../helpers/generateBreadCrumbs";
 import { useRouter } from "next/router";
+import Seo from "../../components/Seo/Seo";
 
 const ProductPage = ({
   basic_data,
@@ -13,23 +14,28 @@ const ProductPage = ({
   recommendedProducts,
 }) => {
   const { asPath } = useRouter();
+
+  console.log(basic_data.data.item.basic_data.name)
   return (
-    <div className="container">
-      <Breadcrumbs
-        crumbs={generateBreadcrumbs(
-          { label: "Početna", path: "/" },
-          "/kategorije",
-          breadcrumbs.steps,
-          { label: breadcrumbs.end.name, path: asPath }
-        )}
-      />
-      <ProductDetails
-        productData={basic_data.data.item}
-        gallery={gallery}
-        specifications={specifications}
-        recommendedProducts={recommendedProducts}
-      />
-    </div>
+    <>
+      <Seo title={`${basic_data.data.item.basic_data.name}`} />
+      <div className="container">
+        <Breadcrumbs
+          crumbs={generateBreadcrumbs(
+            { label: "Početna", path: "/" },
+            "/kategorije",
+            breadcrumbs.steps,
+            { label: breadcrumbs.end.name, path: asPath }
+          )}
+        />
+        <ProductDetails
+          productData={basic_data.data.item}
+          gallery={gallery}
+          specifications={specifications}
+          recommendedProducts={recommendedProducts}
+        />
+      </div>
+    </>
   );
 };
 

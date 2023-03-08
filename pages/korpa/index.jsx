@@ -14,6 +14,7 @@ import {
   GoogleReCaptcha,
 } from "react-google-recaptcha-v3";
 import pic from '../../assets/images/loading-buffering.gif';
+import Seo from "../../components/Seo/Seo";
 
 
 
@@ -266,729 +267,732 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 
 
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={process.env.CAPTCHAKEY}>
-      <GoogleReCaptcha
-        onVerify={verifyCaptcha}
-        refreshReCaptcha={refreshReCaptcha}
-      />
-      <div className={`${classes["checkout"]} container`}>
-        <h5 className={classes["your-cart"]}>Vaša korpa</h5>
+    <>
+      <Seo title="Vaša korpa" />
+      <GoogleReCaptchaProvider reCaptchaKey={process.env.CAPTCHAKEY}>
+        <GoogleReCaptcha
+          onVerify={verifyCaptcha}
+          refreshReCaptcha={refreshReCaptcha}
+        />
+        <div className={`${classes["checkout"]} container`}>
+          <h5 className={classes["your-cart"]}>Vaša korpa</h5>
 
-        {isLoadingList ?
-          (<div className="gif">
-            <Image src={pic} alt="Loading" objectFit={'contain'} />
-          </div>) : (
-            <div className={"row"}>
-              {cartItems.length > 0 ? (
-                <>
-                  <div className={classes["left-side"] + " col-xxl-7 col-12"}>
-                    <div className={classes["user-info"]}>
-                      <div className={classes["radio-face"]}>
-                        <input
-                          type="radio"
-                          className={classes["basic-radio"]}
-                          name="type"
-                          value="personal"
-                          id="personal"
-                          onChange={formChangeHandler}
-                          checked={formData.type === "personal"}
-                        />
-                        <label htmlFor={"personal"}>Poručujem kao fizičko lice</label>
-                        <input
-                          type="radio"
-                          className={classes["basic-radio"]}
-                          name="type"
-                          value="company"
-                          id="company"
-                          onChange={formChangeHandler}
-                        />
-                        <label htmlFor={"company"}>Poručujem kao pravno lice</label>
-                      </div>
+          {isLoadingList ?
+            (<div className="gif">
+              <Image src={pic} alt="Loading" objectFit={'contain'} />
+            </div>) : (
+              <div className={"row"}>
+                {cartItems.length > 0 ? (
+                  <>
+                    <div className={classes["left-side"] + " col-xxl-7 col-12"}>
+                      <div className={classes["user-info"]}>
+                        <div className={classes["radio-face"]}>
+                          <input
+                            type="radio"
+                            className={classes["basic-radio"]}
+                            name="type"
+                            value="personal"
+                            id="personal"
+                            onChange={formChangeHandler}
+                            checked={formData.type === "personal"}
+                          />
+                          <label htmlFor={"personal"}>Poručujem kao fizičko lice</label>
+                          <input
+                            type="radio"
+                            className={classes["basic-radio"]}
+                            name="type"
+                            value="company"
+                            id="company"
+                            onChange={formChangeHandler}
+                          />
+                          <label htmlFor={"company"}>Poručujem kao pravno lice</label>
+                        </div>
 
-                      {formData.type === "company" && (
-                        <>
-                          <div className={classes["input-info-container"] + " row"}>
-                            <div
-                              className={classes["input-info"] + " col-lg-12 col-12"}
-                            >
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="company_name"
+                        {formData.type === "company" && (
+                          <>
+                            <div className={classes["input-info-container"] + " row"}>
+                              <div
+                                className={classes["input-info"] + " col-lg-12 col-12"}
                               >
-                                Naziv kompanije: <span className="mandatory">*</span>
-                                {errors.includes("company_name") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="company_name"
-                                  type="text"
-                                  name="company_name"
-                                  value={formData.company_name}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className={classes["input-info-container"] + " row"}>
-                            <div
-                              className={
-                                classes["input-info-left"] + " col-lg-6 col-12"
-                              }
-                            >
-                              <label className={classes["input-label"]} htmlFor="pib">
-                                PIB: <span className="mandatory">*</span>
-                                {errors.includes("pib") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="pib"
-                                  type="text"
-                                  name="pib"
-                                  value={formData.pib}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                            <div
-                              className={
-                                classes["input-info-right"] + " col-lg-6 col-12"
-                              }
-                            >
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="maticni_broj"
-                              >
-                                Matični broj: <span className="mandatory">*</span>
-                                {errors.includes("maticni_broj") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="maticni_broj"
-                                  type="text"
-                                  name="maticni_broj"
-                                  value={formData.maticni_broj}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      )}
-
-                      <div className={classes["input-info-container"] + " row"}>
-                        <div
-                          className={classes["input-info-left"] + " col-lg-6 col-12"}
-                        >
-                          <label className={classes["input-label"]} htmlFor="name">
-                            Ime: <span className="mandatory">*</span>
-                            {errors.includes("first_name") && (
-                              <span className={classes.errorMsg}>{errorMsg}</span>
-                            )}
-                          </label>
-                          <div className={classes["input-info-padding"]}>
-                            <input
-                              className={classes["input"]}
-                              id="name"
-                              type="text"
-                              name="first_name"
-                              value={formData.first_name}
-                              onChange={formChangeHandler}
-                            />
-                          </div>
-                          <label className={classes["input-label"]} htmlFor="surname">
-                            Prezime: <span className="mandatory">*</span>
-                            {errors.includes("last_name") && (
-                              <span className={classes.errorMsg}>{errorMsg}</span>
-                            )}
-                          </label>
-                          <div className={classes["input-info-padding"]}>
-                            <input
-                              className={classes["input"]}
-                              id="surname"
-                              type="text"
-                              name="last_name"
-                              value={formData.last_name}
-                              onChange={formChangeHandler}
-                            />
-                          </div>
-                          <label className={classes["input-label"]} htmlFor="email">
-                            E-mail: <span className="mandatory">*</span>
-                            {errors.includes("email") && (
-                              <span className={classes.errorMsg}>{errorMsg}</span>
-                            )}
-                          </label>
-                          <div className={classes["input-info-padding"]}>
-                            <input
-                              className={classes["input"]}
-                              id="email"
-                              type="text"
-                              name="email"
-                              value={formData.email}
-                              onChange={formChangeHandler}
-                            />
-                          </div>
-                        </div>
-                        <div
-                          className={classes["input-info-right"] + " col-lg-6 col-12"}
-                        >
-                          <label className={classes["input-label"]} htmlFor="phone">
-                            Telefon: <span className="mandatory">*</span>
-                            {errors.includes("phone") && (
-                              <span className={classes.errorMsg}>{errorMsg}</span>
-                            )}
-                          </label>
-                          <div className={classes["input-info-padding"]}>
-                            <input
-                              className={classes["input"]}
-                              id="phone"
-                              type="text"
-                              name="phone"
-                              value={formData.phone}
-                              onChange={formChangeHandler}
-                            />
-                          </div>
-                          <div className="row">
-                            <div className="col-6">
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="address"
-                              >
-                                Ulica: <span className="mandatory">*</span>
-                                {errors.includes("address") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="address"
-                                  type="text"
-                                  name="address"
-                                  value={formData.address}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                            <div className="col-6">
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="object_number"
-                              >
-                                Broj: <span className="mandatory">*</span>
-                                {errors.includes("object_number") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="object_number"
-                                  type="text"
-                                  name="object_number"
-                                  value={formData.object_number}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-6">
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="zip_code"
-                              >
-                                Poštanski broj: <span className="mandatory">*</span>
-                                {errors.includes("zip_code") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="zip_code"
-                                  type="text"
-                                  name="zip_code"
-                                  value={formData.zip_code}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                            <div className="col-6">
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="town"
-                              >
-                                Grad: <span className="mandatory">*</span>
-                                {errors.includes("town") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="town"
-                                  type="text"
-                                  name="town"
-                                  value={formData.town}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className={classes["additional-user-info"] + " row"}>
-                        <div
-                          className={classes["user-info-adress"] + " col-lg-6 col-12"}
-                        >
-                          <h6>Adresa dostave</h6>
-                          <p className={classes["user-info-adress-p"]}>
-                            Zahtevajte drugu adresu za dostavu u odnosu na adresu
-                            računa.
-                          </p>
-                          <div className={classes["padding-125"]}>
-                            <button
-                              className={classes["input"]}
-                              onClick={() => setSecondAddress(!secondAddress)}
-                            >
-                              Druga adresa dostave
-                            </button>
-                          </div>
-                        </div>
-                        <div className={classes["user-note"] + " col-lg-6 col-12"}>
-                          <label className={classes["input-label"]} htmlFor="note">
-                            Napomena:
-                          </label>
-                          <div className={classes["input-info-padding"]}>
-                            <textarea
-                              id="note"
-                              type="text"
-                              rows="4"
-                              name="note"
-                              value={formData.note}
-                              onChange={formChangeHandler}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      {secondAddress && formData.type === "company" && (
-                        <>
-                          <div className={classes["input-info-container"] + " row"}>
-                            <div
-                              className={classes["input-info"] + " col-lg-12 col-12"}
-                            >
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="shipping_company_name"
-                              >
-                                Naziv kompanije: <span className="mandatory">*</span>
-                                {errors.includes("shipping_company_name") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="shipping_company_name"
-                                  type="text"
-                                  name="shipping_company_name"
-                                  value={formData.shipping_company_name}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      )}
-                      {secondAddress && (
-                        <>
-                          <div className={classes["input-info-container"] + " row"}>
-                            <div
-                              className={
-                                classes["input-info-left"] + " col-lg-6 col-12"
-                              }
-                            >
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="shipping_name"
-                              >
-                                Ime: <span className="mandatory">*</span>
-                                {errors.includes("shipping_first_name") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="shipping_name"
-                                  type="text"
-                                  name="shipping_first_name"
-                                  value={formData.shipping_first_name}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="shipping_surname"
-                              >
-                                Prezime: <span className="mandatory">*</span>
-                                {errors.includes("shipping_last_name") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="shipping_surname"
-                                  type="text"
-                                  name="shipping_last_name"
-                                  value={formData.shipping_last_name}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="shipping_email"
-                              >
-                                E-mail: <span className="mandatory">*</span>
-                                {errors.includes("shipping_email") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="shipping_email"
-                                  type="text"
-                                  name="shipping_email"
-                                  value={formData.shipping_email}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                            </div>
-                            <div
-                              className={
-                                classes["input-info-right"] + " col-lg-6 col-12"
-                              }
-                            >
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="shipping_phone"
-                              >
-                                Telefon: <span className="mandatory">*</span>
-                                {errors.includes("shipping_phone") && (
-                                  <span className={classes.errorMsg}>{errorMsg}</span>
-                                )}
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <input
-                                  className={classes["input"]}
-                                  id="shipping_phone"
-                                  type="text"
-                                  name="shipping_phone"
-                                  value={formData.shipping_phone}
-                                  onChange={formChangeHandler}
-                                />
-                              </div>
-                              <div className="row">
-                                <div className="col-6">
-                                  <label
-                                    className={classes["input-label"]}
-                                    htmlFor="shipping_address"
-                                  >
-                                    Adresa dostave:{" "}
-                                    <span className="mandatory">*</span>
-                                    {errors.includes("shipping_address") && (
-                                      <span className={classes.errorMsg}>
-                                        {errorMsg}
-                                      </span>
-                                    )}
-                                  </label>
-                                  <div className={classes["input-info-padding"]}>
-                                    <input
-                                      className={classes["input"]}
-                                      id="shipping_address"
-                                      type="text"
-                                      name="shipping_address"
-                                      value={formData.shipping_address}
-                                      onChange={formChangeHandler}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-6">
-                                  <label
-                                    className={classes["input-label"]}
-                                    htmlFor="shipping_object_number"
-                                  >
-                                    Broj: <span className="mandatory">*</span>
-                                    {errors.includes("shipping_object_number") && (
-                                      <span className={classes.errorMsg}>
-                                        {errorMsg}
-                                      </span>
-                                    )}
-                                  </label>
-                                  <div className={classes["input-info-padding"]}>
-                                    <input
-                                      className={classes["input"]}
-                                      id="shipping_object_number"
-                                      type="text"
-                                      name="shipping_object_number"
-                                      value={formData.shipping_object_number}
-                                      onChange={formChangeHandler}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="row">
-                                <div className="col-6">
-                                  <label
-                                    className={classes["input-label"]}
-                                    htmlFor="shipping_zip_code"
-                                  >
-                                    Poštanski broj:{" "}
-                                    <span className="mandatory">*</span>
-                                    {errors.includes("shipping_zip_code") && (
-                                      <span className={classes.errorMsg}>
-                                        {errorMsg}
-                                      </span>
-                                    )}
-                                  </label>
-                                  <div className={classes["input-info-padding"]}>
-                                    <input
-                                      className={classes["input"]}
-                                      id="shipping_zip_code"
-                                      type="text"
-                                      name="shipping_zip_code"
-                                      value={formData.shipping_zip_code}
-                                      onChange={formChangeHandler}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-6">
-                                  <label
-                                    className={classes["input-label"]}
-                                    htmlFor="shipping_town"
-                                  >
-                                    Grad: <span className="mandatory">*</span>
-                                    {errors.includes("shipping_town") && (
-                                      <span className={classes.errorMsg}>
-                                        {errorMsg}
-                                      </span>
-                                    )}
-                                  </label>
-                                  <div className={classes["input-info-padding"]}>
-                                    <input
-                                      className={classes["input"]}
-                                      id="shipping_town"
-                                      type="text"
-                                      name="shipping_town"
-                                      value={formData.shipping_town}
-                                      onChange={formChangeHandler}
-                                    />
-                                  </div>
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="company_name"
+                                >
+                                  Naziv kompanije: <span className="mandatory">*</span>
+                                  {errors.includes("company_name") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="company_name"
+                                    type="text"
+                                    name="company_name"
+                                    value={formData.company_name}
+                                    onChange={formChangeHandler}
+                                  />
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div className={classes["additional-user-info"] + " row"}>
-                            <div
-                              className={classes["input-info"] + " col-lg-12 col-12"}
-                            >
-                              <label
-                                className={classes["input-label"]}
-                                htmlFor="shipping_note"
+                            <div className={classes["input-info-container"] + " row"}>
+                              <div
+                                className={
+                                  classes["input-info-left"] + " col-lg-6 col-12"
+                                }
                               >
-                                Napomena:
-                              </label>
-                              <div className={classes["input-info-padding"]}>
-                                <textarea
-                                  id="shipping_note"
-                                  type="text"
-                                  rows="4"
-                                  name="shipping_note"
-                                  value={formData.shipping_note}
-                                  onChange={formChangeHandler}
-                                />
+                                <label className={classes["input-label"]} htmlFor="pib">
+                                  PIB: <span className="mandatory">*</span>
+                                  {errors.includes("pib") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="pib"
+                                    type="text"
+                                    name="pib"
+                                    value={formData.pib}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                              <div
+                                className={
+                                  classes["input-info-right"] + " col-lg-6 col-12"
+                                }
+                              >
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="maticni_broj"
+                                >
+                                  Matični broj: <span className="mandatory">*</span>
+                                  {errors.includes("maticni_broj") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="maticni_broj"
+                                    type="text"
+                                    name="maticni_broj"
+                                    value={formData.maticni_broj}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    <div className={classes["products-container"]}>
-                      <CartProductBox cartItems={cartItems} />
-                    </div>
-                  </div>
-                  <div className={classes["right-side"] + " col-xxl-5 col-12"}>
-                    <div className={classes["same-height-1"]}>
-                      <div className={classes["way-of-delivery"]}>
-                        <h5>Odaberite način dostave:</h5>
-                        {errors.includes("delivery") && (
-                          <span className={classes.errorMsg}>{errorSelect}</span>
+                          </>
                         )}
-                        <div className={classes["padding"]}>
-                          {(deliveryoptions ?? []).map((item) => (
-                            <div key={item.type}>
-                              <div className={classes["radio-face"]}>
+
+                        <div className={classes["input-info-container"] + " row"}>
+                          <div
+                            className={classes["input-info-left"] + " col-lg-6 col-12"}
+                          >
+                            <label className={classes["input-label"]} htmlFor="name">
+                              Ime: <span className="mandatory">*</span>
+                              {errors.includes("first_name") && (
+                                <span className={classes.errorMsg}>{errorMsg}</span>
+                              )}
+                            </label>
+                            <div className={classes["input-info-padding"]}>
+                              <input
+                                className={classes["input"]}
+                                id="name"
+                                type="text"
+                                name="first_name"
+                                value={formData.first_name}
+                                onChange={formChangeHandler}
+                              />
+                            </div>
+                            <label className={classes["input-label"]} htmlFor="surname">
+                              Prezime: <span className="mandatory">*</span>
+                              {errors.includes("last_name") && (
+                                <span className={classes.errorMsg}>{errorMsg}</span>
+                              )}
+                            </label>
+                            <div className={classes["input-info-padding"]}>
+                              <input
+                                className={classes["input"]}
+                                id="surname"
+                                type="text"
+                                name="last_name"
+                                value={formData.last_name}
+                                onChange={formChangeHandler}
+                              />
+                            </div>
+                            <label className={classes["input-label"]} htmlFor="email">
+                              E-mail: <span className="mandatory">*</span>
+                              {errors.includes("email") && (
+                                <span className={classes.errorMsg}>{errorMsg}</span>
+                              )}
+                            </label>
+                            <div className={classes["input-info-padding"]}>
+                              <input
+                                className={classes["input"]}
+                                id="email"
+                                type="text"
+                                name="email"
+                                value={formData.email}
+                                onChange={formChangeHandler}
+                              />
+                            </div>
+                          </div>
+                          <div
+                            className={classes["input-info-right"] + " col-lg-6 col-12"}
+                          >
+                            <label className={classes["input-label"]} htmlFor="phone">
+                              Telefon: <span className="mandatory">*</span>
+                              {errors.includes("phone") && (
+                                <span className={classes.errorMsg}>{errorMsg}</span>
+                              )}
+                            </label>
+                            <div className={classes["input-info-padding"]}>
+                              <input
+                                className={classes["input"]}
+                                id="phone"
+                                type="text"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={formChangeHandler}
+                              />
+                            </div>
+                            <div className="row">
+                              <div className="col-6">
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="address"
+                                >
+                                  Ulica: <span className="mandatory">*</span>
+                                  {errors.includes("address") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="address"
+                                    type="text"
+                                    name="address"
+                                    value={formData.address}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-6">
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="object_number"
+                                >
+                                  Broj: <span className="mandatory">*</span>
+                                  {errors.includes("object_number") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="object_number"
+                                    type="text"
+                                    name="object_number"
+                                    value={formData.object_number}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-6">
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="zip_code"
+                                >
+                                  Poštanski broj: <span className="mandatory">*</span>
+                                  {errors.includes("zip_code") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="zip_code"
+                                    type="text"
+                                    name="zip_code"
+                                    value={formData.zip_code}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-6">
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="town"
+                                >
+                                  Grad: <span className="mandatory">*</span>
+                                  {errors.includes("town") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="town"
+                                    type="text"
+                                    name="town"
+                                    value={formData.town}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={classes["additional-user-info"] + " row"}>
+                          <div
+                            className={classes["user-info-adress"] + " col-lg-6 col-12"}
+                          >
+                            <h6>Adresa dostave</h6>
+                            <p className={classes["user-info-adress-p"]}>
+                              Zahtevajte drugu adresu za dostavu u odnosu na adresu
+                              računa.
+                            </p>
+                            <div className={classes["padding-125"]}>
+                              <button
+                                className={classes["input"]}
+                                onClick={() => setSecondAddress(!secondAddress)}
+                              >
+                                Druga adresa dostave
+                              </button>
+                            </div>
+                          </div>
+                          <div className={classes["user-note"] + " col-lg-6 col-12"}>
+                            <label className={classes["input-label"]} htmlFor="note">
+                              Napomena:
+                            </label>
+                            <div className={classes["input-info-padding"]}>
+                              <textarea
+                                id="note"
+                                type="text"
+                                rows="4"
+                                name="note"
+                                value={formData.note}
+                                onChange={formChangeHandler}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        {secondAddress && formData.type === "company" && (
+                          <>
+                            <div className={classes["input-info-container"] + " row"}>
+                              <div
+                                className={classes["input-info"] + " col-lg-12 col-12"}
+                              >
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="shipping_company_name"
+                                >
+                                  Naziv kompanije: <span className="mandatory">*</span>
+                                  {errors.includes("shipping_company_name") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="shipping_company_name"
+                                    type="text"
+                                    name="shipping_company_name"
+                                    value={formData.shipping_company_name}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                        {secondAddress && (
+                          <>
+                            <div className={classes["input-info-container"] + " row"}>
+                              <div
+                                className={
+                                  classes["input-info-left"] + " col-lg-6 col-12"
+                                }
+                              >
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="shipping_name"
+                                >
+                                  Ime: <span className="mandatory">*</span>
+                                  {errors.includes("shipping_first_name") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="shipping_name"
+                                    type="text"
+                                    name="shipping_first_name"
+                                    value={formData.shipping_first_name}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="shipping_surname"
+                                >
+                                  Prezime: <span className="mandatory">*</span>
+                                  {errors.includes("shipping_last_name") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="shipping_surname"
+                                    type="text"
+                                    name="shipping_last_name"
+                                    value={formData.shipping_last_name}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="shipping_email"
+                                >
+                                  E-mail: <span className="mandatory">*</span>
+                                  {errors.includes("shipping_email") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="shipping_email"
+                                    type="text"
+                                    name="shipping_email"
+                                    value={formData.shipping_email}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                              <div
+                                className={
+                                  classes["input-info-right"] + " col-lg-6 col-12"
+                                }
+                              >
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="shipping_phone"
+                                >
+                                  Telefon: <span className="mandatory">*</span>
+                                  {errors.includes("shipping_phone") && (
+                                    <span className={classes.errorMsg}>{errorMsg}</span>
+                                  )}
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <input
+                                    className={classes["input"]}
+                                    id="shipping_phone"
+                                    type="text"
+                                    name="shipping_phone"
+                                    value={formData.shipping_phone}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                                <div className="row">
+                                  <div className="col-6">
+                                    <label
+                                      className={classes["input-label"]}
+                                      htmlFor="shipping_address"
+                                    >
+                                      Adresa dostave:{" "}
+                                      <span className="mandatory">*</span>
+                                      {errors.includes("shipping_address") && (
+                                        <span className={classes.errorMsg}>
+                                          {errorMsg}
+                                        </span>
+                                      )}
+                                    </label>
+                                    <div className={classes["input-info-padding"]}>
+                                      <input
+                                        className={classes["input"]}
+                                        id="shipping_address"
+                                        type="text"
+                                        name="shipping_address"
+                                        value={formData.shipping_address}
+                                        onChange={formChangeHandler}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="col-6">
+                                    <label
+                                      className={classes["input-label"]}
+                                      htmlFor="shipping_object_number"
+                                    >
+                                      Broj: <span className="mandatory">*</span>
+                                      {errors.includes("shipping_object_number") && (
+                                        <span className={classes.errorMsg}>
+                                          {errorMsg}
+                                        </span>
+                                      )}
+                                    </label>
+                                    <div className={classes["input-info-padding"]}>
+                                      <input
+                                        className={classes["input"]}
+                                        id="shipping_object_number"
+                                        type="text"
+                                        name="shipping_object_number"
+                                        value={formData.shipping_object_number}
+                                        onChange={formChangeHandler}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-6">
+                                    <label
+                                      className={classes["input-label"]}
+                                      htmlFor="shipping_zip_code"
+                                    >
+                                      Poštanski broj:{" "}
+                                      <span className="mandatory">*</span>
+                                      {errors.includes("shipping_zip_code") && (
+                                        <span className={classes.errorMsg}>
+                                          {errorMsg}
+                                        </span>
+                                      )}
+                                    </label>
+                                    <div className={classes["input-info-padding"]}>
+                                      <input
+                                        className={classes["input"]}
+                                        id="shipping_zip_code"
+                                        type="text"
+                                        name="shipping_zip_code"
+                                        value={formData.shipping_zip_code}
+                                        onChange={formChangeHandler}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="col-6">
+                                    <label
+                                      className={classes["input-label"]}
+                                      htmlFor="shipping_town"
+                                    >
+                                      Grad: <span className="mandatory">*</span>
+                                      {errors.includes("shipping_town") && (
+                                        <span className={classes.errorMsg}>
+                                          {errorMsg}
+                                        </span>
+                                      )}
+                                    </label>
+                                    <div className={classes["input-info-padding"]}>
+                                      <input
+                                        className={classes["input"]}
+                                        id="shipping_town"
+                                        type="text"
+                                        name="shipping_town"
+                                        value={formData.shipping_town}
+                                        onChange={formChangeHandler}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className={classes["additional-user-info"] + " row"}>
+                              <div
+                                className={classes["input-info"] + " col-lg-12 col-12"}
+                              >
+                                <label
+                                  className={classes["input-label"]}
+                                  htmlFor="shipping_note"
+                                >
+                                  Napomena:
+                                </label>
+                                <div className={classes["input-info-padding"]}>
+                                  <textarea
+                                    id="shipping_note"
+                                    type="text"
+                                    rows="4"
+                                    name="shipping_note"
+                                    value={formData.shipping_note}
+                                    onChange={formChangeHandler}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      <div className={classes["products-container"]}>
+                        <CartProductBox cartItems={cartItems} />
+                      </div>
+                    </div>
+                    <div className={classes["right-side"] + " col-xxl-5 col-12"}>
+                      <div className={classes["same-height-1"]}>
+                        <div className={classes["way-of-delivery"]}>
+                          <h5>Odaberite način dostave:</h5>
+                          {errors.includes("delivery") && (
+                            <span className={classes.errorMsg}>{errorSelect}</span>
+                          )}
+                          <div className={classes["padding"]}>
+                            {(deliveryoptions ?? []).map((item) => (
+                              <div key={item.type}>
+                                <div className={classes["radio-face"]}>
+                                  <input
+                                    type="radio"
+                                    className={classes["basic-radio"]}
+                                    name="delivery"
+                                    value={item.id}
+                                    id={"delivery" + item.id}
+                                    onChange={formChangeHandler}
+                                  />
+                                  <label htmlFor={"delivery" + item.id}>
+                                    {item.name}
+                                  </label>
+                                </div>
+                                { }
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className={classes["way-of-payement"]}>
+                          <h5>Odaberite način plaćanja:</h5>
+                          {errors.includes("payment") && (
+                            <span className={classes.errorMsg}>{errorSelect}</span>
+                          )}
+                          <div className={classes["padding"]}>
+                            {(paymentoptions ?? []).map((item) => (
+                              <div className={classes["radio-face"]} key={item.id}>
                                 <input
                                   type="radio"
                                   className={classes["basic-radio"]}
-                                  name="delivery"
+                                  name="payment"
                                   value={item.id}
-                                  id={"delivery" + item.id}
+                                  id={"payment" + item.id}
                                   onChange={formChangeHandler}
                                 />
-                                <label htmlFor={"delivery" + item.id}>
-                                  {item.name}
-                                </label>
+                                <label htmlFor={"payment" + item.id}>{item.name}</label>
                               </div>
-                              { }
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       </div>
-                      <div className={classes["way-of-payement"]}>
-                        <h5>Odaberite način plaćanja:</h5>
-                        {errors.includes("payment") && (
-                          <span className={classes.errorMsg}>{errorSelect}</span>
-                        )}
-                        <div className={classes["padding"]}>
-                          {(paymentoptions ?? []).map((item) => (
-                            <div className={classes["radio-face"]} key={item.id}>
-                              <input
-                                type="radio"
-                                className={classes["basic-radio"]}
-                                name="payment"
-                                value={item.id}
-                                id={"payment" + item.id}
-                                onChange={formChangeHandler}
-                              />
-                              <label htmlFor={"payment" + item.id}>{item.name}</label>
-                            </div>
-                          ))}
+                      <div className={classes["same-height-2"]}>
+                        <div className={classes["value-container"]}>
+                          <h5>Vrednost Vaše korpe:</h5>
+                          <span className={classes["value-span"]}>
+                            Ukupna vrednost korpe:
+                            <span className={classes["value-span-right"]}>
+                              {currencyFormat(
+                                cartCost?.totals?.with_vat ?? 0,
+                                cartCost?.currency
+                              )}
+                            </span>
+                          </span>
+                          <span className={classes["value-span"]}>
+                            Iznos dodatnog popusta u korpi:
+                            <span className={classes["value-span-right"]}>
+                              {currencyFormat(
+                                -(cartCost?.options?.discount?.active
+                                  ? cartCost?.totals?.discount
+                                  : 0),
+                                cartCost?.currency
+                              )}
+                            </span>
+                          </span>
+                          <span className={classes["value-span"]}>
+                            Iznos koštanja transporta:
+                            <span className={classes["value-span-right"]}>
+                              {currencyFormat(
+                                cartCost?.options?.delivery?.active
+                                  ? cartCost?.totals?.delivery
+                                  : 0,
+                                cartCost?.currency
+                              )}
+                            </span>
+                          </span>
+                          <span className={classes["value-span"]}>
+                            Iznos PDV-a:
+                            <span className={classes["value-span-right"]}>
+                              {currencyFormat(
+                                cartCost?.totals?.vat ?? 0,
+                                cartCost?.currency
+                              )}
+                            </span>
+                          </span>
+                          <span className={classes["value-span"]}>
+                            Ukupna vrednost korpe nakon popusta:
+                            <span className={classes["value-span-right-sum"]}>
+                              {currencyFormat(
+                                cartCost?.totals?.total ?? 0,
+                                cartCost?.currency
+                              )}
+                            </span>
+                          </span>
                         </div>
                       </div>
                     </div>
-                    <div className={classes["same-height-2"]}>
-                      <div className={classes["value-container"]}>
-                        <h5>Vrednost Vaše korpe:</h5>
-                        <span className={classes["value-span"]}>
-                          Ukupna vrednost korpe:
-                          <span className={classes["value-span-right"]}>
-                            {currencyFormat(
-                              cartCost?.totals?.with_vat ?? 0,
-                              cartCost?.currency
-                            )}
-                          </span>
-                        </span>
-                        <span className={classes["value-span"]}>
-                          Iznos dodatnog popusta u korpi:
-                          <span className={classes["value-span-right"]}>
-                            {currencyFormat(
-                              -(cartCost?.options?.discount?.active
-                                ? cartCost?.totals?.discount
-                                : 0),
-                              cartCost?.currency
-                            )}
-                          </span>
-                        </span>
-                        <span className={classes["value-span"]}>
-                          Iznos koštanja transporta:
-                          <span className={classes["value-span-right"]}>
-                            {currencyFormat(
-                              cartCost?.options?.delivery?.active
-                                ? cartCost?.totals?.delivery
-                                : 0,
-                              cartCost?.currency
-                            )}
-                          </span>
-                        </span>
-                        <span className={classes["value-span"]}>
-                          Iznos PDV-a:
-                          <span className={classes["value-span-right"]}>
-                            {currencyFormat(
-                              cartCost?.totals?.vat ?? 0,
-                              cartCost?.currency
-                            )}
-                          </span>
-                        </span>
-                        <span className={classes["value-span"]}>
-                          Ukupna vrednost korpe nakon popusta:
-                          <span className={classes["value-span-right-sum"]}>
-                            {currencyFormat(
-                              cartCost?.totals?.total ?? 0,
-                              cartCost?.currency
-                            )}
-                          </span>
-                        </span>
+                    <div className={classes["agree"]}>
+                      <div className="d-flex">
+                        <input
+                          type="checkbox"
+                          id="agreed"
+                          name="agreed"
+                          onChange={formChangeHandler}
+                          value={formData.agreed === "1" ? "" : "1"}
+                        />
+                        <label htmlFor="agreed">
+                          Saglasan sam sa opštim uslovima korišćenja Stojić shop-a
+                        </label>
                       </div>
-                    </div>
-                  </div>
-                  <div className={classes["agree"]}>
-                    <div className="d-flex">
-                      <input
-                        type="checkbox"
-                        id="agreed"
-                        name="agreed"
-                        onChange={formChangeHandler}
-                        value={formData.agreed === "1" ? "" : "1"}
-                      />
-                      <label htmlFor="agreed">
-                        Saglasan sam sa opštim uslovima korišćenja Stojić shop-a
-                      </label>
-                    </div>
 
-                    {errors.includes("agreed") && (
-                      <span className={classes.errorMsg}>{errorChecked}</span>
-                    )}
-                  </div>
-                  <div className={classes["end-button-container"]}>
-                    <div>
-                      {isLoadingSend ? (
-                        <button type="button" className={`${classes["end-button"]} ${classes["loading-button"]}`}>
-                          <Image src={pic} alt="Loading" objectFit={'contain'} />
-                        </button>
-                      ) : (
-                        <button
-                          type="button"
-                          className={classes["end-button"] + " basic-button-sec"}
-                          onClick={formSubmitHandler}
-                        >
-                          Završi kupovinu
-                        </button>)}
-
-                      {errors.length > 0 && (
-                        <p className={classes.errorMsg}>
-                          Nisu popunjena sva obavezna polja
-                        </p>
+                      {errors.includes("agreed") && (
+                        <span className={classes.errorMsg}>{errorChecked}</span>
                       )}
                     </div>
-                  </div>
-                </>
-              ) : (
-                <div>
-                  <p className="mb-3">Vaša korpa je prazna!</p>
-                  <Link href="/" >
-                    <a className="button-back-to-home">
-                      Vratite se na početnu stranicu
-                    </a>
-                  </Link>
-                </div>
-              )}
-            </div>)}
+                    <div className={classes["end-button-container"]}>
+                      <div>
+                        {isLoadingSend ? (
+                          <button type="button" className={`${classes["end-button"]} ${classes["loading-button"]}`}>
+                            <Image src={pic} alt="Loading" objectFit={'contain'} />
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            className={classes["end-button"] + " basic-button-sec"}
+                            onClick={formSubmitHandler}
+                          >
+                            Završi kupovinu
+                          </button>)}
 
-      </div>
-    </GoogleReCaptchaProvider>
+                        {errors.length > 0 && (
+                          <p className={classes.errorMsg}>
+                            Nisu popunjena sva obavezna polja
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    <p className="mb-3">Vaša korpa je prazna!</p>
+                    <Link href="/" >
+                      <a className="button-back-to-home">
+                        Vratite se na početnu stranicu
+                      </a>
+                    </Link>
+                  </div>
+                )}
+              </div>)}
+
+        </div>
+      </GoogleReCaptchaProvider>
+    </>
   );
 };
 

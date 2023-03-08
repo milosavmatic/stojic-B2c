@@ -21,11 +21,14 @@ import { queryKeys, sortKeys } from "../../helpers/const";
 import Image from "next/image";
 import catBanner from "../../assets/images/banners/catBanner.jpg";
 import pic from '../../assets/images/loading-buffering.gif';
+import Seo from "../../components/Seo/Seo";
 
 const CategoriesPage = ({ categoryData, filters }) => {
   const router = useRouter();
   const { asPath } = router;
   const { query } = router;
+
+  console.log("category",categoryData)
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -226,48 +229,68 @@ const CategoriesPage = ({ categoryData, filters }) => {
   console.log(categoryData);
 
   return (
-    <div className={`${classes.categoriespage}`}>
-      <div className={`${classes.catBanner}`}>
-        <div className="container-fluid">
-          {categoryData.images.image ? (
-            <Image
-              src={categoryData.images.image}
-              alt={categoryData.name}
-              layout="fill"
-              objectFit="cover"
-            />
-          ) : (
-            <Image
-              src={catBanner}
-              alt="Stojic Elektrik doo"
-              layout="fill"
-              objectFit="cover"
-            />
-          )}
-          <div className={`${classes.title}`}>
-            <h5>{categoryData?.basic_data?.name}</h5>
+    <>
+      <Seo title={`${categoryData.basic_data.name}`} />
+      <div className={`${classes.categoriespage}`}>
+        <div className={`${classes.catBanner}`}>
+          <div className="container-fluid">
+            {categoryData.images.image ? (
+              <Image
+                src={categoryData.images.image}
+                alt={categoryData.name}
+                layout="fill"
+                objectFit="cover"
+              />
+            ) : (
+              <Image
+                src={catBanner}
+                alt="Stojic Elektrik doo"
+                layout="fill"
+                objectFit="cover"
+              />
+            )}
+            <div className={`${classes.title}`}>
+              <h5>{categoryData?.basic_data?.name}</h5>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="container">
-        <Breadcrumbs
-          crumbs={generateBreadcrumbs(
-            { label: "Početna", path: "/" },
-            "/kategorije",
-            categoryData.parents,
-            { label: categoryData?.basic_data?.name, path: asPath }
-          )}
-        />
+        <div className="container">
+          <Breadcrumbs
+            crumbs={generateBreadcrumbs(
+              { label: "Početna", path: "/" },
+              "/kategorije",
+              categoryData.parents,
+              { label: categoryData?.basic_data?.name, path: asPath }
+            )}
+          />
 
-        <div className={`${classes["mobile-display"]}`}>
-          <Accordion className={`${classes["filters-mobile-holder"]}`}>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header
-                className={`${classes["mobile-filters-heading"]}`}
-              >
-                Filteri
-              </Accordion.Header>
-              <Accordion.Body>
+          <div className={`${classes["mobile-display"]}`}>
+            <Accordion className={`${classes["filters-mobile-holder"]}`}>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header
+                  className={`${classes["mobile-filters-heading"]}`}
+                >
+                  Filteri
+                </Accordion.Header>
+                <Accordion.Body>
+                  <Filters
+                    filters={availableFilters}
+                    selectedFilters={selectedFilters}
+                    setSelectedFilters={setSelectedFilters}
+                    changeFilters={changeFilters}
+                    setChangeFilters={setChangeFilters}
+                    showSearch={showSearch}
+                    setShowSearch={setShowSearch}
+                    searchProducts={searchProducts}
+                  />
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+
+          <div className="row">
+            <div className="col-xl-3 col-md-3 col-12">
+              <div className={`${classes["desktop-display"]}`}>
                 <Filters
                   filters={availableFilters}
                   selectedFilters={selectedFilters}
@@ -278,164 +301,147 @@ const CategoriesPage = ({ categoryData, filters }) => {
                   setShowSearch={setShowSearch}
                   searchProducts={searchProducts}
                 />
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </div>
-
-        <div className="row">
-          <div className="col-xl-3 col-md-3 col-12">
-            <div className={`${classes["desktop-display"]}`}>
-              <Filters
-                filters={availableFilters}
-                selectedFilters={selectedFilters}
-                setSelectedFilters={setSelectedFilters}
-                changeFilters={changeFilters}
-                setChangeFilters={setChangeFilters}
-                showSearch={showSearch}
-                setShowSearch={setShowSearch}
-                searchProducts={searchProducts}
-              />
+              </div>
             </div>
-          </div>
-          <div
-            className={
-              classes["right-side-container"] +
-              " col-xl-9 col-lg-9 col-12 col-sm-12 col-xs-12"
-            }
-          >
-            <div className={classes["controls"] + " row"}>
-              <div
-                className={
-                  classes["number-of-products"] +
-                  " col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12"
-                }
-              >
-                <span>
-                  {pagination.total_items}{" "}
-                  {pagination.total_items !== 1 ? "proizvoda" : "proizvod"}
-                </span>
-              </div>
-              <div
-                className={
-                  classes["sort-container"] +
-                  " col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6"
-                }
-              >
-                <span>Sortiraj:</span>
-                <span>
-                  <select
-                    name="sort"
-                    id="sort"
-                    className={classes["select"]}
-                    onChange={onSortChange}
-                    value={sort ? sort.field + "_" + sort.direction : "none"}
-                  >
-                    <option value="none" className={`${classes["sort-title"]}`}>
-                      Sortirajte
-                    </option>
-                    {Object.entries(sortKeys).map((item) => (
-                      <option value={item[0]} key={item[0]}>
-                        {item[1].label}
+            <div
+              className={
+                classes["right-side-container"] +
+                " col-xl-9 col-lg-9 col-12 col-sm-12 col-xs-12"
+              }
+            >
+              <div className={classes["controls"] + " row"}>
+                <div
+                  className={
+                    classes["number-of-products"] +
+                    " col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12"
+                  }
+                >
+                  <span>
+                    {pagination.total_items}{" "}
+                    {pagination.total_items !== 1 ? "proizvoda" : "proizvod"}
+                  </span>
+                </div>
+                <div
+                  className={
+                    classes["sort-container"] +
+                    " col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6"
+                  }
+                >
+                  <span>Sortiraj:</span>
+                  <span>
+                    <select
+                      name="sort"
+                      id="sort"
+                      className={classes["select"]}
+                      onChange={onSortChange}
+                      value={sort ? sort.field + "_" + sort.direction : "none"}
+                    >
+                      <option value="none" className={`${classes["sort-title"]}`}>
+                        Sortirajte
                       </option>
-                    ))}
-                  </select>
-                </span>
-              </div>
-              <div
-                className={
-                  classes["products-per-page"] +
-                  " col-xl-5 col-lg-4 col-md-3 col-sm-6 col-6"
-                }
-              >
-                <span>Prikaži:</span>
-                <span className={classes["select-span"]}>
-                  <select
-                    name="limit"
-                    id="limit"
-                    className={classes["select"]}
-                    onChange={onLimitChange}
-                    value={limit}
-                  >
-                    <option value={4} key="4">
-                      4
-                    </option>
-                    <option value={8} key="8">
-                      8
-                    </option>
-                    <option value={12} key="12">
-                      12
-                    </option>
-                    <option value={24} key="24">
-                      24
-                    </option>
-                    <option value={36} key="36">
-                      36
-                    </option>
-                  </select>
-                </span>
-                <span>po strani</span>
-              </div>
-              {isLoading ? (
-                <div className="gif">
-                  <Image src={pic} alt="Loading" objectFit={'contain'} />
+                      {Object.entries(sortKeys).map((item) => (
+                        <option value={item[0]} key={item[0]}>
+                          {item[1].label}
+                        </option>
+                      ))}
+                    </select>
+                  </span>
                 </div>
-              ) : (
-                <div className={classes["product-row"] + " row"}>
-                {(products ?? []).map((product) => (
-                  <div
-                    className={
-                      classes["product-col"] +
-                      " col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12"
-                    }
-                    key={product.id}
-                  >
-                    <ProductBoxComplexSmall product={product} />
+                <div
+                  className={
+                    classes["products-per-page"] +
+                    " col-xl-5 col-lg-4 col-md-3 col-sm-6 col-6"
+                  }
+                >
+                  <span>Prikaži:</span>
+                  <span className={classes["select-span"]}>
+                    <select
+                      name="limit"
+                      id="limit"
+                      className={classes["select"]}
+                      onChange={onLimitChange}
+                      value={limit}
+                    >
+                      <option value={4} key="4">
+                        4
+                      </option>
+                      <option value={8} key="8">
+                        8
+                      </option>
+                      <option value={12} key="12">
+                        12
+                      </option>
+                      <option value={24} key="24">
+                        24
+                      </option>
+                      <option value={36} key="36">
+                        36
+                      </option>
+                    </select>
+                  </span>
+                  <span>po strani</span>
+                </div>
+                {isLoading ? (
+                  <div className="gif">
+                    <Image src={pic} alt="Loading" objectFit={'contain'} />
                   </div>
-                ))}
-                {products.length === 0 && (
-                  <p>Trenutno nema podataka za prikaz!</p>
-                )}
-              </div>
-                )}
-              
-              <div className={classes.paginationHolder}>
-                <div>
-                  Strana {pagination?.selected_page} od{" "}
-                  {pagination?.total_pages}
-                </div>
-                {pagination?.selected_page && (
-                  <div className={classes.pagination}>
-                    {Array.from(
-                      {
-                        length: Math.min(
-                          5,
-                          pagination?.total_pages -
-                          pagination?.selected_page +
-                          3,
-                          pagination?.total_pages
-                        ),
-                      },
-                      (x, i) => i + Math.max(pagination?.selected_page - 2, 1)
-                    ).map((num) => (
-                      <span
-                        key={num}
-                        className={`${classes.paginationItem} ${num === pagination?.selected_page &&
-                          classes.paginationItemSelected
-                          }`}
-                        onClick={() => onPageChange(num)}
+                ) : (
+                  <div className={classes["product-row"] + " row"}>
+                    {(products ?? []).map((product) => (
+                      <div
+                        className={
+                          classes["product-col"] +
+                          " col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12"
+                        }
+                        key={product.id}
                       >
-                        {num}
-                      </span>
+                        <ProductBoxComplexSmall product={product} />
+                      </div>
                     ))}
+                    {products.length === 0 && (
+                      <p>Trenutno nema podataka za prikaz!</p>
+                    )}
                   </div>
                 )}
+
+                <div className={classes.paginationHolder}>
+                  <div>
+                    Strana {pagination?.selected_page} od{" "}
+                    {pagination?.total_pages}
+                  </div>
+                  {pagination?.selected_page && (
+                    <div className={classes.pagination}>
+                      {Array.from(
+                        {
+                          length: Math.min(
+                            5,
+                            pagination?.total_pages -
+                            pagination?.selected_page +
+                            3,
+                            pagination?.total_pages
+                          ),
+                        },
+                        (x, i) => i + Math.max(pagination?.selected_page - 2, 1)
+                      ).map((num) => (
+                        <span
+                          key={num}
+                          className={`${classes.paginationItem} ${num === pagination?.selected_page &&
+                            classes.paginationItemSelected
+                            }`}
+                          onClick={() => onPageChange(num)}
+                        >
+                          {num}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

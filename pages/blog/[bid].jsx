@@ -3,6 +3,7 @@ import classes from './Blog.module.scss';
 import { useRouter } from 'next/dist/client/router';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { ApiHandler } from '../api/api';
+import Seo from '../../components/Seo/Seo';
 
 
 const BlogPost = ({ blogpost }) => {
@@ -19,6 +20,7 @@ const BlogPost = ({ blogpost }) => {
 
   return (
     <>
+     <Seo title={`${blogpost.basic_data.title}`} />
       <div className={classes.BlogPostHolder}>
         <div className={classes.titleHolder}>
           <h5>{blogpost.basic_data.title}</h5>
