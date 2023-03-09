@@ -120,7 +120,7 @@ const ProductDetailsSlider = ({
                   <Image
                     className="slick-small-img"
                     alt=""
-                    src={'/products/missing.png'}
+                    src={'/static/images/logo.png'}
                     width={600}
                     height={450}
                   />

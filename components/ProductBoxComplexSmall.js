@@ -42,7 +42,7 @@ const ProductBoxComplexSmall = ({
         ) : (
           <h5>Specijalna ponuda</h5>
         )}
-        <Link href={`/proizvod/${product?.id}`}>
+        <Link href={`/proizvod/${product?.slug}`}>
           <a className={classes['product-name']}>
             {product?.basic_data?.name ?? ''}
           </a>
@@ -50,7 +50,7 @@ const ProductBoxComplexSmall = ({
       </div>
 
       {/* <div className={`${classes['ruza']}`} onClick={handleClick}> */}
-      <Link href={`/proizvod/${product?.id}`}>
+      <Link href={`/proizvod/${product?.slug}`}>
         <a
           className={
             product?.image.length <= 0
@@ -72,7 +72,6 @@ const ProductBoxComplexSmall = ({
           />
         </a>
       </Link>
-
 
       <div className={classes['price']}>
         {!product?.price?.discount?.active && (

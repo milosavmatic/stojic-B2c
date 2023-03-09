@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import pic from '../../assets/images/loading-buffering.gif';
+import Seo from '../../components/Seo/Seo';
 
 const SearchPage = () => {
   const router = useRouter();
@@ -74,149 +75,151 @@ const SearchPage = () => {
   const pagination = productsData.pagination;
 
   return (
-    <div className={`${classes.searchPage}`}>
-      <div className="container">
-        <h4 className={classes.title}>Pretraga: &quot;{search}&quot;</h4>
-      </div>
-      <div className="container">
-        <div className="row">
-          <div className={classes['right-side-container'] + ' col-12 '}>
-            <div className={classes['controls'] + ' row'}>
-              <div
-                className={
-                  classes['number-of-products'] +
-                  ' col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12'
-                }
-              >
-                <span>
-                  {pagination.total_items}{' '}
-                  {pagination.total_items !== 1 ? 'proizvoda' : 'proizvod'}
-                </span>
-              </div>
-              <div
-                className={
-                  classes['sort-container'] +
-                  ' col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6'
-                }
-              >
-                <span>Sortiraj:</span>
-                <span>
-                  <select
-                    name="sort"
-                    id="sort"
-                    className={classes['select']}
-                    onChange={onSortChange}
-                    defaultValue="none"
-                  >
-                    <option value="none" className={`${classes['sort-title']}`}>
-                      Sortirajte
-                    </option>
-                    <option value="price_asc">Cena rastuće</option>
-                    <option value="price_desc">Cena opadajuće</option>
-                    <option value="new_asc">Novo</option>
-                    <option value="new_desc">Staro</option>
-                    <option value="name_asc">Naziv rastuće</option>
-                    <option value="name_desc">Naziv opadajuće</option>
-                    <option value="inventory_asc">Na stanju rastuće</option>
-                    <option value="inventory_desc">Na stanju opadajuće</option>
-                  </select>
-                </span>
-              </div>
-              <div
-                className={
-                  classes['products-per-page'] +
-                  ' col-xl-5 col-lg-4 col-md-3 col-sm-6 col-6'
-                }
-              >
-                <span>Prikaži:</span>
-                <span className={classes['select-span']}>
-                  <select
-                    name="limit"
-                    id="limit"
-                    className={classes['select']}
-                    onChange={onLimitChange}
-                    value={limit}
-                  >
-                    <option value={4} key="4">
-                      4
-                    </option>
-                    <option value={8} key="8">
-                      8
-                    </option>
-                    <option value={12} key="12">
-                      12
-                    </option>
-                    <option value={24} key="24">
-                      24
-                    </option>
-                    <option value={36} key="36">
-                      36
-                    </option>
-                  </select>
-                </span>
-                <span>po strani</span>
-              </div>
-              {/* className={`${classes["end-button"]} ${classes["loading-button"]}`} */}
-              {isLoading ? (
-                <div className="gif">
-                  <Image src={pic} alt="Loading" objectFit={'contain'} />
+    <>
+      <Seo title="Pretraga" description="Pretraga" ogtitle="Pretraga" ogdescription="Pretraga" ogurl={`${process.env.BASE_URL}search?search=${search}`} />
+      <div className={`${classes.searchPage}`}>
+        <div className="container">
+          <h4 className={classes.title}>Pretraga: &quot;{search}&quot;</h4>
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className={classes['right-side-container'] + ' col-12 '}>
+              <div className={classes['controls'] + ' row'}>
+                <div
+                  className={
+                    classes['number-of-products'] +
+                    ' col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12'
+                  }
+                >
+                  <span>
+                    {pagination.total_items}{' '}
+                    {pagination.total_items !== 1 ? 'proizvoda' : 'proizvod'}
+                  </span>
                 </div>
-              ) : (
-                <div className={classes['product-row'] + ' row'}>
-                  {products.map((product) => (
-                    <div
-                      className={
-                        classes['product-col'] +
-                        ' col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-6 col-12'
-                      }
-                      key={product.id}
+                <div
+                  className={
+                    classes['sort-container'] +
+                    ' col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6'
+                  }
+                >
+                  <span>Sortiraj:</span>
+                  <span>
+                    <select
+                      name="sort"
+                      id="sort"
+                      className={classes['select']}
+                      onChange={onSortChange}
+                      defaultValue="none"
                     >
-                      <ProductBoxComplexSmall product={product} />
-                    </div>
-                  ))}
-                  {products.length === 0 && (
-                    <p>Nema podataka za unesenu pretragu!</p>
-                  )}
-                </div>)}
-
-
-              <div className={classes.paginationHolder}>
-                <div>
-                  Strana {pagination?.selected_page} od{' '}
-                  {pagination?.total_pages}
+                      <option value="none" className={`${classes['sort-title']}`}>
+                        Sortirajte
+                      </option>
+                      <option value="price_asc">Cena rastuće</option>
+                      <option value="price_desc">Cena opadajuće</option>
+                      <option value="new_asc">Novo</option>
+                      <option value="new_desc">Staro</option>
+                      <option value="name_asc">Naziv rastuće</option>
+                      <option value="name_desc">Naziv opadajuće</option>
+                      <option value="inventory_asc">Na stanju rastuće</option>
+                      <option value="inventory_desc">Na stanju opadajuće</option>
+                    </select>
+                  </span>
                 </div>
-                {pagination?.selected_page && (
-                  <div className={classes.pagination}>
-                    {Array.from(
-                      {
-                        length: Math.min(
-                          5,
-                          pagination?.total_pages -
-                          pagination?.selected_page +
-                          3,
-                          pagination?.total_pages
-                        ),
-                      },
-                      (x, i) => i + Math.max(pagination?.selected_page - 2, 1)
-                    ).map((num) => (
-                      <span
-                        key={num}
-                        className={`${classes.paginationItem} ${num === pagination?.selected_page &&
-                          classes.paginationItemSelected
-                          }`}
-                        onClick={() => setPage(num)}
-                      >
-                        {num}
-                      </span>
-                    ))}
+                <div
+                  className={
+                    classes['products-per-page'] +
+                    ' col-xl-5 col-lg-4 col-md-3 col-sm-6 col-6'
+                  }
+                >
+                  <span>Prikaži:</span>
+                  <span className={classes['select-span']}>
+                    <select
+                      name="limit"
+                      id="limit"
+                      className={classes['select']}
+                      onChange={onLimitChange}
+                      value={limit}
+                    >
+                      <option value={4} key="4">
+                        4
+                      </option>
+                      <option value={8} key="8">
+                        8
+                      </option>
+                      <option value={12} key="12">
+                        12
+                      </option>
+                      <option value={24} key="24">
+                        24
+                      </option>
+                      <option value={36} key="36">
+                        36
+                      </option>
+                    </select>
+                  </span>
+                  <span>po strani</span>
+                </div>
+                {isLoading ? (
+                  <div className="gif">
+                    <Image src={pic} alt="Loading" objectFit={'contain'} />
                   </div>
-                )}
+                ) : (
+                  <div className={classes['product-row'] + ' row'}>
+                    {products.map((product) => (
+                      <div
+                        className={
+                          classes['product-col'] +
+                          ' col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-6 col-12'
+                        }
+                        key={product.id}
+                      >
+                        <ProductBoxComplexSmall product={product} />
+                      </div>
+                    ))}
+                    {products.length === 0 && (
+                      <p>Nema podataka za unesenu pretragu!</p>
+                    )}
+                  </div>)}
+
+
+                <div className={classes.paginationHolder}>
+                  <div>
+                    Strana {pagination?.selected_page} od{' '}
+                    {pagination?.total_pages}
+                  </div>
+                  {pagination?.selected_page && (
+                    <div className={classes.pagination}>
+                      {Array.from(
+                        {
+                          length: Math.min(
+                            5,
+                            pagination?.total_pages -
+                            pagination?.selected_page +
+                            3,
+                            pagination?.total_pages
+                          ),
+                        },
+                        (x, i) => i + Math.max(pagination?.selected_page - 2, 1)
+                      ).map((num) => (
+                        <span
+                          key={num}
+                          className={`${classes.paginationItem} ${num === pagination?.selected_page &&
+                            classes.paginationItemSelected
+                            }`}
+                          onClick={() => setPage(num)}
+                        >
+                          {num}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
