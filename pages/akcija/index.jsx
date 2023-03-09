@@ -6,7 +6,7 @@ import { ApiHandler } from '../api/api';
 function ActionPage({ actionProducts }) {
   return (
     <>
-      <Seo title="Akcije" />
+      <Seo title="Akcije" description="Akcije" ogtitle="Akcije" ogdescription="Akcije" ogurl={`${process.env.BASE_URL}akcija`} />
       <div className={classes['actionProducts']}>
         <div className="container">
           <h5>Proizvodi na akciji</h5>

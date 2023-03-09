@@ -4,7 +4,7 @@ import Seo from '../../components/Seo/Seo';
 function PrivacyPolicy() {
   return (
     <>
-      <Seo title="Politika privatnosti" />
+      <Seo title="Politika privatnosti" description="Politika privatnosti" ogtitle="Politika privatnosti" ogdescription="Politika privatnosti" ogurl={`${process.env.BASE_URL}politika-privatnosti`} />
       <div className="staticPages">
         <div className="container">
           <h3>OBAVEŠTENJE O ZAŠTITI PRIVATNOSTI</h3>

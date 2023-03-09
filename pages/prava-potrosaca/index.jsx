@@ -4,7 +4,7 @@ import Seo from '../../components/Seo/Seo';
 function ConsumerRights() {
   return (
     <>
-      <Seo title="Prava potrošača" />
+      <Seo title="Prava potrošača" description="Prava potrošača" ogtitle="Prava potrošača" ogdescription="Prava potrošača" ogurl={`${process.env.BASE_URL}prava-potrosaca`} />
       <div className="staticPages">
         <div className="container">
           <h3>Prava potrošača</h3>

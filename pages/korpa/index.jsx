@@ -268,7 +268,7 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 
   return (
     <>
-      <Seo title="Vaša korpa" />
+      <Seo title="Vaša korpa" description="Vaša korpa" ogtitle="Vaša korpa" ogdescription="Vaša korpa" ogurl={`${process.env.BASE_URL}korpa`} />
       <GoogleReCaptchaProvider reCaptchaKey={process.env.CAPTCHAKEY}>
         <GoogleReCaptcha
           onVerify={verifyCaptcha}

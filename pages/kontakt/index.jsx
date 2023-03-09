@@ -173,7 +173,7 @@ const ContactPage = () => {
 
   return (
     <>
-      <Seo title="Kontakt" />
+      <Seo title="Kontakt" description="Kontakt" ogtitle="Kontakt" ogdescription="Kontakt" ogurl={`${process.env.BASE_URL}kontakt`} />
       <GoogleReCaptchaProvider reCaptchaKey={process.env.CAPTCHAKEY}>
         <GoogleReCaptcha
           onVerify={verifyCaptcha}

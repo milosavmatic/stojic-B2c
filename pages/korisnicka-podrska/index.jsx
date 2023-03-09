@@ -5,7 +5,7 @@ import Seo from '../../components/Seo/Seo';
 function CustomerSupport() {
   return (
     <>
-      <Seo title="Korisnička podrška" />
+      <Seo title="Korisnička podrška" description="Korisnička podrška" ogtitle="Korisnička podrška" ogdescription="Korisnička podrška" ogurl={`${process.env.BASE_URL}korisnicka-podrska`} />
       <div className="staticPages">
         <div className="container">
           <h3>Korisnička podrška</h3>

@@ -76,7 +76,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <Seo title="Pretraga" />
+      <Seo title="Pretraga" description="Pretraga" ogtitle="Pretraga" ogdescription="Pretraga" ogurl={`${process.env.BASE_URL}search?search=${search}`} />
       <div className={`${classes.searchPage}`}>
         <div className="container">
           <h4 className={classes.title}>Pretraga: &quot;{search}&quot;</h4>
@@ -159,7 +159,6 @@ const SearchPage = () => {
                   </span>
                   <span>po strani</span>
                 </div>
-                {/* className={`${classes["end-button"]} ${classes["loading-button"]}`} */}
                 {isLoading ? (
                   <div className="gif">
                     <Image src={pic} alt="Loading" objectFit={'contain'} />

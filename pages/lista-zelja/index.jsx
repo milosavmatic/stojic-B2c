@@ -31,6 +31,8 @@ const WishListPage = () => {
       })
   }, []);
 
+  console.log("wishListData", wishListData)
+
   useEffect(() => {
     getWishList();
   }, [wishlist])
@@ -39,7 +41,7 @@ const WishListPage = () => {
 
   return (
     <>
-      <Seo title="Lista želja" />
+      <Seo title="Lista želja" description="Lista želja" ogtitle="Lista želja" ogdescription="Lista želja" ogurl={`${process.env.BASE_URL}lista-zelja`} />
       <div className={classes['container']}>
         <h5 className={classes['wishlist-heading']}>Vaša lista želja</h5>
         {isLoading ?

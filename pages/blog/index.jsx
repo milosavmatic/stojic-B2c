@@ -8,12 +8,13 @@ import Seo from '../../components/Seo/Seo';
 
 const Blog = ({ blog }) => {
 
-  const [data, setData] = useState([]);
   const [thumbCount, setThumbCount] = useState(4);
+
+  console.log("blog", blog)
 
   return (
     <>
-      <Seo title="Blog" />
+      <Seo title="Blog" keywords="blog" description="Blog" ogtitle="Blog" ogdescription="Blog" ogurl={`${process.env.BASE_URL}blog`} />
       <div className={classes.blogHolder}>
         <div className={classes.titleHolder}>
           <h5>Blog</h5>

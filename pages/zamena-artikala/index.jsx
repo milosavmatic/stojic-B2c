@@ -4,7 +4,7 @@ import Seo from '../../components/Seo/Seo';
 function ExchangeOfItems() {
   return (
     <>
-      <Seo title="Zamena artikala" />
+      <Seo title="Zamena artikala" description="Zamena artikala" ogtitle="Zamena artikala" ogdescription="Zamena artikala" ogurl={`${process.env.BASE_URL}zamena-artikala`} />
       <div className="staticPages">
         <div className="container">
           <h3>Uputstvo za reklamaciju robe (Internet kupovina)</h3>

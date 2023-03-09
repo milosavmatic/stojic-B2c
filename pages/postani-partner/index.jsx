@@ -5,7 +5,7 @@ import Seo from '../../components/Seo/Seo';
 function BecomeaPartner() {
   return (
     <>
-      <Seo title="Postani partner" />
+      <Seo title="Postani partner" description="Postani partner" ogtitle="Postani partner" ogdescription="Postani partner" ogurl={`${process.env.BASE_URL}postani-partner`} />
       <div className="staticPages">
         <div className="container">
           <h3>Postani naš partner</h3>

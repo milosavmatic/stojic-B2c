@@ -8,7 +8,7 @@ import Seo from '../../components/Seo/Seo';
 function index() {
   return (
     <>
-      <Seo title="Najčešća pitanja" />
+      <Seo title="Najčešća pitanja" description="Najčešća pitanja" ogtitle="Najčešća pitanja" ogdescription="Najčešća pitanja" ogurl={`${process.env.BASE_URL}najcesca-pitanja`} />
       <div className="staticPages">
         <div className="container">
           <h3>Česta pitanja</h3>

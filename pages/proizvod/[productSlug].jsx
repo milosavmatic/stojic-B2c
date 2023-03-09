@@ -15,10 +15,11 @@ const ProductPage = ({
 }) => {
   const { asPath } = useRouter();
 
-  console.log(basic_data.data.item.basic_data.name)
+  console.log(basic_data)
+  console.log(gallery)
   return (
     <>
-      <Seo title={`${basic_data.data.item.basic_data.name}`} />
+      <Seo title={`${basic_data.data.item.basic_data.name}`} description={`${basic_data.data.item.basic_data.short_description}`} ogtitle={`${basic_data.data.item.basic_data.name}`} ogdescription={`${basic_data.data.item.basic_data.short_description}`} ogimage={`${gallery?.gallery[0]?.image}`} ogurl={`${process.env.BASE_URL}proizvod/${basic_data.data.item.id}`} />
       <div className="container">
         <Breadcrumbs
           crumbs={generateBreadcrumbs(
