@@ -148,7 +148,6 @@ const CategoriesPage = ({ categoryData, filters }) => {
     replaceQuery(newQuery);
   }, [selectedFilters, categoryData.id]);
 
-  console.log(categoryData.id)
 
   const getProductList = useCallback(
     (limit, sort, page, selectedFilters) => {
@@ -226,15 +225,12 @@ const CategoriesPage = ({ categoryData, filters }) => {
   const products = productsData.items;
   const pagination = productsData.pagination;
 
-  console.log("pagination", productsData.pagination)
-  console.log("pagination item", productsData.items)
 
-  console.log(categoryData);
 
   return (
 
     <>
-      <Seo title={`${categoryData.basic_data.name}`} description={`${categoryData.seo.description}`} ogtitle={`${categoryData.seo.title}`} ogdescription={`${categoryData.seo.description}`} ogimage={`${categoryData.seo.image}`} ogurl={categoryData.seo.url !== null ? categoryData.seo.url : `${process.env.BASE_URL}kategorije/${categoryData?.parents[0]?.slug}/${categoryData?.slug}`} />
+      <Seo title={`${categoryData?.basic_data?.name}`} description={`${categoryData?.seo?.description}`} ogtitle={`${categoryData?.seo?.title}`} ogdescription={`${categoryData?.seo?.description}`} ogimage={categoryData.seo.image !== null ? categoryData?.seo?.image : categoryData?.images?.image} ogurl={categoryData.seo.url !== null ? categoryData?.seo?.url : `${process.env.BASE_URL}kategorije/${categoryData?.parents[0]?.slug}/${categoryData?.slug}`} />
       <div className={`${classes.categoriespage}`}>
         <div className={`${classes.catBanner}`}>
           <div className="container-fluid">
