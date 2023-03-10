@@ -10,6 +10,7 @@ import { BsHandbag } from 'react-icons/bs';
 import pic from '../assets/images/loading-buffering.gif';
 import { useState } from 'react';
 
+
 const ProductBoxComplexSmall = ({
   product,
   noBorder = '',
