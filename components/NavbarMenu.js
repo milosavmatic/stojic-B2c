@@ -21,7 +21,7 @@ import classes from './NavbarMenu.module.scss';
 import { ApiHandler } from '../pages/api/api';
 import { generateMenu } from '../helpers/generateMenu';
 import Categories from './Categories/Categories';
-import { useCartContext } from '../pages/api/cartContext';
+import { useCartContext } from '../helpers/cartContext';
 import { currencyFormat } from '../helpers/functions';
 // import { TfiLocationPin } from 'react-icons/tfi';
 

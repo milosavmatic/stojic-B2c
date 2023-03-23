@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import '../styles/globals.scss';
 import '../components/Filters.scss';
-import { CartContextProvider } from './api/cartContext';
+import { CartContextProvider } from '../helpers/cartContext';
 import 'rsuite/dist/rsuite.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 

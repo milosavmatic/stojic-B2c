@@ -12,7 +12,7 @@ import classes from './CheckoutPage.module.scss';
 
 import { ApiHandler } from '../api/api';
 import { currencyFormat } from '../../helpers/functions';
-import { useCartContext } from '../api/cartContext';
+import { useCartContext } from '../../helpers/cartContext';
 import Seo from '../../components/Seo/Seo';
 
 const CartProductBox = dynamic(() => import('../../components/CartProductBox'));

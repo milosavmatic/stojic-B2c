@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import classes from './ProductDetails.module.scss';
 import { currencyFormat } from '../helpers/functions';
-import { useGlobalAddToCart, useGlobalAddToWishList } from '../pages/api/globals';
+import { useGlobalAddToCart, useGlobalAddToWishList } from '../helpers/globals';
 
 const Specifications = dynamic(() => import('./Specifications'), {
 	ssr: false,

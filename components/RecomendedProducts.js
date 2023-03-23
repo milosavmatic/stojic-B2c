@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import classes from './RecomendedProducts.module.scss';
 import { currencyFormat } from '../helpers/functions';
-import { useGlobalAddToCart, useGlobalAddToWishList } from '../pages/api/globals';
+import { useGlobalAddToCart, useGlobalAddToWishList } from '../helpers/globals';
 import Slider from './Slider/Slider';
 import 'keen-slider/keen-slider.min.css';
 

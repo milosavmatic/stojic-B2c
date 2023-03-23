@@ -7,7 +7,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import classes from './CartProductItem.module.scss';
 import PlusMinusInputCart from './PlusMinusInputCart';
 import { currencyFormat } from '../helpers/functions';
-import { useGlobalAddToCart, useGlobalRemoveFromCart } from '../pages/api/globals';
+import { useGlobalAddToCart, useGlobalRemoveFromCart } from '../helpers/globals';
 import { openAlertBox } from '../helpers/tostify';
 
 const CartProductItem = ({ item }) => {

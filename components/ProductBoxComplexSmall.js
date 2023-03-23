@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import classes from './ProductBoxComplexSmall.module.scss';
 import { currencyFormat } from '../helpers/functions';
-import { useGlobalAddToCart, useGlobalAddToWishList } from '../pages/api/globals';
+import { useGlobalAddToCart, useGlobalAddToWishList } from '../helpers/globals';
 
 const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', biggerImg = '', isSpecialOffer = false }) => {
 	const [addToCart, loading] = useGlobalAddToCart();

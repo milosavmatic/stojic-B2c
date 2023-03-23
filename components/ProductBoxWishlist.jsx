@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import classes from './ProductBoxComplexSmall.module.scss';
 import { currencyFormat } from '../helpers/functions';
-import { useGlobalAddToCart, useGlobalRemoveFromWishlist } from '../pages/api/globals';
+import { useGlobalAddToCart, useGlobalRemoveFromWishlist } from '../helpers/globals';
 import { openAlertBox } from '../helpers/tostify';
 
 const ProductBoxWishlist = ({ product, wishlistId }) => {

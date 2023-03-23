@@ -5,7 +5,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import classes from './WishListPage.module.scss';
 import { ApiHandler } from '../api/api';
-import { useCartContext } from '../api/cartContext';
+import { useCartContext } from '../../helpers/cartContext';
 
 const Seo = dynamic(() => import('../../components/Seo/Seo'));
 const ProductBoxWishlist = dynamic(() => import('../../components/ProductBoxWishlist'));

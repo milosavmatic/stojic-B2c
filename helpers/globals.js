@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ApiHandler } from './api';
+import { ApiHandler } from '../pages/api/api';
 import { useCartContext } from './cartContext';
-import { openAlertBox } from '../../helpers/tostify';
+import { openAlertBox } from './tostify';
 /**
  * Hook wrapper for global add to cart so context can be used
  */
