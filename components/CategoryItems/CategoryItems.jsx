@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { ApiHandler } from '../../pages/api/api';
+import { ApiHandler } from '../../helpers/api';
 import classes from './CategoryItems.module.scss';
 
 const HomeTabButton = dynamic(() => import('../UI/HomeTabButton/HomeTabButton'));

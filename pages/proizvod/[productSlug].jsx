@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { ApiHandler } from '../api/api';
+import { ApiHandler } from '../../helpers/api';
 import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs';
 import Seo from '../../components/Seo/Seo';
 

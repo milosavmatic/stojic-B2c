@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ApiHandler } from '../pages/api/api';
+import { ApiHandler } from './api';
 import { useCartContext } from './cartContext';
 import { openAlertBox } from './tostify';
 /**

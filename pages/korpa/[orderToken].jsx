@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Link from 'next/link';
 import classes from './CheckoutPage.module.scss';
-import { ApiHandler } from '../api/api';
+import { ApiHandler } from '../../helpers/api';
 import { currencyFormat } from '../../helpers/functions';
 
 const OrderSuccess = ({ checkoutData }) => {

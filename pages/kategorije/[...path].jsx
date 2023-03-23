@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import classes from './CategoriesPage.module.scss';
-import { ApiHandler } from '../api/api';
+import { ApiHandler } from '../../helpers/api';
 import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs';
 import { queryKeys, sortKeys } from '../../helpers/const';
 

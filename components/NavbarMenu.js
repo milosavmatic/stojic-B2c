@@ -18,7 +18,7 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import classes from './NavbarMenu.module.scss';
-import { ApiHandler } from '../pages/api/api';
+import { ApiHandler } from '../helpers/api';
 import { generateMenu } from '../helpers/generateMenu';
 import Categories from './Categories/Categories';
 import { useCartContext } from '../helpers/cartContext';

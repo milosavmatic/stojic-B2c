@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 
 import classes from './ContactPage.module.scss';
 
-import { ApiHandler } from '../api/api';
+import { ApiHandler } from '../../helpers/api';
 import { openAlertBox } from '../../helpers/tostify';
 
 const GoogleReCaptcha = dynamic(async () => await import('react-google-recaptcha-v3').GoogleReCaptcha);

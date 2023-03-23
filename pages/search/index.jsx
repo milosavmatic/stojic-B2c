@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import classes from './CategoriesPage.module.scss';
-import { ApiHandler } from '../api/api';
+import { ApiHandler } from '../../helpers/api';
 import Seo from '../../components/Seo/Seo';
 
 const ProductBoxComplexSmall = dynamic(() => import('../../components/ProductBoxComplexSmall'));

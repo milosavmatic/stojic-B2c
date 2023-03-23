@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import classes from './CheckoutPage.module.scss';
 
-import { ApiHandler } from '../api/api';
+import { ApiHandler } from '../../helpers/api';
 import { currencyFormat } from '../../helpers/functions';
 import { useCartContext } from '../../helpers/cartContext';
 import Seo from '../../components/Seo/Seo';

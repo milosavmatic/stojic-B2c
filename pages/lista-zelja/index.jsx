@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import classes from './WishListPage.module.scss';
-import { ApiHandler } from '../api/api';
+import { ApiHandler } from '../../helpers/api';
 import { useCartContext } from '../../helpers/cartContext';
 
 const Seo = dynamic(() => import('../../components/Seo/Seo'));

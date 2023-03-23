@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import classes from './ActionPage.module.scss';
-import { ApiHandler } from '../api/api';
+import { ApiHandler } from '../../helpers/api';
 
 const ProductBoxComplexSmall = dynamic(() => import('../../components/ProductBoxComplexSmall'));
 const Seo = dynamic(() => import('../../components/Seo/Seo'));

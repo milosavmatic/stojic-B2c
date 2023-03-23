@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Seo from '../components/Seo/Seo';
-import { ApiHandler } from './api/api';
+import { ApiHandler } from '../helpers/api';
 
 const MainSlider = dynamic(() => import('../components/MainSlider'));
 const ActionBanners = dynamic(() => import('../components/ActionBanners/ActionBanners.jsx'));
