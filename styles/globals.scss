@@ -1,6 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap');
 
+
 :root {
   --navy-blue: #131921;
   --white-color: #fff;
@@ -583,7 +584,7 @@ footer .accordion-button:hover {
   color: rgb(219, 219, 219);
 }
 footer .accordion-button::after {
-  background-image: url(../assets/images/elements/arrow-down.png);
+  // background-image: url(../assets/images/elements/arrow-down.png);
   background-size: 10px;
   background-position: center;
 }

@@ -17,10 +17,7 @@ form.header-search {
       background: var(--red-color);
       transform: translateX(2px);
       width: 80px;
-      svg {
-        width: 22px;
-        height: 22px;
-      }
+      
     }
     .newsletter-input {
       margin: 0px;
@@ -67,7 +64,9 @@ form.header-search {
   background-color: var(--white-color);
   padding: 1.2rem 0rem;
   .image-holder {
+    position: relative;
     cursor: pointer;
+    height: 80px;
     width: 290px;
     // img {
     //   filter: brightness(0) invert(1);
@@ -613,6 +612,7 @@ ul.product-list {
 
 .button-wishlist,
 .button-checkout {
+  position: relative;
   border: none;
   width: 100%;
   height: 30px;
@@ -675,7 +675,10 @@ ul.header-links li:hover {
   color: rgb(170, 170, 170);
   cursor: pointer;
 }
-.button-wishlist:hover img,
+.button-wishlist:hover {
+  opacity: 0.5;
+}
+
 .button-checkout:hover img {
   opacity: 0.5;
 }

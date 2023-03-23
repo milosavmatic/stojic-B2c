@@ -1,21 +1,27 @@
-import React from 'react'
-import { PagePreparation } from '../../components/PagePreparation/PagePreparation'
-import Seo from '../../components/Seo/Seo'
+import React from 'react';
+import dynamic from 'next/dynamic';
 
-function index() {
-  return (
-    <>
-      <Seo title="O nama" description="O nama" ogtitle="O nama" ogdescription="O nama" ogurl={`${process.env.BASE_URL}o-nama`} />
-      <div className="staticPages">
-        <div className="container">
-          <h3>O nama</h3>
-          <div className="staticPagesContent">
-            <PagePreparation />
-          </div>
-        </div>
-      </div>
-    </>
-  )
-}
+const PagePreparation = dynamic(() => import('../../components/PagePreparation/PagePreparation'));
+const Seo = dynamic(() => import('../../components/Seo/Seo'));
 
-export default index
+const About = () => (
+	<>
+		{/* <Seo
+			title="O nama"
+			description="O nama"
+			ogtitle="O nama"
+			ogdescription="O nama"
+			// ogurl={`${process.env.BASE_URL}o-nama`}
+		/> */}
+		<div className="staticPages">
+			<div className="container">
+				<h3>O nama</h3>
+				<div className="staticPagesContent">
+					<PagePreparation />
+				</div>
+			</div>
+		</div>
+	</>
+);
+
+export default About;

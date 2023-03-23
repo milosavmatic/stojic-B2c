@@ -1,20 +1,24 @@
 import React from 'react';
-import Accordion from 'react-bootstrap/Accordion';
-import Link from 'next/link';
-import { PagePreparation } from '../../components/PagePreparation/PagePreparation';
-import Seo from '../../components/Seo/Seo';
-// import classes  from "../../components/"
+import dynamic from 'next/dynamic';
 
-function index() {
-  return (
-    <>
-      <Seo title="Najčešća pitanja" description="Najčešća pitanja" ogtitle="Najčešća pitanja" ogdescription="Najčešća pitanja" ogurl={`${process.env.BASE_URL}najcesca-pitanja`} />
-      <div className="staticPages">
-        <div className="container">
-          <h3>Česta pitanja</h3>
-          <div className="staticPagesContent">
-            <PagePreparation />
-            {/* <Accordion >
+const PagePreparation = dynamic(() => import('../../components/PagePreparation/PagePreparation'));
+const Seo = dynamic(() => import('../../components/Seo/Seo'));
+
+const Questions = () => (
+	<>
+		<Seo
+			title="Najčešća pitanja"
+			description="Najčešća pitanja"
+			ogtitle="Najčešća pitanja"
+			ogdescription="Najčešća pitanja"
+			// ogurl={`${process.env.BASE_URL}najcesca-pitanja`}
+		/>
+		<div className="staticPages">
+			<div className="container">
+				<h3>Česta pitanja</h3>
+				<div className="staticPagesContent">
+					<PagePreparation />
+					{/* <Accordion >
             <Accordion.Item
               eventKey="0"
               
@@ -77,11 +81,10 @@ function index() {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion> */}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+				</div>
+			</div>
+		</div>
+	</>
+);
 
-export default index;
+export default Questions;
