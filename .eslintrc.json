@@ -30,18 +30,6 @@
         "bracketSpacing": true,
         "endOfLine": "auto"
       }
-    ],
-    "no-restricted-imports": [
-      "error",
-      {
-        "paths": [
-          "@mui/material",
-          "@mui/material/utils",
-          " @mui/styles",
-          "@mui/base",
-          "@mui/utils"
-        ]
-      }
     ]
   }
 }
