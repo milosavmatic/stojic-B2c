@@ -42,10 +42,6 @@ export const getStaticProps = async () => {
 		props: {
 			banners: await api.get('banners/index_slider').then((response) => response?.payload),
 			mobileBanners: await api.get('banners/index_slider_mobile').then((response) => response?.payload),
-			// recommendedCategories:
-			//   (await api
-			//     .list('categories/section/recomended', { limit: 6 })
-			//     .then((response) => response?.payload)) ?? null,
 			actionBanners: await api.get('banners/action_banners').then((response) => response?.payload),
 			buttonTabs: await api.list('categories/section/recommended').then((response) => response?.payload),
 			recommendedProducts: await api
