@@ -3,6 +3,7 @@
 const nextConfig = {
 	reactStrictMode: false,
 	swcMinify: true,
+	compress: false,
 	images: {
 		domains: [
 			'static.tehnomanija.rs',

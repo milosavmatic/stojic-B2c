@@ -42,6 +42,7 @@ const ProductPage = ({ basic_data, breadcrumbs, gallery, specifications, recomme
 export default ProductPage;
 
 export const getServerSideProps = async (context) => {
+	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
 	const api = ApiHandler();
 	const { productSlug } = context.query;
 	return {

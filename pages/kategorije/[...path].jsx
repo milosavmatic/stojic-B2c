@@ -417,6 +417,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
 export default CategoriesPage;
 
 export const getServerSideProps = async (context) => {
+	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
 	const { path } = context.query;
 	const id = path[path.length - 1];
 	const api = ApiHandler();
