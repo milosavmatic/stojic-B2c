@@ -11,7 +11,7 @@ const BecomeaPartner = () => (
 			description="Postani partner"
 			ogtitle="Postani partner"
 			ogdescription="Postani partner"
-			// ogurl={`${process.env.BASE_URL}postani-partner`}
+			ogurl={`${process.env.BASE_URL}postani-partner`}
 		/>
 		<div className="staticPages">
 			<div className="container">

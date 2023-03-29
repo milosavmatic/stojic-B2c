@@ -11,7 +11,7 @@ const MethodOfPayment = () => (
 			description="Način plaćanja"
 			ogtitle="Način plaćanja"
 			ogdescription="Način plaćanja"
-			// ogurl={`${process.env.BASE_URL}nacin-placanja-i-isporuka`}
+			ogurl={`${process.env.BASE_URL}nacin-placanja-i-isporuka`}
 		/>
 		<div className="staticPages">
 			<div className="container">

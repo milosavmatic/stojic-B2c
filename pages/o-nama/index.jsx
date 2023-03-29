@@ -6,13 +6,13 @@ const Seo = dynamic(() => import('../../components/Seo/Seo'));
 
 const About = () => (
 	<>
-		{/* <Seo
+		<Seo
 			title="O nama"
 			description="O nama"
 			ogtitle="O nama"
 			ogdescription="O nama"
-			// ogurl={`${process.env.BASE_URL}o-nama`}
-		/> */}
+			ogurl={`${process.env.BASE_URL}o-nama`}
+		/>
 		<div className="staticPages">
 			<div className="container">
 				<h3>O nama</h3>

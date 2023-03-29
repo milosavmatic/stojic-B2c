@@ -11,7 +11,7 @@ const Condition = () => (
 			description="Opšti uslovi prodaje"
 			ogtitle="Opšti uslovi prodaje"
 			ogdescription="Opšti uslovi prodaje"
-			// ogurl={`${process.env.BASE_URL}opsti-uslovi-prodaje`}
+			ogurl={`${process.env.BASE_URL}opsti-uslovi-prodaje`}
 		/>
 		<div className="staticPages">
 			<div className="container">
