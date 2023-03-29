@@ -7,7 +7,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = withBundleAnalyzer({
 	reactStrictMode: false,
 	swcMinify: true,
-	compress: false,
+	compress: true,
 	images: {
 		domains: [
 			'static.tehnomanija.rs',
