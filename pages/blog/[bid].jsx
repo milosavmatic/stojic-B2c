@@ -37,7 +37,13 @@ const BlogPost = ({ blogpost }) => {
 					<span className={classes.date}>{blogpost.basic_data.created_at.date_time}</span>
 				</div>
 				<div className={classes.imgHolder}>
-					<Image src={blogpost.images.thumb_image} alt={blogpost.basic_data.title} layout="fill" priority />
+					<Image
+						src={blogpost.images.thumb_image}
+						alt={blogpost.basic_data.title}
+						layout="fill"
+						priority
+						objectFit="contain"
+					/>
 				</div>
 				<div className={classes.txtHolder}>
 					{blogpost.basic_data.description ? <p ref={desc} /> : <p>Trenutno ne postoji opis za ovu vest.</p>}

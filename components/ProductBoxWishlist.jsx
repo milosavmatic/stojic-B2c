@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-// import { BsHandbag } from 'react-icons/bs';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import classes from './ProductBoxComplexSmall.module.scss';
 import { currencyFormat } from '../helpers/functions';
 import { useGlobalAddToCart, useGlobalRemoveFromWishlist } from '../helpers/globals';
@@ -14,15 +14,12 @@ const ProductBoxWishlist = ({ product, wishlistId }) => {
 		<div className={classes.container}>
 			<Link href={`/proizvod/${product?.basic_data?.id_product}`}>
 				<a className={classes['product-img']}>
-					{/* <Image
-            alt={product?.basic_data?.slug}
-            src={
-              (product?.image ? product?.image[0] : product?.path) ??
-              '/products/missing.png'
-            }
-            layout="fill"
-            objectFit="contain"
-          /> */}
+					<Image
+						alt={product?.basic_data?.slug}
+						src={(product?.image ? product?.image[0] : product?.path) ?? '/products/missing.png'}
+						layout="fill"
+						objectFit="contain"
+					/>
 				</a>
 			</Link>
 			{product?.categories && (
@@ -68,7 +65,7 @@ const ProductBoxWishlist = ({ product, wishlistId }) => {
 						className={classes['add-to-cart-image']}
 						onClick={() => addToCart(product?.basic_data?.id_product, 1)}
 					>
-						{/* <BsHandbag /> */}
+						<FontAwesomeIcon icon={faBagShopping} color="white" />
 					</div>
 				</div>
 			)}

@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import classes from '../NavbarMenu.module.scss';
 
 // const RiArrowRightSLine = dynamic(async () => await import('react-icons/ri/RiArrowRightSLine'));
@@ -79,7 +81,7 @@ const Categories = ({
 								<div className={classes['submenu-item-holder']}>
 									<div className={classes.iconNameCat}>
 										{item.icon ? (
-											<Image src={item.icon} alt="Stojic Elektrik doo" width={50} height={50} />
+											<Image src={item.icon} alt="Stojic Elektrik doo" width={30} height={30} />
 										) : null}
 
 										<p
@@ -93,18 +95,21 @@ const Categories = ({
 										</p>
 									</div>
 
-									{item.children && item.children.length > 0
-										? ''
-										: // <RiArrowRightSLine
-										  // 	className={
-										  // 		selectedCategoryId === item.id
-										  // 			? `${classes.rotate}`
-										  // 			: '' || categoryItem?.id === item.id
-										  // 			? ` ${classes.active}`
-										  // 			: ''
-										  // 	}
-										  // />
-										  null}
+									{item.children && item.children.length > 0 ? (
+										<FontAwesomeIcon
+											icon={faAngleRight}
+											className={
+												selectedCategoryId === item.id
+													? `${classes.rotate}`
+													: '' || categoryItem?.id === item.id
+													? ` ${classes.active}`
+													: ''
+											}
+											color="#000"
+										/>
+									) : (
+										''
+									)}
 								</div>
 							</li>
 						) : (
@@ -112,7 +117,7 @@ const Categories = ({
 								<a className={classes['submenu-item-holder']}>
 									<li onClick={clearModalData}>
 										{item.icon ? (
-											<Image src={item.icon} alt="Stojic Elektrik doo" width={50} height={50} />
+											<Image src={item.icon} alt="Stojic Elektrik doo" width={30} height={30} />
 										) : null}
 										<p>{item.name}</p>
 									</li>

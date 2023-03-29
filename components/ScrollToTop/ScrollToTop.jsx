@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import { AiOutlineArrowUp } from 'react-icons/ai';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import classes from './ScrollToTop.module.scss';
 
 const ScrollToTop = () => {
@@ -26,7 +27,7 @@ const ScrollToTop = () => {
 		<div className={classes.topToBtn}>
 			{showTopBtn && (
 				<div className={`${classes.wrappArrow} ${classes.svgPosition}`} onClick={goToTop}>
-					{/* <AiOutlineArrowUp /> */}
+					<FontAwesomeIcon icon={faArrowUp} style={{ width: '20px', height: '20px' }} />
 				</div>
 			)}
 		</div>

@@ -66,8 +66,8 @@ form.header-search {
   .image-holder {
     position: relative;
     cursor: pointer;
-    height: 80px;
-    width: 290px;
+    height: 75px;
+    width: 285px;
     // img {
     //   filter: brightness(0) invert(1);
     // }
@@ -84,6 +84,7 @@ form.header-search {
 }
 
 .submenu-item-holder {
+  width: 100%;
   text-align: left;
   display: flex;
   align-items: center;
@@ -92,8 +93,9 @@ form.header-search {
     color: #333;
     font-size: 1rem;
     font-weight: normal;
-    padding-left: 0;
+    padding-left: 0.5;
     transition: all 0.3s ease-in-out;
+    margin-left: 10px;
     &::first-letter {
       text-transform: uppercase;
     }
@@ -109,6 +111,8 @@ form.header-search {
   }
   svg {
     color: #333;
+    width: 10px;
+    height: 10px;
 
     &.active {
       color: red;
@@ -129,11 +133,10 @@ a.submenu-item-holder {
     display: flex;
     align-items: center;
     margin-bottom: 0.7rem;
-    img {
-      width: 30px;
-      margin-right: 10px;
-    }
+   
+    
     p {
+      margin-left: 10px !important; 
       padding-left: 0 !important;
     }
   }
@@ -668,7 +671,7 @@ h5.all-categories-title {
   // display: flex;
   // margin-left: auto;
   position: absolute;
-  right: 1.5rem;
+  right: 5.5rem;
   top: 1.5rem;
 }
 ul.header-links li:hover {
@@ -868,7 +871,7 @@ ul.header-links li:hover {
       }
     }
     .close {
-      margin: 1rem 0 0 0;
+      margin: 1rem 0.7rem 0 0;
       text-align: right;
     }
   }

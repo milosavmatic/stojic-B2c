@@ -1,4 +1,3 @@
-/* eslint-disable no-irregular-whitespace */
 import Link from 'next/link';
 import Accordion from 'react-bootstrap/Accordion';
 import classes from './Footer.module.scss';
@@ -75,7 +74,7 @@ const Footer = () => (
 											<li>
 												<Link href="tel:00381653773300">
 													<a className={`${classes['basic-link-white']}`}>
-														+381 65 377 330 0 
+														+381 65 377 330 0
 													</a>
 												</Link>
 											</li>
@@ -232,7 +231,7 @@ const Footer = () => (
 										<ul className={`${classes['footer-list']}`}>
 											<li>
 												<Link href="tel:00381653773300" className={`${classes['acc-items']}`}>
-													+381 65 377 330 0 
+													+381 65 377 330 0
 												</Link>
 											</li>
 											<li>Ponedeljak - petak: 8 - 20h</li>

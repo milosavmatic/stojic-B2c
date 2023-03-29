@@ -31,7 +31,6 @@ const ActionProducts = ({ recommendedProducts }) => {
 												<div className={classes['image-holder']}>
 													<Image
 														src={item?.image[0] ?? '/products/missing.png'}
-														className="d-inline-block align-top w-100 img-fluid"
 														alt="React"
 														width={200}
 														height={215}

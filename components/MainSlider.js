@@ -18,12 +18,21 @@ const MainSlider = ({ banners, mobileBanners }) => (
 										alt="Stojic Elektrik doo"
 										layout="fill"
 										objectFit="cover"
+										quality={100}
+										priority
 									/>
 								</div>
 							</Link>
 						) : (
 							<div className={`${classes['desktop-display']}`}>
-								<Image src={banner.image} alt="Stojic Elektrik doo" layout="fill" objectFit="cover" />
+								<Image
+									src={banner.image}
+									alt="Stojic Elektrik doo"
+									layout="fill"
+									objectFit="cover"
+									quality={100}
+									priority
+								/>
 							</div>
 						)}
 

@@ -1,8 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import Link from 'next/link';
 import Image from 'next/image';
-// import { BsHandbag } from 'react-icons/bs';
 import { useState } from 'react';
+import { faBagShopping, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classes from './ProductBoxComplexSmall.module.scss';
 import { currencyFormat } from '../helpers/functions';
 import { useGlobalAddToCart, useGlobalAddToWishList } from '../helpers/globals';
@@ -100,6 +101,7 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 						) : (
 							'' // <BsHandbag />
 						)} */}
+						<FontAwesomeIcon icon={faBagShopping} color="white" />
 					</div>
 				</div>
 			) : (

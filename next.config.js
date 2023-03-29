@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
+// eslint-disable-next-line import/no-extraneous-dependencies
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+	enabled: process.env.ANALYZE === 'true',
+});
 
-const nextConfig = {
+const nextConfig = withBundleAnalyzer({
 	reactStrictMode: false,
 	swcMinify: true,
-	compress: false,
+	compress: true,
 	images: {
 		domains: [
 			'static.tehnomanija.rs',
@@ -24,6 +28,6 @@ const nextConfig = {
 		SEO_OGDESCRIPTION: process.env.SEO_OGDESCRIPTION,
 		SEO_OGIMAGE: process.env.SEO_OGIMAGE,
 	},
-};
+});
 
 module.exports = nextConfig;

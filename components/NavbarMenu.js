@@ -16,7 +16,8 @@ import { useRouter } from 'next/router';
 // import { SlUser } from 'react-icons/sl';
 // import { FaRegUser, FaPhoneAlt } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingBag, faMagnifyingGlass, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import classes from './NavbarMenu.module.scss';
 import { ApiHandler } from '../helpers/api';
 import { generateMenu } from '../helpers/generateMenu';
@@ -131,8 +132,6 @@ const NavbarMenu = () => {
 
 	const menu = generateMenu(categoryData, '/kategorije');
 
-	console.log(menu.icon);
-
 	const handleSearch = (event) => {
 		event.preventDefault();
 		navigate(`/search?search=${searchTerm}`);
@@ -206,10 +205,10 @@ const NavbarMenu = () => {
 									<div className={classes['image-holder']}>
 										<Image
 											src="/images/logo-color.webp"
-											className="d-inline-block align-top w-100"
 											alt="Stojic-elektrik-logo"
 											priority
 											layout="fill"
+											objectFit="contain"
 										/>
 									</div>
 								</Link>
@@ -263,10 +262,11 @@ const NavbarMenu = () => {
 												</button>
 												{showDivWishListCount && (
 													<div ref={myRef} className="on-click-show-div-zero">
-														{/* <BsX
+														<FontAwesomeIcon
+															icon={faXmark}
 															className="close-div-zero"
-															onClick={handleCloseClickWishlist}
-														/> */}
+															onClick={handleCloseClickCart}
+														/>
 														<b>Vaša lista želja je prazna.</b>
 														Da biste videli sadržaj ove stranice, prvo morate dodati artikle
 														u Vašu listu želja.
@@ -281,16 +281,17 @@ const NavbarMenu = () => {
 												>
 													<FontAwesomeIcon
 														style={{ height: '30px', width: '30px' }}
-														icon={faCartShopping}
+														icon={faShoppingBag}
 													/>
 													<span className={`${classes.marker}`}>{cartCount}</span>
 												</button>
 												{showDivCartCount && (
 													<div ref={myRef} className="on-click-show-div-zero">
-														{/* <BsX
+														<FontAwesomeIcon
+															icon={faXmark}
 															className="close-div-zero"
 															onClick={handleCloseClickCart}
-														/> */}
+														/>
 														<b>Vaša korpa je prazna.</b>
 														Da biste videli sadržaj ove stranice, prvo morate dodati artikle
 														u Vašu korpu.
@@ -406,7 +407,7 @@ const NavbarMenu = () => {
 									<li>
 										<Link href="mailto:web@stojic.rs">
 											<span>
-												{/* <BsEnvelope /> */}
+												<FontAwesomeIcon icon={faEnvelope} />
 												<span>web@stojic.rs</span>
 											</span>
 										</Link>
@@ -414,7 +415,7 @@ const NavbarMenu = () => {
 									<li>
 										<Link href="tel:00381653773300">
 											<span>
-												{/* <FaPhoneAlt /> */}
+												<FontAwesomeIcon icon={faPhone} />
 												<span>+381 65 377 330 0 </span>
 											</span>
 										</Link>
@@ -435,10 +436,10 @@ const NavbarMenu = () => {
 									<div className={classes['image-holder']}>
 										<Image
 											src="/images/logo-color.webp"
-											className="d-inline-block align-top w-100"
 											alt="React"
 											priority
 											layout="fill"
+											objectFit="contain"
 										/>
 									</div>
 								</Link>
@@ -448,8 +449,8 @@ const NavbarMenu = () => {
 									<div>
 										<ul className={classes['icons-list']}>
 											{/* <li>
-                        <SlUser />
-                      </li> */}
+												<FontAwesomeIcon icon={faUser} />
+											</li> */}
 											<li>
 												<button
 													type="button"
@@ -472,7 +473,7 @@ const NavbarMenu = () => {
 													onClick={() => navigate('/korpa')}
 												>
 													<FontAwesomeIcon
-														icon={faCartShopping}
+														icon={faShoppingBag}
 														style={{
 															width: '30px',
 															height: '30px',
