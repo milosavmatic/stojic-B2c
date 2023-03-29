@@ -52,6 +52,7 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 						objectFit="contain"
 						priority
 						layout="fill"
+						sizes="100vw"
 					/>
 				</a>
 			</Link>

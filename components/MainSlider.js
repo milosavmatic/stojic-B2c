@@ -65,6 +65,7 @@ const MainSlider = ({ banners, mobileBanners }) => (
 											layout="fill"
 											objectFit="cover"
 											priority
+											sizes="100vw"
 										/>
 									</div>
 								</a>
@@ -78,6 +79,7 @@ const MainSlider = ({ banners, mobileBanners }) => (
 									layout="fill"
 									objectFit="cover"
 									priority
+									sizes="100vw"
 								/>
 							</div>
 						)}
