@@ -27,6 +27,7 @@ const CategoryList = ({ recomendedCategories = [] }) => (
 											alt="React"
 											layout="fill"
 											objectFit="contain"
+											priority
 										/>
 									</div>{' '}
 								</a>

@@ -34,6 +34,7 @@ const RecomendedProducts = ({ recommendedProducts }) => {
 													alt=""
 													width={215}
 													height={260}
+													priority
 												/>
 											</div>
 										</Link>

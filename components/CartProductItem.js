@@ -37,6 +37,7 @@ const CartProductItem = ({ item }) => {
 							src={item.product.image[0] ?? '/products/missing.png'}
 							layout="fill"
 							objectFit="contain"
+							priority
 						/>
 					</div>
 				</div>
@@ -74,6 +75,7 @@ const CartProductItem = ({ item }) => {
 							src={item.product.image[0] ?? '/products/missing.png'}
 							width={180}
 							height={220}
+							priority
 						/>
 					</div>
 				</div>

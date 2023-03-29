@@ -78,6 +78,7 @@ const ProductDetailsSlider = ({ images = [], addToWishList, isLoadingWish, ...pr
 											src={convertHttpToHttps(item.image)}
 											width={70}
 											height={50}
+											priority
 										/>
 									</div>
 								))}
@@ -112,6 +113,7 @@ const ProductDetailsSlider = ({ images = [], addToWishList, isLoadingWish, ...pr
 										src={convertHttpToHttps(item.image)}
 										width={600}
 										height={450}
+										priority
 									/>
 								</div>
 							))}
