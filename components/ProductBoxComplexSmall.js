@@ -12,9 +12,6 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 	const [addToCart, loading] = useGlobalAddToCart();
 	const [isLoadingDetails, setIsLoadingDetails] = useState(false);
 
-	const imageUrl =
-		product?.image.length > 0 && product?.image ? product?.image[0] : product?.path ?? '/static/images/logo.png';
-
 	const handleClick = () => {
 		setIsLoadingDetails(true);
 	};
@@ -49,7 +46,13 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 							<Image src="/image/loading-buffering.gif" alt="Loading" objectFit="contain" />
 						</div>
 					)} */}
-					<Image alt={product?.basic_data?.slug} src={imageUrl} objectFit="contain" priority layout="fill" />
+					<Image
+						alt={product?.basic_data?.slug}
+						src={product?.image[0] || '/static/images/logo.png'}
+						objectFit="contain"
+						priority
+						layout="fill"
+					/>
 				</a>
 			</Link>
 
