@@ -31,7 +31,6 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 				</Link>
 			</div>
 
-			{/* <div className={`${classes['ruza']}`} onClick={handleClick}> */}
 			<Link href={`/proizvod/${product?.slug}`}>
 				<a
 					className={
@@ -41,18 +40,13 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 					}
 					onClick={handleClick}
 				>
-					{/* {isLoadingDetails && (
-						<div className={`${classes['box-small-gif']} gif`}>
-							<Image src="/image/loading-buffering.gif" alt="Loading" objectFit="contain" />
-						</div>
-					)} */}
 					<Image
 						alt={product?.basic_data?.slug}
 						src={product?.image[0] || '/static/images/logo.png'}
 						objectFit="contain"
 						priority
 						layout="fill"
-						sizes="100vw"
+						sizes="100vw, 100%"
 					/>
 				</a>
 			</Link>
@@ -98,13 +92,6 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 			{Number(product?.inventory?.amount) > 0 && product?.price?.price?.original ? (
 				<div className={classes['add-to-cart']}>
 					<div className={classes['add-to-cart-image']} onClick={() => addToCart(product?.id, 1)}>
-						{/* {loading ? (
-							<div className="gif">
-								<Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" />
-							</div>
-						) : (
-							'' // <BsHandbag />
-						)} */}
 						<FontAwesomeIcon icon={faBagShopping} color="white" />
 					</div>
 				</div>
