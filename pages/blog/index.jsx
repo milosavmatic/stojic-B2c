@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { ApiHandler } from '../../helpers/api';
 import classes from './Blog.module.scss';
 
@@ -43,30 +43,28 @@ const Blog = ({ blog }) => {
 							{(blog?.slice(0, thumbCount) ?? []).map((row) => (
 								<Col xl={3} md={6} sm={6} xs={12} key={row?.id}>
 									<Link href={`/blog/${row?.id}`}>
-										<a>
-											<div className={classes.postHolder} id={row.id}>
-												<div className={classes.imgHolder}>
-													<Image
-														src={row.images.thumb_image}
-														alt={row.title}
-														layout="fill"
-														priority
-													/>
-												</div>
-												<div className={classes.txtHolder}>
-													<h5>{row.basic_data.title ? row.basic_data.title : '/'}</h5>
-													<span className={classes.date}>
-														{row.basic_data.created_at.date_time}
-													</span>
-													<p>
-														{row.basic_data.short_description
-															? row.basic_data.short_description
-															: '/'}
-													</p>
-													<span className={classes.more}>Pročitajte više</span>
-												</div>
+										<div className={classes.postHolder} id={row.id}>
+											<div className={classes.imgHolder}>
+												<Image
+													src={row.images.thumb_image}
+													alt={row.title}
+													layout="fill"
+													priority
+												/>
 											</div>
-										</a>
+											<div className={classes.txtHolder}>
+												<h5>{row.basic_data.title ? row.basic_data.title : '/'}</h5>
+												<span className={classes.date}>
+													{row.basic_data.created_at.date_time}
+												</span>
+												<p>
+													{row.basic_data.short_description
+														? row.basic_data.short_description
+														: '/'}
+												</p>
+												<span className={classes.more}>Pročitajte više</span>
+											</div>
+										</div>
 									</Link>
 								</Col>
 							))}

@@ -18,7 +18,7 @@ const CategoryList = ({ recomendedCategories = [] }) => (
 						className={`${`${classes['category-col']} col-xl-2 col-lg-2 col-md-4 col-sm-6 col-xs-6 col-6`}`}
 					>
 						<div className={classes['category-holder']}>
-							<Link href={`/kategorije/${item.slug}`}>
+							<Link href={`/kategorije/${item.slug}`} legacyBehavior>
 								<a>
 									<div className={classes['image-holder']}>
 										<Image
@@ -33,7 +33,7 @@ const CategoryList = ({ recomendedCategories = [] }) => (
 								</a>
 							</Link>
 							<div className={classes['info-holder']}>
-								<Link href={`/kategorije/${item.id}`}>
+								<Link href={`/kategorije/${item.id}`} legacyBehavior>
 									<a className={classes['info-holder-title']}>
 										<h5>{item?.basic_data?.name ?? ''}</h5>
 									</a>

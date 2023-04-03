@@ -12,7 +12,7 @@ const ProductBoxWishlist = ({ product, wishlistId }) => {
 	const removeFromWishList = useGlobalRemoveFromWishlist();
 	return (
 		<div className={classes.container}>
-			<Link href={`/proizvod/${product?.basic_data?.id_product}`}>
+			<Link href={`/proizvod/${product?.basic_data?.id_product}`} legacyBehavior>
 				<a className={classes['product-img']}>
 					<Image
 						alt={product?.basic_data?.slug}
@@ -23,11 +23,11 @@ const ProductBoxWishlist = ({ product, wishlistId }) => {
 				</a>
 			</Link>
 			{product?.categories && (
-				<Link href={`/kategorije/${product?.categories[0]?.id}`}>
+				<Link href={`/kategorije/${product?.categories[0]?.id}`} legacyBehavior>
 					<a className={classes['category-name']}>{product?.categories[0]?.name ?? ''}</a>
 				</Link>
 			)}
-			<Link href={`/proizvod/${product?.basic_data?.id_product}`}>
+			<Link href={`/proizvod/${product?.basic_data?.id_product}`} legacyBehavior>
 				<a className={classes['product-name']}>{product?.basic_data?.name ?? ''}</a>
 			</Link>
 			<div className={classes.price}>

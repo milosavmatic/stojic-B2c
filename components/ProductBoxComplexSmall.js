@@ -20,18 +20,18 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 		<div className={`${classes.container} ${classes[className]}`}>
 			<div className={`${classes.wrapp}`}>
 				{!isSpecialOffer && product?.categories ? (
-					<Link href={`/kategorije/${product?.categories[0]?.id}`}>
+					<Link href={`/kategorije/${product?.categories[0]?.id}`} legacyBehavior>
 						<a className={classes['category-name']}>{product?.categories[0]?.name ?? ''}</a>
 					</Link>
 				) : (
 					<h5>Specijalna ponuda</h5>
 				)}
-				<Link href={`/proizvod/${product?.slug}`}>
+				<Link href={`/proizvod/${product?.slug}`} legacyBehavior>
 					<a className={classes['product-name']}>{product?.basic_data?.name ?? ''}</a>
 				</Link>
 			</div>
 
-			<Link href={`/proizvod/${product?.slug}`}>
+			<Link href={`/proizvod/${product?.slug}`} legacyBehavior>
 				<a
 					className={
 						product?.image.length <= 0
@@ -41,9 +41,9 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 					onClick={handleClick}
 				>
 					<Image
+						style={{ objectFit: 'contain' }}
 						alt={product?.basic_data?.slug}
 						src={product?.image[0] || '/static/images/logo.png'}
-						objectFit="contain"
 						priority
 						layout="fill"
 						sizes="100vw, 100%"

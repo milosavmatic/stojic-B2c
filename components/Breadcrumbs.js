@@ -8,7 +8,7 @@ const Breadcrumbs = ({ crumbs = [] }) => (
 		<ul>
 			{crumbs.map((item, index) => (
 				<li key={index}>
-					<Link href={item?.path ?? ''}>
+					<Link href={item?.path ?? ''} legacyBehavior>
 						<a className={`${classes['breadcrumbs-link']}`}>{item.label}</a>
 					</Link>
 				</li>

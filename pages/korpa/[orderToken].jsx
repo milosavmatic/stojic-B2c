@@ -28,8 +28,8 @@ const OrderSuccess = ({ checkoutData }) => {
 				<b>Ukupno za uplatu:</b>
 				{` ${currencyFormat(checkoutData.total, checkoutData.currency)}`}
 			</p>
-			<Link href="/">
-				<a className="button-back-to-home">Vratite se na početnu stranicu</a>
+			<Link href="/" className="button-back-to-home">
+				Vratite se na početnu stranicu
 			</Link>
 		</div>
 	);

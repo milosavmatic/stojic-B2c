@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { GoogleReCaptcha, GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import classes from './CheckoutPage.module.scss';
 
@@ -881,10 +881,10 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 											>
 												Loading...
 												{/* <Image
-													src="/images/loading-buffering.gif"
-													alt="Loading"
-													objectFit="contain"
-												/> */}
+                                                src="/images/loading-buffering.gif"
+                                                alt="Loading"
+                                                objectFit="contain"
+                                            /> */}
 											</button>
 										) : (
 											<button
@@ -905,8 +905,8 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 						) : (
 							<div>
 								<p className="mb-3">Vaša korpa je prazna!</p>
-								<Link href="/">
-									<a className="button-back-to-home">Vratite se na početnu stranicu</a>
+								<Link href="/" className="button-back-to-home">
+									Vratite se na početnu stranicu
 								</Link>
 							</div>
 						)}

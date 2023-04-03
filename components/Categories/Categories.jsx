@@ -113,7 +113,7 @@ const Categories = ({
 								</div>
 							</li>
 						) : (
-							<Link href={item.path}>
+							<Link href={item.path} legacyBehavior>
 								<a className={classes['submenu-item-holder']}>
 									<li onClick={clearModalData}>
 										{item.icon ? (
@@ -129,21 +129,25 @@ const Categories = ({
 						{selectedCategoryId === item.id && item ? (
 							<div className={classes.subCategoryTreeMobile}>
 								<div className={classes.subCategoryChildrenMobile}>
-									<Link href={item.path}>
+									<Link href={item.path} legacyBehavior>
 										<a className={classes.categoryNameMobile}>
 											<p onClick={clearModalData}>{item.name}</p>
 										</a>
 									</Link>
 									{(categoryItem?.children ?? []).map((subCategory) => (
 										<ul key={subCategory.id}>
-											<Link href={subCategory.path}>
+											<Link href={subCategory.path} legacyBehavior>
 												<a>
 													<p onClick={clearModalData}>{subCategory.name}</p>
 												</a>
 											</Link>
 											{subCategory.children && subCategory.children.length > 0
 												? subCategory.children.map((subSubCategory) => (
-														<Link key={subSubCategory.id} href={subSubCategory.path}>
+														<Link
+															key={subSubCategory.id}
+															href={subSubCategory.path}
+															legacyBehavior
+														>
 															<a>
 																<li onClick={clearModalData}>{subSubCategory.name}</li>
 															</a>
@@ -162,7 +166,7 @@ const Categories = ({
 
 			{categoryItem ? (
 				<div className={classes.subCategoryTree}>
-					<Link href={categoryItem.path}>
+					<Link href={categoryItem.path} legacyBehavior>
 						<a className={classes.categoryName}>
 							<h5 onClick={clearModalData}>{categoryItem.name}</h5>
 						</a>
@@ -189,13 +193,13 @@ const Categories = ({
 								{categoryData.length > 0 ? (
 									categoryData.map((subCategory) => (
 										<ul key={subCategory.id}>
-											<Link href={subCategory.path}>
+											<Link href={subCategory.path} legacyBehavior>
 												<a>
 													<p onClick={clearModalData}>{subCategory.name}</p>
 												</a>
 											</Link>
 											{(subCategory?.children ?? []).map((subSubCategory) => (
-												<Link key={subSubCategory.id} href={subSubCategory.path}>
+												<Link key={subSubCategory.id} href={subSubCategory.path} legacyBehavior>
 													<a>
 														<li onClick={clearModalData}>{subSubCategory.name}</li>
 													</a>

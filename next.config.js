@@ -3,11 +3,16 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 });
+const path = require('path');
 
 const nextConfig = withBundleAnalyzer({
 	reactStrictMode: false,
 	swcMinify: true,
 	compress: true,
+	sassOptions: {
+		fiber: false,
+		includePaths: [path.join(__dirname, 'styles')],
+	},
 	images: {
 		domains: [
 			'static.tehnomanija.rs',

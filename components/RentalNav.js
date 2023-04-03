@@ -110,7 +110,7 @@ const RentalNav = ({ rentalProducts }) => {
 					</p>
 					<p>
 						Za detaljnije informacije i cene paketa{' '}
-						<Link href="/kontakt">
+						<Link href="/kontakt" legacyBehavior>
 							<a className={`${classes['call-service']}`}>nazovite službu prodaje</a>
 						</Link>{' '}
 						MIŠA CANON.

@@ -76,8 +76,7 @@ const ProductDetailsSlider = ({ images = [], addToWishList, isLoadingWish, ...pr
 											className="slick-small-img"
 											alt=""
 											src={convertHttpToHttps(item.image)}
-											width={70}
-											height={50}
+											layout="fill"
 											priority
 										/>
 									</div>
@@ -111,8 +110,7 @@ const ProductDetailsSlider = ({ images = [], addToWishList, isLoadingWish, ...pr
 										className="slick-small-img"
 										alt=""
 										src={convertHttpToHttps(item.image)}
-										width={600}
-										height={450}
+										layout="fill"
 										priority
 									/>
 								</div>

@@ -7,7 +7,7 @@ import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
 
 import { GoogleReCaptcha, GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
@@ -182,13 +182,13 @@ const ContactPage = () => {
 								<span className={classes['phone-numbers']}>+381 32 515 52 99</span>
 								<span className={classes['bolded-faces']}>ili e-mailom na:</span>
 								<span className={classes['phone-numbers']}>
-									<Link href="mailto:web@stojic.rs">
+									<Link href="mailto:web@stojic.rs" legacyBehavior>
 										<span>web@stojic.rs</span>
 									</Link>
 								</span>
 							</div>
 							<div className={classes['working-hours']}>
-								<Link href="/">
+								<Link href="/" legacyBehavior>
 									<Image
 										src="/images/logo.webp"
 										alt="Stojic-elektrik-logo"
@@ -290,8 +290,8 @@ const ContactPage = () => {
 											Upoznat sam i slažem se sa sadržajem disklejmera.
 											<br />
 											Sadržaj disklejmera možete pogledati na{' '}
-											<Link href="/politika-privatnosti">
-												<a target="_blank">Pročitaj uslove</a>
+											<Link href="/politika-privatnosti" target="_blank">
+												Pročitaj uslove
 											</Link>
 										</label>
 									</div>

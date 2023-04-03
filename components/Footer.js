@@ -14,29 +14,29 @@ const Footer = () => (
 								<h5 className={`${classes['footer-middle-headings']}`}>Podrška</h5>
 								<ul className={`${classes['footer-list']}`}>
 									<li>
-										<Link href="/nacin-placanja-i-isporuka">
+										<Link href="/nacin-placanja-i-isporuka" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>
 												Način plaćanja i isporuka
 											</a>
 										</Link>
 									</li>
 									<li>
-										<Link href="/kako-naruciti">
+										<Link href="/kako-naruciti" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>Kako naručiti</a>
 										</Link>
 									</li>
 									<li>
-										<Link href="/najcesca-pitanja">
+										<Link href="/najcesca-pitanja" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>Najčešća pitanja</a>
 										</Link>
 									</li>
 									<li>
-										<Link href="/korisnicka-podrska">
+										<Link href="/korisnicka-podrska" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>Korisnička podrška</a>
 										</Link>
 									</li>
 									<li>
-										<Link href="/zamena-artikala">
+										<Link href="/zamena-artikala" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>Zamena artikala</a>
 										</Link>
 									</li>
@@ -55,14 +55,14 @@ const Footer = () => (
                           </Link>
                         </li> */}
 											<li>
-												<Link href="/politika-privatnosti">
+												<Link href="/politika-privatnosti" legacyBehavior>
 													<a className={`${classes['basic-link-white']}`}>
 														Politika privatnosti
 													</a>
 												</Link>
 											</li>
 											<li>
-												<Link href="/prava-potrosaca">
+												<Link href="/prava-potrosaca" legacyBehavior>
 													<a className={`${classes['basic-link-white']}`}>Prava potrošača</a>
 												</Link>
 											</li>
@@ -72,7 +72,7 @@ const Footer = () => (
 										<h5 className={`${classes['footer-middle-headings']}`}>Kontakt centar</h5>
 										<ul className={`${classes['footer-list']}`}>
 											<li>
-												<Link href="tel:00381653773300">
+												<Link href="tel:00381653773300" legacyBehavior>
 													<a className={`${classes['basic-link-white']}`}>
 														+381 65 377 330 0
 													</a>
@@ -89,22 +89,22 @@ const Footer = () => (
 								<h5 className={`${classes['footer-middle-headings']}`}>Stojić Elektrik</h5>
 								<ul className={`${classes['footer-list']}`}>
 									<li>
-										<Link href="/o-nama">
+										<Link href="/o-nama" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>O nama</a>
 										</Link>
 									</li>
 									<li>
-										<Link href="/postani-partner">
+										<Link href="/postani-partner" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>Postani partner</a>
 										</Link>
 									</li>
 									<li>
-										<Link href="/kontakt">
+										<Link href="/kontakt" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>Kontakt</a>
 										</Link>
 									</li>
 									<li>
-										<Link href="/blog">
+										<Link href="/blog" legacyBehavior>
 											<a className={`${classes['basic-link-white']}`}>Blog</a>
 										</Link>
 									</li>

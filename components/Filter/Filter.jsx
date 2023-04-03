@@ -1,4 +1,3 @@
-/* eslint-disable no-const-assign */
 import { useState, useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -8,7 +7,7 @@ const RangeSlider = dynamic(() => import('rsuite/RangeSlider'));
 
 const Filter = ({ filter, selectedFilters, setSelectedFilters }) => {
 	const changeHanler = (data) => {
-		const tmp = [...selectedFilters];
+		let tmp = [...selectedFilters];
 		const filtered = tmp.filter((item) => item.column === data.column);
 		if (data.value.selected.length === 0) {
 			if (filtered.length > 0) {

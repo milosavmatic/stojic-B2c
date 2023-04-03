@@ -40,7 +40,7 @@ const MainSlider = ({ banners, mobileBanners }) => (
 
 						{banner.button && (
 							<Carousel.Caption className={`${classes['custom-caption']}`}>
-								<Link href="/">
+								<Link href="/" legacyBehavior>
 									<a variant="danger" className={`${classes['button-caption']}`}>
 										{banner.button}
 									</a>
@@ -57,7 +57,7 @@ const MainSlider = ({ banners, mobileBanners }) => (
 				{(mobileBanners ?? []).map((banner) => (
 					<Carousel.Item className={`${classes['main-slider']}`} key={banner.id}>
 						{banner.url ? (
-							<Link href={banner.url} target="_blank">
+							<Link href={banner.url} target="_blank" legacyBehavior>
 								<a>
 									<div className={classes['mobile-display']}>
 										<Image
@@ -88,7 +88,7 @@ const MainSlider = ({ banners, mobileBanners }) => (
 
 						{banner.button && (
 							<Carousel.Caption className={`${classes['custom-caption']}`}>
-								<Link href="/">
+								<Link href="/" legacyBehavior>
 									<a variant="danger" className={`${classes['button-caption']}`}>
 										{banner.button}
 									</a>

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import dynamic from 'next/dynamic';
 import classes from './WishListPage.module.scss';
 import { ApiHandler } from '../../helpers/api';
@@ -66,8 +66,8 @@ const WishListPage = () => {
 						{wishListProducts.length === 0 && (
 							<div>
 								<p className="mb-3">Vaša lista želja je prazna!</p>
-								<Link href="/">
-									<a className="button-back-to-home">Vratite se na početnu stranicu</a>
+								<Link href="/" className="button-back-to-home">
+									Vratite se na početnu stranicu
 								</Link>
 							</div>
 						)}

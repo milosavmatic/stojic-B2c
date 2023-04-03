@@ -2,7 +2,7 @@
 /* eslint-disable eqeqeq */
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import dynamic from 'next/dynamic';
 import classes from './CategoriesPage.module.scss';
 import { ApiHandler } from '../../helpers/api';

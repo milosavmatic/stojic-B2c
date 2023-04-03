@@ -5,9 +5,10 @@
 /* eslint-disable no-restricted-syntax */
 import dynamic from 'next/dynamic';
 
+import { Accordion } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import classes from './CategoriesPage.module.scss';
 import { ApiHandler } from '../../helpers/api';
 import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs';
@@ -17,9 +18,6 @@ const Breadcrumbs = dynamic(() => import('../../components/Breadcrumbs'));
 const Filters = dynamic(() => import('../../components/Filters'));
 const ProductBoxComplexSmall = dynamic(() => import('../../components/ProductBoxComplexSmall'));
 const Seo = dynamic(() => import('../../components/Seo/Seo'));
-const Accordion = dynamic(async () => {
-	await import('react-bootstrap/Accordion').Accordion;
-});
 
 const CategoriesPage = ({ categoryData, filters }) => {
 	const router = useRouter();
@@ -114,7 +112,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
 		);
 		setPage(1);
 
-		const newQuery = {};
+		let newQuery = {};
 		if (queryKeys.page in query) {
 			newQuery[queryKeys.page] = 1;
 		}
