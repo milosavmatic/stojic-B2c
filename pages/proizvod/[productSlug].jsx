@@ -41,16 +41,30 @@ const ProductPage = ({ basic_data, breadcrumbs, gallery, specifications, recomme
 
 export default ProductPage;
 
-export const getServerSideProps = async (context) => {
-	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+export const getStaticPaths = async () => {
 	const api = ApiHandler();
-	const { productSlug } = context.query;
+	const data = await api.post('/export/vercel/products?token=uJbl9PN8Dy835HgKIIMTg9Y8');
+
+	console.log(data);
+	const paths = data.payload.map((item) => ({
+		params: { productSlug: item.slug },
+	}));
+	return {
+		paths,
+		fallback: 'blocking',
+	};
+};
+
+export const getStaticProps = async (context) => {
+	const api = ApiHandler();
+	const { productSlug } = context.params;
 	return {
 		props: {
 			basic_data: await api
 				.get(`/product-details/basic-data/${productSlug}`)
 				.then((response) => response?.payload),
 			breadcrumbs: await api
+
 				.get(`/product-details/breadcrumbs/${productSlug}`)
 				.then((response) => response?.payload),
 			gallery: await api.get(`/product-details/gallery/${productSlug}`).then((response) => response?.payload),
@@ -61,5 +75,29 @@ export const getServerSideProps = async (context) => {
 				.list(`/product-details/recommended/${productSlug}`)
 				.then((response) => response?.payload?.items),
 		},
+		revalidate: 10,
 	};
 };
+
+// export const getServerSideProps = async (context) => {
+// 	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+// 	const api = ApiHandler();
+// 	const { productSlug } = context.query;
+// 	return {
+// 		props: {
+// 			basic_data: await api
+// 				.get(`/product-details/basic-data/${productSlug}`)
+// 				.then((response) => response?.payload),
+// 			breadcrumbs: await api
+// 				.get(`/product-details/breadcrumbs/${productSlug}`)
+// 				.then((response) => response?.payload),
+// 			gallery: await api.get(`/product-details/gallery/${productSlug}`).then((response) => response?.payload),
+// 			specifications: await api
+// 				.get(`/product-details/specification/${productSlug}`)
+// 				.then((response) => response?.payload),
+// 			recommendedProducts: await api
+// 				.list(`/product-details/recommended/${productSlug}`)
+// 				.then((response) => response?.payload?.items),
+// 		},
+// 	};
+// };

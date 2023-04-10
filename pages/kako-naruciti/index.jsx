@@ -12,7 +12,7 @@ function HowToOrder() {
 				description="Kako naručiti"
 				ogtitle="Kako naručiti"
 				ogdescription="Kako naručiti"
-				// ogurl={`${process.env.BASE_URL}kako-naruciti`}
+				ogurl={`${process.env.BASE_URL}kako-naruciti`}
 			/>
 			<div className="staticPages">
 				<div className="container">

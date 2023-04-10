@@ -19,7 +19,7 @@ const Filters = dynamic(() => import('../../components/Filters'));
 const ProductBoxComplexSmall = dynamic(() => import('../../components/ProductBoxComplexSmall'));
 const Seo = dynamic(() => import('../../components/Seo/Seo'));
 
-const CategoriesPage = ({ categoryData, filters }) => {
+const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 	const router = useRouter();
 	const { asPath } = router;
 	const { query } = router;
@@ -29,18 +29,19 @@ const CategoriesPage = ({ categoryData, filters }) => {
 	const replaceQuery = useCallback(
 		(newQuery) => {
 			delete newQuery.path;
-			router.replace({
-				pathname: router.asPath.split('?')[0],
-				query: newQuery,
-			});
+			router.replace(
+				{
+					pathname: router.asPath.split('?')[0],
+					query: newQuery,
+				},
+				undefined,
+				{ scroll: false }
+			);
 		},
 		[router]
 	);
 
-	const [productsData, setProductsData] = useState({
-		items: [],
-		pagination: {},
-	});
+	const [productsData, setProductsData] = useState(productsItems);
 
 	const [limit, setLimit] = useState(query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24);
 
@@ -54,14 +55,14 @@ const CategoriesPage = ({ categoryData, filters }) => {
 
 	const newSelected = [];
 	for (const item in query) {
-		if (item !== 'path' && !Object.values(queryKeys).includes(item))
+		if (item !== 'slug' && !Object.values(queryKeys).includes(item))
 			newSelected.push({
 				column: item,
 				value: { selected: query[item].split(',') },
 			});
 	}
 	const [selectedFilters, setSelectedFilters] = useState(newSelected);
-	const [availableFilters, setAvailableFilters] = useState(filters);
+	const [availableFilters, setAvailableFilters] = useState(filterData);
 	// ***
 	const [changeFilters, setChangeFilters] = useState(false);
 	const [showSearch, setShowSearch] = useState(false);
@@ -102,32 +103,33 @@ const CategoriesPage = ({ categoryData, filters }) => {
 				// setIsLoading(false);
 			});
 		}
+		if (selectedFilters.length > 0) {
+			const arr = selectedFilters.reduce(
+				(obj, item) => ({
+					...obj,
+					[item.column]: String([item.value.selected]),
+				}),
+				{}
+			);
+			setPage(1);
 
-		const arr = selectedFilters.reduce(
-			(obj, item) => ({
-				...obj,
-				[item.column]: String([item.value.selected]),
-			}),
-			{}
-		);
-		setPage(1);
+			let newQuery = {};
+			if (queryKeys.page in query) {
+				newQuery[queryKeys.page] = 1;
+			}
 
-		let newQuery = {};
-		if (queryKeys.page in query) {
-			newQuery[queryKeys.page] = 1;
+			if (queryKeys.limit in query) {
+				newQuery[queryKeys.limit] = query[queryKeys.limit];
+			}
+
+			if (queryKeys.sort in query) {
+				newQuery[queryKeys.sort] = query[queryKeys.sort];
+			}
+
+			newQuery = { ...newQuery, ...arr };
+
+			replaceQuery(newQuery);
 		}
-
-		if (queryKeys.limit in query) {
-			newQuery[queryKeys.limit] = query[queryKeys.limit];
-		}
-
-		if (queryKeys.sort in query) {
-			newQuery[queryKeys.sort] = query[queryKeys.sort];
-		}
-
-		newQuery = { ...newQuery, ...arr };
-
-		replaceQuery(newQuery);
 	}, [selectedFilters, categoryData.id]);
 
 	const getProductList = useCallback(
@@ -152,11 +154,11 @@ const CategoriesPage = ({ categoryData, filters }) => {
 		[categoryData.id]
 	);
 
-	useEffect(() => {
-		if (!showSearch) {
-			getProductList(limit, sort, page, selectedFilters);
-		}
-	}, [getProductList, limit, sort, page, selectedFilters, showSearch]);
+	// useEffect(() => {
+	// 	if (!showSearch) {
+	// 		getProductList(limit, sort, page, selectedFilters);
+	// 	}
+	// }, [getProductList, limit, sort, page, selectedFilters, showSearch]);
 
 	const searchProducts = () => {
 		getProductList(limit, sort, page, selectedFilters);
@@ -216,27 +218,18 @@ const CategoriesPage = ({ categoryData, filters }) => {
 				ogurl={
 					categoryData.seo.url !== null
 						? categoryData?.seo?.url
-						: `${process.env.BASE_URL}kategorije/${categoryData?.parents[0]?.slug}/${categoryData?.slug}`
+						: `${process.env.BASE_URL}kategorije/${categoryData?.parents[0]?.id}/${categoryData?.id}`
 				}
 			/>
 			<div className={`${classes.categoriespage}`}>
 				<div className={`${classes.catBanner}`}>
 					<div className="container-fluid">
-						{categoryData.images.image ? (
-							<Image
-								src={categoryData.images.image}
-								alt={categoryData.name}
-								layout="fill"
-								objectFit="cover"
-							/>
-						) : (
-							<Image
-								src="/images/cartBanner.webp"
-								alt="Stojic Elektrik doo"
-								layout="fill"
-								objectFit="cover"
-							/>
-						)}
+						<Image
+							src="/images/cartBanner.webp"
+							alt="Stojic Elektrik doo"
+							layout="fill"
+							objectFit="cover"
+						/>
 						<div className={`${classes.title}`}>
 							<h5>{categoryData?.basic_data?.name}</h5>
 						</div>
@@ -361,7 +354,7 @@ const CategoriesPage = ({ categoryData, filters }) => {
 									</div>
 								) : (
 									<div className={`${classes['product-row']} row`}>
-										{(products ?? []).map((product) => (
+										{products?.map((product) => (
 											<div
 												className={`${classes['product-col']} col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12`}
 												key={product.id}
@@ -414,15 +407,72 @@ const CategoriesPage = ({ categoryData, filters }) => {
 
 export default CategoriesPage;
 
-export const getServerSideProps = async (context) => {
-	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
-	const { path } = context.query;
-	const id = path[path.length - 1];
+export const getStaticPaths = async () => {
+	const api = ApiHandler();
+	const data = await api.post('/export/vercel/categories?token=uJbl9PN8Dy835HgKIIMTg9Y8');
+
+	const categories = data.payload.filter((item) => item.slug_path.split('/').length > 1);
+
+	console.log('categories', categories);
+
+	const paths = categories.map((item) => {
+		console.log('item', item);
+
+		const categoryId = item.slug;
+
+		console.log('categoryid', categoryId);
+
+		return {
+			params: {
+				slug: categoryId,
+			},
+		};
+	});
+
+	return {
+		paths,
+		fallback: false,
+	};
+};
+
+export const getStaticProps = async (context) => {
+	const { slug } = context.params;
+
+	console.log('slug', slug);
+
 	const api = ApiHandler();
 	return {
 		props: {
-			categoryData: await api.get(`/categories/product/single/${id}`).then((response) => response.payload),
-			filters: await api.post(`/products/category/filters/${id}`).then((response) => response.payload),
+			categoryData: await api.get(`/categories/product/single/${slug}`).then((response) => response.payload),
+
+			productsItems: await api
+				.list(`/products/category/list/${slug}`, {
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						limit: 24,
+						page: 1,
+						sort: { field: 'stickers', direction: 'asc' },
+						filters: [],
+					}),
+				})
+				.then((response) => response.payload),
+			filterData: await api.post(`/products/category/filters/${slug}`).then((response) => response.payload),
 		},
+		revalidate: 10,
 	};
 };
+
+// export const getServerSideProps = async (context) => {
+// 	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+// 	const { path } = context.query;
+// 	const id = path[path.length - 1];
+// 	const api = ApiHandler();
+// 	return {
+// 		props: {
+// 			categoryData: await api.get(`/categories/product/single/${id}`).then((response) => response.payload),
+// 			filters: await api.post(`/products/category/filters/${id}`).then((response) => response.payload),
+// 		},
+// 	};
+// };

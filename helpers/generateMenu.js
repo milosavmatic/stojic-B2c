@@ -4,7 +4,8 @@ export const generateMenu = (menu, startPath) => {
 		const path = `${startPath}/${item.slug}`;
 		const { name } = item;
 		const children = (item?.children ?? []).length > 0 ? generateMenu(item.children, path) : [];
-		ret.push({ name, path, children, id: item.id, icon: item.icon });
+
+		ret.push({ name, path, children, id: item.id, icon: item.icon, slug: item.slug });
 	}
 
 	return ret;

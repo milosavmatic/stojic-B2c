@@ -62,6 +62,8 @@ const Categories = ({
 
 	const categoryData = filterByLabel(categoryItem?.children, searchCategory);
 
+	console.log(menu);
+
 	return (
 		<div className={classes.categoriesTree}>
 			<ul className={classes['nav-submenu']}>
@@ -113,7 +115,7 @@ const Categories = ({
 								</div>
 							</li>
 						) : (
-							<Link href={item.path} legacyBehavior>
+							<Link href={`/kategorije/${item.slug}`} legacyBehavior>
 								<a className={classes['submenu-item-holder']}>
 									<li onClick={clearModalData}>
 										{item.icon ? (
@@ -129,14 +131,14 @@ const Categories = ({
 						{selectedCategoryId === item.id && item ? (
 							<div className={classes.subCategoryTreeMobile}>
 								<div className={classes.subCategoryChildrenMobile}>
-									<Link href={item.path} legacyBehavior>
+									<Link href={`/kategorije/${item.slug}`} legacyBehavior>
 										<a className={classes.categoryNameMobile}>
 											<p onClick={clearModalData}>{item.name}</p>
 										</a>
 									</Link>
 									{(categoryItem?.children ?? []).map((subCategory) => (
 										<ul key={subCategory.id}>
-											<Link href={subCategory.path} legacyBehavior>
+											<Link href={`/kategorije/${item.slug}`} legacyBehavior>
 												<a>
 													<p onClick={clearModalData}>{subCategory.name}</p>
 												</a>
@@ -145,7 +147,7 @@ const Categories = ({
 												? subCategory.children.map((subSubCategory) => (
 														<Link
 															key={subSubCategory.id}
-															href={subSubCategory.path}
+															href={`/kategorije/${subSubCategory.slug}`}
 															legacyBehavior
 														>
 															<a>
@@ -166,7 +168,7 @@ const Categories = ({
 
 			{categoryItem ? (
 				<div className={classes.subCategoryTree}>
-					<Link href={categoryItem.path} legacyBehavior>
+					<Link href={`/kategorije/${categoryItem.slug}`} legacyBehavior>
 						<a className={classes.categoryName}>
 							<h5 onClick={clearModalData}>{categoryItem.name}</h5>
 						</a>
@@ -193,13 +195,17 @@ const Categories = ({
 								{categoryData.length > 0 ? (
 									categoryData.map((subCategory) => (
 										<ul key={subCategory.id}>
-											<Link href={subCategory.path} legacyBehavior>
+											<Link href={subCategory.slug} legacyBehavior>
 												<a>
 													<p onClick={clearModalData}>{subCategory.name}</p>
 												</a>
 											</Link>
 											{(subCategory?.children ?? []).map((subSubCategory) => (
-												<Link key={subSubCategory.id} href={subSubCategory.path} legacyBehavior>
+												<Link
+													key={subSubCategory.id}
+													href={`/kategorije/${subSubCategory.slug}`}
+													legacyBehavior
+												>
 													<a>
 														<li onClick={clearModalData}>{subSubCategory.name}</li>
 													</a>
