@@ -26,9 +26,8 @@ import { useCartContext } from '../helpers/cartContext';
 import { currencyFormat } from '../helpers/functions';
 // import { TfiLocationPin } from 'react-icons/tfi';
 
-const NavbarMenu = () => {
+const NavbarMenu = ({ categoryData }) => {
 	const [isShown, setIsShown] = useState(false);
-	const [categoryData, setCategoryData] = useState([]);
 	const [cartCount, setCartCount] = useState(0);
 	const [wishCount, setWishCount] = useState(0);
 	const [headerTotal, setHeaderTotal] = useState(0);
@@ -76,13 +75,6 @@ const NavbarMenu = () => {
 		setShowMobileDiv((prev) => !prev);
 	};
 
-	const getMenuCategories = useCallback(() => {
-		const api = ApiHandler();
-		api.get('/categories/product/tree')
-			.then((response) => setCategoryData(response.payload))
-			.catch((error) => console.warn(error));
-	}, []);
-
 	const [cart] = useCartContext();
 	const [, , , wishList] = useCartContext();
 
@@ -109,10 +101,6 @@ const NavbarMenu = () => {
 	}, []);
 
 	useEffect(() => {
-		getMenuCategories();
-	}, [getMenuCategories]);
-
-	useEffect(() => {
 		getCartCount();
 	}, [getCartCount, cart]);
 
@@ -125,12 +113,9 @@ const NavbarMenu = () => {
 		api.list('cart')
 			.then((response) => {
 				setHeaderTotal(response?.payload.summary.total);
-				console.log(response?.payload.summary.totals.total);
 			})
 			.catch((error) => console.warn(error));
 	}, [cart]);
-
-	const menu = generateMenu(categoryData, '/kategorije');
 
 	const handleSearch = (event) => {
 		event.preventDefault();
@@ -177,6 +162,8 @@ const NavbarMenu = () => {
 			document.removeEventListener('mousedown', handleOutsideClick);
 		};
 	}, []);
+
+	console.log(categoryData);
 
 	return (
 		<div>
@@ -341,7 +328,7 @@ const NavbarMenu = () => {
 											/>
 
 											<Categories
-												menu={menu}
+												menu={categoryData}
 												categoryItem={categoryItem}
 												setCategoryItemHandler={setCategoryItemHandler}
 												closeLeftSidebarModal={closeLeftSidebarModal}
@@ -546,7 +533,7 @@ const NavbarMenu = () => {
 													<div xs={1} className={classes['nav-submenu-item']}>
 														<div className={classes['submenu-item-holder']}>
 															<Categories
-																menu={menu}
+																menu={categoryData}
 																categoryItem={categoryItem}
 																setCategoryItemHandler={setCategoryItemHandler}
 																closeLeftSidebarModal={closeLeftSideMobileModal}

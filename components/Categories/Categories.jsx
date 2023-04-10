@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import classes from '../NavbarMenu.module.scss';
 
-// const RiArrowRightSLine = dynamic(async () => await import('react-icons/ri/RiArrowRightSLine'));
-
 const Categories = ({
 	menu,
 	setCategoryItemHandler,
@@ -20,7 +18,6 @@ const Categories = ({
 	searchCategory,
 	isMobile = false,
 }) => {
-	// console.log(menu)
 	const clearModalData = () => {
 		closeLeftSidebarModal();
 		setCategoryItemHandler(null);
@@ -61,8 +58,6 @@ const Categories = ({
 	};
 
 	const categoryData = filterByLabel(categoryItem?.children, searchCategory);
-
-	console.log(menu);
 
 	return (
 		<div className={classes.categoriesTree}>

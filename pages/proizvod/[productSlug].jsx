@@ -46,7 +46,7 @@ export const getStaticPaths = async () => {
 	const data = await api.post('/export/vercel/products?token=uJbl9PN8Dy835HgKIIMTg9Y8');
 
 	console.log(data);
-	const paths = data.payload.slice(0, 1000).map((item) => ({
+	const paths = data.payload.slice(0, 100).map((item) => ({
 		params: { productSlug: item.slug },
 	}));
 	return {
