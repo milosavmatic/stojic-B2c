@@ -411,11 +411,7 @@ export const getStaticPaths = async () => {
 	const api = ApiHandler();
 	const data = await api.post('/export/vercel/categories?token=uJbl9PN8Dy835HgKIIMTg9Y8');
 
-	const categories = data.payload.filter((item) => item.slug_path.split('/').length > 1);
-
-	console.log('categories', categories);
-
-	const paths = categories.map((item) => {
+	const paths = data.payload.slice(0, 100).map((item) => {
 		console.log('item', item);
 
 		const categoryId = item.slug;
