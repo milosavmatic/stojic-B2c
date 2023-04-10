@@ -67,6 +67,8 @@ const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 	const [changeFilters, setChangeFilters] = useState(false);
 	const [showSearch, setShowSearch] = useState(false);
 
+	console.log('router', router);
+
 	useEffect(() => {
 		// setIsLoading(true);
 		const api = ApiHandler();
@@ -209,198 +211,205 @@ const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 
 	return (
 		<>
-			<Seo
-				title={`${categoryData?.basic_data?.name}`}
-				description={`${categoryData?.seo?.description}`}
-				ogtitle={`${categoryData?.seo?.title}`}
-				ogdescription={`${categoryData?.seo?.description}`}
-				ogimage={categoryData.seo.image !== null ? categoryData?.seo?.image : categoryData?.images?.image}
-				ogurl={
-					categoryData.seo.url !== null
-						? categoryData?.seo?.url
-						: `${process.env.BASE_URL}kategorije/${categoryData?.parents[0]?.id}/${categoryData?.id}`
-				}
-			/>
-			<div className={`${classes.categoriespage}`}>
-				<div className={`${classes.catBanner}`}>
-					<div className="container-fluid">
-						<Image
-							src="/images/cartBanner.webp"
-							alt="Stojic Elektrik doo"
-							layout="fill"
-							objectFit="cover"
-						/>
-						<div className={`${classes.title}`}>
-							<h5>{categoryData?.basic_data?.name}</h5>
-						</div>
-					</div>
-				</div>
-				<div className="container">
-					<Breadcrumbs
-						crumbs={generateBreadcrumbs(
-							{ label: 'Početna', path: '/' },
-							'/kategorije',
-							categoryData.parents,
-							{ label: categoryData?.basic_data?.name, path: asPath }
-						)}
+			{router.isFallback && <div className={`${classes.loading}`}>Loading...</div>}
+			{!router.isFallback && (
+				<>
+					<Seo
+						title={`${categoryData?.basic_data?.name}`}
+						description={`${categoryData?.seo?.description}`}
+						ogtitle={`${categoryData?.seo?.title}`}
+						ogdescription={`${categoryData?.seo?.description}`}
+						ogimage={
+							categoryData.seo.image !== null ? categoryData?.seo?.image : categoryData?.images?.image
+						}
+						ogurl={
+							categoryData.seo.url !== null
+								? categoryData?.seo?.url
+								: `${process.env.BASE_URL}kategorije/${categoryData?.parents[0]?.id}/${categoryData?.id}`
+						}
 					/>
-
-					<div className={`${classes['mobile-display']}`}>
-						<Accordion className={`${classes['filters-mobile-holder']}`}>
-							<Accordion.Item eventKey="0">
-								<Accordion.Header className={`${classes['mobile-filters-heading']}`}>
-									Filteri
-								</Accordion.Header>
-								<Accordion.Body>
-									<Filters
-										filters={availableFilters}
-										selectedFilters={selectedFilters}
-										setSelectedFilters={setSelectedFilters}
-										changeFilters={changeFilters}
-										setChangeFilters={setChangeFilters}
-										showSearch={showSearch}
-										setShowSearch={setShowSearch}
-										searchProducts={searchProducts}
-									/>
-								</Accordion.Body>
-							</Accordion.Item>
-						</Accordion>
-					</div>
-
-					<div className="row">
-						<div className="col-xl-3 col-md-3 col-12">
-							<div className={`${classes['desktop-display']}`}>
-								<Filters
-									filters={availableFilters}
-									selectedFilters={selectedFilters}
-									setSelectedFilters={setSelectedFilters}
-									changeFilters={changeFilters}
-									setChangeFilters={setChangeFilters}
-									showSearch={showSearch}
-									setShowSearch={setShowSearch}
-									searchProducts={searchProducts}
+					<div className={`${classes.categoriespage}`}>
+						<div className={`${classes.catBanner}`}>
+							<div className="container-fluid">
+								<Image
+									src="/images/cartBanner.webp"
+									alt="Stojic Elektrik doo"
+									layout="fill"
+									objectFit="cover"
 								/>
+								<div className={`${classes.title}`}>
+									<h5>{categoryData?.basic_data?.name}</h5>
+								</div>
 							</div>
 						</div>
-						<div
-							className={`${classes['right-side-container']} col-xl-9 col-lg-9 col-12 col-sm-12 col-xs-12`}
-						>
-							<div className={`${classes.controls} row`}>
-								<div
-									className={`${classes['number-of-products']} col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12`}
-								>
-									<span>
-										{pagination.total_items}{' '}
-										{pagination.total_items !== 1 ? 'proizvoda' : 'proizvod'}
-									</span>
-								</div>
-								<div
-									className={`${classes['sort-container']} col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6`}
-								>
-									<span>Sortiraj:</span>
-									<span>
-										<select
-											name="sort"
-											id="sort"
-											className={classes.select}
-											onChange={onSortChange}
-											value={sort ? `${sort.field}_${sort.direction}` : 'none'}
-										>
-											<option value="none" className={`${classes['sort-title']}`}>
-												Sortirajte
-											</option>
-											{Object.entries(sortKeys).map((item) => (
-												<option value={item[0]} key={item[0]}>
-													{item[1].label}
-												</option>
-											))}
-										</select>
-									</span>
-								</div>
-								<div
-									className={`${classes['products-per-page']} col-xl-5 col-lg-4 col-md-3 col-sm-6 col-6`}
-								>
-									<span>Prikaži:</span>
-									<span className={classes['select-span']}>
-										<select
-											name="limit"
-											id="limit"
-											className={classes.select}
-											onChange={onLimitChange}
-											value={limit}
-										>
-											<option value={4} key="4">
-												4
-											</option>
-											<option value={8} key="8">
-												8
-											</option>
-											<option value={12} key="12">
-												12
-											</option>
-											<option value={24} key="24">
-												24
-											</option>
-											<option value={36} key="36">
-												36
-											</option>
-										</select>
-									</span>
-									<span>po strani</span>
-								</div>
-								{isLoading ? (
-									<div className="gif">
-										{/* <Image src="images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
-									</div>
-								) : (
-									<div className={`${classes['product-row']} row`}>
-										{products?.map((product) => (
-											<div
-												className={`${classes['product-col']} col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12`}
-												key={product.id}
-											>
-												<ProductBoxComplexSmall product={product} />
-											</div>
-										))}
-										{products.length === 0 && <p>Trenutno nema podataka za prikaz!</p>}
-									</div>
+						<div className="container">
+							<Breadcrumbs
+								crumbs={generateBreadcrumbs(
+									{ label: 'Početna', path: '/' },
+									'/kategorije',
+									categoryData.parents,
+									{ label: categoryData?.basic_data?.name, path: asPath }
 								)}
+							/>
 
-								<div className={classes.paginationHolder}>
-									<div>
-										Strana {pagination?.selected_page} od {pagination?.total_pages}
+							<div className={`${classes['mobile-display']}`}>
+								<Accordion className={`${classes['filters-mobile-holder']}`}>
+									<Accordion.Item eventKey="0">
+										<Accordion.Header className={`${classes['mobile-filters-heading']}`}>
+											Filteri
+										</Accordion.Header>
+										<Accordion.Body>
+											<Filters
+												filters={availableFilters}
+												selectedFilters={selectedFilters}
+												setSelectedFilters={setSelectedFilters}
+												changeFilters={changeFilters}
+												setChangeFilters={setChangeFilters}
+												showSearch={showSearch}
+												setShowSearch={setShowSearch}
+												searchProducts={searchProducts}
+											/>
+										</Accordion.Body>
+									</Accordion.Item>
+								</Accordion>
+							</div>
+
+							<div className="row">
+								<div className="col-xl-3 col-md-3 col-12">
+									<div className={`${classes['desktop-display']}`}>
+										<Filters
+											filters={availableFilters}
+											selectedFilters={selectedFilters}
+											setSelectedFilters={setSelectedFilters}
+											changeFilters={changeFilters}
+											setChangeFilters={setChangeFilters}
+											showSearch={showSearch}
+											setShowSearch={setShowSearch}
+											searchProducts={searchProducts}
+										/>
 									</div>
-									{pagination?.selected_page && (
-										<div className={classes.pagination}>
-											{Array.from(
-												{
-													length: Math.min(
-														5,
-														pagination?.total_pages - pagination?.selected_page + 3,
-														pagination?.total_pages
-													),
-												},
-												(x, i) => i + Math.max(pagination?.selected_page - 2, 1)
-											).map((num) => (
-												<span
-													key={num}
-													className={`${classes.paginationItem} ${
-														num === pagination?.selected_page &&
-														classes.paginationItemSelected
-													}`}
-													onClick={() => onPageChange(num)}
-												>
-													{num}
-												</span>
-											))}
+								</div>
+								<div
+									className={`${classes['right-side-container']} col-xl-9 col-lg-9 col-12 col-sm-12 col-xs-12`}
+								>
+									<div className={`${classes.controls} row`}>
+										<div
+											className={`${classes['number-of-products']} col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12`}
+										>
+											<span>
+												{pagination.total_items}{' '}
+												{pagination.total_items !== 1 ? 'proizvoda' : 'proizvod'}
+											</span>
 										</div>
-									)}
+										<div
+											className={`${classes['sort-container']} col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6`}
+										>
+											<span>Sortiraj:</span>
+											<span>
+												<select
+													name="sort"
+													id="sort"
+													className={classes.select}
+													onChange={onSortChange}
+													value={sort ? `${sort.field}_${sort.direction}` : 'none'}
+												>
+													<option value="none" className={`${classes['sort-title']}`}>
+														Sortirajte
+													</option>
+													{Object.entries(sortKeys).map((item) => (
+														<option value={item[0]} key={item[0]}>
+															{item[1].label}
+														</option>
+													))}
+												</select>
+											</span>
+										</div>
+										<div
+											className={`${classes['products-per-page']} col-xl-5 col-lg-4 col-md-3 col-sm-6 col-6`}
+										>
+											<span>Prikaži:</span>
+											<span className={classes['select-span']}>
+												<select
+													name="limit"
+													id="limit"
+													className={classes.select}
+													onChange={onLimitChange}
+													value={limit}
+												>
+													<option value={4} key="4">
+														4
+													</option>
+													<option value={8} key="8">
+														8
+													</option>
+													<option value={12} key="12">
+														12
+													</option>
+													<option value={24} key="24">
+														24
+													</option>
+													<option value={36} key="36">
+														36
+													</option>
+												</select>
+											</span>
+											<span>po strani</span>
+										</div>
+										{isLoading ? (
+											<div className="gif">
+												{/* <Image src="images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
+											</div>
+										) : (
+											<div className={`${classes['product-row']} row`}>
+												{products?.map((product) => (
+													<div
+														className={`${classes['product-col']} col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12`}
+														key={product.id}
+													>
+														<ProductBoxComplexSmall product={product} />
+													</div>
+												))}
+												{products.length === 0 && <p>Trenutno nema podataka za prikaz!</p>}
+											</div>
+										)}
+
+										<div className={classes.paginationHolder}>
+											<div>
+												Strana {pagination?.selected_page} od {pagination?.total_pages}
+											</div>
+											{pagination?.selected_page && (
+												<div className={classes.pagination}>
+													{Array.from(
+														{
+															length: Math.min(
+																5,
+																pagination?.total_pages - pagination?.selected_page + 3,
+																pagination?.total_pages
+															),
+														},
+														(x, i) => i + Math.max(pagination?.selected_page - 2, 1)
+													).map((num) => (
+														<span
+															key={num}
+															className={`${classes.paginationItem} ${
+																num === pagination?.selected_page &&
+																classes.paginationItemSelected
+															}`}
+															onClick={() => onPageChange(num)}
+														>
+															{num}
+														</span>
+													))}
+												</div>
+											)}
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+				</>
+			)}
 		</>
 	);
 };
@@ -411,30 +420,26 @@ export const getStaticPaths = async () => {
 	const api = ApiHandler();
 	const data = await api.post('/export/vercel/categories?token=uJbl9PN8Dy835HgKIIMTg9Y8');
 
-	const paths = data.payload.slice(0, 100).map((item) => {
-		console.log('item', item);
+	const categories = data.payload.filter((item) => item.slug_path.split('/').length > 1);
 
-		const categoryId = item.slug;
-
-		console.log('categoryid', categoryId);
+	const paths = categories.slice(0, 10).map((item) => {
+		const category = item.slug;
 
 		return {
 			params: {
-				slug: categoryId,
+				slug: category,
 			},
 		};
 	});
 
 	return {
 		paths,
-		fallback: 'blocking',
+		fallback: true,
 	};
 };
 
 export const getStaticProps = async (context) => {
 	const { slug } = context.params;
-
-	console.log('slug', slug);
 
 	const api = ApiHandler();
 	return {
@@ -456,7 +461,7 @@ export const getStaticProps = async (context) => {
 				.then((response) => response.payload),
 			filterData: await api.post(`/products/category/filters/${slug}`).then((response) => response.payload),
 		},
-		revalidate: 10,
+		revalidate: 60,
 	};
 };
 
