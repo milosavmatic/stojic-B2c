@@ -39,7 +39,6 @@ function CategoryItems({ buttonTabs }) {
 	useEffect(() => {
 		getProductList(sort, limit);
 	}, [getProductList, sort, limit]);
-	console.log(isLoading);
 
 	return (
 		<div className={`${classes.categoryItems}`}>

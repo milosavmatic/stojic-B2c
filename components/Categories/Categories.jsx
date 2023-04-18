@@ -1,6 +1,6 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-nested-ternary */
-import Link from 'next/link';
+
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,7 +45,6 @@ const Categories = ({
 	const filterByLabel = (array, searchTerm) => {
 		if ((array ?? []).length > 0 && !isMobile) {
 			return array.reduce((prev, curr) => {
-				console.log(convertChirilicLetter(curr?.name.toLowerCase()));
 				const children = curr.children ? filterByLabel(curr.children, searchTerm) : undefined;
 				return convertChirilicLetter(curr.name.toLowerCase()).includes(
 					convertChirilicLetter(searchTerm.toLowerCase())
@@ -110,45 +109,36 @@ const Categories = ({
 								</div>
 							</li>
 						) : (
-							<Link href={`/kategorije/${item.slug}`} legacyBehavior>
-								<a className={classes['submenu-item-holder']}>
-									<li onClick={clearModalData}>
-										{item.icon ? (
-											<Image src={item.icon} alt="Stojic Elektrik doo" width={30} height={30} />
-										) : null}
-										<p>{item.name}</p>
-									</li>
-								</a>
-							</Link>
+							<a href={`/kategorije/${item.id}`} className={classes['submenu-item-holder']}>
+								<li onClick={clearModalData}>
+									{item.icon ? (
+										<Image src={item.icon} alt="Stojic Elektrik doo" width={30} height={30} />
+									) : null}
+									<p>{item.name}</p>
+								</li>
+							</a>
 						)}
 						{/* ***** */}
 
 						{selectedCategoryId === item.id && item ? (
 							<div className={classes.subCategoryTreeMobile}>
 								<div className={classes.subCategoryChildrenMobile}>
-									<Link href={`/kategorije/${item.slug}`} legacyBehavior>
-										<a className={classes.categoryNameMobile}>
-											<p onClick={clearModalData}>{item.name}</p>
-										</a>
-									</Link>
+									<a href={`/kategorije/${item.id}`} className={classes.categoryNameMobile}>
+										<p onClick={clearModalData}>{item.name}</p>
+									</a>
 									{(categoryItem?.children ?? []).map((subCategory) => (
 										<ul key={subCategory.id}>
-											<Link href={`/kategorije/${item.slug}`} legacyBehavior>
-												<a>
-													<p onClick={clearModalData}>{subCategory.name}</p>
-												</a>
-											</Link>
+											<a href={`/kategorije/${item.id}`}>
+												<p onClick={clearModalData}>{subCategory.name}</p>
+											</a>
 											{subCategory.children && subCategory.children.length > 0
 												? subCategory.children.map((subSubCategory) => (
-														<Link
+														<a
 															key={subSubCategory.id}
-															href={`/kategorije/${subSubCategory.slug}`}
-															legacyBehavior
+															href={`/kategorije/${subSubCategory.id}`}
 														>
-															<a>
-																<li onClick={clearModalData}>{subSubCategory.name}</li>
-															</a>
-														</Link>
+															<li onClick={clearModalData}>{subSubCategory.name}</li>
+														</a>
 												  ))
 												: null}
 										</ul>
@@ -163,11 +153,9 @@ const Categories = ({
 
 			{categoryItem ? (
 				<div className={classes.subCategoryTree}>
-					<Link href={`/kategorije/${categoryItem.slug}`} legacyBehavior>
-						<a className={classes.categoryName}>
-							<h5 onClick={clearModalData}>{categoryItem.name}</h5>
-						</a>
-					</Link>
+					<a href={`/kategorije/${categoryItem.id}`} className={classes.categoryName}>
+						<h5 onClick={clearModalData}>{categoryItem.name}</h5>
+					</a>
 					<div className={classes.gridRightSideSubCat}>
 						<>
 							<form
@@ -190,21 +178,13 @@ const Categories = ({
 								{categoryData.length > 0 ? (
 									categoryData.map((subCategory) => (
 										<ul key={subCategory.id}>
-											<Link href={subCategory.slug} legacyBehavior>
-												<a>
-													<p onClick={clearModalData}>{subCategory.name}</p>
-												</a>
-											</Link>
+											<a href={`/kategorije/${subCategory.id}`}>
+												<p onClick={clearModalData}>{subCategory.name}</p>
+											</a>
 											{(subCategory?.children ?? []).map((subSubCategory) => (
-												<Link
-													key={subSubCategory.id}
-													href={`/kategorije/${subSubCategory.slug}`}
-													legacyBehavior
-												>
-													<a>
-														<li onClick={clearModalData}>{subSubCategory.name}</li>
-													</a>
-												</Link>
+												<a key={subSubCategory.id} href={`/kategorije/${subSubCategory.id}`}>
+													<li onClick={clearModalData}>{subSubCategory.name}</li>
+												</a>
 											))}
 										</ul>
 									))

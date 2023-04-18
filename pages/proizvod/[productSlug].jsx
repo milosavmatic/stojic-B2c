@@ -12,40 +12,38 @@ const ProductPage = ({ basic_data, breadcrumbs, gallery, specifications, recomme
 	const { asPath } = useRouter();
 	const router = useRouter();
 
+	console.log('product fallback ', router.isFallback);
+
+	if (router.isFallback) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<>
-			{router.isFallback && <div>Loading...</div>}
-			{!router.isFallback && (
-				<>
-					<Seo
-						title={`${basic_data.data.item.basic_data.name}`}
-						description={`${basic_data.data.item.basic_data.short_description}`}
-						ogtitle={`${basic_data.data.item.basic_data.name}`}
-						ogdescription={`${basic_data.data.item.basic_data.short_description}`}
-						ogimage={`${gallery?.gallery[0]?.image}`}
-						ogurl={`${process.env.BASE_URL}proizvod/${basic_data.data.item.id}`}
+			<>
+				<Seo
+					title={`${basic_data.data.item.basic_data.name}`}
+					description={`${basic_data.data.item.basic_data.short_description}`}
+					ogtitle={`${basic_data.data.item.basic_data.name}`}
+					ogdescription={`${basic_data.data.item.basic_data.short_description}`}
+					ogimage={`${gallery?.gallery[0]?.image}`}
+					ogurl={`${process.env.BASE_URL}proizvod/${basic_data.data.item.id}`}
+				/>
+				<div className="container">
+					<Breadcrumbs
+						crumbs={generateBreadcrumbs({ label: 'Početna', path: '/' }, '/kategorije', breadcrumbs.steps, {
+							label: breadcrumbs.end.name,
+							path: asPath,
+						})}
 					/>
-					<div className="container">
-						<Breadcrumbs
-							crumbs={generateBreadcrumbs(
-								{ label: 'Početna', path: '/' },
-								'/kategorije',
-								breadcrumbs.steps,
-								{
-									label: breadcrumbs.end.name,
-									path: asPath,
-								}
-							)}
-						/>
-						<ProductDetails
-							productData={basic_data.data.item}
-							gallery={gallery}
-							specifications={specifications}
-							recommendedProducts={recommendedProducts}
-						/>
-					</div>
-				</>
-			)}
+					<ProductDetails
+						productData={basic_data.data.item}
+						gallery={gallery}
+						specifications={specifications}
+						recommendedProducts={recommendedProducts}
+					/>
+				</div>
+			</>
 		</>
 	);
 };
@@ -56,7 +54,7 @@ export const getStaticPaths = async () => {
 	const api = ApiHandler();
 	const data = await api.post('/export/vercel/products?token=uJbl9PN8Dy835HgKIIMTg9Y8');
 
-	const paths = data.payload.slice(0, 100).map((item) => ({
+	const paths = data.payload.slice(0, 5).map((item) => ({
 		params: { productSlug: item.slug },
 	}));
 

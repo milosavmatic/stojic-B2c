@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import Link from 'next/link';
+
 import Image from 'next/image';
 import { useState } from 'react';
 import { faBagShopping, faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -20,36 +20,35 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 		<div className={`${classes.container} ${classes[className]}`}>
 			<div className={`${classes.wrapp}`}>
 				{!isSpecialOffer && product?.categories ? (
-					<Link href={`/kategorije/${product?.categories[0]?.id}`} legacyBehavior>
-						<a className={classes['category-name']}>{product?.categories[0]?.name ?? ''}</a>
-					</Link>
+					<a href={`/kategorije/${product?.categories[0]?.id}`} className={classes['category-name']}>
+						{product?.categories[0]?.name ?? ''}
+					</a>
 				) : (
 					<h5>Specijalna ponuda</h5>
 				)}
-				<Link href={`/proizvod/${product?.slug}`} legacyBehavior>
-					<a className={classes['product-name']}>{product?.basic_data?.name ?? ''}</a>
-				</Link>
+				<a href={`/proizvod/${product?.slug}`} className={classes['product-name']}>
+					{product?.basic_data?.name ?? ''}
+				</a>
 			</div>
 
-			<Link href={`/proizvod/${product?.slug}`} legacyBehavior>
-				<a
-					className={
-						product?.image.length <= 0
-							? `${classes.noImg} ${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
-							: `${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
-					}
-					onClick={handleClick}
-				>
-					<Image
-						style={{ objectFit: 'contain' }}
-						alt={product?.basic_data?.slug}
-						src={product?.image[0] || '/images/logo.webp'}
-						priority
-						layout="fill"
-						sizes="100vw, 100%"
-					/>
-				</a>
-			</Link>
+			<a
+				href={`/proizvod/${product?.slug}`}
+				className={
+					product?.image.length <= 0
+						? `${classes.noImg} ${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
+						: `${classes['product-img']} ${classes[noBorder]} ${classes[biggerImg]}`
+				}
+				onClick={handleClick}
+			>
+				<Image
+					style={{ objectFit: 'contain' }}
+					alt={product?.basic_data?.slug}
+					src={product?.image[0] || '/images/logo.webp'}
+					priority
+					layout="fill"
+					sizes="100vw, 100%"
+				/>
+			</a>
 
 			<div className={classes.price}>
 				{!product?.price?.discount?.active && <p className={classes['no-old-price']} />}
@@ -97,9 +96,7 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 				</div>
 			) : (
 				<div className={classes.checkAvailability}>
-					<Link href={`/kontakt?id=${product?.id}&&name=${product?.basic_data?.name}`}>
-						Proverite dostupnost
-					</Link>
+					<a href={`/kontakt?id=${product?.id}&&name=${product?.basic_data?.name}`}>Proverite dostupnost</a>
 				</div>
 			)}
 		</div>

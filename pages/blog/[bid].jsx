@@ -8,12 +8,9 @@ import { ApiHandler } from '../../helpers/api';
 const Seo = dynamic(() => import('../../components/Seo/Seo'));
 
 const BlogPost = ({ blogpost }) => {
-	console.log(blogpost);
 	const router = useRouter();
 	const desc = useRef(null);
 	const { id } = router.query;
-
-	console.log('kjk', process.env.BASE_URL);
 
 	useEffect(() => {
 		if (desc.current) {

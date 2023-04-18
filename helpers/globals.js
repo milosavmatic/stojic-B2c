@@ -56,7 +56,6 @@ export const useGlobalRemoveFromCart = () => {
 			status: null,
 		})
 			.then((response) => {
-				console.log(response);
 				mutateCart();
 			})
 			.catch((error) => console.warn(error));
@@ -108,7 +107,6 @@ export const useGlobalRemoveFromWishlist = () => {
 	const removeFromWishList = (id) => {
 		api.delete(`/wishlist/${id}`)
 			.then((response) => {
-				console.log(response);
 				mutateWishList();
 			})
 			.catch((error) => console.warn(error));

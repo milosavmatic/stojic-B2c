@@ -214,7 +214,6 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 
 			api.post('/checkout/one-page', ret)
 				.then((response) => {
-					console.log(response);
 					const token = response?.payload?.order?.order_token;
 					mutateCart();
 					router.push(`/korpa/${token}`);
@@ -229,8 +228,6 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 				});
 		}
 	};
-
-	console.log('cartItems', cartItems);
 
 	return (
 		<>

@@ -63,8 +63,6 @@ const NavbarMenu = ({ categoryData }) => {
 		setSearchCategory(searchTermCat);
 	};
 
-	// console.log(categoryData);
-
 	const { push: navigate } = useRouter();
 
 	// Shows mobile hamburger div
@@ -162,8 +160,6 @@ const NavbarMenu = ({ categoryData }) => {
 			document.removeEventListener('mousedown', handleOutsideClick);
 		};
 	}, []);
-
-	console.log(categoryData);
 
 	return (
 		<div>

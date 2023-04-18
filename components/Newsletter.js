@@ -13,7 +13,7 @@ function Newsletter() {
 
 	const subscribeToNewsletter = async (e) => {
 		e.preventDefault();
-		console.log(emailRef.current.value);
+
 		if (validateSubscribeForm()) {
 			const result = await axios.post(
 				'https://api.mobs.croonus.com/api/v1/b2c/newsletter/',
@@ -24,7 +24,7 @@ function Newsletter() {
 					},
 				}
 			);
-			console.log(result.data);
+
 			emailRef.current.value = '';
 			openAlertBox('Uspešno ste se prijavili na naš newsletter.', 'success');
 			setIsNewsletterBoxOpen(false);

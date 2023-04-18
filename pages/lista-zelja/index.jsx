@@ -30,8 +30,6 @@ const WishListPage = () => {
 			});
 	}, []);
 
-	console.log('wishListData', wishListData);
-
 	useEffect(() => {
 		getWishList();
 	}, [wishlist]);

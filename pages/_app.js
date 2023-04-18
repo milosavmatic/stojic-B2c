@@ -20,8 +20,6 @@ const SSRProvider = dynamic(async () => (await import('react-bootstrap')).SSRPro
 const MyApp = ({ Component, pageProps, categories }) => {
 	const router = useRouter();
 
-	console.log('categories', categories);
-
 	return (
 		<div>
 			<ToastContainer />
@@ -35,17 +33,6 @@ const MyApp = ({ Component, pageProps, categories }) => {
 			</CartContextProvider>
 		</div>
 	);
-};
-
-export const getInitialProps = async () => {
-	const api = ApiHandler();
-
-	return {
-		props: {
-			categories: await api.get('/categories/product/tree').then((response) => console.log(response)),
-		},
-		revalidate: 10,
-	};
 };
 
 MyApp.getInitialProps = async (appContext) => {

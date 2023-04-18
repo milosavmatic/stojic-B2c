@@ -26,7 +26,6 @@ class Api {
 	 */
 	_execute(method, path, payload = null) {
 		return new Promise((resolve, reject) => {
-			console.log(this.api_url + path.replace(/^\//, ''));
 			axios({
 				method,
 				url: this.api_url + path.replace(/^\//, ''),

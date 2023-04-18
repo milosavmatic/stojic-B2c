@@ -17,8 +17,6 @@ const Col = dynamic(() => import('react-bootstrap/Col'));
 const Blog = ({ blog }) => {
 	const [thumbCount, setThumbCount] = useState(4);
 
-	console.log('blog', blog);
-
 	return (
 		<>
 			<Seo
