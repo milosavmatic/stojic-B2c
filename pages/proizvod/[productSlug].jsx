@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import Loader from 'rsuite/Loader';
 import { ApiHandler } from '../../helpers/api';
 import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs';
 import Seo from '../../components/Seo/Seo';
@@ -12,10 +13,19 @@ const ProductPage = ({ basic_data, breadcrumbs, gallery, specifications, recomme
 	const { asPath } = useRouter();
 	const router = useRouter();
 
-	console.log('product fallback ', router.isFallback);
-
 	if (router.isFallback) {
-		return <div>Loading...</div>;
+		return (
+			<div
+				style={{
+					minHeight: '100vh',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+				}}
+			>
+				<Loader center content="Loading..." size="lg" vertical />
+			</div>
+		);
 	}
 
 	return (
@@ -54,7 +64,7 @@ export const getStaticPaths = async () => {
 	const api = ApiHandler();
 	const data = await api.post('/export/vercel/products?token=uJbl9PN8Dy835HgKIIMTg9Y8');
 
-	const paths = data.payload.slice(0, 5).map((item) => ({
+	const paths = data.payload.slice(105, 106).map((item) => ({
 		params: { productSlug: item.slug },
 	}));
 

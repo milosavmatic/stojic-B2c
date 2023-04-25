@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import dynamic from 'next/dynamic';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import { ApiHandler } from '../../helpers/api';
 import classes from './Blog.module.scss';
 

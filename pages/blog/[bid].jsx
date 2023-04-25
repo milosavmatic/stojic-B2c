@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import classes from './Blog.module.scss';
 import { ApiHandler } from '../../helpers/api';
 

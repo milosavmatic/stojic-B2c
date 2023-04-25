@@ -8,30 +8,31 @@ import dynamic from 'next/dynamic';
 import { Accordion } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
+import Loader from 'rsuite/Loader';
 import classes from './CategoriesPage.module.scss';
 import { ApiHandler } from '../../helpers/api';
 import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs';
 import { queryKeys, sortKeys } from '../../helpers/const';
+import { getProductList } from '../../helpers/getProductList';
 
 const Breadcrumbs = dynamic(() => import('../../components/Breadcrumbs'));
 const Filters = dynamic(() => import('../../components/Filters'));
 const ProductBoxComplexSmall = dynamic(() => import('../../components/ProductBoxComplexSmall'));
 const Seo = dynamic(() => import('../../components/Seo/Seo'));
 
-const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
+const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	const router = useRouter();
 
 	const { asPath } = router;
 	const { query } = router;
-
-	console.log(router);
 
 	const [isLoading, setIsLoading] = useState(false);
 
 	const replaceQuery = useCallback(
 		(newQuery) => {
 			delete newQuery.path;
+			console.log('newQuery', newQuery);
 			router.replace(
 				{
 					pathname: router.asPath.split('?')[0],
@@ -44,46 +45,47 @@ const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 		[router]
 	);
 
-	const [productsData, setProductsData] = useState(productsItems);
+	const [productsData, setProductsData] = useState([]);
 
 	const [limit, setLimit] = useState(query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24);
 
-	const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
-
-	const [sort, setSort] = useState(
-		newSort ? { field: newSort.split('_')[0], direction: newSort.split('_')[1] } : null
-	);
+	const [sort, setSort] = useState({ field: 'stickers', direction: 'asc' });
 
 	const [page, setPage] = useState(query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1);
 
 	const newSelected = [];
-	for (const item in query) {
-		if (item !== 'id' && !Object.values(queryKeys).includes(item))
-			newSelected.push({
-				column: item,
-				value: { selected: query[item].split(',') },
-			});
-	}
+	// for (const item in query) {
+	// 	if (item !== 'id' && !Object.values(queryKeys).includes(item))
+	// 		newSelected.push({
+	// 			column: item,
+	// 			value: { selected: query[item].split(',') },
+	// 		});
+	// }
+
 	const [selectedFilters, setSelectedFilters] = useState(newSelected);
-	const [availableFilters, setAvailableFilters] = useState(filterData);
+	const [availableFilters, setAvailableFilters] = useState([]);
 	// ***
 	const [changeFilters, setChangeFilters] = useState(false);
 	const [showSearch, setShowSearch] = useState(false);
 
-	console.log('router', router);
+	console.log('query', query);
 
 	useEffect(() => {
-		// setIsLoading(true);
-		const api = ApiHandler();
-		console.log(categoryData?.id);
-		api.post(`/products/category/filters/${categoryData?.id}`).then((response) => {
-			replaceQuery({});
-			setSelectedFilters([]);
-			setPage(1);
-			setAvailableFilters(response.payload);
-			// setIsLoading(false);
-		});
-	}, [categoryData?.id]);
+		setProductsData(productsItems);
+		setAvailableFilters(filters);
+	}, [router.isFallback]);
+
+	useEffect(() => {
+		for (const item in query) {
+			if (item !== 'id' && !Object.values(queryKeys).includes(item))
+				newSelected.push({
+					column: item,
+					value: { selected: query[item].split(',') },
+				});
+		}
+
+		setSelectedFilters(newSelected);
+	}, [router.isReady]);
 
 	useEffect(() => {
 		if (changeFilters) {
@@ -108,70 +110,50 @@ const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 				// setIsLoading(false);
 			});
 		}
-		if (selectedFilters.length > 0) {
-			const arr = selectedFilters.reduce(
-				(obj, item) => ({
-					...obj,
-					[item.column]: String([item.value.selected]),
-				}),
-				{}
-			);
-			setPage(1);
 
-			let newQuery = {};
-			if (queryKeys.page in query) {
-				newQuery[queryKeys.page] = 1;
-			}
+		const arr = selectedFilters.reduce(
+			(obj, item) => ({
+				...obj,
+				[item.column]: String([item.value.selected]),
+			}),
+			{}
+		);
 
-			if (queryKeys.limit in query) {
-				newQuery[queryKeys.limit] = query[queryKeys.limit];
-			}
-
-			if (queryKeys.sort in query) {
-				newQuery[queryKeys.sort] = query[queryKeys.sort];
-			}
-
-			newQuery = { ...newQuery, ...arr };
-
-			replaceQuery(newQuery);
+		let newQuery = {};
+		if (queryKeys.page in query) {
+			newQuery[queryKeys.page] = 1;
 		}
-	}, [selectedFilters, categoryData?.id]);
 
-	const getProductList = useCallback(
-		(limit, sort, page, selectedFilters) => {
-			setIsLoading(true);
-			const api = ApiHandler();
-			api.list(`products/category/list/${categoryData?.id}`, {
-				limit,
-				page,
-				sort,
-				filters: selectedFilters,
-			})
-				.then((response) => {
-					setProductsData(response?.payload);
-					setIsLoading(false);
-				})
-				.catch((error) => {
-					console.warn(error);
-					setIsLoading(false);
-				});
-		},
-		[categoryData?.id]
-	);
+		if (queryKeys.limit in query) {
+			newQuery[queryKeys.limit] = query[queryKeys.limit];
+		}
+
+		if (queryKeys.sort in query) {
+			newQuery[queryKeys.sort] = query[queryKeys.sort];
+		}
+
+		newQuery = { ...newQuery, ...arr };
+
+		replaceQuery(newQuery);
+	}, [selectedFilters, router.isReady]);
 
 	useEffect(() => {
-		if (!showSearch) {
-			getProductList(limit, sort, page, selectedFilters);
+		if (!showSearch && (sort !== undefined || selectedFilters.length > 0)) {
+			getProductList(limit, sort, page, selectedFilters, setIsLoading, categoryData, setProductsData);
 		}
-	}, [getProductList, limit, sort, page, selectedFilters, showSearch]);
+	}, [limit, sort, page, selectedFilters, showSearch]);
 
 	const searchProducts = () => {
-		getProductList(limit, sort, page, selectedFilters);
+		getProductList(limit, sort, page, selectedFilters, setIsLoading, categoryData, setProductsData);
 	};
 
 	useEffect(() => {
 		setPage(query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1);
-	}, [asPath, query]);
+		setLimit(query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24);
+
+		const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
+		setSort(newSort ? { field: newSort.split('_')[0], direction: newSort.split('_')[1] } : undefined);
+	}, [asPath, query, router.isReady]);
 
 	const onSortChange = ({ target }) => {
 		if (target.value != 'none') {
@@ -213,7 +195,11 @@ const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 	const pagination = productsData?.pagination;
 
 	if (router.isFallback) {
-		return <div style={{ minHeight: '100vh' }}>Loading...</div>;
+		return (
+			<div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+				<Loader center content="loading" vertical size="lg" />
+			</div>
+		);
 	}
 
 	return (
@@ -299,10 +285,14 @@ const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 									<div
 										className={`${classes['number-of-products']} col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12`}
 									>
-										<span>
-											{pagination?.total_items}{' '}
-											{pagination?.total_items !== 1 ? 'proizvoda' : 'proizvod'}
-										</span>
+										{isLoading ? (
+											<span>Loading...</span>
+										) : (
+											<span>
+												{pagination?.total_items}{' '}
+												{pagination?.total_items !== 1 ? 'proizvoda' : 'proizvod'}
+											</span>
+										)}
 									</div>
 									<div
 										className={`${classes['sort-container']} col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6`}
@@ -360,52 +350,60 @@ const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 									</div>
 									{isLoading ? (
 										<div className="gif">
-											{/* <Image src="images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
+											<Image
+												src="/images/loading-buffering.gif"
+												alt="Loading"
+												width={200}
+												height={200}
+											/>
 										</div>
 									) : (
-										<div className={`${classes['product-row']} row`}>
-											{products?.map((product) => (
-												<div
-													className={`${classes['product-col']} col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12`}
-													key={product.id}
-												>
-													<ProductBoxComplexSmall product={product} />
-												</div>
-											))}
-											{products?.length === 0 && <p>Trenutno nema podataka za prikaz!</p>}
-										</div>
-									)}
-
-									<div className={classes.paginationHolder}>
-										<div>
-											Strana {pagination?.selected_page} od {pagination?.total_pages}
-										</div>
-										{pagination?.selected_page && (
-											<div className={classes.pagination}>
-												{Array.from(
-													{
-														length: Math.min(
-															5,
-															pagination?.total_pages - pagination?.selected_page + 3,
-															pagination?.total_pages
-														),
-													},
-													(x, i) => i + Math.max(pagination?.selected_page - 2, 1)
-												).map((num) => (
-													<span
-														key={num}
-														className={`${classes.paginationItem} ${
-															num === pagination?.selected_page &&
-															classes.paginationItemSelected
-														}`}
-														onClick={() => onPageChange(num)}
+										<>
+											<div className={`${classes['product-row']} row`}>
+												{products?.map((product) => (
+													<div
+														className={`${classes['product-col']} col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 col-12`}
+														key={product.id}
 													>
-														{num}
-													</span>
+														<ProductBoxComplexSmall product={product} />
+													</div>
 												))}
+												{products?.length === 0 && <p>Trenutno nema podataka za prikaz!</p>}
 											</div>
-										)}
-									</div>
+											<div className={classes.paginationHolder}>
+												<div>
+													Strana {pagination?.selected_page} od {pagination?.total_pages}
+												</div>
+												{pagination?.selected_page && (
+													<div className={classes.pagination}>
+														{Array.from(
+															{
+																length: Math.min(
+																	5,
+																	pagination?.total_pages -
+																		pagination?.selected_page +
+																		3,
+																	pagination?.total_pages
+																),
+															},
+															(x, i) => i + Math.max(pagination?.selected_page - 2, 1)
+														).map((num) => (
+															<span
+																key={num}
+																className={`${classes.paginationItem} ${
+																	num === pagination?.selected_page &&
+																	classes.paginationItemSelected
+																}`}
+																onClick={() => onPageChange(num)}
+															>
+																{num}
+															</span>
+														))}
+													</div>
+												)}
+											</div>
+										</>
+									)}
 								</div>
 							</div>
 						</div>
@@ -418,7 +416,8 @@ const CategoriesPage = ({ categoryData, productsItems, filterData }) => {
 
 export default CategoriesPage;
 
-export const getStaticPaths = async () => {
+export const getStaticPaths = async (context) => {
+	console.log(context);
 	const api = ApiHandler();
 	const data = await api.post('/export/vercel/categories?token=uJbl9PN8Dy835HgKIIMTg9Y8');
 
@@ -461,7 +460,7 @@ export const getStaticProps = async (context) => {
 					}),
 				})
 				.then((response) => response.payload),
-			filterData: await api.post(`/products/category/filters/${id}`).then((response) => response.payload),
+			filters: await api.post(`/products/category/filters/${id}`).then((response) => response.payload),
 		},
 		revalidate: 60,
 	};
