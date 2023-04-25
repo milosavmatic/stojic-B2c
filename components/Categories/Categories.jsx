@@ -5,6 +5,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/router';
 import classes from '../NavbarMenu.module.scss';
 
 const Categories = ({
@@ -22,6 +23,8 @@ const Categories = ({
 		closeLeftSidebarModal();
 		setCategoryItemHandler(null);
 	};
+
+	const router = useRouter();
 
 	const convertChirilicLetter = (word) => {
 		if (word.includes('č')) {
@@ -128,17 +131,22 @@ const Categories = ({
 									</a>
 									{(categoryItem?.children ?? []).map((subCategory) => (
 										<ul key={subCategory.id}>
-											<a href={`/kategorije/${item.id}`}>
-												<p onClick={clearModalData}>{subCategory.name}</p>
-											</a>
+											<span
+												onClick={() => {
+													router.push(`/kategorije/${item.id}`);
+													clearModalData();
+												}}
+											/>
 											{subCategory.children && subCategory.children.length > 0
 												? subCategory.children.map((subSubCategory) => (
-														<a
-															key={subSubCategory.id}
-															href={`/kategorije/${subSubCategory.id}`}
+														<span
+															onClick={() => {
+																router.push(`/kategorije/${item.id}`);
+																clearModalData();
+															}}
 														>
-															<li onClick={clearModalData}>{subSubCategory.name}</li>
-														</a>
+															{subSubCategory.name}
+														</span>
 												  ))
 												: null}
 										</ul>
