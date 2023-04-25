@@ -45,7 +45,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 		[router]
 	);
 
-	const [productsData, setProductsData] = useState([]);
+	const [productsData, setProductsData] = useState(productsItems || []);
 
 	const [limit, setLimit] = useState(query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24);
 
@@ -54,17 +54,10 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	const [page, setPage] = useState(query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1);
 
 	const newSelected = [];
-	// for (const item in query) {
-	// 	if (item !== 'id' && !Object.values(queryKeys).includes(item))
-	// 		newSelected.push({
-	// 			column: item,
-	// 			value: { selected: query[item].split(',') },
-	// 		});
-	// }
 
 	const [selectedFilters, setSelectedFilters] = useState(newSelected);
 	const [availableFilters, setAvailableFilters] = useState([]);
-	// ***
+
 	const [changeFilters, setChangeFilters] = useState(false);
 	const [showSearch, setShowSearch] = useState(false);
 
