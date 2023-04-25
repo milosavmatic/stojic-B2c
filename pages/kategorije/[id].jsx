@@ -45,7 +45,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 		[router]
 	);
 
-	const [productsData, setProductsData] = useState(productsItems || []);
+	const [productsData, setProductsData] = useState([]);
 
 	const [limit, setLimit] = useState(query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24);
 
