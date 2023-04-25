@@ -73,7 +73,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	useEffect(() => {
 		setProductsData(productsItems);
 		setAvailableFilters(filters);
-	}, [router.isFallback]);
+	}, [router.isFallback, router.isReady]);
 
 	useEffect(() => {
 		for (const item in query) {
@@ -138,7 +138,8 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	}, [selectedFilters, router.isReady]);
 
 	useEffect(() => {
-		if (!showSearch && (sort !== undefined || selectedFilters.length > 0)) {
+		const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
+		if (query[queryKeys.page] != null || query[queryKeys.page] != null || newSort || selectedFilters.length > 0) {
 			getProductList(limit, sort, page, selectedFilters, setIsLoading, categoryData, setProductsData);
 		}
 	}, [limit, sort, page, selectedFilters, showSearch]);
@@ -148,10 +149,10 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	};
 
 	useEffect(() => {
+		const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
 		setPage(query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1);
 		setLimit(query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24);
 
-		const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
 		setSort(newSort ? { field: newSort.split('_')[0], direction: newSort.split('_')[1] } : undefined);
 	}, [asPath, query, router.isReady]);
 
