@@ -61,8 +61,6 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	const [changeFilters, setChangeFilters] = useState(false);
 	const [showSearch, setShowSearch] = useState(false);
 
-	console.log('query', query);
-
 	useEffect(() => {
 		setProductsData(productsItems);
 		setAvailableFilters(filters);
@@ -191,7 +189,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	if (router.isFallback) {
 		return (
 			<div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-				<Loader center content="loading" vertical size="lg" />
+				<Loader center content="Loading..." vertical size="lg" />
 			</div>
 		);
 	}
@@ -200,7 +198,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 		<>
 			<>
 				<Seo
-					title={`${categoryData?.basic_data?.name}`}
+					title={categoryData?.basic_data?.name}
 					description={`${categoryData?.seo?.description}`}
 					ogtitle={`${categoryData?.seo?.title}`}
 					ogdescription={`${categoryData?.seo?.description}`}
@@ -227,12 +225,8 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 					</div>
 					<div className="container">
 						<Breadcrumbs
-							crumbs={generateBreadcrumbs(
-								{ label: 'Početna', path: '/' },
-								'/kategorije',
-								categoryData?.parents || [],
-								{ label: categoryData?.basic_data?.name, path: asPath }
-							)}
+							crumbs={categoryData?.parents || []}
+							end={{ label: categoryData?.basic_data?.name, path: asPath }}
 						/>
 
 						<div className={`${classes['mobile-display']}`}>

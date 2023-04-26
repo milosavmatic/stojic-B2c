@@ -2,26 +2,15 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 import classes from './ProductDetails.module.scss';
 import { currencyFormat } from '../helpers/functions';
 import { useGlobalAddToCart, useGlobalAddToWishList } from '../helpers/globals';
 
-const Specifications = dynamic(() => import('./Specifications'), {
-	ssr: false,
-	loading: () => null,
-});
-const RecomendedProducts = dynamic(() => import('./RecomendedProducts'), {
-	ssr: false,
-	loading: () => null,
-});
-const ProductDetailsSlider = dynamic(() => import('./ProductDetailsSlider'), {
-	ssr: false,
-	loading: () => null,
-});
-const PlusMinusInput = dynamic(() => import('./PlusMinusInput'), {
-	ssr: false,
-	loading: () => null,
-});
+const Specifications = dynamic(() => import('./Specifications'));
+const RecomendedProducts = dynamic(() => import('./RecomendedProducts'));
+const ProductDetailsSlider = dynamic(() => import('./ProductDetailsSlider'));
+const PlusMinusInput = dynamic(() => import('./PlusMinusInput'));
 
 const ProductDetails = ({ productData, gallery, specifications, recommendedProducts }) => {
 	// Holds the selected additional option
@@ -136,7 +125,7 @@ const ProductDetails = ({ productData, gallery, specifications, recommendedProdu
 								{loading ? (
 									<button className={`${classes.button} ${classes['button-loading']}`} type="button">
 										Loading...
-										{/* <Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
+										<Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" />
 									</button>
 								) : (
 									<button onClick={addToCart} className={classes.button} type="button">

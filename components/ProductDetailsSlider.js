@@ -145,7 +145,7 @@ const ProductDetailsSlider = ({ images = [], addToWishList, isLoadingWish, ...pr
 										onClick={addToWishList}
 										type="button"
 									>
-										<Image alt="compare" src="/images/heart.webp" width={30} height={30} />
+										<Image alt="compare" src="/images/heart.webp" width={20} height={20} />
 										Sačuvaj
 									</button>
 								)}

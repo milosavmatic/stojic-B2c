@@ -63,7 +63,7 @@ const NavbarMenu = ({ categoryData }) => {
 		setSearchCategory(searchTermCat);
 	};
 
-	const { push: navigate } = useRouter();
+	const router = useRouter();
 
 	// Shows mobile hamburger div
 	const [showMobileDiv, setShowMobileDiv] = useState(false);
@@ -117,7 +117,7 @@ const NavbarMenu = ({ categoryData }) => {
 
 	const handleSearch = (event) => {
 		event.preventDefault();
-		navigate(`/search?search=${searchTerm}`);
+		router.push(`/search?search=${searchTerm}`);
 		setSearchTerm('');
 	};
 
@@ -126,7 +126,7 @@ const NavbarMenu = ({ categoryData }) => {
 			setShowDivCartCount(!showDivCartCount);
 			setShowDivWishListCount(false);
 		} else {
-			navigate('/korpa');
+			router.push('/korpa');
 		}
 	};
 
@@ -139,7 +139,7 @@ const NavbarMenu = ({ categoryData }) => {
 			setShowDivWishListCount(!showDivWishListCount);
 			setShowDivCartCount(false);
 		} else {
-			navigate('/lista-zelja');
+			router.push('/lista-zelja');
 		}
 	};
 
@@ -438,7 +438,7 @@ const NavbarMenu = ({ categoryData }) => {
 												<button
 													type="button"
 													className={`${classes['button-wishlist']}`}
-													onClick={() => navigate('/lista-zelja')}
+													onClick={() => router.push('/lista-zelja')}
 												>
 													<Image
 														src="/images/heart.webp"
@@ -453,7 +453,7 @@ const NavbarMenu = ({ categoryData }) => {
 												<button
 													type="button"
 													className={`${classes['button-checkout']}`}
-													onClick={() => navigate('/korpa')}
+													onClick={() => router.push('/korpa')}
 												>
 													<FontAwesomeIcon
 														icon={faShoppingBag}
@@ -505,7 +505,7 @@ const NavbarMenu = ({ categoryData }) => {
 											</li>
 											<li
 												onClick={() => {
-													navigate('/');
+													router.push('/');
 													onMobileDivShow();
 												}}
 												className={classes['mobile-nav-link']}
@@ -545,7 +545,7 @@ const NavbarMenu = ({ categoryData }) => {
 
 											<li
 												onClick={() => {
-													navigate('/akcija');
+													router.push('/akcija');
 													onMobileDivShow();
 												}}
 												className={classes['mobile-nav-link']}
@@ -554,7 +554,7 @@ const NavbarMenu = ({ categoryData }) => {
 											</li>
 											<li
 												onClick={() => {
-													navigate('/nacin-placanja-i-isporuka');
+													router.push('/nacin-placanja-i-isporuka');
 													onMobileDivShow();
 												}}
 												className={classes['mobile-nav-link']}
@@ -563,7 +563,7 @@ const NavbarMenu = ({ categoryData }) => {
 											</li>
 											<li
 												onClick={() => {
-													navigate('/blog');
+													router.push('/blog');
 													onMobileDivShow();
 												}}
 												className={classes['mobile-nav-link']}
@@ -572,7 +572,7 @@ const NavbarMenu = ({ categoryData }) => {
 											</li>
 											<li
 												onClick={() => {
-													navigate('https://b2b.stojic.rs/prijava');
+													router.push('https://b2b.stojic.rs/prijava');
 													onMobileDivShow();
 												}}
 												className={`${classes['mobile-nav-link']} ${classes.activeB2B}`}
@@ -581,7 +581,7 @@ const NavbarMenu = ({ categoryData }) => {
 											</li>
 											<li
 												onClick={() => {
-													navigate('/kontakt');
+													router.push('/kontakt');
 													onMobileDivShow();
 												}}
 												className={classes['mobile-nav-link']}

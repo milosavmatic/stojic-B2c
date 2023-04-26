@@ -41,10 +41,8 @@ const ProductPage = ({ basic_data, breadcrumbs, gallery, specifications, recomme
 				/>
 				<div className="container">
 					<Breadcrumbs
-						crumbs={generateBreadcrumbs({ label: 'Početna', path: '/' }, '/kategorije', breadcrumbs.steps, {
-							label: breadcrumbs.end.name,
-							path: asPath,
-						})}
+						crumbs={breadcrumbs.steps || []}
+						end={{ label: basic_data.data.item.basic_data.name, path: asPath }}
 					/>
 					<ProductDetails
 						productData={basic_data.data.item}
