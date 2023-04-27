@@ -1,7 +1,7 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-nested-ternary */
 
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';

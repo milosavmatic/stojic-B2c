@@ -10,7 +10,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Nav from 'react-bootstrap/Nav';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
 // import { BsHandbag, BsSearch, BsEnvelope, BsX } from 'react-icons/bs';
 // import { SlUser } from 'react-icons/sl';
@@ -184,7 +184,7 @@ const NavbarMenu = ({ categoryData }) => {
 					<div className="container">
 						<Row>
 							<Col xl={3} lg={3} className={`${classes['col-holder']} ${classes['logo-holder']}`}>
-								<Link href="/">
+								<Link href="/" legacyBehavior>
 									<div className={classes['image-holder']}>
 										<Image
 											src="/images/logo-color.webp"
@@ -388,7 +388,7 @@ const NavbarMenu = ({ categoryData }) => {
 							<Col md={3} xl={4} lg={3}>
 								<ul className={`${classes['envelope-phone']} d-flex justify-content-end`}>
 									<li>
-										<Link href="mailto:web@stojic.rs">
+										<Link href="mailto:web@stojic.rs" legacyBehavior>
 											<span>
 												<FontAwesomeIcon icon={faEnvelope} />
 												<span>web@stojic.rs</span>
@@ -396,7 +396,7 @@ const NavbarMenu = ({ categoryData }) => {
 										</Link>
 									</li>
 									<li>
-										<Link href="tel:00381653773300">
+										<Link href="tel:00381653773300" legacyBehavior>
 											<span>
 												<FontAwesomeIcon icon={faPhone} />
 												<span>+381 65 377 330 0 </span>
@@ -415,7 +415,7 @@ const NavbarMenu = ({ categoryData }) => {
 					<div className="container">
 						<Row className={`${classes['top-header-mobile']}`}>
 							<Col xs={6} sm={6} md={4} className={`${classes['col-holder']} ${classes['logo-holder']}`}>
-								<Link href="/">
+								<Link href="/" legacyBehavior>
 									<div className={classes['image-holder']}>
 										<Image
 											src="/images/logo-color.webp"

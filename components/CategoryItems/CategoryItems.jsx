@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import dynamic from 'next/dynamic';
 import { ApiHandler } from '../../helpers/api';
 import classes from './CategoryItems.module.scss';

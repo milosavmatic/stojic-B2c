@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import classes from '../assets/css/RentalNav.module.scss';
 import { currencyFormat } from '../helpers/functions';
 import { useGlobalAddToCart } from '../pages/api/globals';

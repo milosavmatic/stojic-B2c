@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable eqeqeq */
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import classes from './CartProductItem.module.scss';

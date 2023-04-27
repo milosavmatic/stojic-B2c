@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { Carousel } from 'react-bootstrap';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import classes from './MainSlider.module.scss';
 
 const MainSlider = ({ banners, mobileBanners }) => (
@@ -11,7 +11,7 @@ const MainSlider = ({ banners, mobileBanners }) => (
 				{(banners ?? []).map((banner) => (
 					<Carousel.Item className={`${classes['main-slider']}`} key={banner.id}>
 						{banner.url ? (
-							<Link href={banner.url} target="_blank">
+							<Link href={banner.url} target="_blank" legacyBehavior>
 								<div className={`${classes['desktop-display']}`}>
 									<Image
 										src={banner.image}

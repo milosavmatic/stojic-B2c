@@ -38,6 +38,25 @@ export default Home;
 
 export const getStaticProps = async () => {
 	const api = ApiHandler();
+
+	// const tabs = await api.list('categories/section/recommended').then((response) => response?.payload);
+
+	// const tabsProducts = await tabs?.map(async (item) => {
+	// 	const productsTabs = [];
+	// 	const productsResTabs = await fetch(`${process.env.API_URL}products/category/list/773`, {
+	// 		method: 'LIST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 	});
+
+	// 	const products = await productsResTabs.json();
+
+	// 	return productsTabs.concat(products.payload.items);
+	// });
+
+	// console.log('tabsProducts', tabsProducts);
+
 	return {
 		props: {
 			banners: await api.get('banners/index_slider').then((response) => response?.payload),

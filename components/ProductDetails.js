@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import classes from './ProductDetails.module.scss';
 import { currencyFormat } from '../helpers/functions';
 import { useGlobalAddToCart, useGlobalAddToWishList } from '../helpers/globals';

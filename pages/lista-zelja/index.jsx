@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import dynamic from 'next/dynamic';
 import classes from './WishListPage.module.scss';
 import { ApiHandler } from '../../helpers/api';
@@ -77,3 +77,9 @@ const WishListPage = () => {
 };
 
 export default WishListPage;
+
+export async function getStaticProps(context) {
+	return {
+		props: {}, // will be passed to the page component as props
+	};
+}

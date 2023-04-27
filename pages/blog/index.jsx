@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { ApiHandler } from '../../helpers/api';
 import classes from './Blog.module.scss';
 
@@ -40,7 +40,7 @@ const Blog = ({ blog }) => {
 						<Row>
 							{(blog?.slice(0, thumbCount) ?? []).map((row) => (
 								<Col xl={3} md={6} sm={6} xs={12} key={row?.id}>
-									<Link href={`/blog/${row?.id}`}>
+									<Link href={`/blog/${row?.id}`} legacyBehavior>
 										<div className={classes.postHolder} id={row.id}>
 											<div className={classes.imgHolder}>
 												<Image

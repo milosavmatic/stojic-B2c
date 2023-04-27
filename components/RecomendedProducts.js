@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import classes from './RecomendedProducts.module.scss';
 import { currencyFormat } from '../helpers/functions';
@@ -26,7 +26,11 @@ const RecomendedProducts = ({ recommendedProducts }) => {
 							<div key={item?.id} className="keen-slider__slide">
 								<div className={`${classes['recomended-product-col']}`}>
 									<div className={`${classes['recomended-product-holder']}`}>
-										<Link href={`/proizvod/${item?.id}`} className={`${classes.link}`}>
+										<Link
+											href={`/proizvod/${item?.id}`}
+											className={`${classes.link}`}
+											legacyBehavior
+										>
 											<div className={classes['image-holder']}>
 												<Image
 													src={item?.image[0]}
@@ -39,7 +43,11 @@ const RecomendedProducts = ({ recommendedProducts }) => {
 											</div>
 										</Link>
 										<div className={`${classes['info-holder']}`}>
-											<Link href={`/proizvod/${item?.id}`} className={`${classes.link}`}>
+											<Link
+												href={`/proizvod/${item?.id}`}
+												className={`${classes.link}`}
+												legacyBehavior
+											>
 												<p>{item?.basic_data?.name}</p>
 											</Link>
 											<p className={`${classes['old-price']}`}>

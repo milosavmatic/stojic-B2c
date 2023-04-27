@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import wishlist from '../assets/images/elements/heart.png';
 import cart from '../assets/images/elements/cart-white.png';
 import classes from './ActionProducts.module.scss';
@@ -27,7 +27,7 @@ const ActionProducts = ({ recommendedProducts }) => {
 								<div key={item?.id} className="keen-slider__slide">
 									<div className={`${classes['action-product-col']} `}>
 										<div className={`${classes['action-product-holder']}`}>
-											<Link href={`/proizvod/${item?.id}`}>
+											<Link href={`/proizvod/${item?.id}`} legacyBehavior>
 												<div className={classes['image-holder']}>
 													<Image
 														src={item?.image[0] ?? '/products/missing.png'}
@@ -39,7 +39,7 @@ const ActionProducts = ({ recommendedProducts }) => {
 												</div>
 											</Link>
 											<div className={`${classes['info-holder']}`}>
-												<Link href={`/proizvod/${item?.id}`}>
+												<Link href={`/proizvod/${item?.id}`} legacyBehavior>
 													<p>{item?.basic_data?.name}</p>
 												</Link>
 												<p className={`${classes['old-price']}`}>

@@ -8,11 +8,10 @@ import dynamic from 'next/dynamic';
 import { Accordion } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Loader from 'rsuite/Loader';
 import classes from './CategoriesPage.module.scss';
 import { ApiHandler } from '../../helpers/api';
-import { generateBreadcrumbs } from '../../helpers/generateBreadCrumbs';
 import { queryKeys, sortKeys } from '../../helpers/const';
 import { getProductList } from '../../helpers/getProductList';
 
@@ -212,12 +211,21 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 				<div className={`${classes.categoriespage}`}>
 					<div className={`${classes.catBanner}`}>
 						<div className="container-fluid">
-							<Image
-								src="/images/cartBanner.webp"
-								alt="Stojic Elektrik doo"
-								layout="fill"
-								objectFit="cover"
-							/>
+							{categoryData.images.image ? (
+								<Image
+									src={categoryData.images.image}
+									alt={categoryData.name}
+									layout="fill"
+									objectFit="cover"
+								/>
+							) : (
+								<Image
+									src="/images/cartBanner.webp"
+									alt="Stojic Elektrik doo"
+									layout="fill"
+									objectFit="cover"
+								/>
+							)}
 							<div className={`${classes.title}`}>
 								<h5>{categoryData?.basic_data?.name}</h5>
 							</div>

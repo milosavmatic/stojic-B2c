@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import classes from './ActionBanners.module.scss';
 
 const Row = dynamic(() => import('react-bootstrap/Row'));
@@ -12,7 +12,7 @@ const ActionBanners = ({ actionBanners }) => (
 			<Row>
 				{(actionBanners ?? []).map((banner) => (
 					<Col className={`${classes.box}`} key={banner.id} sm={12} md={6} lg={6} xl={6}>
-						<Link href="/">
+						<Link href="/" legacyBehavior>
 							<div className={`${classes.actionBanner}`}>
 								<Image src={banner.image} alt="Stojic Elektik" layout="fill" />
 								{/* <div className={classes.wrappText}>

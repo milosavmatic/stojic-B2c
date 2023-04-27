@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useState } from 'react';
 import { faBagShopping, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
