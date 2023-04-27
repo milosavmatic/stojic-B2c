@@ -70,6 +70,12 @@
   display: block;
   position: relative;
   margin: 4rem 0;
+  
+  
+  .img {
+    object-fit: contain
+  }
+  
 }
 .category-name {
   font-size: 0.725rem;

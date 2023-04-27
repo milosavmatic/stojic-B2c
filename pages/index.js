@@ -17,6 +17,8 @@ const Home = ({
 	saleProducts,
 	positionProducts,
 	actionBanners,
+	tabsProducts,
+	tabs,
 }) => (
 	<>
 		<Seo title="Web shop" />
@@ -29,7 +31,7 @@ const Home = ({
 				positionProducts={positionProducts}
 			/>
 			<ActionBanners actionBanners={actionBanners} />
-			<CategoryItems buttonTabs={buttonTabs} />
+			<CategoryItems buttonTabs={buttonTabs} itemsTab={tabsProducts} tabs={tabs} />
 		</div>
 	</>
 );
@@ -39,32 +41,34 @@ export default Home;
 export const getStaticProps = async () => {
 	const api = ApiHandler();
 
-	// const tabs = await api.list('categories/section/recommended').then((response) => response?.payload);
+	const tabs = await api.list('categories/section/recommended').then((response) => response?.payload);
 
-	// const tabsProducts = await tabs?.map(async (item) => {
-	// 	const productsTabs = [];
-	// 	const productsResTabs = await fetch(`${process.env.API_URL}products/category/list/773`, {
-	// 		method: 'LIST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 	});
+	const tabsProducts = [];
 
-	// 	const products = await productsResTabs.json();
+	function myFunction(array) {
+		array.forEach((item) => {
+			tabsProducts.push(item);
+		});
+	}
 
-	// 	return productsTabs.concat(products.payload.items);
-	// });
+	await tabs?.slice(0, 6).map(async (item) => {
+		console.log('id', item.id);
+		const productsResTabs = await fetch(`${process.env.API_URL}products/category/list/${item.id}`, {
+			method: 'LIST',
+			limit: 7,
+			sort: null,
+		});
 
-	// console.log('tabsProducts', tabsProducts);
+		const products = await productsResTabs.json();
+		const productsTabs = await products?.payload?.items.slice(0, 7);
+
+		await myFunction(productsTabs);
+	});
 
 	return {
 		props: {
 			banners: await api.get('banners/index_slider').then((response) => response?.payload),
 			mobileBanners: await api.get('banners/index_slider_mobile').then((response) => response?.payload),
-			// recommendedCategories:
-			//   (await api
-			//     .list('categories/section/recomended', { limit: 6 })
-			//     .then((response) => response?.payload)) ?? null,
 			actionBanners: await api.get('banners/action_banners').then((response) => response?.payload),
 			buttonTabs: await api.list('categories/section/recommended').then((response) => response?.payload),
 			recommendedProducts: await api
@@ -76,6 +80,8 @@ export const getStaticProps = async () => {
 			positionProducts: await api
 				.list('products/section/list/sale', { limit: 6 })
 				.then((response) => response?.payload?.items),
+			tabsProducts,
+			tabs,
 		},
 		revalidate: 10,
 	};

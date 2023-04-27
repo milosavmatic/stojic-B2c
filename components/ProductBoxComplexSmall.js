@@ -41,12 +41,12 @@ const ProductBoxComplexSmall = ({ product, noBorder = '', className = '', bigger
 				onClick={handleClick}
 			>
 				<Image
-					style={{ objectFit: 'contain' }}
 					alt={product?.basic_data?.slug}
 					src={product?.image[0] || '/images/logo.webp'}
 					priority
 					layout="fill"
 					sizes="100vw, 100%"
+					className={classes.img}
 				/>
 			</a>
 

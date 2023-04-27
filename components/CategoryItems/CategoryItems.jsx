@@ -7,38 +7,31 @@ import classes from './CategoryItems.module.scss';
 const HomeTabButton = dynamic(() => import('../UI/HomeTabButton/HomeTabButton'));
 const ProductBoxComplexSmall = dynamic(() => import('../ProductBoxComplexSmall'));
 
-function CategoryItems({ buttonTabs }) {
+function CategoryItems({ buttonTabs, itemsTab, tabs }) {
 	const [tabCategory, setTabsCategory] = useState('');
-	const [sort, setSort] = useState(null);
+
 	const [items, setItems] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
 
-	const [limit, setLimit] = useState(7);
+	const categoryProducts = (id) => {
+		setTabsCategory(id);
 
-	useEffect(() => {
-		setTabsCategory(buttonTabs[1]?.id);
-	}, [buttonTabs]);
+		console.log(itemsTab.map((item) => item.categories[0]?.id));
 
-	const getProductList = useCallback(
-		(sort, limit) => {
-			setIsLoading(true);
-			const api = ApiHandler();
-			api.list(`products/category/list/${tabCategory}`, {
-				sort,
-				limit,
-			})
-				.then((response) => {
-					setItems(response?.payload.items);
-					setIsLoading(false);
-				})
-				.catch((error) => console.warn(error));
-		},
-		[tabCategory]
-	);
+		console.log(buttonTabs.filter((item) => item.id));
+
+		console.log(
+			'tabs',
+			tabs.filter((item) => item.id)
+		);
+
+		setItems(itemsTab.filter((item) => item.categories[0]?.id === id));
+	};
 
 	useEffect(() => {
-		getProductList(sort, limit);
-	}, [getProductList, sort, limit]);
+		setTabsCategory(buttonTabs[0]?.id);
+
+		setItems(itemsTab.filter((item) => item.categories[0]?.id === buttonTabs[0]?.id));
+	}, []);
 
 	return (
 		<div className={`${classes.categoryItems}`}>
@@ -48,7 +41,7 @@ function CategoryItems({ buttonTabs }) {
 						<HomeTabButton
 							key={item.id}
 							onButtonClick={() => {
-								setTabsCategory(item.id);
+								categoryProducts(item.id);
 							}}
 							buttonClass={tabCategory === item.id ? 'active' : ''}
 							changeStyle="tabCategoryButton"
@@ -58,25 +51,19 @@ function CategoryItems({ buttonTabs }) {
 					))}
 				</div>
 
-				{!isLoading ? (
-					<div className={`${classes.categoryGrid}`}>
-						{items.map((item, index) => (
-							<div key={item.id} className={index === 2 ? `${classes.item3}` : ''}>
-								<ProductBoxComplexSmall
-									className="homeBoxCategory"
-									biggerImg={index === 2 ? 'biggerImg' : ''}
-									product={item}
-								/>
-							</div>
-						))}
-					</div>
-				) : (
-					<div className="gif">
-						{/* <Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
-					</div>
-				)}
+				<div className={`${classes.categoryGrid}`}>
+					{items.map((item, index) => (
+						<div key={item.id} className={index === 2 ? `${classes.item3}` : ''}>
+							<ProductBoxComplexSmall
+								className="homeBoxCategory"
+								biggerImg={index === 2 ? 'biggerImg' : ''}
+								product={item}
+							/>
+						</div>
+					))}
+				</div>
 
-				{items <= 0 && !isLoading && (
+				{items <= 0 && (
 					<div className={`${classes.noProduct}`}>
 						<h3>Trenutno nema podataka za prikaz.</h3>
 					</div>

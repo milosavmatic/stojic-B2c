@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable no-return-await */
 /* eslint-disable no-nested-ternary */
 
@@ -124,29 +125,28 @@ const Categories = ({
 						{/* ***** */}
 
 						{selectedCategoryId === item.id && item ? (
-							<div className={classes.subCategoryTreeMobile}>
-								<div className={classes.subCategoryChildrenMobile}>
-									<a href={`/kategorije/${item.id}`} className={classes.categoryNameMobile}>
+							<div className={classes['subCategoryTreeMobile']}>
+								<div className={classes['subCategoryChildrenMobile']}>
+									<a href={`/kategorije/${item.id}`} className={classes['categoryNameMobile']}>
 										<p onClick={clearModalData}>{item.name}</p>
 									</a>
 									{(categoryItem?.children ?? []).map((subCategory) => (
 										<ul key={subCategory.id}>
-											<span
-												onClick={() => {
-													router.push(`/kategorije/${item.id}`);
-													clearModalData();
-												}}
-											/>
+											<a>
+												<p onClick={clearModalData}>{subCategory.name}</p>
+											</a>
 											{subCategory.children && subCategory.children.length > 0
 												? subCategory.children.map((subSubCategory) => (
-														<span
-															onClick={() => {
-																router.push(`/kategorije/${item.id}`);
-																clearModalData();
-															}}
-														>
-															{subSubCategory.name}
-														</span>
+														<a>
+															<li
+																onClick={() => {
+																	router.push(`/kategorije/${item.id}`);
+																	clearModalData();
+																}}
+															>
+																{subSubCategory.name}
+															</li>
+														</a>
 												  ))
 												: null}
 										</ul>
