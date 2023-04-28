@@ -17,8 +17,6 @@ const Home = ({
 	saleProducts,
 	positionProducts,
 	actionBanners,
-	tabsProducts,
-	tabs,
 }) => (
 	<>
 		<Seo title="Web shop" />
@@ -31,7 +29,7 @@ const Home = ({
 				positionProducts={positionProducts}
 			/>
 			<ActionBanners actionBanners={actionBanners} />
-			<CategoryItems buttonTabs={buttonTabs} itemsTab={tabsProducts} tabs={tabs} />
+			<CategoryItems buttonTabs={buttonTabs} />
 		</div>
 	</>
 );
@@ -40,30 +38,6 @@ export default Home;
 
 export const getStaticProps = async () => {
 	const api = ApiHandler();
-
-	const tabs = await api.list('categories/section/recommended').then((response) => response?.payload);
-
-	const tabsProducts = [];
-
-	function myFunction(array) {
-		array.forEach((item) => {
-			tabsProducts.push(item);
-		});
-	}
-
-	await tabs?.slice(0, 6).map(async (item) => {
-		console.log('id', item.id);
-		const productsResTabs = await fetch(`${process.env.API_URL}products/category/list/${item.id}`, {
-			method: 'LIST',
-			limit: 7,
-			sort: null,
-		});
-
-		const products = await productsResTabs.json();
-		const productsTabs = await products?.payload?.items.slice(0, 7);
-
-		await myFunction(productsTabs);
-	});
 
 	return {
 		props: {
@@ -80,8 +54,6 @@ export const getStaticProps = async () => {
 			positionProducts: await api
 				.list('products/section/list/sale', { limit: 6 })
 				.then((response) => response?.payload?.items),
-			tabsProducts,
-			tabs,
 		},
 		revalidate: 10,
 	};
