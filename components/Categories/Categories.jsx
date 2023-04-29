@@ -127,25 +127,30 @@ const Categories = ({
 						{selectedCategoryId === item.id && item ? (
 							<div className={classes['subCategoryTreeMobile']}>
 								<div className={classes['subCategoryChildrenMobile']}>
-									<a href={`/kategorije/${item.id}`} className={classes['categoryNameMobile']}>
-										<p onClick={clearModalData}>{item.name}</p>
+									<a
+										href={`/kategorije/${item.id}`}
+										className={classes['categoryNameMobile']}
+										onClick={clearModalData}
+									>
+										{item.name}
 									</a>
 									{(categoryItem?.children ?? []).map((subCategory) => (
 										<ul key={subCategory.id}>
-											<a>
-												<p onClick={clearModalData}>{subCategory.name}</p>
+											<a
+												href={`/kategorije/${subCategory.id}`}
+												onClick={clearModalData}
+												className={classes.mainLink}
+											>
+												{subCategory.name}
 											</a>
 											{subCategory.children && subCategory.children.length > 0
 												? subCategory.children.map((subSubCategory) => (
-														<a>
-															<li
-																onClick={() => {
-																	router.push(`/kategorije/${item.id}`);
-																	clearModalData();
-																}}
-															>
-																{subSubCategory.name}
-															</li>
+														<a
+															href={`/kategorije/${item.id}`}
+															onClick={clearModalData}
+															className={classes.childLink}
+														>
+															{subSubCategory.name}
 														</a>
 												  ))
 												: null}
@@ -161,8 +166,12 @@ const Categories = ({
 
 			{categoryItem ? (
 				<div className={classes.subCategoryTree}>
-					<a href={`/kategorije/${categoryItem.id}`} className={classes.categoryName}>
-						<h5 onClick={clearModalData}>{categoryItem.name}</h5>
+					<a
+						href={`/kategorije/${categoryItem.id}`}
+						className={classes.categoryName}
+						onClick={clearModalData}
+					>
+						{categoryItem.name}
 					</a>
 					<div className={classes.gridRightSideSubCat}>
 						<>
@@ -186,12 +195,21 @@ const Categories = ({
 								{categoryData.length > 0 ? (
 									categoryData.map((subCategory) => (
 										<ul key={subCategory.id}>
-											<a href={`/kategorije/${subCategory.id}`}>
-												<p onClick={clearModalData}>{subCategory.name}</p>
+											<a
+												href={`/kategorije/${subCategory.id}`}
+												onClick={clearModalData}
+												className={`${classes.headerLink}`}
+											>
+												{subCategory.name}
 											</a>
 											{(subCategory?.children ?? []).map((subSubCategory) => (
-												<a key={subSubCategory.id} href={`/kategorije/${subSubCategory.id}`}>
-													<li onClick={clearModalData}>{subSubCategory.name}</li>
+												<a
+													key={subSubCategory.id}
+													href={`/kategorije/${subSubCategory.id}`}
+													onClick={clearModalData}
+													className={`${classes.link}`}
+												>
+													{subSubCategory.name}
 												</a>
 											))}
 										</ul>

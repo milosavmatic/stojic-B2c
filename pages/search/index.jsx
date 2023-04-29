@@ -158,7 +158,12 @@ const SearchPage = () => {
 								</div>
 								{isLoading ? (
 									<div className="gif">
-										{/* <Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
+										<Image
+											src="/images/loading-buffering.gif"
+											alt="Loading"
+											width={200}
+											height={200}
+										/>
 									</div>
 								) : (
 									<div className={`${classes['product-row']} row`}>

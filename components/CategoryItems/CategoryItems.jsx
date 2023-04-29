@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import classes from './CategoryItems.module.scss';
 import HomeTabButton from '../UI/HomeTabButton/HomeTabButton';
@@ -75,7 +75,7 @@ function CategoryItems({ buttonTabs }) {
 					</div>
 				) : (
 					<div className="gif">
-						<Image src="/images/loading-buffering.gif" alt="Loading" />
+						<Image src="/images/loading-buffering.gif" alt="Loading" width={200} height={200} />
 					</div>
 				)}
 

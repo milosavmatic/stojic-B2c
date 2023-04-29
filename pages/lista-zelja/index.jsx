@@ -49,7 +49,7 @@ const WishListPage = () => {
 				<h5 className={classes['wishlist-heading']}>Vaša lista želja</h5>
 				{isLoading ? (
 					<div className="gif">
-						{/* <Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
+						<Image src="/images/loading-buffering.gif" alt="Loading" width={200} height={200} />
 					</div>
 				) : (
 					<div className={`${classes.content} row`}>

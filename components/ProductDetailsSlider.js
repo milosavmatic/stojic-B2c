@@ -136,8 +136,12 @@ const ProductDetailsSlider = ({ images = [], addToWishList, isLoadingWish, ...pr
 							<div className={classes['under-details-buttons-surrounder']}>
 								{isLoadingWish ? (
 									<button className={`${classes['under-details-buttons-button']}`} type="button">
-										Loading...
-										{/* <Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
+										<Image
+											src="/images/loading-buffering.gif"
+											alt="Loading"
+											width={200}
+											height={200}
+										/>
 									</button>
 								) : (
 									<button

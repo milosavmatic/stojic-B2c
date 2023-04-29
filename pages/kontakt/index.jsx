@@ -303,7 +303,12 @@ const ContactPage = () => {
 
 								{isLoading ? (
 									<button type="button" className={classes['contact-submit']}>
-										{/* <Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" /> */}
+										<Image
+											src="/images/loading-buffering.gif"
+											alt="Loading"
+											width={200}
+											height={200}
+										/>
 									</button>
 								) : (
 									<button

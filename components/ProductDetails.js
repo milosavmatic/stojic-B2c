@@ -124,8 +124,12 @@ const ProductDetails = ({ productData, gallery, specifications, recommendedProdu
 							<div className={`${classes['button-add-to-cart-holder']}`}>
 								{loading ? (
 									<button className={`${classes.button} ${classes['button-loading']}`} type="button">
-										Loading...
-										<Image src="/images/loading-buffering.gif" alt="Loading" objectFit="contain" />
+										<Image
+											src="/images/loading-buffering.gif"
+											alt="Loading"
+											width={200}
+											height={200}
+										/>
 									</button>
 								) : (
 									<button onClick={addToCart} className={classes.button} type="button">

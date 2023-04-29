@@ -844,7 +844,8 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 											<Image
 												src="/images/loading-buffering.gif"
 												alt="Loading"
-												objectFit="contain"
+												width={200}
+												height={200}
 											/>
 										</button>
 									) : (
