@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic';
 import Seo from '../components/Seo/Seo';
 import { ApiHandler } from '../helpers/api';
+import CategoryItems from '../components/CategoryItems/CategoryItems';
 
 const MainSlider = dynamic(() => import('../components/MainSlider'));
 const ActionBanners = dynamic(() => import('../components/ActionBanners/ActionBanners.jsx'));
 
 const CardsSupport = dynamic(() => import('../components/CardsSupport/CardsSupport'));
-const CategoryItems = dynamic(() => import('../components/CategoryItems/CategoryItems'));
 const GridProducts = dynamic(() => import('../components/GridProducts/GridProducts'));
 
 const Home = ({

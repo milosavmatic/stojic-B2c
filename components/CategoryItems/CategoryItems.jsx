@@ -1,47 +1,40 @@
 import { useCallback, useState, useEffect } from 'react';
 import Image from 'next/legacy/image';
-
+import useSWR from 'swr';
 import classes from './CategoryItems.module.scss';
 import HomeTabButton from '../UI/HomeTabButton/HomeTabButton';
 import ProductBoxComplexSmall from '../ProductBoxComplexSmall';
 import { ApiHandler } from '../../helpers/api';
 
+function fetcher(url) {
+	return fetch(url).then((res) => res.json());
+}
+
 function CategoryItems({ buttonTabs }) {
 	const [tabCategory, setTabsCategory] = useState('');
-	const [sort, setSort] = useState({
-		direction: 'desc',
-		field: 'display_in_section_recommendation',
-	});
-	const [items, setItems] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
 
-	const [limit, setLimit] = useState(7);
+	function fetcher(url) {
+		return fetch(url, {
+			method: 'LIST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				sort: null,
+				limit: 7,
+			}),
+		}).then((res) => res.json());
+	}
+
+	const { data, error, isLoading } = useSWR(`${process.env.API_URL}/products/category/list/${tabCategory}`, fetcher, {
+		cacheKey: `data-${tabCategory}`,
+		revalidateOnMount: true,
+		revalidateOnFocus: true,
+	});
 
 	useEffect(() => {
 		setTabsCategory(buttonTabs[1]?.id);
 	}, [buttonTabs]);
-
-	const getProductList = useCallback(
-		(sort, limit) => {
-			setIsLoading(true);
-			const api = ApiHandler();
-			api.list(`products/category/list/${tabCategory}`, {
-				sort,
-				limit,
-			})
-				.then((response) => {
-					setItems(response?.payload.items);
-					setIsLoading(false);
-				})
-				.catch((error) => console.warn(error));
-		},
-		[tabCategory]
-	);
-
-	useEffect(() => {
-		getProductList(sort, limit);
-	}, [getProductList, sort, limit]);
-	console.log(isLoading);
 
 	return (
 		<div className={`${classes.categoryItems}`}>
@@ -63,7 +56,7 @@ function CategoryItems({ buttonTabs }) {
 
 				{!isLoading ? (
 					<div className={`${classes.categoryGrid}`}>
-						{items.map((item, index) => (
+						{data?.payload?.items.map((item, index) => (
 							<div key={item.id} className={index === 2 ? `${classes.item3}` : ''}>
 								<ProductBoxComplexSmall
 									className="homeBoxCategory"
@@ -79,7 +72,7 @@ function CategoryItems({ buttonTabs }) {
 					</div>
 				)}
 
-				{items <= 0 && !isLoading && (
+				{data?.payload?.items <= 0 && !isLoading && (
 					<div className={`${classes.noProduct}`}>
 						<h3>Trenutno nema podataka za prikaz.</h3>
 					</div>
