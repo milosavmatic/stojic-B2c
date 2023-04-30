@@ -1,40 +1,25 @@
 import { useCallback, useState, useEffect } from 'react';
 import Image from 'next/legacy/image';
-import useSWR from 'swr';
 import classes from './CategoryItems.module.scss';
 import HomeTabButton from '../UI/HomeTabButton/HomeTabButton';
 import ProductBoxComplexSmall from '../ProductBoxComplexSmall';
-import { ApiHandler } from '../../helpers/api';
 
-function fetcher(url) {
-	return fetch(url).then((res) => res.json());
-}
-
-function CategoryItems({ buttonTabs }) {
+function CategoryItems({ buttonTabs, recommendedCategoriesProducts }) {
 	const [tabCategory, setTabsCategory] = useState('');
+	const [items, setItems] = useState([]);
 
-	function fetcher(url) {
-		return fetch(url, {
-			method: 'LIST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				sort: null,
-				limit: 7,
-			}),
-		}).then((res) => res.json());
-	}
-
-	const { data, error, isLoading } = useSWR(`${process.env.API_URL}/products/category/list/${tabCategory}`, fetcher, {
-		cacheKey: `data-${tabCategory}`,
-		revalidateOnMount: true,
-		revalidateOnFocus: true,
-	});
+	const filterItems = (id) => {
+		setTabsCategory(id);
+		setItems(
+			recommendedCategoriesProducts?.filter((item) =>
+				item?.categories[0]?.category_path?.some((itemId) => itemId.id === id)
+			)
+		);
+	};
 
 	useEffect(() => {
-		setTabsCategory(buttonTabs[1]?.id);
-	}, [buttonTabs]);
+		filterItems(buttonTabs[1]?.id);
+	}, []);
 
 	return (
 		<div className={`${classes.categoryItems}`}>
@@ -44,7 +29,7 @@ function CategoryItems({ buttonTabs }) {
 						<HomeTabButton
 							key={item.id}
 							onButtonClick={() => {
-								setTabsCategory(item.id);
+								filterItems(item.id);
 							}}
 							buttonClass={tabCategory === item.id ? 'active' : ''}
 							changeStyle="tabCategoryButton"
@@ -54,25 +39,19 @@ function CategoryItems({ buttonTabs }) {
 					))}
 				</div>
 
-				{!isLoading ? (
-					<div className={`${classes.categoryGrid}`}>
-						{data?.payload?.items.map((item, index) => (
-							<div key={item.id} className={index === 2 ? `${classes.item3}` : ''}>
-								<ProductBoxComplexSmall
-									className="homeBoxCategory"
-									biggerImg={index === 2 ? 'biggerImg' : ''}
-									product={item}
-								/>
-							</div>
-						))}
-					</div>
-				) : (
-					<div className="gif">
-						<Image src="/images/loading-buffering.gif" alt="Loading" width={200} height={200} />
-					</div>
-				)}
+				<div className={`${classes.categoryGrid}`}>
+					{items.map((item, index) => (
+						<div key={item.id} className={index === 2 ? `${classes.item3}` : ''}>
+							<ProductBoxComplexSmall
+								className="homeBoxCategory"
+								biggerImg={index === 2 ? 'biggerImg' : ''}
+								product={item}
+							/>
+						</div>
+					))}
+				</div>
 
-				{data?.payload?.items <= 0 && !isLoading && (
+				{items <= 0 && (
 					<div className={`${classes.noProduct}`}>
 						<h3>Trenutno nema podataka za prikaz.</h3>
 					</div>

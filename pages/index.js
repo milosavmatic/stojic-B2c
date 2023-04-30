@@ -17,6 +17,7 @@ const Home = ({
 	saleProducts,
 	positionProducts,
 	actionBanners,
+	recommendationCategoriesProducts,
 }) => (
 	<>
 		<Seo title="Web shop" />
@@ -29,7 +30,7 @@ const Home = ({
 				positionProducts={positionProducts}
 			/>
 			<ActionBanners actionBanners={actionBanners} />
-			<CategoryItems buttonTabs={buttonTabs} />
+			<CategoryItems buttonTabs={buttonTabs} recommendedCategoriesProducts={recommendationCategoriesProducts} />
 		</div>
 	</>
 );
@@ -45,6 +46,9 @@ export const getStaticProps = async () => {
 			mobileBanners: await api.get('banners/index_slider_mobile').then((response) => response?.payload),
 			actionBanners: await api.get('banners/action_banners').then((response) => response?.payload),
 			buttonTabs: await api.list('categories/section/recommended').then((response) => response?.payload),
+			recommendationCategoriesProducts: await api
+				.list('products/section/list/recommendation')
+				.then((response) => response?.payload?.items),
 			recommendedProducts: await api
 				.list('products/section/list/action')
 				.then((response) => response?.payload?.items),
