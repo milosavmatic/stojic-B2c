@@ -413,14 +413,11 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 export default CategoriesPage;
 
 export const getStaticPaths = async (context) => {
-	console.log(context);
 	const api = ApiHandler();
-	const data = await api.post('/export/vercel/categories?token=uJbl9PN8Dy835HgKIIMTg9Y8');
+	const data = await api.list(`products/category/list/805`);
 
-	const categories = data.payload.filter((item) => item.slug_path.split('/').length > 1);
-
-	const paths = categories.slice(150, 151).map((item) => {
-		const category = item.id.toString();
+	const paths = data?.payload?.items.map((item) => {
+		const category = item.categories[0].id.toString();
 
 		return {
 			params: {

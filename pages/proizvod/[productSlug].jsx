@@ -60,9 +60,9 @@ export default ProductPage;
 
 export const getStaticPaths = async () => {
 	const api = ApiHandler();
-	const data = await api.post('/export/vercel/products?token=uJbl9PN8Dy835HgKIIMTg9Y8');
+	const data = await api.list('/products/category/list/805');
 
-	const paths = data.payload.slice(105, 106).map((item) => ({
+	const paths = data?.payload?.items.map((item) => ({
 		params: { productSlug: item.slug },
 	}));
 
