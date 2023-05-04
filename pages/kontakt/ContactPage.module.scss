@@ -9,7 +9,6 @@
   top: 0;
   z-index: -1;
   left: 0;
-  
 }
 .content-container {
   padding: 22rem 0rem 3rem 0rem;
@@ -57,7 +56,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
-  img {
+  .img-logo {
     width: 200px !important;
     filter: brightness(0) invert(1) !important;
     padding-bottom: 1rem !important;
@@ -87,7 +86,7 @@
 .line {
   position: relative;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 50px;
     height: 1px;

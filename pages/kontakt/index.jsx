@@ -190,11 +190,12 @@ const ContactPage = () => {
 							<div className={classes['working-hours']}>
 								<Link href="/" legacyBehavior>
 									<Image
-										src="/images/logo.webp"
+										src="/images/logo-color.webp"
 										alt="Stojic-elektrik-logo"
 										priority
-										width={285}
-										height={125}
+										width={200}
+										height={64}
+										className={classes['img-logo']}
 									/>
 								</Link>
 								<h5 className={`${classes['working-hours-heading']} ${classes.line}`}>

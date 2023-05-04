@@ -220,11 +220,17 @@ const Categories = ({
 							</div>
 						</>
 
-						{categoryItem.image != null && (
+						{/* {categoryItem.image != null && (
 							<div className={classes.banner}>
-								<Image src={categoryItem.image} alt="Stojic Elektrik doo" width={300} height={500} />
+								<Image
+									src={categoryItem.image}
+									alt="Stojic Elektrik doo"
+									width={300}
+									height={500}
+									objectFit="cover"
+								/>
 							</div>
-						)}
+						)} */}
 					</div>
 				</div>
 			) : null}
