@@ -367,10 +367,7 @@ const NavbarMenu = ({ categoryData }) => {
 													</Link>
 												</li>
 												<li className={`${classes.activeB2B}`}>
-													<Link
-														href="https://b2b.stojic.rs/prijava"
-														className={`${classes.Link} `}
-													>
+													<Link href="https://b2b.stojic.rs" className={`${classes.Link} `}>
 														B2B
 													</Link>
 												</li>
@@ -572,7 +569,7 @@ const NavbarMenu = ({ categoryData }) => {
 											</li>
 											<li
 												onClick={() => {
-													router.push('https://b2b.stojic.rs/prijava');
+													router.push('https://b2b.stojic.rs');
 													onMobileDivShow();
 												}}
 												className={`${classes['mobile-nav-link']} ${classes.activeB2B}`}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable camelcase */
 /* eslint-disable eqeqeq */
 import { useEffect, useState } from 'react';
@@ -16,13 +17,13 @@ const CartProductItem = ({ item }) => {
 
 	const removeFromCart = useGlobalRemoveFromCart();
 
-	const addToCart = useGlobalAddToCart(true);
+	const [addToCart, loading] = useGlobalAddToCart(true);
 
 	useEffect(() => {
 		if (productAmount != item.cart.quantity) {
 			addToCart(item?.product?.id, productAmount, true);
 		}
-	}, [productAmount, addToCart, item.cart.quantity, item?.product?.id]);
+	}, [productAmount, item.cart.quantity, item?.product?.id]);
 
 	const per_item = item?.product?.price?.per_item;
 	const total = item?.product?.price?.cost;
