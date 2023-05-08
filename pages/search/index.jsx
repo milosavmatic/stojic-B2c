@@ -10,47 +10,43 @@ import Seo from '../../components/Seo/Seo';
 
 const ProductBoxComplexSmall = dynamic(() => import('../../components/ProductBoxComplexSmall'));
 
-const SearchPage = () => {
+const SearchPage = ({ productsItems }) => {
 	const router = useRouter();
 	const { search } = router.query;
 	const { asPath } = router;
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [productsData, setProductsData] = useState({
-		items: [],
-		pagination: {},
-	});
+	const [productsData, setProductsData] = useState(productsItems);
 
 	const [limit, setLimit] = useState(24);
 	const [sort, setSort] = useState(null);
 	const [page, setPage] = useState(1);
 
-	const getProductList = useCallback(
-		(limit, sort, page) => {
-			setIsLoading(true);
-			const api = ApiHandler();
+	const getProductList = useCallback(() => {
+		setIsLoading(true);
+		const api = ApiHandler();
 
-			api.list(`/products/search/list?search=${search}`, {
-				limit,
-				page,
-				sort,
+		api.list(`/products/search/list?search=${search}`, {
+			limit,
+			page,
+			sort,
+		})
+			.then((response) => {
+				setProductsData(response?.payload);
+				setIsLoading(false);
 			})
-				.then((response) => {
-					setProductsData(response?.payload);
-					setIsLoading(false);
-				})
-				.catch((error) => {
-					console.warn(error);
-					setIsLoading(false);
-				});
-		},
-		[search]
-	);
+			.catch((error) => {
+				console.warn(error);
+				setIsLoading(false);
+			});
+	}, [limit, sort, page, search]);
 
 	useEffect(() => {
-		getProductList(limit, sort, page);
-	}, [getProductList, limit, sort, page]);
+		if (limit !== 24 || sort !== null || page !== 1) {
+			getProductList();
+		}
+	}, [limit, sort, page]);
 
 	useEffect(() => {
 		setPage(1);
@@ -219,3 +215,22 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
+
+export async function getServerSideProps(context) {
+	context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+	const { search } = context?.query;
+
+	const api = ApiHandler();
+
+	return {
+		props: {
+			productsItems: await api
+				.list(`/products/search/list?search=${search}`, {
+					limit: 24,
+					page: 1,
+					sort: null,
+				})
+				.then((response) => response.payload),
+		},
+	};
+}

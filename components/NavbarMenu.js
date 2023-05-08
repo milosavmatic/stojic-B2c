@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-irregular-whitespace */
@@ -35,6 +36,7 @@ const NavbarMenu = ({ categoryData }) => {
 	const [categoryItem, setCategoryItem] = useState(null);
 	const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 	const [searchCategory, setSearchCategory] = useState('');
+	const [isLoadingSearch, setIsLoadingSearch] = useState(false);
 
 	const [showDivCartCount, setShowDivCartCount] = useState(false);
 	const [showDivWishListCount, setShowDivWishListCount] = useState(false);
@@ -116,9 +118,9 @@ const NavbarMenu = ({ categoryData }) => {
 	}, [cart]);
 
 	const handleSearch = (event) => {
+		setIsLoadingSearch(true);
 		event.preventDefault();
 		router.push(`/search?search=${searchTerm}`);
-		setSearchTerm('');
 	};
 
 	const handleButtonClickCart = () => {
@@ -160,6 +162,12 @@ const NavbarMenu = ({ categoryData }) => {
 			document.removeEventListener('mousedown', handleOutsideClick);
 		};
 	}, []);
+
+	console.log('categoryData', router);
+
+	useEffect(() => {
+		router.pathname === '/search' ? setIsLoadingSearch(false) : null;
+	}, [router.pathname]);
 
 	return (
 		<div>
@@ -213,14 +221,23 @@ const NavbarMenu = ({ categoryData }) => {
 											className={`${`${classes['newsletter-button']} basic-button`}`}
 											onClick={handleSearch}
 										>
-											<FontAwesomeIcon
-												icon={faMagnifyingGlass}
-												style={{
-													color: '#fff',
-													width: '22px',
-													height: '22px',
-												}}
-											/>
+											{isLoadingSearch ? (
+												<Image
+													src="/images/loading-buffering.gif"
+													alt="loader"
+													width={20}
+													height={20}
+												/>
+											) : (
+												<FontAwesomeIcon
+													icon={faMagnifyingGlass}
+													style={{
+														color: '#fff',
+														width: '22px',
+														height: '22px',
+													}}
+												/>
+											)}
 										</button>
 									</div>
 								</form>
