@@ -28,8 +28,6 @@ function CategoryItems({ buttonTabs, recommendedCategoriesProducts }) {
 			).length > 0
 	);
 
-	console.log(recommendedCategoriesProducts);
-
 	return (
 		<div className={`${classes.categoryItems}`}>
 			<div className="container">

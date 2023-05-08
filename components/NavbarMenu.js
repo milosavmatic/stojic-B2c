@@ -163,8 +163,6 @@ const NavbarMenu = ({ categoryData }) => {
 		};
 	}, []);
 
-	console.log('categoryData', router);
-
 	useEffect(() => {
 		router.pathname === '/search' ? setIsLoadingSearch(false) : null;
 	}, [router.pathname]);

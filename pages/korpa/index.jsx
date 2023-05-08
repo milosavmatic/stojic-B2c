@@ -30,7 +30,7 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 	}, []);
 
 	const [cart, mutateCart] = useCartContext();
-	const [cartData, setCartData] = useState([]);
+	const [cartData, setCartData] = useState({ items: [{}] });
 	const [secondAddress, setSecondAddress] = useState(false);
 	const [formData, setFormData] = useState({
 		type: 'personal',
@@ -94,17 +94,20 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 	const [errors, setErrors] = useState([]);
 
 	const getCart = useCallback(() => {
-		const api = ApiHandler();
-		api.list('cart')
-			.then((response) => {
-				setCartData(response?.payload);
-			})
-			.catch((error) => {
-				console.warn(error);
-			})
-			.finally(() => {
-				setIsLoadingList(false);
-			});
+		if (router.pathname === '/korpa') {
+			const api = ApiHandler();
+
+			api.list('cart')
+				.then((response) => {
+					setCartData(response?.payload);
+				})
+				.catch((error) => {
+					console.warn(error);
+				})
+				.finally(() => {
+					setIsLoadingList(false);
+				});
+		}
 	}, []);
 
 	useEffect(() => {
@@ -751,7 +754,11 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 										)}
 									</div>
 									<div className={classes['products-container']}>
-										<CartProductBox cartItems={cartItems} />
+										{isLoadingList ? (
+											<Image src="/loading.gif" alt="loading" width={100} height={100} />
+										) : (
+											<CartProductBox cartItems={cartItems} />
+										)}
 									</div>
 								</div>
 								<div className={`${classes['right-side']} col-xxl-5 col-12`}>
