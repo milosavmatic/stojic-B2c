@@ -21,11 +21,20 @@ function CategoryItems({ buttonTabs, recommendedCategoriesProducts }) {
 		filterItems(buttonTabs[1]?.id);
 	}, []);
 
+	const tabs = buttonTabs.filter(
+		(item) =>
+			recommendedCategoriesProducts?.filter((itemId) =>
+				itemId.categories[0].category_path.some((itemId) => itemId.id === item.id)
+			).length > 0
+	);
+
+	console.log(tabs);
+
 	return (
 		<div className={`${classes.categoryItems}`}>
 			<div className="container">
 				<div className={`${classes.categoryTabs}`}>
-					{buttonTabs.slice(0, 6).map((item) => (
+					{tabs.slice(0, 6).map((item) => (
 						<HomeTabButton
 							key={item.id}
 							onButtonClick={() => {

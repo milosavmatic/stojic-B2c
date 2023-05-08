@@ -97,7 +97,6 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 					}
 				}
 				setAvailableFilters(ret);
-				// setIsLoading(false);
 			});
 		}
 

@@ -262,9 +262,11 @@ const NavbarMenu = ({ categoryData }) => {
 													className={`${classes['button-checkout']}`}
 													onClick={handleButtonClickCart}
 												>
-													<FontAwesomeIcon
-														style={{ height: '30px', width: '30px' }}
-														icon={faShoppingBag}
+													<Image
+														src="/images/bag-icon.png"
+														alt="Korpa"
+														width={30}
+														height={30}
 													/>
 													<span className={`${classes.marker}`}>{cartCount}</span>
 												</button>
@@ -452,12 +454,11 @@ const NavbarMenu = ({ categoryData }) => {
 													className={`${classes['button-checkout']}`}
 													onClick={() => router.push('/korpa')}
 												>
-													<FontAwesomeIcon
-														icon={faShoppingBag}
-														style={{
-															width: '30px',
-															height: '30px',
-														}}
+													<Image
+														src="/images/bag-icon.png"
+														alt="Korpa"
+														width={30}
+														height={30}
 													/>
 													<span className={`${classes.marker}`}>{cartCount}</span>
 												</button>
