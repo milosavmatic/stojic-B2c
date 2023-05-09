@@ -38,7 +38,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 					query: newQuery,
 				},
 				undefined,
-				{ scroll: false }
+				{ scroll: true }
 			);
 		},
 		[router]
@@ -110,7 +110,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 
 		let newQuery = {};
 		if (queryKeys.page in query) {
-			newQuery[queryKeys.page] = 1;
+			newQuery[queryKeys.page] = query[queryKeys.page];
 		}
 
 		if (queryKeys.limit in query) {
@@ -176,6 +176,8 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	const onPageChange = (num) => {
 		const newQuery = query;
 		newQuery[queryKeys.page] = num;
+		newQuery[queryKeys.limit] = limit;
+
 		replaceQuery(newQuery);
 
 		setPage(num);
