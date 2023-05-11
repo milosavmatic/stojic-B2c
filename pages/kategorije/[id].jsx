@@ -28,29 +28,27 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const replaceQuery = useCallback(
-		(newQuery) => {
-			delete newQuery.path;
-			console.log('newQuery', newQuery);
-			router.replace(
-				{
-					pathname: router.asPath.split('?')[0],
-					query: newQuery,
-				},
-				undefined,
-				{ scroll: true }
-			);
-		},
-		[router]
-	);
+	const replaceQuery = (newQuery) => {
+		delete newQuery.path;
+		delete newQuery.id;
+
+		router.replace(
+			{
+				pathname: router.asPath.split('?')[0],
+				query: newQuery,
+			},
+			undefined,
+			{ scroll: true, shallow: true }
+		);
+	};
 
 	const [productsData, setProductsData] = useState([]);
 
-	const [limit, setLimit] = useState(query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24);
+	const [limit, setLimit] = useState(query[queryKeys.limit] ?? 24);
 
-	const [sort, setSort] = useState({ field: 'stickers', direction: 'asc' });
+	const [sort, setSort] = useState(null);
 
-	const [page, setPage] = useState(query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1);
+	const [page, setPage] = useState(query[queryKeys.page] ?? 1);
 
 	const newSelected = [];
 
@@ -63,7 +61,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	useEffect(() => {
 		setProductsData(productsItems);
 		setAvailableFilters(filters);
-	}, [router.isFallback, router.isReady]);
+	}, [router.isFallback]);
 
 	useEffect(() => {
 		for (const item in query) {
@@ -74,7 +72,9 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 				});
 		}
 
-		setSelectedFilters(newSelected);
+		if (newSelected.length > 0) {
+			setSelectedFilters(newSelected);
+		}
 	}, [router.isReady]);
 
 	useEffect(() => {
@@ -123,27 +123,30 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 
 		newQuery = { ...newQuery, ...arr };
 
-		replaceQuery(newQuery);
+		if (selectedFilters.length > 0) {
+			replaceQuery(newQuery);
+		}
 	}, [selectedFilters, router.isReady]);
 
 	useEffect(() => {
-		const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
-		if (query[queryKeys.page] != null || query[queryKeys.page] != null || newSort || selectedFilters.length > 0) {
+		if (!showSearch) {
 			getProductList(limit, sort, page, selectedFilters, setIsLoading, categoryData, setProductsData);
 		}
-	}, [limit, sort, page, selectedFilters, showSearch]);
+	}, [page, sort, selectedFilters, showSearch]);
 
 	const searchProducts = () => {
 		getProductList(limit, sort, page, selectedFilters, setIsLoading, categoryData, setProductsData);
 	};
 
 	useEffect(() => {
+		setPage(query[queryKeys.page] ?? 1);
+
+		setLimit(query[queryKeys.limit] ?? 24);
+
 		const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
-		setPage(query[queryKeys.page] != null ? Number(query[queryKeys.page]) : 1);
-		setLimit(query[queryKeys.limit] != null ? Number(query[queryKeys.limit]) : 24);
 
 		setSort(newSort ? { field: newSort.split('_')[0], direction: newSort.split('_')[1] } : undefined);
-	}, [asPath, query, router.isReady]);
+	}, [router.isReady]);
 
 	const onSortChange = ({ target }) => {
 		if (target.value != 'none') {
@@ -176,7 +179,6 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	const onPageChange = (num) => {
 		const newQuery = query;
 		newQuery[queryKeys.page] = num;
-		newQuery[queryKeys.limit] = limit;
 
 		replaceQuery(newQuery);
 
