@@ -17,16 +17,17 @@ function CategoryItems({ buttonTabs, recommendedCategoriesProducts }) {
 		);
 	};
 
-	useEffect(() => {
-		filterItems(buttonTabs[1]?.id);
-	}, []);
-
 	const tabs = buttonTabs.filter(
 		(item) =>
 			recommendedCategoriesProducts?.filter((itemId) =>
 				itemId.categories[0].category_path.some((itemId) => itemId.id === item.id)
 			).length > 0
 	);
+
+	useEffect(() => {
+		filterItems(tabs[1]?.id);
+		setTabsCategory(tabs[1]?.id);
+	}, []);
 
 	return (
 		<div className={`${classes.categoryItems}`}>

@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/legacy/image';
 import Loader from 'rsuite/Loader';
+import { route } from 'fontawesome';
 import classes from './CategoriesPage.module.scss';
 import { ApiHandler } from '../../helpers/api';
 import { queryKeys, sortKeys } from '../../helpers/const';
@@ -44,11 +45,15 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 
 	const [productsData, setProductsData] = useState([]);
 
-	const [limit, setLimit] = useState(query[queryKeys.limit] ?? 24);
+	const [limit, setLimit] = useState(query[queryKeys.limit] ? parseInt(query[queryKeys.limit]) : 24);
 
-	const [sort, setSort] = useState(null);
+	const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
 
-	const [page, setPage] = useState(query[queryKeys.page] ?? 1);
+	const [sort, setSort] = useState(
+		newSort ? { field: newSort.split('_')[0], direction: newSort.split('_')[1] } : undefined
+	);
+
+	const [page, setPage] = useState(query[queryKeys.page] ? parseInt(query[queryKeys.page]) : 1);
 
 	const newSelected = [];
 
@@ -72,9 +77,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 				});
 		}
 
-		if (newSelected.length > 0) {
-			setSelectedFilters(newSelected);
-		}
+		setSelectedFilters(newSelected);
 	}, [router.isReady]);
 
 	useEffect(() => {
@@ -110,7 +113,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 
 		let newQuery = {};
 		if (queryKeys.page in query) {
-			newQuery[queryKeys.page] = query[queryKeys.page];
+			newQuery[queryKeys.page] = page;
 		}
 
 		if (queryKeys.limit in query) {
@@ -123,30 +126,53 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 
 		newQuery = { ...newQuery, ...arr };
 
-		if (selectedFilters.length > 0) {
+		if (Object.keys(newQuery).length > 0) {
 			replaceQuery(newQuery);
 		}
-	}, [selectedFilters, router.isReady]);
+	}, [selectedFilters]);
+
+	const getProductList = useCallback(
+		(limit, sort, page, selectedFilters) => {
+			console.log('getProductList', selectedFilters);
+			setIsLoading(true);
+			const api = ApiHandler();
+			api.list(`products/category/list/${categoryData?.id}`, {
+				limit,
+				page,
+				sort,
+				filters: selectedFilters,
+			})
+				.then((response) => {
+					setProductsData(response?.payload);
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					console.warn(error);
+					setIsLoading(false);
+				});
+		},
+		[page, limit, sort, selectedFilters]
+	);
 
 	useEffect(() => {
-		if (!showSearch) {
-			getProductList(limit, sort, page, selectedFilters, setIsLoading, categoryData, setProductsData);
+		if ((!showSearch && query !== {}) || query.id === categoryData?.id) {
+			getProductList(limit, sort, page, selectedFilters);
 		}
-	}, [page, sort, selectedFilters, showSearch]);
+	}, []);
 
 	const searchProducts = () => {
-		getProductList(limit, sort, page, selectedFilters, setIsLoading, categoryData, setProductsData);
+		getProductList(limit, sort, page, selectedFilters);
 	};
 
 	useEffect(() => {
-		setPage(query[queryKeys.page] ?? 1);
+		setPage(query[queryKeys.page] ? parseInt(query[queryKeys.page]) : 1);
 
-		setLimit(query[queryKeys.limit] ?? 24);
+		setLimit(query[queryKeys.limit] ? parseInt(query[queryKeys.limit]) : 24);
 
 		const newSort = Object.keys(sortKeys).find((key) => sortKeys[key].query === query[queryKeys.sort]);
 
 		setSort(newSort ? { field: newSort.split('_')[0], direction: newSort.split('_')[1] } : undefined);
-	}, [router.isReady]);
+	}, [query]);
 
 	const onSortChange = ({ target }) => {
 		if (target.value != 'none') {
@@ -214,7 +240,7 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 				<div className={`${classes.categoriespage}`}>
 					<div className={`${classes.catBanner}`}>
 						<div className="container-fluid">
-							{categoryData.images.image ? (
+							{categoryData?.images?.image ? (
 								<Image
 									src={categoryData.images.image}
 									alt={categoryData.name}
