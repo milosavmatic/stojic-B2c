@@ -155,13 +155,13 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 	);
 
 	useEffect(() => {
-		if ((!showSearch && query !== {}) || query.id === categoryData?.id) {
+		if (!showSearch) {
 			getProductList(limit, sort, page, selectedFilters);
 		}
-	}, []);
+	}, [query.page, query.limit, query.sort, selectedFilters, showSearch]);
 
 	const searchProducts = () => {
-		getProductList(limit, sort, page, selectedFilters);
+		getProductList(limit, sort, page, selectedFilters, showSearch);
 	};
 
 	useEffect(() => {
