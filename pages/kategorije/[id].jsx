@@ -133,32 +133,33 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 
 	const getProductList = useCallback(
 		(limit, sort, page, selectedFilters) => {
-			console.log('getProductList', selectedFilters);
-			setIsLoading(true);
-			const api = ApiHandler();
-			api.list(`products/category/list/${categoryData?.id}`, {
-				limit,
-				page,
-				sort,
-				filters: selectedFilters,
-			})
-				.then((response) => {
-					setProductsData(response?.payload);
-					setIsLoading(false);
+			if (queryKeys.page in query || queryKeys.limit in query || queryKeys.sort in query) {
+				setIsLoading(true);
+				const api = ApiHandler();
+				api.list(`products/category/list/${categoryData?.id}`, {
+					limit,
+					page,
+					sort,
+					filters: selectedFilters,
 				})
-				.catch((error) => {
-					console.warn(error);
-					setIsLoading(false);
-				});
+					.then((response) => {
+						setProductsData(response?.payload);
+						setIsLoading(false);
+					})
+					.catch((error) => {
+						console.warn(error);
+						setIsLoading(false);
+					});
+			}
 		},
 		[page, limit, sort, selectedFilters]
 	);
 
 	useEffect(() => {
-		if (!showSearch) {
+		if (!showSearch || queryKeys.page in query || queryKeys.limit in query || queryKeys.sort in query) {
 			getProductList(limit, sort, page, selectedFilters);
 		}
-	}, [query.page, query.limit, query.sort, selectedFilters, showSearch]);
+	}, [selectedFilters, showSearch]);
 
 	const searchProducts = () => {
 		getProductList(limit, sort, page, selectedFilters, showSearch);
