@@ -14,7 +14,6 @@ import { route } from 'fontawesome';
 import classes from './CategoriesPage.module.scss';
 import { ApiHandler } from '../../helpers/api';
 import { queryKeys, sortKeys } from '../../helpers/const';
-import { getProductList } from '../../helpers/getProductList';
 
 const Breadcrumbs = dynamic(() => import('../../components/Breadcrumbs'));
 const Filters = dynamic(() => import('../../components/Filters'));
