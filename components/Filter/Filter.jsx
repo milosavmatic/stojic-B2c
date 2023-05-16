@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-import dynamic from 'next/dynamic';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import styles from './Filter.module.scss';
-
-const RangeSlider = dynamic(() => import('rsuite/RangeSlider'));
 
 const Filter = ({ filter, selectedFilters, setSelectedFilters }) => {
 	const changeHanler = (data) => {
+		console.log('filter', data);
 		let tmp = [...selectedFilters];
 		const filtered = tmp.filter((item) => item.column === data.column);
 		if (data.value.selected.length === 0) {
@@ -88,6 +88,7 @@ const FilterRange = ({ filter, onChange, selected }) => {
 		selected.length === 2 ? selected : [Number(filter.params.min), Number(filter.params.max)]
 	);
 	const onRangeChange = (data) => {
+		console.log('data', data);
 		onChange({
 			column: filter?.params?.use_field ? filter[filter?.params?.use_field] : filter.key,
 			value: { selected: data },
@@ -100,15 +101,24 @@ const FilterRange = ({ filter, onChange, selected }) => {
 
 	return (
 		<div>
-			<RangeSlider
+			<Slider
+				className={styles['custom-slider']}
+				range
 				min={Number(filter.params.min)}
 				max={Number(filter.params.max)}
 				value={selectedValue}
 				defaultValue={[Number(filter.params.min), Number(filter.params.max)]}
 				onChange={(value) => {
+					console.log('value', value);
 					setSelectedValue(value);
 				}}
-				onChangeCommitted={onRangeChange}
+				onAfterChange={onRangeChange}
+				trackStyle={{ backgroundColor: '#3498ff' }}
+				handleStyle={{
+					borderColor: '#3498ff',
+					backgroundColor: 'white',
+				}}
+				railStyle={{ backgroundColor: '#3498ff' }}
 			/>
 			<div>
 				<span>od: {selectedValue[0]}</span>

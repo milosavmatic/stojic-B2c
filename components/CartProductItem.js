@@ -10,20 +10,25 @@ import PlusMinusInputCart from './PlusMinusInputCart';
 import { currencyFormat } from '../helpers/functions';
 import { useGlobalAddToCart, useGlobalRemoveFromCart } from '../helpers/globals';
 import { openAlertBox } from '../helpers/tostify';
+import useDebounce from '../helpers/useDebounce';
 
 const CartProductItem = ({ item }) => {
 	// State that holds amount of products
 	const [productAmount, setProductAmount] = useState(Number(item.cart.quantity));
+
+	const debounce = useDebounce(productAmount, 400);
+
+	console.log('debounce', debounce);
 
 	const removeFromCart = useGlobalRemoveFromCart();
 
 	const [addToCart, loading] = useGlobalAddToCart(true);
 
 	useEffect(() => {
-		if (productAmount != item.cart.quantity) {
+		if (debounce !== Number(item.cart.quantity)) {
 			addToCart(item?.product?.id, productAmount, true);
 		}
-	}, [productAmount, item.cart.quantity, item?.product?.id]);
+	}, [debounce, item.cart.quantity, item?.product?.id]);
 
 	const per_item = item?.product?.price?.per_item;
 	const total = item?.product?.price?.cost;

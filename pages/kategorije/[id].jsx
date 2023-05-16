@@ -132,7 +132,12 @@ const CategoriesPage = ({ categoryData, productsItems, filters }) => {
 
 	const getProductList = useCallback(
 		(limit, sort, page, selectedFilters) => {
-			if (queryKeys.page in query || queryKeys.limit in query || queryKeys.sort in query) {
+			if (
+				queryKeys.page in query ||
+				queryKeys.limit in query ||
+				queryKeys.sort in query ||
+				selectedFilters.length > 0
+			) {
 				setIsLoading(true);
 				const api = ApiHandler();
 				api.list(`products/category/list/${categoryData?.id}`, {

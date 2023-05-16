@@ -96,9 +96,10 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 
 	const getCart = useCallback(() => {
 		const api = ApiHandler();
-		setIsLoadingList(true);
+
 		api.list('cart')
 			.then((response) => {
+				setIsLoadingList(true);
 				setCartData(response?.payload);
 			})
 			.catch((error) => {
@@ -111,7 +112,7 @@ const CheckoutPage = ({ paymentoptions, deliveryoptions }) => {
 
 	useEffect(() => {
 		getCart();
-	}, [getCart, cart]);
+	}, [cart]);
 
 	const cartItems = cartData.items ?? [];
 	const cartCost = cartData.summary;
